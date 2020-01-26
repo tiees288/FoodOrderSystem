@@ -147,19 +147,19 @@ include("../conf/connection.php");
     </tr>
     <tr style="color:orange;">
         <td colspan="5"></td>
-        <td align="" style="padding-left:10px;" colspan="2"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
+        <td align="" style="padding-left:5px;" colspan="2"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
         <td align="right"><b><?= $type_0 ?></b></td>
         <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
     </tr>
     <tr style="color:#12BB4F;">
         <td colspan="5"></td>
-        <td colspan="2" align="" style="padding-left:10px;"><b>รวมยืนยันการจองทั้งหมด</b></td>
+        <td colspan="2" align="" style="padding-left:5px;"><b>รวมยืนยันการจองทั้งหมด</b></td>
         <td align="right"><b><?= $type_1 ?></b></td>
         <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
     </tr>
     <tr style="border-bottom:1px solid;">
         <td colspan="5"></td>
-        <td align="" colspan="2" style="color:red; padding-left:10px;"><b>รวมยกเลิกการจองทั้งหมด</b></td>
+        <td align="" colspan="2" style="color:red; padding-left:5px;"><b>รวมยกเลิกการจองทั้งหมด</b></td>
         <td align="right" style="color:red;"><b><?= $type_2 ?></b></td>
         <td colspan="2" style="color:red; height:26px; padding-left:15px;"><b>รายการ</b></td>
     </tr>
