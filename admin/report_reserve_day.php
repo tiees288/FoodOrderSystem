@@ -45,8 +45,9 @@ include("../conf/connection.php");
             <th style="text-align:center; width:120px;">วันที่นัด</th>
             <th style="text-align:center; width:120px;">เวลานัด</th>
             <th style="text-align:left; width:125px;">สถานะ</th>
+
             <th style="text-align:right; width:120px;">หมายเลขโต๊ะ</th>
-            <th style="text-align:right; width:120px;">จำนวนที่นั่ง</th>
+            <th style="text-align:right; width:120px; padding-right:10px;">จำนวนที่นั่ง</th>
             <th style="text-align:left; width:145px; padding-left:15px;">หมายเหตุ</th>
         </tr>
         <?php
@@ -54,13 +55,14 @@ include("../conf/connection.php");
             WHERE (date(res.reserv_date_reservation) >= date('" . tochristyear($_POST['startdate']) . "') 
             AND date(res.reserv_date_reservation) <= date('" . tochristyear($_POST['enddate']) . "'))";
         $query_date = mysqli_query($link, $sql_date) or die(mysqli_error($link));
-
+        $type_a = $type_0 = $type_1 = $type_2 = 0;
 
         if (mysqli_num_rows($query_date) == 0) {
             echo "<script>alert('ไม่พบข้อมูลที่ท่านค้นหา'); window.close();</script>";
             exit();
         }
         while ($result_date = mysqli_fetch_array($query_date)) {
+            $per_day = 0;
             echo "
                <tr height='25px'>
                <td align='center'>
@@ -74,6 +76,24 @@ include("../conf/connection.php");
             $query_reserve = mysqli_query($link, $sql_reserve) or die(mysqli_error($link));
 
             while ($result_reserve = mysqli_fetch_array($query_reserve)) {
+                $per_day++;
+                $type_a++;
+                switch ($result_reserve['reserv_status']) {
+                    case 0:
+                        $reserv_status = "<span style='color:#0072EE'>รอการตรวจสอบ</span>";
+                        break;
+                        $type_0++;
+                    case 1:
+                        $reserv_status = "<span style='color:#12BB4F';>ยืนยันการจอง</span>";
+                        $type_1++;
+                        break;
+                    case 2:
+                        $reserv_status = "<span style='color:red;'>ยกเลิกการจอง</span>";
+                        $type_2++;
+                        break;
+                    default:
+                        $reserv_status = "-";
+                }
         ?>
                 <tr height="20px">
                     <td></td>
@@ -81,10 +101,68 @@ include("../conf/connection.php");
                     <td align="left"><?= $result_reserve['cus_name'] ?></td>
                     <td align="left"><?= $result_reserve['cus_tel'] ?></td>
                     <td align="center"><?= short_datetime_thai($result_reserve['reserv_date_appointment']) ?></td>
-                    <td align="center"><?=  substr($result_reserve['reserv_time_appointment'],0,5) ?></td>
-                    <td align="left"></td>
-                    <td style="padding-left:15px;" align="left"><?= ($result_reserve['reserv_note'] != "") ? "" : "-" ?></td>
+                    <td align="center"><?= substr($result_reserve['reserv_time_appointment'], 0, 5) ?></td>
+                    <td align="left"><?= $reserv_status ?></td>
+
+
+
+                    <?php
+                    $sql_tables = "SELECT tables_no, reservlist_amount FROM reservelist
+                    WHERE reserv_id = '" . $result_reserve['reserv_id'] . "'";
+                    $query_tables = mysqli_query($link, $sql_tables) or die(mysqli_error($link));
+
+                    $row_tables = 1;
+                    while ($result_tables = mysqli_fetch_array($query_tables)) {
+                        if ($row_tables > 1) {
+                            echo "</tr><tr> <td colspan='7'></td>";
+                        }
+                    ?>
+                        <td style="height:25px;" align="right"><?= $result_tables['tables_no'] ?></td>
+                        <td align="right" style="padding-right:10px;"><?= $result_tables['reservlist_amount'] ?></td>
+
+                        <?php
+                        if ($row_tables == 1) {
+                        ?>
+                            <td style="padding-left:15px;" align="left"><?= ($result_reserve['reserv_note'] != "") ? "" : "-" ?></td>
+                        <?php } ?>
                 </tr>
         <?php
-            }
-        } ?>
+                        $row_tables++;
+                    }
+                } ?>
+        <tr style="border-bottom:1px solid;">
+            <td colspan="6"></td>
+            <td align="right"><b>รวม</b></td>
+            <td align="right"><b><?= $per_day ?></b></td>
+            <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
+        </tr>
+    <?php
+        }
+    ?>
+    <tr>
+        <td colspan="6"></td>
+        <td align="right"><b>รวมทั้งหมด</b></td>
+        <td align="right"><b><?= $type_a ?></b></td>
+        <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
+    </tr>
+    <tr style="color:orange;">
+        <td colspan="5"></td>
+        <td align="" style="padding-left:10px;" colspan="2"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
+        <td align="right"><b><?= $type_0 ?></b></td>
+        <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
+    </tr>
+    <tr style="color:#12BB4F;">
+        <td colspan="5"></td>
+        <td colspan="2" align="" style="padding-left:10px;"><b>รวมยืนยันการจองทั้งหมด</b></td>
+        <td align="right"><b><?= $type_1 ?></b></td>
+        <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
+    </tr>
+    <tr style="border-bottom:1px solid;">
+        <td colspan="5"></td>
+        <td align="" colspan="2" style="color:red; padding-left:10px;"><b>รวมยกเลิกการจองทั้งหมด</b></td>
+        <td align="right" style="color:red;"><b><?= $type_2 ?></b></td>
+        <td colspan="2" style="color:red; height:26px; padding-left:15px;"><b>รายการ</b></td>
+    </tr>
+    </table>
+    <br>
+</body>
