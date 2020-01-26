@@ -42,7 +42,7 @@
                 <thead>
                     <th style="text-align:center; width:130px;">รหัสการสั่ง</th>
                     <th style="text-align: center; width:190px;">วัน/เวลาสั่งอาหาร</th>
-                    <th style="width:260px;">ชื่อลูกค้า</th>
+                    <th style="width:265px;">ชื่อลูกค้า</th>
                     <th style="text-align:right; width:140px;">ราคา (บาท)</th>
                     <th style="text-align:left; width:160px;">สถานะ</th>
                     <th style=" text-align:center; width:180px;">รายละเอียดการสั่ง</th>
