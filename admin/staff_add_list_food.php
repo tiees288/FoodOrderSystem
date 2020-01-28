@@ -56,7 +56,7 @@ if (!isset($_SESSION['food_admin']['list'])) {
 	}
 }
 if (isset($_GET['oid'])) {
-	echo  "<script>window.location.assign('order_more.php?oid=". $_GET['oid'] ."') </script>";
+	echo  "<script>window.location.assign('order_edit.php?oid=". $_GET['oid'] ."') </script>";
 } else {
 	echo  "<script>window.location.assign('staff_cart_order.php') </script>";
 }

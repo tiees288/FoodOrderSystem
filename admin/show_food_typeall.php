@@ -208,7 +208,7 @@ if (isset($_SESSION['food_admin']['list']['foodid'])) {
 ?>
 <div class="sticky-div">
 	<span class="badge badge-danger" style="position:absolute; right:-3px; top:-3px; background:red; font-size:15px;"><?= $cartcount ?></span>
-	<a href="<?= (isset($_GET['oid'])) ? "order_more.php?oid=$order_more" : "staff_cart_order.php" ?>" class="sticky-cart btn btn-success"><i style="padding-top:10px; font-size:35px;" class="fa fa-shopping-basket"></i></a>
+	<a href="<?= (isset($_GET['oid'])) ? "order_edit.php?oid=$order_more" : "staff_cart_order.php" ?>" class="sticky-cart btn btn-success"><i style="padding-top:10px; font-size:35px;" class="fa fa-shopping-basket"></i></a>
 </div>
 
 </html>

@@ -67,13 +67,14 @@ include("../conf/connection.php");
                <td align='center'>
                 " . short_datetime_thai($result_date['date(orderdate)']) . "
                </td>
-               </tr>";
+               ";
             $sql_order = "SELECT * FROM orders 
                 LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(orderdate) = '" . $result_date['date(orderdate)'] . "'";
             $query_order = mysqli_query($link, $sql_order) or die(mysqli_error($link));
 
             $sum_per_date = 0; // ราคารวมในแต่ละวัน
+            $row_order = 1; // นับจำนวนแถว
 
             while ($result_order = mysqli_fetch_array($query_order)) {
                 switch ($result_order['order_status']) {
@@ -100,14 +101,15 @@ include("../conf/connection.php");
                     default:
                         $order_status = "-";
                 }
+                if ($row_order > 1) {
+                    echo "</tr><tr height='27px'><td></td>";
+                }
         ?>
-                <tr height="20px">
-                    <td></td>
-                    <td align="center"><?= $result_order['orderid'] ?></td>
-                    <td><?= $order_status ?></td>
-                    <td><?= $result_order['cus_name'] ?></td>
-                    <td align="right"><?= $order_totalprice ?></td>
-                </tr>
+                <td align="center"><?= $result_order['orderid'] ?></td>
+                <td><?= $order_status ?></td>
+                <td><?= $result_order['cus_name'] ?></td>
+                <td align="right"><?= $order_totalprice ?></td>
+
                 <?php
                 $sum_per_date += $result_order['order_totalprice'];
 
@@ -127,16 +129,21 @@ include("../conf/connection.php");
                     WHERE orderdetails.orderid = '" . $result_order['orderid'] . "' AND orderdetails.orderdet_status != '2'";
                 $query_orderdet = mysqli_query($link, $sql_orderdet) or die(mysqli_error($link));
 
-                while ($result_orderdet = mysqli_fetch_array($query_orderdet)) { ?>
-                    <tr style="height: 25px;">
-                        <td colspan="5"></td>
-                        <td style="padding-left:20px;"><?= $result_orderdet['food_name'] ?></td>
-                        <td align="right"><?= $result_orderdet['orderdet_amount'] ?></td>
-                        <td align="right"><?= $result_orderdet['orderdet_price'] ?></td>
-                        <td align="right" style="padding-right:15px;"><?= number_format($result_orderdet['orderdet_price'] * $result_orderdet['orderdet_amount'], 2) ?></td>
+                $row_orderdet = 1; // นับจำนวนแถว
+                while ($result_orderdet = mysqli_fetch_array($query_orderdet)) {
+                    if ($row_orderdet > 1) {
+                        echo "</tr><tr style='height:25px;'><td colspan='5'></td>";
+                    }
+                ?>
+                    <td style="padding-left:20px;"><?= $result_orderdet['food_name'] ?></td>
+                    <td align="right"><?= $result_orderdet['orderdet_amount'] ?></td>
+                    <td align="right"><?= $result_orderdet['orderdet_price'] ?></td>
+                    <td align="right" style="padding-right:15px;"><?= number_format($result_orderdet['orderdet_price'] * $result_orderdet['orderdet_amount'], 2) ?></td>
                     </tr>
             <?php
+                    $row_orderdet++;
                 }
+                $row_order++;
             }
             $total += $sum_per_date;
 
@@ -201,7 +208,9 @@ include("../conf/connection.php");
             <td align="right">
                 <font color="#12BB4F"><b><?= $total_trans_2 ?></b></font>
             </td>
-            <td style="padding-left:15px;"> <font color="#12BB4F"><b>รายการ</b></font></td>
+            <td style="padding-left:15px;">
+                <font color="#12BB4F"><b>รายการ</b></font>
+            </td>
         </tr>
         <tr style="border-bottom:1px solid;">
             <td colspan="2" style="height:30px;"></td>
@@ -215,7 +224,9 @@ include("../conf/connection.php");
             <td align="right">
                 <font color="red"><b><?= $total_trans_3 ?></b></font>
             </td>
-            <td colspan="2" style="padding-left:15px;"> <font color="red"><b>รายการ</b></font></td>
+            <td colspan="2" style="padding-left:15px;">
+                <font color="red"><b>รายการ</b></font>
+            </td>
         </tr>
     </table>
 </body>

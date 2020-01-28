@@ -23,7 +23,7 @@
         $strKeyword = $_GET["search_orders"];
     }
     ?>
-    <div class="container" style="width:1220px; padding-top: 135px;">
+    <div class="container" style="padding-top: 135px;">
 
         <h1 class="page-header text-left">แสดง/ยกเลิกการสั่งอาหาร</h1>
         <div class="row">
@@ -47,7 +47,6 @@
                     <th style="text-align:left; width:160px;">สถานะ</th>
                     <th style=" text-align:center; width:180px;">รายละเอียดการสั่ง</th>
                     <th style=" text-align:center; width:230px;">ปรับปรุงการสั่งอาหาร</th>
-                    <th style=" text-align:center; width:120px;">สั่งเพิ่ม</th>
                     <th style=" text-align:center; width:145px;">เลือกรับชำระ</th>
                 </thead>
 
@@ -121,11 +120,6 @@
                                     <a href="order_edit.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
                         <?php } ?>
                         </td>
-                        <td align="center">
-                            <?php if ($result['order_status'] == 0 || $result['order_status'] == 1) { ?>
-                                <a href="order_more.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> สั่งเพิ่ม</a></td>
-                    <?php } ?>
-                    </td>
                     <td align="center">
                             <?php if ($result['order_status'] != 3 && $result['order_status'] != 2) { // ปุ่มเลือกรับชำระ
                             ?>

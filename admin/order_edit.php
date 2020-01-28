@@ -60,7 +60,7 @@ if (!isset($_GET['oid'])) {
             <h1 class="page-header text-center">ปรับปรุงรายการสั่งอาหาร</h1>
             <div class="container" style="width:850px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
-                    <form id="edit_order" class="form" name="edit_order" method="POST" action="save_edit_order.php">
+                    <form id="basket" class="form" name="edit_order" method="POST" action="save_edit_order.php">
                         <table width="750px" border="0" align="center">
                             <tr>
                                 <td height="13px"></td>
@@ -205,67 +205,133 @@ if (!isset($_GET['oid'])) {
                             </tr>
                         </table>
                 </div>
-                <h3 class="page-header text-center">รายการอาหาร</h3>
-                <table class="table table-striped table-bordered" id="foodlist">
-                    <thead>
-                        <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
-                        <th width="140px">ชื่ออาหาร</th>
-                        <th width="90px">หน่วยนับ</th>
-                        <th style="text-align:right; width:110px;">ราคา (บาท)</th>
-                        <th style="text-align:center;">จำนวน</th>
-                        <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
-                        <th style="text-align: center; width:85px;">ยกเลิก</th>
-                    </thead>
-                    <?php
-                    $orderdet_sql = "SELECT * FROM orderdetails WHERE orderid = '" . $_GET['oid'] . "'";
-                    $orderdet_query = mysqli_query($link, $orderdet_sql);
-                    $i = 0;
-                    while ($orderdet_data = mysqli_fetch_array($orderdet_query)) {
-                        $food_sql = "SELECT food_name, food_count FROM foods WHERE foodid = '" . $orderdet_data['foodid'] . "'";
-                        $food_data = mysqli_fetch_assoc(mysqli_query($link, $food_sql));
-                    ?>
-                        <tr <?php if ($orderdet_data['orderdet_status'] != 2) echo 'class="cnt"'; ?>)>
-                            <td align="right"><?php echo $orderdet_data['foodid'] ?></td>
-                            <td><?php echo $food_data['food_name']; ?></td>
-                            <td><?= $food_data['food_count'] ?></td>
-                            <td align="right">
-                                <?= number_format($orderdet_data['orderdet_price'], 2); ?></td>
+            </div>
+            <h3 class="page-header text-center">รายการอาหาร</h3>
+            <table class="table table-striped table-bordered" style="width:900px;" align="center" id="foodlist">
+                <thead>
+                    <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
+                    <th width="140px">ชื่ออาหาร</th>
+                    <th width="90px">หน่วยนับ</th>
+                    <th style="text-align:right; width:110px;">ราคา (บาท)</th>
+                    <th style="text-align:center;">จำนวน</th>
+                    <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+                    <th style="text-align: center; width:85px;">ยกเลิก</th>
+                </thead>
+                <?php
+                $orderdet_sql = "SELECT * FROM orderdetails WHERE orderid = '" . $_GET['oid'] . "'";
+                $orderdet_query = mysqli_query($link, $orderdet_sql);
+                $i = 0;
+                while ($orderdet_data = mysqli_fetch_array($orderdet_query)) {
+                    $food_sql = "SELECT food_name, food_count FROM foods WHERE foodid = '" . $orderdet_data['foodid'] . "'";
+                    $food_data = mysqli_fetch_assoc(mysqli_query($link, $food_sql));
+                ?>
+                    <tr <?php if ($orderdet_data['orderdet_status'] != 2) echo 'class="cnt"'; ?>)>
+                        <td align="right"><?php echo $orderdet_data['foodid'] ?></td>
+                        <td><?php echo $food_data['food_name']; ?></td>
+                        <td><?= $food_data['food_count'] ?></td>
+                        <td align="right">
+                            <?= number_format($orderdet_data['orderdet_price'], 2); ?></td>
+                        <td class="text-center">
+                            <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="delete" type="button">-</button>
+                            <input <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
+                            <input type="text" name="id[]" value="<?= $orderdet_data['foodid'] ?>" hidden>
+                            <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="plus" type="button"> + </button>
+                            <!-- จำนวนเหลือ ใน Stock -->
+                            <input type="text" value="<?= $orderdet_data['orderdet_amount'] ?>" id="stock_<?= $i ?>" name="stock_<?= $i ?>" hidden>
+                            <!-- =================== -->
+                        </td>
+                        <td class="text-right <?php if ($orderdet_data['orderdet_status'] != 2) echo 'price-order-' . $i; ?>" id="price-<?= $orderdet_data['foodid'] ?>" data-value="<?= number_format($orderdet_data['orderdet_price'], 2) ?>">
+                            <?= number_format($orderdet_data['orderdet_price'] * $orderdet_data['orderdet_amount'], 2) ?>
+                        </td>
+                        <td align="center">
+                            <?php if ($orderdet_data['orderdet_status'] == 0) { ?>
+                                <a href="save_edit_order.php?del_oid=<?= $orderdet_data['orderdetid'] ?>" onclick="if(confirm('ต้องการยกเลิกรายการอาหารนี้หรือไม่?')) return true; else return false;"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color:red;"></span></a>
+                            <?php } elseif ($orderdet_data['orderdet_status'] == 2) {
+                                echo "<font color='red'>ยกเลิกแล้ว</font>";
+                            } ?>
+                        </td>
+                    </tr>
+                <?php $i++;
+                } ?>
+                <tr>
+                    <td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
+                    <td class="text-right" id="sum"><b><?= number_format($order_data['order_totalprice'], 2); ?></b></td>
+                    <td></td>
+                </tr>
+        </div>
+        </table>
+
+        <h3 class="page-header text-center" style="">ตะกร้าสั่งเพิ่ม</h3>
+       
+            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:900px;">
+                <thead>
+                    <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
+                    <th style="width:180px;">ชื่ออาหาร</th>
+                    <th style="width:110px;">หน่วยนับ</th>
+                    <th style="text-align:right; width:100px;">ราคา (บาท)</th>
+                    <th style="text-align:center; width:135px;">จำนวน</th>
+                    <th style="width:140px; text-align:right">ราคารวม (บาท)</th>
+                    <th style="width:60px; text-align:center;">ยกเลิก</th>
+                </thead>
+
+                <?php
+                if (!isset($_SESSION['food_admin']['list']['foodid'])) {
+                    echo '<tr>
+			<td colspan="7" class="text-center">ไม่มีสินค้าในตะกร้า</td>
+		</tr>';
+                } else {
+
+                    $count_product = count($_SESSION['food_admin']['list']['foodid']);
+
+                    for ($i = 0; $i < $count_product; $i++) {
+                        $sql_sum        =    "SELECT * FROM foods WHERE foodid = '" . $_SESSION['food_admin']['list']['foodid'][$i] . "' ";
+                        $data_sum        =    mysqli_query($link, $sql_sum);
+                        $value            =    mysqli_fetch_assoc($data_sum);
+                        $sum_price[]     = $_SESSION['food_admin']['list']['food_price'][$i] * $_SESSION['food_admin']['list']['amount'][$i];
+                        $product_id[]     = $value['foodid'];
+
+                        // สำหรับตรวจสอบถ้าในระบบไม่มีรูป
+                        if ($value['food_image'] == "")
+                            $food_img = "../images/default_food.png";
+                        else $food_img = "../" . $value['food_image'];
+
+                ?>
+                        <input name="oid" type="text" value="<?= $_GET['oid'] ?>" hidden>
+                        <tr>
+                            <td align="right"><?php echo $value['foodid']; ?></td>
+                            <td><?php echo $value['food_name']; ?></td>
+                            <td><?= $value['food_count'] ?></td>
+                            <td align="right"><?php echo number_format($value['food_price'], 2); ?></td>
                             <td class="text-center">
-                                <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="delete" type="button">-</button>
-                                <input <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
-                                <input type="text" name="id[]" value="<?= $orderdet_data['foodid'] ?>" hidden>
-                                <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="plus" type="button"> + </button>
+                                <button class="delete2" type="button">-</button>
+                                <input type="text" maxlength="3" class="amount2" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center;" autocomplete="off" id="amount2-<?= $value['foodid'] ?>" value="<?= $_SESSION['food_admin']['list']['amount'][$i] ?>" size="1" name="qty2_<?php echo $i; ?>">
+                                <input type="text" name="id2[]" value="<?= $value['foodid'] ?>" hidden>
+                                <button class="plus2" type="button"> + </button>
                                 <!-- จำนวนเหลือ ใน Stock -->
-                                <input type="text" value="<?= $orderdet_data['orderdet_amount'] ?>" id="stock_<?= $i ?>" name="stock_<?= $i ?>" hidden>
+                                <input type="text" value="<?= $value['food_qty'] ?>" id="stock2_<?= $i ?>" name="stock2_<?= $i ?>" hidden>
                                 <!-- =================== -->
                             </td>
-                            <td class="text-right <?php if ($orderdet_data['orderdet_status'] != 2) echo 'price-order-' . $i; ?>" id="price-<?= $orderdet_data['foodid'] ?>" data-value="<?= number_format($orderdet_data['orderdet_price'], 2) ?>">
-                                <?= number_format($orderdet_data['orderdet_price'] * $orderdet_data['orderdet_amount'], 2) ?>
-                            </td>
-                            <td align="center">
-                                <?php if ($orderdet_data['orderdet_status'] == 0) { ?>
-                                    <a href="save_edit_order.php?del_oid=<?= $orderdet_data['orderdetid'] ?>" onclick="if(confirm('ต้องการยกเลิกรายการอาหารนี้หรือไม่?')) return true; else return false;"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color:red;"></span></a>
-                                <?php } elseif ($orderdet_data['orderdet_status'] == 2) {
-                                    echo "<font color='red'>ยกเลิกแล้ว</font>";
-                                } ?>
-                            </td>
+                            <td class="text-right price-order2-<?= $i ?>" data-value="<?= number_format($_SESSION['food_admin']['list']['food_price'][$i], 2) ?>" id="price2-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food_admin']['list']['food_price'][$i] * $_SESSION['food_admin']['list']['amount'][$i], 2) ?></td>
+                            <td align="center" style="padding:25px; width:10px"><a href="staff_del_list_food.php?foodid=<?php echo $value['foodid']; ?>&oid=<?= $_GET['oid'] ?>"> <span class="glyphicon glyphicon-trash fa-2x" style="color:red;" aria-hidden="true"></span></td>
                         </tr>
-                    <?php $i++;
-                    } ?>
+                    <?php } ?>
                     <tr>
-                        <td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
-                        <td class="text-right" id="sum"><b><?= number_format($order_data['order_totalprice'], 2); ?></b></td>
-                        <td></td>
+                        <td align="right" colspan="5"><b>ราคารวมทั้งหมด</b></td>
+                        <td class="text-right"><b id="sum2"><?= number_format(array_sum($sum_price), 2); ?></b></td>
+                        <td align="center"></td>
                     </tr>
-            </div>
+                <?php } ?>
             </table>
+
             <div class="col-md-offset-3 col-md-6" style="text-align: center;">
+                <a class="btn btn-primary" href="show_food_typeall.php?oid=<?= $_GET['oid'] ?>" role="button">เพิ่มรายการ</a>
                 <input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันปรับปรุงการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
                 <input type="reset" name="reset" class="btn btn-danger" value="คืนค่า">
-                <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิกการสั่งอาหาร?')) return true; else return false;" class="btn btn-warning">ยกเลิกการสั่ง</button></form>
-                <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
-            </div>
-        </div>
+                <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิกการสั่งอาหาร?')) return true; else return false;" class="btn btn-warning">ยกเลิกการสั่ง</button>
+        </form>
+        <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
+    </div>
+    </div>
     </div>
     <br>
     </div>
@@ -434,6 +500,183 @@ if (!isset($_GET['oid'])) {
                  }) */
             }
 
+            //	document.getElementById('basket').submit();
+        });
+
+
+
+        //// ส่วนของตะกร้า /////
+        $('.delete2').click(function(event) {
+            let id = $(this).next().attr('id');
+            let val = $('#' + id).val();
+            let id2 = id.replace('amount2-', 'price2-');
+            let price = $('#' + id2).data('value');
+
+            if (val <= 1) {
+                alert('จำนวนไม่สามารถน้อยกว่า 1 ได้');
+            } else {
+                let sum = parseInt(val) - 1;
+                $('#' + id).val(sum);
+
+                prices = price.replace(/,/g, ''),
+                    asANumber = +prices;
+
+                let price2 = sum * prices;
+
+                let price3 = price2.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                });
+
+                $('#' + id2).text(price3);
+
+                let count_tr = ($('#foodlist tr').length);
+                var sum2 = [];
+
+                for (var i = 0; i < count_tr; i++) {
+                    if ($('.price-order2-' + i).text() != "") {
+                        sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                    }
+                }
+                let sum3 = sum2.reduce(add, 0);
+                let sum_tt = sum3.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                });
+                $('#sum2').text(sum_tt)
+                $.ajax({ // Ajax สำหรับ ส่งค่า แก้ไขตะกร้า
+                    type: 'post',
+                    url: 'staff_update_qty_food2.php',
+                    data: $('form').serialize(),
+                    success: function() {
+                        //document.getElementById("demo").innerHTML = "Save your post done.";
+                        //	alert('form was submitted');
+                    }
+                })
+            }
+        });
+        $('.plus2').click(function(event) {
+            let id = $(this).prev().prev().attr('id');
+            let val = $('#' + id).val();
+            let id2 = id.replace('amount2-', 'price2-');
+            let price = $('#' + id2).data('value');
+            let sum = parseInt(val) + 1;
+            prices = price.replace(/,/g, ''),
+                asANumber = +prices;
+
+            let price2 = sum * prices;
+            let price3 = price2.toLocaleString(undefined, {
+                minimumFractionDigits: 2
+            });
+            $('#' + id).val(sum);
+            $('#' + id2).text(price3);
+
+            let count_tr = ($('#foodlist2 tr').length);
+
+            var sum2 = [];
+            for (var i = 0; i < count_tr; i++) {
+                if ($('.price-order2-' + i).text() != "") {
+                    sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                }
+            }
+            let sum3 = sum2.reduce(add, 0);
+            let sum_tt = sum3.toLocaleString(undefined, {
+                minimumFractionDigits: 2
+            });
+            $('#sum2').text(sum_tt)
+            $.ajax({
+                type: 'post',
+                url: 'staff_update_qty_food2.php',
+                data: $('form').serialize(),
+                success: function() {
+                    //document.getElementById("demo").innerHTML = "Save your post done.";
+                    //	alert('form was submitted');
+                }
+            })
+        });
+        $('.amount2').keyup(function(event) {
+            let id = $(this).attr('id');
+            let val = parseInt($('#' + id).val()); //|| 0;
+            let id2 = id.replace('amount2-', 'price2-');
+            let price = $('#' + id2).data('value');
+            let sum = parseInt(val);
+            prices = price.replace(/,/g, ''),
+                asANumber = +prices;
+
+            let price2 = sum * prices;
+            let price3 = price2.toLocaleString(undefined, {
+                minimumFractionDigits: 2
+            });
+
+            let limit = 250; // ลิมิตจำนวน อาหารมากสุด
+            //	parseInt($(this).prev().parent().prev().text()); // ลิมิตจำนวน
+            if ((limit < val || val <= 0) || isNaN(val)) {
+                if (val <= 0) {
+                    alert('จำนวนไม่สามารถน้อยกว่า 1 ได้');
+                    $('#' + id).val('1');
+                    $('#' + id2).text(price);
+                }
+                if (val > limit) {
+                    alert('จำนวนอาหารต้องน้อยกว่า 250');
+                    $('#' + id).val(limit);
+                    let price3 = price2.toLocaleString(undefined, {
+                        minimumFractionDigits: 2
+                    });
+                    $('#' + id2).text(price3);
+                }
+
+                let count_tr = ($('#foodlist2 tr').length);
+
+                var sum2 = [];
+                for (var i = 0; i < count_tr; i++) {
+                    if ($('.price-order2-' + i).text() != "") {
+                        sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                    }
+                }
+                let sum3 = sum2.reduce(add, 0);
+                let sum_tt = sum3.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                })
+                $('#sum2').text(sum_tt)
+
+                if (!isNaN(val)) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'staff_update_qty_food2.php',
+                        data: $('form').serialize(),
+                        success: function() {
+                            //document.getElementById("demo").innerHTML = "Save your post done.";
+                            //	alert('form was submitted');
+                        }
+                    })
+                }
+                //return
+            } else {
+                $('#' + id).val(sum);
+                $('#' + id2).text(price3);
+                let price = parseInt($('#price2' + id).data('value'));
+                let sum4 = price * val;
+
+                let count_tr = ($('#foodlist2 tr').length);
+                var sum2 = [];
+                for (var i = 0; i < count_tr; i++) {
+                    if ($('.price-order2-' + i).text() != "") {
+                        sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                    }
+                }
+                let sum3 = sum2.reduce(add, 0);
+                let sum_tt = sum3.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                });
+                $('#sum').text(sum_tt)
+                $.ajax({
+                    type: 'post',
+                    url: 'staff_update_qty_food2.php',
+                    data: $('form').serialize(),
+                    success: function() {
+                        //document.getElementById("demo").innerHTML = "Save your post done.";
+                        //	alert('form was submitted');
+                    }
+                })
+            }
             //	document.getElementById('basket').submit();
         });
     });
