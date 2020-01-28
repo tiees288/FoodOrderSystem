@@ -123,62 +123,84 @@ include("../conf/connection.php");
                     <td><?= $payment_type ?></td>
                     <td><?= $payment_status ?></td>
                     <td align="right" style="padding-right:5px;"><?= $pay_amount ?></td>
-                </tr>
-                <?php
-                $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
+                    <?php
+                    $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
                         WHERE payno = '" . $result_payment['payno'] . "'";
-                $query_date2 = mysqli_query($link, $sql_date2);
+                    $query_date2 = mysqli_query($link, $sql_date2);
 
-                while ($result_date2 = mysqli_fetch_array($query_date2)) {
-                    echo "<tr><td colspan='6'></td><td align='center'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td></tr>";
-                    $sql_order = "SELECT orderid, order_totalprice, tables_no
+                    $row_order_day = 1; // จำนวนแถว วันที่
+                    while ($result_date2 = mysqli_fetch_array($query_date2)) {
+                        if ($row_order_day > 1) {
+                            echo "</tr><tr><td colspan='6'></td>";
+                        }
+                        
+                        echo "<td align='center'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td>";
+                        $sql_order = "SELECT orderid, order_totalprice, tables_no
                         FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' AND payno = '" . $result_payment['payno'] . "'";
-                    $query_order = mysqli_query($link, $sql_order);
-                    while ($result_order = mysqli_fetch_array($query_order)) {
-                ?>
-                        <tr>
-                            <td colspan="7"></td>
-                            <td align="center"><?= $result_order['orderid'] ?></td>
-                            <td align="right"><?= ($result_order['tables_no'] != "") ? $result_order['tables_no'] : "-" ?></td>
-                            <td align="right" style="padding-right:10px;"><?= $result_order['order_totalprice'] ?></td>
-                        </tr>
+                        $query_order = mysqli_query($link, $sql_order);
 
-            <?php
+                        $row_order = 1; // จำนวนแถว การสั่ง
+                        while ($result_order = mysqli_fetch_array($query_order)) {
+
+                            if ($row_order > 1) {
+                                echo "</tr><tr><td colspan='7'></td>";
+                            }
+                    ?>
+                    <td align="center"><?= $result_order['orderid'] ?></td>
+                    <td align="right"><?= ($result_order['tables_no'] != "") ? $result_order['tables_no'] : "-" ?></td>
+                    <td align="right" style="padding-right:10px;"><?= $result_order['order_totalprice'] ?></td>
+                </tr>
+
+    <?php
+                        $row_order++;
+                        }
+                        $row_order_day++;
                     }
                 }
-            }
-            ?>
-            <tr style="border-bottom:1px solid;">
-                <td colspan="4"></td>
-                <td align="right"><b>รวม</b></td>
-                <td align="right"><b><?= number_format($per_day, 2) ?></b></td>
-                <td style="padding-left:10px;"><b>บาท</b></td>
-                <td colspan="3"></td>
-            </tr>
-        <?php
+    ?>
+    <tr style="border-bottom:1px solid;">
+        <td colspan="4"></td>
+        <td align="right"><b>รวม</b></td>
+        <td align="right"><b><?= number_format($per_day, 2) ?></b></td>
+        <td style="padding-left:10px;"><b>บาท</b></td>
+        <td colspan="3"></td>
+    </tr>
+<?php
         }
-        ?>
-        <tr>
-            <td colspan="3"></td>
-            <td align="right" colspan="2"><b>รวมทั้งหมด(บาท)</b></td>
-            <td align="right"><b><?= number_format($total_pay, 2) ?></b></td>
-            <td style="padding-left:10px;"><b>บาท</b></td>
-            <td colspan="3"></td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td align="right" colspan="2"><b><font color='#DC1CE1'>รวมชำระด้วยเงินโอนทั้งหมด(บาท)</b></td>
-            <td align="right"><b><font color='#DC1CE1'><?= number_format($total_bank_trans, 2) ?></b></td>
-            <td style="padding-left:10px;"><b><font color='#DC1CE1'>บาท</font></b></td>
-            <td colspan="3"></td>
-        </tr>
-        <tr style="border-bottom:1px solid;">
-            <td colspan="3"></td>
-            <td align="right" colspan="2"><b><font color='#1E87C9'>รวมชำระด้วยเงินสดทั้งหมด(บาท)</font></b></td>
-            <td align="right"><b><font color='#1E87C9   '><?= number_format($total_cash, 2) ?></font></b></td>
-            <td style="padding-left:10px;"><b><font color='#1E87C9'>บาท</font></b></td>
-            <td colspan="3"></td>
-        </tr>
+?>
+<tr>
+    <td colspan="3"></td>
+    <td align="right" colspan="2"><b>รวมทั้งหมด(บาท)</b></td>
+    <td align="right"><b><?= number_format($total_pay, 2) ?></b></td>
+    <td style="padding-left:10px;"><b>บาท</b></td>
+    <td colspan="3"></td>
+</tr>
+<tr>
+    <td colspan="3"></td>
+    <td align="right" colspan="2"><b>
+            <font color='#DC1CE1'>รวมชำระด้วยเงินโอนทั้งหมด(บาท)
+        </b></td>
+    <td align="right"><b>
+            <font color='#DC1CE1'><?= number_format($total_bank_trans, 2) ?>
+        </b></td>
+    <td style="padding-left:10px;"><b>
+            <font color='#DC1CE1'>บาท</font>
+        </b></td>
+    <td colspan="3"></td>
+</tr>
+<tr style="border-bottom:1px solid;">
+    <td colspan="3"></td>
+    <td align="right" colspan="2"><b>
+            <font color='#1E87C9'>รวมชำระด้วยเงินสดทั้งหมด(บาท)</font>
+        </b></td>
+    <td align="right"><b>
+            <font color='#1E87C9   '><?= number_format($total_cash, 2) ?></font>
+        </b></td>
+    <td style="padding-left:10px;"><b>
+            <font color='#1E87C9'>บาท</font>
+        </b></td>
+    <td colspan="3"></td>
+</tr>
     </table>
     <br>
 </body>

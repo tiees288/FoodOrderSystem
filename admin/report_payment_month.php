@@ -52,7 +52,7 @@ $year    = $_POST['year'];
                 WHERE month(pay_date) = '$month' AND year(pay_date) = '$year'";
         $query_date = mysqli_query($link, $sql_date) or die(mysqli_error($link));
         $status_all = $status_0 = $status_1 = $status_2 = 0; // รวมสถานะด้านล่าง
-
+        $row_payment = 1; // นับ แถว
 
         if (mysqli_num_rows($query_date) == 0) {
             echo "<script>alert('ไม่พบข้อมูลที่ท่านค้นหา'); window.close();</script>";
@@ -61,11 +61,11 @@ $year    = $_POST['year'];
         while ($result_date = mysqli_fetch_array($query_date)) {
             $per_day = 0;
             echo "
-               <tr height='25px'>
+               <tr height='27px'>
                <td align='center'>
                 " . short_datetime_thai($result_date['date(pay_date)']) . "
                </td>
-               </tr>";
+               ";
 
             $sql_payment = "SELECT * FROM payment
                 LEFT JOIN staff ON payment.staffid = staff.staffid
@@ -94,7 +94,7 @@ $year    = $_POST['year'];
                         $status_0 += $result_payment['payamount'];
                         break;
                     case 1:
-                        $pay_status = "<font color='#12BB4F'>ยังไม่ชำระ</font>";
+                        $pay_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
                         $pay_amount = "<font color='#12BB4F'>" . number_format($result_payment['payamount'], 2) . "</font>";
                         $status_1 += $result_payment['payamount'];
                         break;
@@ -109,9 +109,12 @@ $year    = $_POST['year'];
                     LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
                 WHERE orders.payno = '" . $result_payment['payno'] . "'";
                 $result_cus = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
+        
+                if ($row_payment > 1) {
+                    echo "</tr><tr><td height='27px' colspan=''></td>";
+                }
         ?>
-                <tr>
-                    <td colspan=""></td>
+
                     <td align="center"><?= $result_payment['payno'] ?></td>
                     <td><?= $pay_type ?></td>
                     <td><?= $result_cus['cus_name'] ?></td>
@@ -122,6 +125,7 @@ $year    = $_POST['year'];
                 </tr>
 
             <?php
+            $row_payment++;
             }
             ?>
             <tr style="border-bottom: 1px solid;">
@@ -134,25 +138,25 @@ $year    = $_POST['year'];
         }
         ?>
         <tr style="">
-            <td colspan="3"></td>
+            <td colspan="3" height="27px"></td>
             <td colspan="2" style="padding-left:70px;"><b>รวมทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right:10px;"><b><?= number_format($status_all, 2) ?></b></td>
             <td><b>บาท</b></td>
         </tr>
         <tr style="color:orange;">
-            <td colspan="3"></td>
+            <td colspan="3" height="27px"></td>
             <td colspan="2" style="padding-left:70px;"><b>รวมยังไม่ชำระทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right:10px;"><b><?= number_format($status_0, 2) ?></b></td>
             <td><b>บาท</b></td>
         </tr>
         <tr style="color:#12BB4F;">
-            <td colspan="3"></td>
+            <td colspan="3" height="27px"></td>
             <td colspan="2" style="padding-left:70px;"><b>รวมชำระทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right:10px;"><b><?= number_format($status_1, 2) ?></b></td>
             <td><b>บาท</b></td>
         </tr>
         <tr style="border-bottom:1px solid;">
-            <td colspan="3"></td>
+            <td colspan="3" height="27px"></td>
             <td colspan="2" style="padding-left:70px;"><b>
                     <font color="red">รวมยกเลิกทั้งหมด(บาท)
                 </b></td>
