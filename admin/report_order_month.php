@@ -60,11 +60,11 @@ $year    = $_POST['year'];
         }
         while ($result_date = mysqli_fetch_array($query_date)) {
             echo "
-               <tr height='25px'>
+               <tr height='27px'>
                <td align='center'>
                 " . short_datetime_thai($result_date['date(orderdate)']) . "
                </td>
-               </tr>";
+               ";
 
             $sql_order = "SELECT * FROM orders 
                 LEFT JOIN customers ON orders.cusid = customers.cusid
@@ -74,7 +74,7 @@ $year    = $_POST['year'];
             ///////////////////////////////////////////////////////////////////
             $order_trans = $sum_per_day = 0;
             ///////////////////////////////////////////////////////////////////
-
+            $row_order = 1; // นับแถบ
             while ($result_order = mysqli_fetch_array($query_order)) {
                 $order_trans++;
 
@@ -119,19 +119,24 @@ $year    = $_POST['year'];
                 }
                 $sum_per_day += $result_order['order_totalprice'];
                 $total += $result_order['order_totalprice'];
+
+                if ($row_order > 1) {
+                    echo "</tr> <tr height='25px'><td height='25px;'>";
+                }
         ?>
-                <tr height="20px">
-                    <td></td>
-                    <td align="center"><?= $result_order['orderid'] ?></td>
-                    <td><?= $result_order['cus_name'] ?></td>
-                    <td style="padding-right:20px;" align="right"><?= !empty($result_order['tables_no']) ? $result_order['tables_no'] : "-" ?></td>
-                    <td align="left"><?= $order_status ?></td>
-                    <td><?= $order_type ?></td>
-                    <td align="right" style="padding-right:15px;" colspan="3"><?= $order_totalprice ?></td>
+
+
+                <td align="center" height="25x;"><?= $result_order['orderid'] ?></td>
+                <td><?= $result_order['cus_name'] ?></td>
+                <td style="padding-right:20px;" align="right"><?= !empty($result_order['tables_no']) ? $result_order['tables_no'] : "-" ?></td>
+                <td align="left"><?= $order_status ?></td>
+                <td><?= $order_type ?></td>
+                <td align="right" style="padding-right:15px;" colspan="3"><?= $order_totalprice ?></td>
                 </tr>
 
 
             <?php
+            $row_order++;
             }
             ?>
             <tr style="border-bottom:1px solid; height:25px;">
@@ -146,14 +151,14 @@ $year    = $_POST['year'];
         $total_trans = $total_trans_0 + $total_trans_1 + $total_trans_2 + $total_trans_3;
         ?>
         <tr>
-            <td colspan="4" style="height:30px;"></td>
+            <td colspan="4" style="height:25px;"></td>
             <td colspan="2"><b>รวมทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right: 15px;"><b><?= $total_trans ?></b></td>
             <td><b>รายการ</b></td>
             <td style="padding-right:15px;" align="right"><b><?= number_format($total, 2) ?></b></td>
         </tr>
         <tr>
-            <td colspan="4" style="height:30px;"></td>
+            <td colspan="4" style="height:25px;"></td>
             <td colspan="2" align="">
                 <font color="orange"><b>รวมยังไม่แจ้งชำระทั้งหมด(บาท)</b></font>
             </td>
@@ -165,10 +170,10 @@ $year    = $_POST['year'];
             </td>
             <td align="right" style="padding-right: 15px;">
                 <font color="orange"><b><?= number_format($total_0, 2) ?></b></font>
-            </td>         
+            </td>
         </tr>
         <tr>
-            <td colspan="4" style="height:30px;"></td>
+            <td colspan="4" style="height:25px;"></td>
             <td colspan="2" align="">
                 <font color="#0072EE"><b>รวมรอการตรวจสอบทั้งหมด(บาท)</b></font>
             </td>
@@ -183,7 +188,7 @@ $year    = $_POST['year'];
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="height:30px;"></td>
+            <td colspan="4" style="height:25px;"></td>
             <td colspan="2" align="">
                 <font color="#12BB4F"><b>รวมยังไม่แจ้งชำระทั้งหมด(บาท)</b></font>
             </td>
@@ -198,7 +203,7 @@ $year    = $_POST['year'];
             </td>
         </tr>
         <tr style="border-bottom:1px solid;">
-            <td colspan="4" style="height:30px;"></td>
+            <td colspan="4" style="height:25px;"></td>
             <td colspan="2" align="">
                 <font color="red"><b>รวมยกเลิกแล้วทั้งหมด(บาท)</b></font>
             </td>
