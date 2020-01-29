@@ -111,7 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             orderdet_status = 2 WHERE orderid = '" . $_POST['orderid'] . "'";
         //  && mysqli_query($link, $sql_cancel2)
 
-        if (mysqli_query($link, $sql_cancel)) {
+        $sql_cancel_table = "UPDATE tables 
+            RIGHT JOIN orders ON orders.tables_no = tables.tables_no SET
+            tables_status_use = '0' WHERE orders.orderid = '". $_POST['orderid'] ."'";
+
+        if (mysqli_query($link, $sql_cancel) && mysqli_query($link, $sql_cancel_table)) {
             echo "<script>alert('ยกเลิกการสั่งอาหาร รหัสการสั่ง " . $_POST['orderid'] . " เรียบร้อย'); window.location.assign('staff_order_history.php');</script>";
         }
     }
