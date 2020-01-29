@@ -88,6 +88,10 @@ $year    = $_POST['year'];
                     $query_order1 = mysqli_query($link, $sql_order1) or die(mysqli_error($link));
                     $sql_reservelist = "SELECT tables_no FROM reservelist WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
                     $query_reservelist = mysqli_query($link, $sql_reservelist) or die(mysqli_error($link));
+
+                    if ($row_reserve1 > 1) {
+                        echo "<tr><td colspan='2'></td>";
+                    }
             ?>
                     <td align="center" height="30px"><?= $result_reserve1['reserv_id'] ?></td>
                     <td align="center"><?= short_datetime_thai($result_reserve1['reserv_date_appointment'])  ?></td>
@@ -124,7 +128,9 @@ $year    = $_POST['year'];
             <?php
                         }
                     }
+                    $row_reserve1++;
                 }
+    
                 echo "</tr>";
                 $row_date++;
                 $count_list1++;
@@ -167,7 +173,7 @@ $year    = $_POST['year'];
                     $sql_reservelist = "SELECT tables_no FROM reservelist WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
                     $query_reservelist = mysqli_query($link, $sql_reservelist) or die(mysqli_error($link));
                     if ($row_reserve1 > 1) {
-                        echo "<td colspan='2'></td>";
+                        echo "<tr><td colspan='2'></td>";
                     }
             ?>
                     <td align="center" height="30px"><?= $result_reserve1['reserv_id'] ?></td>
@@ -248,7 +254,7 @@ $year    = $_POST['year'];
                     $sql_reservelist = "SELECT tables_no FROM reservelist WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
                     $query_reservelist = mysqli_query($link, $sql_reservelist) or die(mysqli_error($link));
                     if ($row_reserve1 > 1) {
-                        echo "<td colspan='2'></td>";
+                        echo "<tr><td colspan='2'></td>";
                     }
             ?>
                     <td align="center" height="30px"><?= $result_reserve1['reserv_id'] ?></td>
