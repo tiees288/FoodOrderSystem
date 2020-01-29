@@ -50,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        mysqli_query($link, "UPDATE orders SET order_totalprice = $totalprice_update WHERE orderid = '" . $result_orderdet['orderid'] . "'");
+
         if (isset($_SESSION['food_admin']['list']['foodid'])) {
             $oid = $_POST['orderid']; // Orderid
             $total_price = 0;
@@ -99,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_query($link, $sql_update_totalprice) or die(mysqli_error($link));
             unset($_SESSION['food_admin']['list']);
         }
-        mysqli_query($link, "UPDATE orders SET order_totalprice = $totalprice_update WHERE orderid = '" . $result_orderdet['orderid'] . "'");
+    
         echo "<script>alert('ปรับปรุงการสั่งอาหาร รหัสการสั่ง " . $_POST['orderid'] . " เรียบร้อย'); window.location.assign('staff_order_history.php');</script>";
     
     } elseif (isset($_POST['cancel'])) { // กรณียกเลิกการสั่ง

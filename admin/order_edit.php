@@ -207,7 +207,7 @@ if (!isset($_GET['oid'])) {
                 </div>
             </div>
             <h3 class="page-header text-center">รายการอาหาร</h3>
-            <table class="table table-striped table-bordered" style="width:900px;" align="center" id="foodlist">
+            <table class="table table-striped table-bordered" style="width:950px;" align="center" id="foodlist">
                 <thead>
                     <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
                     <th width="140px">ชื่ออาหาร</th>
@@ -263,7 +263,7 @@ if (!isset($_GET['oid'])) {
 
         <h3 class="page-header text-center" style="">ตะกร้าสั่งเพิ่ม</h3>
        
-            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:900px;">
+            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:950px;">
                 <thead>
                     <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
                     <th style="width:180px;">ชื่ออาหาร</th>
