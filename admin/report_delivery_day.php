@@ -140,7 +140,7 @@ include("../conf/connection.php");
             ?>
             <tr style="border-bottom:1px solid;">
                 <td colspan="7"></td>
-                <td style=""><b>รวม</b></td>
+                <td><b>รวม</b></td>
                 <td align="right" style="padding-right:10px;"><b><?= number_format($sum_day_delivery, 2) ?></b></td>
                 <td colspan="4"><b>บาท</b></td>
             </tr>
@@ -172,3 +172,5 @@ include("../conf/connection.php");
             <td style="color:red;" colspan="4"><b>บาท</b></td>
         </tr>
     </table>
+    <br>
+</body>
