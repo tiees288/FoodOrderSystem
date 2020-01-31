@@ -178,6 +178,9 @@
 			.navbar .login-form .btn {
 				width: 100%;
 			}
+			#brand_details {
+				display: none;
+			}
 		}
 
 		.pagination>.active>a,
@@ -206,9 +209,9 @@
 	<nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-fixed-top">
 		<div class="navbar-header d-flex col">
 			<a class="navbar-brand" style="padding-left:16px" href="index.php">เปิ้ล<b>อาหารตามสั่ง</b></a>
-			<span class="navbar-brand" style="font-size:15px; display: inline-block;">
+			<a class="navbar-brand col-md-8" id="brand_details" style="font-size:15px; position:fixed;">
 				ม.5 ต.คลองหนึ่ง อ.คลองหลวง จ.ปทุมธานี (ตรงข้ามมหาวิทยาลัยกรุงเทพ) 061-576-0437 (เปิ้ล)
-			</span>
+			</a>
 			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
 				<span class="navbar-toggler-icon"></span>
 				<span class="icon-bar"></span>
