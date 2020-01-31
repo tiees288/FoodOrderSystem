@@ -8,7 +8,7 @@ if (!isset($_SESSION['staff']) && ($_SESSION['staff_level'] != 1)) {
 }
 
 if (!isset($_POST['month']) && !isset($_POST['year'])) {
-    echo "<script>window.location.assign('monthly_report_selector.php?report_name=order_month');</script>";
+    echo "<script>window.location.assign('monthly_report_selector.php?report_name=reserve_month');</script>";
     exit();
 }
 

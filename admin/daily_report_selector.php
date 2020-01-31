@@ -20,7 +20,7 @@
             break;
         case 'delivery_day':
             $report_name = "รายงานการส่งอาหารประจำวัน";
-            $report_file = "report_order_day.php";
+            $report_file = "report_delivery_day.php";
             break;
         default:
             echo "<script>window.location.assign('index.php');</script>";

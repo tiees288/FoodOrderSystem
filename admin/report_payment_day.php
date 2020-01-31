@@ -8,7 +8,7 @@ if (!isset($_SESSION['staff']) && ($_SESSION['staff_level'] != 1)) {
 }
 
 if (!isset($_POST['startdate']) && !isset($_POST['enddate'])) {
-    echo "<script>window.location.assign('daily_report_selector.php?report_name=order_day');</script>";
+    echo "<script>window.location.assign('daily_report_selector.php?report_name=payment_day');</script>";
     exit();
 }
 
