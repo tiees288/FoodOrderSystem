@@ -51,7 +51,7 @@ $year    = $_POST['year'];
         $sql_delivery = "SELECT DISTINCT date(orderdate) FROM orders
             LEFT JOIN payment ON orders.payno = payment.payno
             WHERE month(orderdate) = '$month' AND year(orderdate) = '$year'
-            AND order_type = '0' AND order_date_delivered != '0000-00-00'";
+            AND (order_type = '0' AND date(order_date_delivered) != '0000-00-00')";
         $query_delivery = mysqli_query($link, $sql_delivery) or die(mysqli_error($link));
         $sql_delivery_1 = $sql_delivery_0 = $sql_delivery_2 = $sql_delivery;
         $sum_a = $sum_b = $sum_c = 0;
@@ -82,7 +82,7 @@ $year    = $_POST['year'];
                 $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "' AND order_type = '0'";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -140,7 +140,7 @@ $year    = $_POST['year'];
                 $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'  AND order_type = '0'";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -198,7 +198,7 @@ $year    = $_POST['year'];
                     $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'  AND order_type = '0'";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
                     while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -236,17 +236,17 @@ $year    = $_POST['year'];
         <tr height="30px" style="color:#12BB4F;">
             <td colspan="7"></td>
             <td colspan="1"><b>รวมชำระแล้วทั้งหมด(บาท)</b></td>
-            <td align="right" style="padding-right:15px;"><b><?= number_format($sum_a + $sum_b + $sum_c, 2) ?></b></td>
+            <td align="right" style="padding-right:15px;"><b><?= number_format($sum_a, 2) ?></b></td>
         </tr>
         <tr height="30px" style="color:orange;">
             <td colspan="7"></td>
             <td colspan="1"><b>รวมยังไม่ชำระทั้งหมด(บาท)</b></td>
-            <td align="right" style="padding-right:15px;"><b><?= number_format($sum_a + $sum_b + $sum_c, 2) ?></b></td>
+            <td align="right" style="padding-right:15px;"><b><?= number_format($sum_b, 2) ?></b></td>
         </tr>
         <tr height="30px" style="border-bottom:1px solid;">
             <td colspan="7"></td>
             <td style="color:red;" colspan="1"><b>รวมยกเลิกทั้งหมด(บาท)</b></td>
-            <td align="right" style="color:red; padding-right:15px;"><b><?= number_format($sum_a + $sum_b + $sum_c, 2) ?></b></td>
+            <td align="right" style="color:red; padding-right:15px;"><b><?= number_format($sum_c, 2) ?></b></td>
         </tr>
     </table>
     <br>
