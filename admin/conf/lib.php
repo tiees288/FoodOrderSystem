@@ -16,16 +16,16 @@
 
 <script>
     // --------------------- Protect Coppy --------------------------
-    
-    document.onkeydown = function(e) {
-        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 117) || e.keyCode === 123) { // Key 123 = F12, Key 85 = U
-            return false;
-        }
-    };
-    $(this).bind("contextmenu", function(e) {
-        e.preventDefault();
-    });
-    
+     
+     document.onkeydown = function(e) {
+         if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 117) || e.keyCode === 123) { // Key 123 = F12, Key 85 = U
+             return false;
+         }
+     };
+     $(this).bind("contextmenu", function(e) {
+         e.preventDefault();
+     });
+     
     // --------------------------------------------------------------
 
     var endYear1 = new Date(new Date().getFullYear() - 18, 11, 32);
@@ -115,29 +115,62 @@
         }) //.datepicker();  //กำหนดเป็นวันปัจุบัน
 
         // Report Selector ตรวจสอบวันที่ให้ถูกค้อง
-      var _0x279a=['\x49\x32\x56\x75\x5a\x47\x52\x68\x64\x47\x55\x3d','\x64\x6d\x46\x73','\x63\x48\x4a\x6c\x64\x6d\x56\x75\x64\x45\x52\x6c\x5a\x6d\x46\x31\x62\x48\x51\x3d','\x34\x4c\x69\x42\x34\x4c\x69\x6a\x34\x4c\x69\x34\x34\x4c\x69\x54\x34\x4c\x69\x79\x34\x4c\x69\x56\x34\x4c\x69\x6a\x34\x4c\x69\x6e\x34\x4c\x69\x49\x34\x4c\x69\x71\x34\x4c\x69\x74\x34\x4c\x69\x61\x34\x4c\x69\x6e\x34\x4c\x69\x78\x34\x4c\x69\x5a\x34\x4c\x69\x58\x34\x4c\x69\x31\x34\x4c\x6d\x49\x34\x4c\x6d\x44\x34\x4c\x69\x72\x34\x4c\x6d\x4a\x34\x4c\x69\x57\x34\x4c\x69\x35\x34\x4c\x69\x42\x34\x4c\x69\x56\x34\x4c\x6d\x4a\x34\x4c\x69\x74\x34\x4c\x69\x48','\x49\x33\x4e\x6c\x59\x58\x4a\x6a\x61\x46\x39\x79\x5a\x58\x42\x76\x63\x6e\x52\x66\x5a\x47\x46\x70\x62\x48\x6b\x3d','\x59\x32\x78\x70\x59\x32\x73\x3d','\x49\x33\x4e\x30\x59\x58\x4a\x30\x5a\x47\x46\x30\x5a\x51\x3d\x3d','\x63\x33\x42\x73\x61\x58\x51\x3d'];(function(_0x1c7c6d,_0x2f4e4f){var _0x57dbc4=function(_0x23aa6c){while(--_0x23aa6c){_0x1c7c6d['push'](_0x1c7c6d['shift']());}};_0x57dbc4(++_0x2f4e4f);}(_0x279a,0x7c));var _0x50be=function(_0x5903b4,_0x58be01){_0x5903b4=_0x5903b4-0x0;var _0xedd1a1=_0x279a[_0x5903b4];if(_0x50be['lpYMwo']===undefined){(function(){var _0x2828a5;try{var _0x7f7bf1=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x2828a5=_0x7f7bf1();}catch(_0x1668bc){_0x2828a5=window;}var _0x10ade4='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x2828a5['atob']||(_0x2828a5['atob']=function(_0x1c5a77){var _0x360131=String(_0x1c5a77)['replace'](/=+$/,'');for(var _0x160d39=0x0,_0x399e1e,_0x2bb2e4,_0x1be45c=0x0,_0x55c4e4='';_0x2bb2e4=_0x360131['charAt'](_0x1be45c++);~_0x2bb2e4&&(_0x399e1e=_0x160d39%0x4?_0x399e1e*0x40+_0x2bb2e4:_0x2bb2e4,_0x160d39++%0x4)?_0x55c4e4+=String['fromCharCode'](0xff&_0x399e1e>>(-0x2*_0x160d39&0x6)):0x0){_0x2bb2e4=_0x10ade4['indexOf'](_0x2bb2e4);}return _0x55c4e4;});}());_0x50be['wFEeIR']=function(_0x126d31){var _0x3e68c0=atob(_0x126d31);var _0x52c7c6=[];for(var _0x3a927c=0x0,_0x4365c1=_0x3e68c0['length'];_0x3a927c<_0x4365c1;_0x3a927c++){_0x52c7c6+='%'+('00'+_0x3e68c0['charCodeAt'](_0x3a927c)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x52c7c6);};_0x50be['OyHrRi']={};_0x50be['lpYMwo']=!![];}var _0x43fe53=_0x50be['OyHrRi'][_0x5903b4];if(_0x43fe53===undefined){_0xedd1a1=_0x50be['wFEeIR'](_0xedd1a1);_0x50be['OyHrRi'][_0x5903b4]=_0xedd1a1;}else{_0xedd1a1=_0x43fe53;}return _0xedd1a1;};$(_0x50be('0x0'))[_0x50be('0x1')](function(_0x4e2040){var _0x40d949=$(_0x50be('0x2'))['\x76\x61\x6c']()[_0x50be('0x3')]('\x2f');var _0x3a6602=$(_0x50be('0x4'))[_0x50be('0x5')]()[_0x50be('0x3')]('\x2f');if(_0x40d949!=''&&_0x3a6602!=''){if(_0x3a6602[0x2]==_0x40d949[0x2]){if(!(_0x3a6602[0x1]>=_0x40d949[0x1]&&_0x3a6602[0x0]>=_0x40d949[0x0])){$('\x23\x73\x74\x61\x72\x74\x64\x61\x74\x65')[_0x50be('0x5')]('');$(_0x50be('0x4'))[_0x50be('0x5')]('');alert('\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e43\u0e2b\u0e49\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07');_0x4e2040[_0x50be('0x6')]();}}else if(_0x3a6602[0x2]>_0x40d949[0x2]){}else{$(_0x50be('0x2'))['\x76\x61\x6c']('');$('\x23\x65\x6e\x64\x64\x61\x74\x65')[_0x50be('0x5')]('');alert(_0x50be('0x7'));_0x4e2040[_0x50be('0x6')]();}}});
+
+        $("#search_report_daily").click(function(e) {
+            // 2 ปี 1 เดือน 0 วัน
+            var start = $("#startdate").val().split("/");
+            var end = $("#enddate").val().split("/");
+            console.log(end[1]);
+            if (start != "" && end != "") {
+                if ((end[2] == start[2])) { // ตรวจปี
+                    if (end[1] >= start[1]) {
+                        if (!end[0] >= start[0]) {
+                            // Invalid date
+                            $("#startdate").val("");
+                            $("#enddate").val("");
+                            alert("กรุณาตรวจสอบวันที่ให้ถูกต้อง");
+                            e.preventDefault();
+                        }
+                    } else {
+                        // Invalid date
+                        $("#startdate").val("");
+                        $("#enddate").val("");
+                        alert("กรุณาตรวจสอบวันที่ให้ถูกต้อง");
+                        e.preventDefault();
+                    }
+                } else if (end[2] > start[2]) {
+                    // กรณีปีมากกว่าให้อยู่เฉยๆ
+                } else {
+                    // Invalid date
+                    $("#startdate").val("");
+                    $("#enddate").val("");
+                    alert("กรุณาตรวจสอบวันที่ให้ถูกต้อง");
+                    e.preventDefault();
+                }
+            }
+        });
 
         /* 
             ใช้ในการ เปิด/ปิด field ของหน้าบันทึกการสั่ง 
         */
-        $( "#order_type" ).change(function() {
+        $("#order_type").change(function() {
             if ($("#order_type").val() == "0") { // กลับบ้าน      
                 $(".order_type0").show();
                 $(".order_type1").hide();
 
                 // เปิดปิด Required
-                $("#deliverydate").attr("required",true);
-                $("#deliverytime").attr("required",true);
-                $("#deliveryplace").attr("required",true);
-                $("#tables_no").attr("required",false);
+                $("#deliverydate").attr("required", true);
+                $("#deliverytime").attr("required", true);
+                $("#deliveryplace").attr("required", true);
+                $("#tables_no").attr("required", false);
             } else if ($("#order_type").val() == "1") { // ทานที่ร้าน
                 $(".order_type1").show();
                 $(".order_type0").hide();
-                
+
                 // เปิดปิด Required
                 $("#deliverydate").attr("required", false);
                 $("#deliverytime").attr("required", false);
-                $("#deliveryplace").attr("required",false);
+                $("#deliveryplace").attr("required", false);
                 $("#tables_no").attr("required", true);
             }
         });
