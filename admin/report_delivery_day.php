@@ -38,18 +38,18 @@ include("../conf/connection.php");
             </td>
         </tr>
         <tr style="border-bottom:1px solid; height:30px; ">
-            <th style="text-align:center; width:120px;">วันที่ส่ง</th>
-            <th style="text-align:center; width:110px;">เวลาส่ง</th>
+            <th style="text-align:center; width:115px;">วันที่ส่ง</th>
+            <th style="text-align:center; width:100px;">เวลาส่ง</th>
             <th style="text-align:center; width:170px;">วัน/เวลากำหนดส่ง</th>
             <th style="text-align:center; width:130px;">วันที่สั่งอาหาร</th>
             <th style="text-align:center; width:130px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:120px;">รหัสการสั่ง</th>
             <th style="text-align:left; width:150px;">สถานะการชำระ</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
-            <th style="text-align:right; width:115px; padding-right:10px;">ราคารวม(บาท)</th>
+            <th style="text-align:right; width:130px; padding-right:10px;">ราคารวม(บาท)</th>
             <th style="text-align:left; width:180px;">ชื่ออาหาร</th>
             <th style="text-align:right; width:90px;">จำนวน</th>
-            <th style="text-align:right; width:130px;">ราคาต่อหน่วย(บาท)</th>
+            <th style="text-align:right; width:125px;">ราคาต่อหน่วย(บาท)</th>
             <th style="text-align:right; padding-right:15px; width:120px;">ราคา(บาท)</th>
         </tr>
         <?php
@@ -138,7 +138,7 @@ include("../conf/connection.php");
                 $row_date++;
             }
             ?>
-            <tr style="border-bottom:1px solid;">
+            <tr style="border-bottom:1px solid; height:30px;">
                 <td colspan="7"></td>
                 <td><b>รวม</b></td>
                 <td align="right" style="padding-right:10px;"><b><?= number_format($sum_day_delivery, 2) ?></b></td>
