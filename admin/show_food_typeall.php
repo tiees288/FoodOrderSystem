@@ -83,7 +83,11 @@
 			<div class="col-md-9"></div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="search_food" placeholder="ค้นหารายการอาหาร" aria-label="Search">
-				<input type="text" name="oid" hidden value="<?= $order_more != null ? $order_more : "" ?>">
+				<?php
+				if (isset($_GET['oid'])) {
+				?>
+					<input type="text" name="oid" hidden value="<?= $order_more != null ? $order_more : "" ?>">
+				<?php } ?>
 			</div>
 			<button type="submit" class="btn btn-success mb-2">ค้นหา</button>
 		</form>
@@ -158,7 +162,7 @@
 				} else {
 					echo '
 					<tr>
-						<td colspan="5" align="center">ไม่พบข้อมูลในระบบ</td>
+						<td colspan="6" align="center">ไม่พบข้อมูลในระบบ</td>
 					</tr>
 				';
 				}
@@ -187,7 +191,7 @@
 						}
 					}
 					if ($page != $num_pages) { ?>
-						<li class="page-item n"><a href='<?= $_SERVER["SCRIPT_NAME"]?>?Page=<?= $next_page ?>&search_food=<?= $strKeyword ?>&food_type=<?= $food_type ?><?= ($order_more != null) ? "&oid=$order_more" : "" ?>'>ถัดไป</a></li>
+						<li class="page-item n"><a href='<?= $_SERVER["SCRIPT_NAME"] ?>?Page=<?= $next_page ?>&search_food=<?= $strKeyword ?>&food_type=<?= $food_type ?><?= ($order_more != null) ? "&oid=$order_more" : "" ?>'>ถัดไป</a></li>
 					<?php
 					} else {
 						echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
