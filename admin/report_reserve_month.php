@@ -129,11 +129,10 @@ $year    = $_POST['year'];
                         }
                     }
                     $row_reserve1++;
+                    $count_list1++;
                 }
-    
                 echo "</tr>";
                 $row_date++;
-                $count_list1++;
             }
             ?>
         </tr>
@@ -216,7 +215,6 @@ $year    = $_POST['year'];
                 }
                 echo "</tr>";
                 $row_date++;
-                $count_list1++;
             }
             ?>
         <tr height="30px" style="border-bottom:1px solid;">
