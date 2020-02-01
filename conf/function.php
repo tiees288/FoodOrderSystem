@@ -189,12 +189,12 @@ function short_datetime_thai($dates)
     $d = substr($dates_n, 0, 2);
     $m = substr($dates_n, 3, 2);
     $y = substr($dates_n, 6, 4);
-    $hi = substr($dates_n, 11, 5);
+   // $hi = substr($dates_n, 11, 5);
 
 
     if ($d < 10) {
         $d = substr($d, 1, 1);
-        $d = "0".$d;
+      //  $d = "0".$d;
     }
     if ($m < 10) {
         $m = substr($m, 1, 1);

@@ -55,7 +55,8 @@ include("../conf/connection.php");
         <?php
         $sql_date = "SELECT DISTINCT date(order_date_delivered) FROM orders 
             WHERE (date(orders.order_date_delivered) >= date('" . tochristyear($_POST['startdate']) . "') 
-            AND date(orders.order_date_delivered) <= date('" . tochristyear($_POST['enddate']) . "'))";
+            AND date(orders.order_date_delivered) <= date('" . tochristyear($_POST['enddate']) . "'))
+            ORDER BY date(order_date_delivered) ASC";
         $query_date = mysqli_query($link, $sql_date) or die(mysqli_error($link));
 
 
