@@ -81,8 +81,8 @@ include("../conf/connection.php");
                 switch ($result_reserve['reserv_status']) {
                     case 0:
                         $reserv_status = "<span style='color:#0072EE'>รอการตรวจสอบ</span>";
-                        break;
                         $type_0++;
+                        break;
                     case 1:
                         $reserv_status = "<span style='color:#12BB4F';>ยืนยันการจอง</span>";
                         $type_1++;
@@ -145,7 +145,7 @@ include("../conf/connection.php");
         <td align="right"><b><?= $type_a ?></b></td>
         <td colspan="2" style="height:26px; padding-left:15px;"><b>รายการ</b></td>
     </tr>
-    <tr style="color:orange;">
+    <tr style="color:#0072EE;">
         <td colspan="5"></td>
         <td align="" style="padding-left:5px;" colspan="2"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
         <td align="right"><b><?= $type_0 ?></b></td>
