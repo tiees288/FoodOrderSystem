@@ -228,7 +228,7 @@ $year    = $_POST['year'];
             <?php
             $status = 2; // เลขสถานะ
             $sql_reserve_b .= "AND reserv_status = '$status'";
-            $query_date_reserve1 = mysqli_query($link, $sql_reserve_a) or die(mysqli_error($link));
+            $query_date_reserve1 = mysqli_query($link, $sql_reserve_b) or die(mysqli_error($link));
             $row_date = 1;
             while ($result_date_reserve1 = mysqli_fetch_array($query_date_reserve1)) {
                 $row_reserve1 = 1;
