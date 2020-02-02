@@ -14,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require('conf/connection.php');
     require_once('conf/function.php');
 
+    $extension        = array("jpeg", "jpg", "png", "gif");
+    $file_extension   = pathinfo($_FILES['order_evidence']['name'], PATHINFO_EXTENSION);
+
     $evidence       =  $_POST['orderid'] . "_" . date("Y-m-d") . "_" . $_FILES['order_evidence']['name'];
     $evidence_time  = dt_tochristyear($_POST['evidence_time']);
 
@@ -30,12 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             order_status = '1',
             order_evidence = '" . "images/pay_evidence/" . $evidence . "' WHERE orderid = '" . $_POST['orderid'] . "'";
 
-    if (move_uploaded_file($_FILES['order_evidence']['tmp_name'], "images/pay_evidence/" . $evidence)) {
-        if (mysqli_query($link, $sql)) {
-            echo  "<script> alert('แจ้งหลักฐาน รหัสการสั่ง " . str_pad($_POST['orderid'], 5, 0, STR_PAD_LEFT) . " เรียบร้อย');window.location.assign('order_history.php');</script>";
+    if (in_array($file_extension, $extension)) {
+        if (move_uploaded_file($_FILES['order_evidence']['tmp_name'], "images/pay_evidence/" . $evidence)) {
+            if (mysqli_query($link, $sql)) {
+                echo  "<script> alert('แจ้งหลักฐาน รหัสการสั่ง " . str_pad($_POST['orderid'], 5, 0, STR_PAD_LEFT) . " เรียบร้อย');window.location.assign('order_history.php');</script>";
+            }
+        } else {
+            // echo  "<script> alert('อัพโหลดไฟล์ผิดพลาด');window.location.assign('show_food.php') </script>";
         }
     } else {
-        // echo  "<script> alert('อัพโหลดไฟล์ผิดพลาด');window.location.assign('show_food.php') </script>";
+        echo "<script>alert('ไฟล์ที่จะอัพโหลด จะต้องเป็นรูปภาพเท่านั้น'); window.history.back();</script>";
     }
-
 }
