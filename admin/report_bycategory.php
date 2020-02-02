@@ -44,11 +44,8 @@
         <tr>
 
             <?php
-
-
             $sql_catg = "SELECT DISTINCT food_type FROM foods";
             $query_catg = mysqli_query($link, $sql_catg) or die(mysqli_error($link));
-
 
             while ($catg = mysqli_fetch_array($query_catg)) {
                 //   echo $catg['food_type'];
@@ -70,11 +67,14 @@
 
             ?>
         <tr>
-            <td class="text-left catg" style="padding-top:15px;"><?= $foodtype ?></td>
-        </tr>
+            <td class="text-left catg" style=""><?= $foodtype ?></td>
 
-        <?php
+            <?php
+                $row_catg = 1;
                 while ($result = mysqli_fetch_array($query)) {
+                    if ($row_catg > 1) {
+                        echo "</tr><tr><td></td>";
+                    }
 
                     if ($result['food_status'] == 0) {
                         $food_status = "<font color='#10C13A'>ใช้งาน</font>";
@@ -89,55 +89,56 @@
                     else $food_img = "../" . $result['food_image'];
 
                     $qty++; // นับจำนวนของอาหารแต่ละประเภท
-        ?>
-            <tr>
-                <td></td>
-                <td class="" style="padding:15px;"><?= $result['food_name'] ?></td>
-                <td class="text-right"><?= number_format($result['food_price'], 2); ?></td>
-                <td class="text-left" style="padding-left:20px;"><?= $result['food_count']; ?></td>
-                <td class="text-left"><?= $food_status; ?></td>
-                <td class="text-center" style="padding:2px;"><img style="border:1px solid;" height="60px" width="80px" src="<?= $food_img ?>"></td>
-            </tr>
-        <?php } ?>
-        <tr style="border-bottom: 1.5px solid">
-            <td style="padding-top:10px" colspan="3" align="right"><b>รวม</b></td>
-            <td style="padding-top:10px; padding-right:20px; text-align:right;" align="center"><?= $qty ?></td>
-            <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
+            ?>
+            <td class="" style="padding:15px;"><?= $result['food_name'] ?></td>
+            <td class="text-right"><?= number_format($result['food_price'], 2); ?></td>
+            <td class="text-left" style="padding-left:20px;"><?= $result['food_count']; ?></td>
+            <td class="text-left"><?= $food_status; ?></td>
+            <td class="text-center" style="padding:2px;"><img style="border:1px solid;" height="60px" width="80px" src="<?= $food_img ?>"></td>
         </tr>
     <?php
+                    $row_catg++;
+                }
+    ?>
+    <tr style="border-bottom: 1.5px solid">
+        <td style="padding-top:10px" colspan="3" align="right"><b>รวม</b></td>
+        <td style="padding-top:10px; padding-right:20px; text-align:right;" align="center"><?= $qty ?></td>
+        <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
+    </tr>
+<?php
                 $sumqty[] = $qty;
                 $sumsell[] = $count_sell;
                 $sumnotsell[] = $cont_notsell;
                 // $i++;
             }
-    ?>
-    <tr style="">
-        <td style="padding-top:10px" colspan="3" align="right"><b>รวมทั้งหมด</b></td>
-        <td style="padding-top:10px; padding-right:20px;" align="right"><?= number_format(array_sum($sumqty)) ?></td>
-        <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
-    </tr>
-    <tr style="">
-        <td style="padding-top:10px; " colspan="3" align="right"><b>
-                <font color='#10C13A'>รวมยังขายอยู่ทั้งหมด</font>
-            </b></td>
-        <td style="padding-top:10px; padding-right:20px;" align="right">
-            <font color='#10C13A'><?= number_format(array_sum($sumsell)) ?></font>
-        </td>
-        <td colspan="2" style="padding-top:10px"><b>
-                <font color='#10C13A'>รายการ</font>
-            </b></td>
-    </tr>
-    <tr style="border-bottom: 1.5px solid; padding-bottom:500px;">
-        <td style="padding-top:10px;" colspan="3" align="right"><b>
-                <font color="red">รวมไม่ขายแล้วทั้งหมด
-            </b></td>
-        <td style="padding-top:10px; padding-right:20px;" align="right">
-            <font color="red"><?= number_format(array_sum($sumnotsell)) ?></font>
-        </td>
-        <td colspan="2" style="padding-top:10px;">
-            <font color="red"><b>รายการ</b></font>
-        </td>
-    </tr>
+?>
+<tr style="">
+    <td style="padding-top:10px" colspan="3" align="right"><b>รวมทั้งหมด</b></td>
+    <td style="padding-top:10px; padding-right:20px;" align="right"><?= number_format(array_sum($sumqty)) ?></td>
+    <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
+</tr>
+<tr style="">
+    <td style="padding-top:10px; " colspan="3" align="right"><b>
+            <font color='#10C13A'>รวมยังขายอยู่ทั้งหมด</font>
+        </b></td>
+    <td style="padding-top:10px; padding-right:20px;" align="right">
+        <font color='#10C13A'><?= number_format(array_sum($sumsell)) ?></font>
+    </td>
+    <td colspan="2" style="padding-top:10px"><b>
+            <font color='#10C13A'>รายการ</font>
+        </b></td>
+</tr>
+<tr style="border-bottom: 1.5px solid; padding-bottom:500px;">
+    <td style="padding-top:10px;" colspan="3" align="right"><b>
+            <font color="red">รวมไม่ขายแล้วทั้งหมด
+        </b></td>
+    <td style="padding-top:10px; padding-right:20px;" align="right">
+        <font color="red"><?= number_format(array_sum($sumnotsell)) ?></font>
+    </td>
+    <td colspan="2" style="padding-top:10px;">
+        <font color="red"><b>รายการ</b></font>
+    </td>
+</tr>
     </table>
 </div>
 <p>
