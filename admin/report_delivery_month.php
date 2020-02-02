@@ -82,7 +82,8 @@ $year    = $_POST['year'];
                 $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "' AND order_type = '0'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "' 
+                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -140,7 +141,8 @@ $year    = $_POST['year'];
                 $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'  AND order_type = '0'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "' 
+                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -198,7 +200,8 @@ $year    = $_POST['year'];
                     $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'  AND order_type = '0'";
+                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'
+                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
                     while ($result_order = mysqli_fetch_array($query_deliveys)) {

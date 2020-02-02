@@ -79,7 +79,8 @@ $year    = $_POST['year'];
 
                 $sql_reserve1 = "SELECT * FROM reservations 
                     LEFT JOIN customers ON reservations.cusid = customers.cusid
-                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'";
+                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'
+                    AND reserv_status = '$status'";
                 $query_reserve1 = mysqli_query($link, $sql_reserve1) or die(mysqli_error($link));
                 $row_reserve1 = 1; // นับแถว
 
@@ -162,7 +163,8 @@ $year    = $_POST['year'];
 
                 $sql_reserve1 = "SELECT * FROM reservations 
                     LEFT JOIN customers ON reservations.cusid = customers.cusid
-                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'";
+                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'
+                    AND reserv_status = '$status'";
                 $query_reserve1 = mysqli_query($link, $sql_reserve1) or die(mysqli_error($link));
                 $row_reserve1 = 1; // นับแถว
 
@@ -242,7 +244,8 @@ $year    = $_POST['year'];
 
                 $sql_reserve1 = "SELECT * FROM reservations 
                     LEFT JOIN customers ON reservations.cusid = customers.cusid
-                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'";
+                    WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'
+                    AND reserv_status = '$status'";
                 $query_reserve1 = mysqli_query($link, $sql_reserve1) or die(mysqli_error($link));
                 $row_reserve1 = 1; // นับแถว
 
