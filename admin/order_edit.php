@@ -261,7 +261,7 @@ if (!isset($_GET['oid'])) {
         </div>
         </table>
 
-        <h3 class="page-header text-center" style="">ตะกร้าสั่งเพิ่ม</h3>
+        <h3 class="page-header text-center">ตะกร้าสั่งเพิ่ม</h3>
        
             <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:950px;">
                 <thead>
@@ -666,7 +666,7 @@ if (!isset($_GET['oid'])) {
                 let sum_tt = sum3.toLocaleString(undefined, {
                     minimumFractionDigits: 2
                 });
-                $('#sum').text(sum_tt)
+                $('#sum2').text(sum_tt)
                 $.ajax({
                     type: 'post',
                     url: 'staff_update_qty_food2.php',
