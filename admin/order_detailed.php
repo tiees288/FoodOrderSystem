@@ -208,7 +208,7 @@ if (!isset($_GET['oid'])) {
                         <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
                     </thead>
                     <?php
-                    $orderdet_sql = "SELECT * FROM orderdetails WHERE orderid = '" . $_GET['oid'] . "'";
+                    $orderdet_sql = "SELECT * FROM orderdetails WHERE orderid = '" . $_GET['oid'] . "' AND orderdet_status != '2'";
                     $orderdet_query = mysqli_query($link, $orderdet_sql);
 
                     while ($orderdet_data = mysqli_fetch_array($orderdet_query)) {
