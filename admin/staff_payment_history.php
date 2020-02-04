@@ -43,7 +43,6 @@
                     <th style="text-align:left; width: 250px;">ชื่อลูกค้า</th>
                     <th style="text-align:right; width: 100px;">ยอดชำระ</th>
                     <th style="text-align:left; width: 130px;">สถานะ</th>
-                    <th style=" text-align:center; width:145px;">บันทึกจัดส่ง</th>
                     <th style=" text-align:center; width:155px;">ใบเสร็จรับเงิน</th>
                     <th style=" text-align:center; width:210px;">ยกเลิกใบเสร็จรับเงิน</th>
                 </thead>
@@ -87,7 +86,7 @@
                     while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
                         // $ordertime = strtotime($result["orderdate"]);
                         $sql_cus = "SELECT orders.orderid, customers.cusid, customers.cus_name FROM orders
-                            LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.payno = '". $result['payno'] ."'";
+                            LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.payno = '" . $result['payno'] . "'";
                         $cus_data = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
 
                         switch ($result['pay_status']) {
@@ -113,15 +112,9 @@
                                 <?php
                                 $sql_check_delivery = "SELECT * FROM payment LEFT JOIN orders ON payment.payno = orders.payno WHERE payment.payno = '" . $result['payno'] . "'";
                                 $result_delivery = mysqli_fetch_assoc(mysqli_query($link, $sql_check_delivery));
-                                if ($result_delivery['pay_status'] != 2) {
-                                    if ($result_delivery['order_date_tobedelivery'] != "0000-00-00" && $result_delivery['order_date_delivered'] == "0000-00-00") {
+
                                 ?>
-                                        <a href="staff_checkout_delivery.php?pno=<?= $result['payno'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
-                                <?php }
-                                } ?>
-                            </td>
-                            <td align="center">
-                                    <a href="bill_payment.php?bill=<?= $result['payno'] ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> ใบเสร็จรับเงิน</a>
+                                <a href="bill_payment.php?bill=<?= $result['payno'] ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> ใบเสร็จรับเงิน</a>
                             </td>
                             <td align="center" height="50px;">
                                 <?php

@@ -23,7 +23,7 @@
         $strKeyword = $_GET["search_orders"];
     }
     ?>
-    <div class="container" style="padding-top: 135px;">
+    <div class="container" style="padding-top: 135px; width:90%">
 
         <h1 class="page-header text-left">แสดง/ยกเลิกการสั่งอาหาร</h1>
         <div class="row">
@@ -47,6 +47,7 @@
                     <th style="text-align:left; width:160px;">สถานะ</th>
                     <th style=" text-align:center; width:180px;">รายละเอียดการสั่ง</th>
                     <th style=" text-align:center; width:230px;">ปรับปรุงการสั่งอาหาร</th>
+                    <th style=" text-align:center; width:145px;">บันทึกจัดส่ง</th>
                     <th style=" text-align:center; width:145px;">เลือกรับชำระ</th>
                 </thead>
 
@@ -120,7 +121,16 @@
                                     <a href="order_edit.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
                         <?php } ?>
                         </td>
-                    <td align="center">
+                        <td>
+                        <?php
+                                if ($result['order_date_tobedelivery'] != "0000-00-00" && $result['order_date_delivered'] == "0000-00-00") {
+                        ?>
+                            <a href="staff_checkout_delivery.php?pno=<?= $result['payno'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
+                        <?php
+                                }
+                        ?>
+                        </td>
+                        <td align="center">
                             <?php if ($result['order_status'] != 3 && $result['order_status'] != 2) { // ปุ่มเลือกรับชำระ
                             ?>
                                 <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
