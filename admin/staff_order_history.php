@@ -121,7 +121,7 @@
                                     <a href="order_edit.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
                         <?php } ?>
                         </td>
-                        <td>
+                        <td align="center">
                             <?php
                             if ($result['order_status'] != 3) {
                                 if ($result['order_type'] == "0" && $result['order_date_delivered'] == "0000-00-00") {
