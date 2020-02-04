@@ -12,25 +12,19 @@
 <body>
     <?php
 
-    if (!isset($_GET['pno'])) {
-        echo "<script>window.location.assign('staff_payment_history.php');</script>";
+    if (!isset($_GET['oid'])) {
+        echo "<script>window.location.assign('staff_order_history.php');</script>";
         exit();
     }
 
     require_once("../conf/connection.php");
     include_once("../conf/function.php");
 
-    $sql_payment    = "SELECT * FROM payment 
-        LEFT JOIN orders ON payment.payno = orders.payno
-        LEFT JOIN customers ON orders.cusid = customers.cusid
-    WHERE payment.payno = '{$_GET['pno']}'";
-    $q_payment = mysqli_query($link, $sql_payment);
-    $payment_data = mysqli_fetch_assoc($q_payment);
-
     $sql_order = "SELECT * FROM orders 
-        LEFT JOIN orderdetails ON orders.orderid = ordersdetails.orderid 
-        WHERE payno = '" . $_GET['pno'] . "'";
+        LEFT JOIN customers ON orders.cusid = customers.cusid
+        WHERE orderid = '" . $_GET['oid'] . "'";
     $q_orders = mysqli_query($link, $sql_order);
+    $result_order = mysqli_fetch_assoc($q_orders);
     ?>
 
     <div class="container" style="padding-top: 135px;">
@@ -42,36 +36,36 @@
                         <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_delivery.php">
                             <table width="750px" border="0" align="center">
                                 <tr>
-                                    <td width="34px" height="36px"><b>เลขที่ใบเสร็จ :</b></td>
+                                    <td width="34px" height="36px"><b>รหัสการสั่งอาหาร :</b></td>
                                     <td width="30%">
-                                        <?= $payment_data['payno'] ?>
-                                        <input name="payno" id="payno" hidden value="<?= $payment_data['payno'] ?>">
+                                        <?= $result_order['orderid'] ?>
+                                        <input name="oid" id="oid" hidden value="<?= $result_order['orderid'] ?>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="34px" height="36px"><b>รหัสลูกค้า :</b></td>
                                     <td width="30%">
-                                        <?= $payment_data['cusid'] ?>
+                                        <?= $result_order['cusid'] ?>
                                     </td>
                                     <td width="20%" height="36px"><b>ชื่อ-นามสกุล :</b></td>
-                                    <td><?php echo $payment_data['cus_name']; ?></td>
+                                    <td><?php echo $result_order['cus_name']; ?></td>
                                 </tr>
                                 <tr>
                                     <td height="40px" width="15%"><b>วันที่สั่ง :</b></td>
                                     <td width="35%">
-                                        <?= dt_tothaiyear($payment_data['orderdate']) ?>
+                                        <?= dt_tothaiyear($result_order['orderdate']) ?>
                                     </td>
                                     <td width="16%" height="40px"><b>เบอร์โทรศัพท์ :</b></td>
-                                    <td><?php echo $payment_data['cus_tel'] ?></td>
+                                    <td><?php echo $result_order['cus_tel'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="15%" height="32px"><b>วันที่กำหนดส่ง :<span style="color:red;"></span></b></td>
                                     <td width="35%">
-                                        <?= tothaiyear($payment_data['order_date_tobedelivery']) ?>
+                                        <?= tothaiyear($result_order['order_date_tobedelivery']) ?>
                                     </td>
                                     <td width="15%" height="32px"><b>เวลากำหนดส่ง :<span style="color:red;"></span></b></td>
                                     <td>
-                                        <?= substr($payment_data['order_time_tobedelivery'], 0, 5) ?></td>
+                                        <?= substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="15%" height="40px"><b>วันที่ส่ง :<span style="color:red;">*</span></b></td>
@@ -83,7 +77,7 @@
                                 </tr>
                                 <tr>
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;"></span></b></td>
-                                    <td height="75px"><?= $payment_data['cus_address'] . " รหัสไปรษณีย์ " . $payment_data['cus_postnum'] ?></td>
+                                    <td height="75px"><?= $result_order['cus_address'] . " รหัสไปรษณีย์ " . $result_order['cus_postnum'] ?></td>
                                     </td>
                                     </td>
                                 </tr>
@@ -92,7 +86,6 @@
                 <h3 class="page-header text-center">รายการอาหาร</h3>
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <th style="width: 150px; text-align:center;">รหัสการสั่งอาหาร</th>
                         <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
                         <th style="width:120px;">ชื่ออาหาร</th>
                         <th style="width:80px;">หน่วยนับ</th>
@@ -101,24 +94,21 @@
                         <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
                     </thead>
                     <?php
-                    $sql_orderdet = "SELECT orderid FROM orders WHERE payno = '" . $_GET['pno'] . "'";
+                    $sql_orderdet = "SELECT orderid FROM orders WHERE orderid = '" . $_GET['oid'] . "'";
                     $q_orderdet = mysqli_query($link, $sql_orderdet) or die(mysqli_error($link));
                     $sum_total = 0;
 
                     while ($result_orderdet = mysqli_fetch_array($q_orderdet)) {
                         $i = 1; ?>
                         <tr>
-                            <td align="center"><?= $result_orderdet['orderid'] ?></td>
                             <?php
-                            $sql_orderdet2 = "SELECT orders.orderid ,orderdetails.foodid, orderdetails.orderdet_amount, orderdetails.orderdet_price, foods.food_name, foods.food_count FROM orders
-                                 LEFT JOIN orderdetails ON orders.orderid = orderdetails.orderid
+                            $sql_orderdet2 = "SELECT * FROM orderdetails
                                  LEFT JOIN foods ON orderdetails.foodid = foods.foodid
-                             WHERE orders.orderid = '" . $result_orderdet['orderid'] . "'";
+                             WHERE orderdetails.orderid = '" . $result_order['orderid'] . "'";
                             $q_orderdet2 = mysqli_query($link, $sql_orderdet2) or die(mysqli_error($link));
 
                             while ($result_orderdet2 = mysqli_fetch_array($q_orderdet2)) {
                             ?>
-                                <?= $i >= 2 ? "</tr><tr><td></td>" : "" ?>
                                 <td align="right"><?= $result_orderdet2['foodid'] ?></td>
                                 <td><?= $result_orderdet2['food_name'] ?></td>
                                 <td><?= $result_orderdet2['food_count'] ?></td>
@@ -132,7 +122,7 @@
                         }
                 ?>
                 <tr>
-                    <td colspan="6" align="right"><b>ราคารวมทั้งหมด</b></td>
+                    <td colspan="5" align="right"><b>ราคารวมทั้งหมด</b></td>
                     <td align="right"><b><?= number_format($sum_total, 2) ?></b></td>
                 </tr>
 
