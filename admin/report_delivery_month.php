@@ -50,8 +50,8 @@ $year    = $_POST['year'];
         <?php
         $sql_delivery = "SELECT DISTINCT date(orderdate) FROM orders
             LEFT JOIN payment ON orders.payno = payment.payno
-            WHERE month(orderdate) = '$month' AND year(orderdate) = '$year'
-            AND (order_type = '0' AND date(order_date_delivered) != '0000-00-00')";
+            WHERE (month(orderdate) = '$month' AND year(orderdate) = '$year'
+            AND order_type = '0')";
         $query_delivery = mysqli_query($link, $sql_delivery) or die(mysqli_error($link));
         $sql_delivery_1 = $sql_delivery_0 = $sql_delivery_2 = $sql_delivery;
         $sum_a = $sum_b = $sum_c = 0;
@@ -178,7 +178,7 @@ $year    = $_POST['year'];
 
             <?php
             $status = 2; // เลขสถานะ
-            $sql_delivery_2 .= "AND pay_status = '$status'";
+            $sql_delivery_2 .= " AND pay_status = '$status'";
             $query_delivery_2 = mysqli_query($link, $sql_delivery_2) or die(mysqli_error($link));
 
             $row_delivery_date = 1; // นับแถว
@@ -189,18 +189,18 @@ $year    = $_POST['year'];
                 </tr>";
             } else {
 
-                while ($result_delivery_1 = mysqli_fetch_array($query_delivery_1)) {
+                while ($result_delivery_2 = mysqli_fetch_array($query_delivery_2)) {
                     if ($row_delivery_date > 1) {
                         echo "</tr><tr><td height='30px'></td>";
                     }
                     echo "
                 <td align='center'>
-                 " . short_datetime_thai($result_delivery_1['date(orderdate)']) . "
+                 " . short_datetime_thai($result_delivery_2['date(orderdate)']) . "
                 </td>";
                     $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "'
+                WHERE date(orderdate) = '" . $result_delivery_2['date(orderdate)'] . "'
                 AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
