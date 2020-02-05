@@ -84,13 +84,13 @@ include("../conf/connection.php");
             $query_delivery = mysqli_query($link, $sql_delivery) or die(mysqli_error($link));
             $row_date = 1; // นับแถว
             while ($result_delivery = mysqli_fetch_array($query_delivery)) {
-                $sum_day_delivery += $result_delivery['payamount'];
-                $total_all += $result_delivery['payamount'];
+                $sum_day_delivery += ($result_delivery['payamount'] ? $result_delivery['payamount'] : $result_delivery['order_totalprice']);
+                $total_all += ($result_delivery['payamount'] ? $result_delivery['payamount'] : $result_delivery['order_totalprice']);
                 switch ($result_delivery['pay_status']) {
                     case 0:
                         $payment_status = "<font color='orange'>ยังไม่ชำระ</font>";
-                        $pay_amount = "<font color='orange'>" . $result_delivery['payamount'] . "</font>";
-                        $total_0 += $result_delivery['payamount'];
+                        $pay_amount = "<font color='orange'>" . $result_delivery['order_totalprice'] . "</font>";
+                        $total_0 += $result_delivery['order_totalprice'];
                         break;
                     case 1:
                         $payment_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
