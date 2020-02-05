@@ -113,7 +113,7 @@ include("../conf/connection.php");
                 <td align="center" height="30px"><?= substr($result_delivery['order_time_delivered'], 0, 5) ?></td>
                 <td align="center"><?= short_datetime_thai($result_delivery['order_date_tobedelivery']) . " " . substr($result_delivery['order_time_tobedelivery'], 0, 5); ?></td>
                 <td align="center"><?= short_datetime_thai($result_delivery['orderdate']) ?></td>
-                <td align="center"><?= $result_delivery['payno'] ?></td>
+                <td align="center"><?= $result_delivery['payno'] ? $result_delivery['payno'] : "-" ?></td>
                 <td align="center"><?= $result_delivery['orderid'] ?></td>
                 <td align="left"><?= $payment_status ?></td>
                 <td align="left"><?= $result_delivery['cus_name'] ?></td>
