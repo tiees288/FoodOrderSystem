@@ -14,6 +14,11 @@ include("../conf/connection.php");
 
 <head>
     <title>ใบเสร็จรับเงิน เลขที่ <?= $_GET['bill'] ?> | ระบบขายอาหารตามสั่ง</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -135,9 +140,9 @@ include("../conf/connection.php");
                 <td width="10%"><?= $result_payment['pay_note'] == "" ? "-" : $result_payment['pay_note'] ?></td>
                 <td rowspan="3" align="center">
                     <?php
-                        if ($result_payment['pay_status'] == 2) {
-                            echo '<font size="5px" color="red"><b>*** ใบเสร็จนี้ได้ถูกยกเลิกแล้ว ***</b></font>';
-                        }
+                    if ($result_payment['pay_status'] == 2) {
+                        echo '<font size="5px" color="red"><b>*** ใบเสร็จนี้ได้ถูกยกเลิกแล้ว ***</b></font>';
+                    }
                     ?>
                 </td>
             </tr>

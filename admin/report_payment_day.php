@@ -19,6 +19,11 @@ include("../conf/connection.php");
 
 <head>
     <title>รายงานการรับชำระประจำวัน ตั้งแต่วันที่ <?= $_POST['startdate']; ?> ถึงวันที่ <?= $_POST['enddate'];  ?> | Food Order System</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -133,7 +138,7 @@ include("../conf/connection.php");
                         if ($row_order_day > 1) {
                             echo "</tr><tr><td colspan='6'></td>";
                         }
-                        
+
                         echo "<td align='center'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td>";
                         $sql_order = "SELECT orderid, order_totalprice, tables_no
                         FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' AND payno = '" . $result_payment['payno'] . "'";
@@ -146,13 +151,13 @@ include("../conf/connection.php");
                                 echo "</tr><tr><td colspan='7'></td>";
                             }
                     ?>
-                    <td align="center"><?= $result_order['orderid'] ?></td>
-                    <td align="right"><?= ($result_order['tables_no'] != "") ? $result_order['tables_no'] : "-" ?></td>
-                    <td align="right" style="padding-right:10px;"><?= $result_order['order_totalprice'] ?></td>
+                            <td align="center"><?= $result_order['orderid'] ?></td>
+                            <td align="right"><?= ($result_order['tables_no'] != "") ? $result_order['tables_no'] : "-" ?></td>
+                            <td align="right" style="padding-right:10px;"><?= $result_order['order_totalprice'] ?></td>
                 </tr>
 
     <?php
-                        $row_order++;
+                            $row_order++;
                         }
                         $row_order_day++;
                     }

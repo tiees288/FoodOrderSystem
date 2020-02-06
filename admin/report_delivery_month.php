@@ -22,6 +22,11 @@ $year    = $_POST['year'];
 
 <head>
     <title>รายงานการส่งอาหารประจำเดือน <?= fullmonth($month); ?> พ.ศ. <?= $year + 543 ?> | Food Order System</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;
+        }
+    </style>
 </head>
 
 <body>

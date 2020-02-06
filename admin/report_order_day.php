@@ -20,6 +20,11 @@ include("../conf/connection.php");
 <head>
     <title>รายงานการสั่งอาหารประจำวัน ตั้งแต่วันที่ <?= $_POST['startdate']; ?> ถึงวันที่ <?= $_POST['enddate'];  ?> | Food Order System</title>
 </head>
+<style type="text/css" media="print">
+    @page {
+        size: auto;
+    }
+</style>
 
 <body>
     <?php

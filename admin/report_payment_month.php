@@ -22,6 +22,11 @@ $year    = $_POST['year'];
 
 <head>
     <title>รายงานการรับชำระประจำเดือน <?= fullmonth($month); ?> พ.ศ. <?= $year + 543 ?> | Food Order System</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -109,23 +114,23 @@ $year    = $_POST['year'];
                     LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
                 WHERE orders.payno = '" . $result_payment['payno'] . "'";
                 $result_cus = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
-        
+
                 if ($row_payment > 1) {
                     echo "</tr><tr><td height='27px' colspan=''></td>";
                 }
         ?>
 
-                    <td align="center"><?= $result_payment['payno'] ?></td>
-                    <td><?= $pay_type ?></td>
-                    <td><?= $result_cus['cus_name'] ?></td>
-                    <td align="center"><?= short_datetime_thai($result_cus['date(orders.orderdate)']) ?></td>
-                    <td align="right" style="padding-right:10px;"><?= $pay_amount ?></td>
-                    <td><?= $result_payment['staff_name']  ?></td>
-                    <td><?= $pay_status ?></td>
+                <td align="center"><?= $result_payment['payno'] ?></td>
+                <td><?= $pay_type ?></td>
+                <td><?= $result_cus['cus_name'] ?></td>
+                <td align="center"><?= short_datetime_thai($result_cus['date(orders.orderdate)']) ?></td>
+                <td align="right" style="padding-right:10px;"><?= $pay_amount ?></td>
+                <td><?= $result_payment['staff_name']  ?></td>
+                <td><?= $pay_status ?></td>
                 </tr>
 
             <?php
-            $row_payment++;
+                $row_payment++;
             }
             ?>
             <tr style="border-bottom: 1px solid;">
