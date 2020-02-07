@@ -16,16 +16,16 @@
 
 <script>
     // --------------------- Protect Coppy --------------------------
-     
-     document.onkeydown = function(e) {
-         if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 117) || e.keyCode === 123) { // Key 123 = F12, Key 85 = U
-             return false;
-         }
-     };
-     $(this).bind("contextmenu", function(e) {
-         e.preventDefault();
-     });
-     
+
+    document.onkeydown = function(e) {
+        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 117) || e.keyCode === 123) { // Key 123 = F12, Key 85 = U
+            return false;
+        }
+    };
+    $(this).bind("contextmenu", function(e) {
+        e.preventDefault();
+    });
+
     // --------------------------------------------------------------
 
     var endYear1 = new Date(new Date().getFullYear() - 18, 11, 32);
@@ -120,10 +120,10 @@
             // 2 ปี 1 เดือน 0 วัน
             var start = $("#startdate").val().split("/");
             var end = $("#enddate").val().split("/");
-         //   console.log(end[1]);
+            //   console.log(end[1]);
             if (start != "" && end != "") {
                 if ((end[2] == start[2])) { // ตรวจปี
-                    if (end[1] >= start[1]) {
+                    if (end[1] == start[1]) {
                         if (!(end[0] >= start[0])) {
                             // Invalid date
                             $("#startdate").val("");
@@ -131,6 +131,8 @@
                             alert("กรุณาตรวจสอบวันที่ให้ถูกต้อง");
                             e.preventDefault();
                         }
+                    } else if (end[1] > start[1]) {
+                        // กรณีเดือนมากกว่า ไม่ต้องทำอะไร
                     } else {
                         // Invalid date
                         $("#startdate").val("");
