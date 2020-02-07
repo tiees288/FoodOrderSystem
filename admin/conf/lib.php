@@ -124,7 +124,7 @@
             if (start != "" && end != "") {
                 if ((end[2] == start[2])) { // ตรวจปี
                     if (end[1] >= start[1]) {
-                        if (!end[0] >= start[0]) {
+                        if (!(end[0] >= start[0])) {
                             // Invalid date
                             $("#startdate").val("");
                             $("#enddate").val("");
