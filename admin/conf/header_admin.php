@@ -217,7 +217,7 @@
 		.pagination>.active>span:hover,
 		.pagination>.active>a:focus,
 		.pagination>.active>span:focus {
-			background-color: #26BA56; //background color of buttons. Blue by default
+			background-color: #26BA56; 
 			border-color: black;
 			cursor: pointer;
 			z-index: 2;
@@ -256,7 +256,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="profile_staff.php" class="dropdown-item"><i class="fa fa-user-o"></i> แก้ไขข้อมูลผู้ใช้</a></li>
 						<li class="divider dropdown-divider"></li>
-						<li><a href="UserManual_foodorder.pdf" class="dropdown-item"><i class="fa fa-book"></i> คู่มือการใช้งาน</a></li>
+						<li><a href="UserManualEmployee.pdf" class="dropdown-item"><i class="fa fa-book"></i> คู่มือการใช้งาน</a></li>
 						<li class="divider dropdown-divider"></li>
 						<li><a href="logout.php" class="dropdown-item"><i class="fa fa-power-off"></i> ออกจากระบบ</a></li>
 					</ul>

@@ -189,7 +189,7 @@
 		.pagination>.active>span:hover,
 		.pagination>.active>a:focus,
 		.pagination>.active>span:focus {
-			background-color: #26BA56; //background color of buttons. Blue by default
+			background-color: #26BA56; 
 			border-color: black;
 			cursor: pointer;
 			z-index: 2;
@@ -201,7 +201,7 @@
 			cursor: pointer;
 			z-index: 2;
 		}
-		}
+		
 	</style>
 </head>
 
@@ -265,7 +265,7 @@
 						<li><a href="cart_reserve.php" class="dropdown-item"><i class="fa fa-shopping-basket"></i> ตะกร้าจอง <b><span class="badge-foodcart">(' . $count_reserve . ')</span></b></a></li>
 						<li><a href="cart_order.php" class="dropdown-item"><i class="fa fa-shopping-basket"></i> ตะกร้าสั่งอาหาร <b><span class="badge-foodcart">(' . $sum_qty . ')</span></b></a></li>
 						<li class="divider dropdown-divider"></li>
-						<li><a href="UserManual_foodorder.pdf" target="_blank" class="dropdown-item"><i class="fa fa-book"></i> คู่มือการใช้งาน</a></li>
+						<li><a href="UserManualCustomers.pdf" target="_blank" class="dropdown-item"><i class="fa fa-book"></i> คู่มือการใช้งาน</a></li>
 						<li class="divider dropdown-divider"></li>
 						<li><a href="logout.php" class="dropdown-item"><i class="fa fa-power-off"></i> ออกจากระบบ</a></li>
 					</ul>
