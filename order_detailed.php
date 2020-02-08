@@ -32,7 +32,7 @@ if (!isset($_GET['oid'])) {
         exit();
     } else {
         if ($_SESSION['user_id'] != $order_data['cusid']) { //กรณีเข้ารหัสที่ไม่ใช่ของตัวเอง
-            echo "<script>alert('กรุณาตรวจสอบสิทธิ์เข้าถึงข้อมูล'); window.location.assign('login.php')</script>";
+            echo "<script>alert('กรุณาตรวจสอบสิทธื์การเข้าถึงข้อมูล'); window.location.assign('login.php')</script>";
             exit();
         }
     }

@@ -28,10 +28,15 @@ if (!isset($_GET['rid'])) {
     $query_reserve = mysqli_query($link, $sql_reservedata);
     $reserve_data = mysqli_fetch_assoc($query_reserve);
 
-    if ($reserve_data['cusid'] != $_SESSION['user_id']) {
-        echo "<script>alert('กรุณาเข้าสู่ระบบก่อนการใช้งาน'); window.location.assign('login.php');</script>";
+    if (!isset($_SESSION['user'])) {
+        echo "<script>alert('กรุณาเข้าสู่ระบบก่อนการใช้งาน'); window.location.assign('login.php')</script>";
+        exit();
+    } else {
+        if ($reserve_data['cusid'] != $_SESSION['user_id']) {
+            echo "<script>alert('กรุณาตรวจสอบสิทธื์การเข้าถึงข้อมูล'); window.location.assign('login.php');</script>";
+        }
     }
-
+    
     $sql_cusdata    = "SELECT * FROM customers WHERE cusid = '{$reserve_data['cusid']}'";
     $query_customer = mysqli_query($link, $sql_cusdata);
     $cus_data = mysqli_fetch_assoc($query_customer);
@@ -102,15 +107,15 @@ if (!isset($_GET['rid'])) {
 
                     while ($reservelist_data = mysqli_fetch_array($reservelist_query)) {
                         $sum_seats += $reservelist_data['reservlist_amount'];
-                        ?>
+                    ?>
                         <td align="right"><?php echo $reservelist_data['tables_no'] ?></td>
                         <td align="right"><?php echo $reservelist_data['reservlist_amount']; ?></td>
                         <td height="80px"><?php
-                                                if ($reservelist_data['reservlist_note'] == "") {
-                                                    echo "<center>-</center>";
-                                                } else {
-                                                    echo $reservelist_data['reservlist_note'];
-                                                } ?></td>
+                                            if ($reservelist_data['reservlist_note'] == "") {
+                                                echo "<center>-</center>";
+                                            } else {
+                                                echo $reservelist_data['reservlist_note'];
+                                            } ?></td>
 
                         </tr>
                     <?php }   ?>
