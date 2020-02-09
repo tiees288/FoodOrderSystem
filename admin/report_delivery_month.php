@@ -123,8 +123,8 @@ $year    = $_POST['year'];
             <td style="padding-left:15px; height:30px; color:orange">ยังไม่ชำระ</td>
 
             <?php
-            $status = 0; // เลขสถานะ
-            $sql_delivery_0 .= "AND pay_status = '$status'";
+            $status = ""; // เลขสถานะ
+            $sql_delivery_0 .= " AND orders.payno IS NULL";
             $query_delivery_0 = mysqli_query($link, $sql_delivery_0) or die(mysqli_error($link));
 
             $row_delivery_date = 1; // นับแถว
@@ -135,19 +135,19 @@ $year    = $_POST['year'];
                 </tr>";
             }
 
-            while ($result_delivery_1 = mysqli_fetch_array($query_delivery_1)) {
+            while ($result_delivery_0 = mysqli_fetch_array($query_delivery_0)) {
                 if ($row_delivery_date > 1) {
                     echo "</tr><tr><td height='30px'></td>";
                 }
                 echo "
                 <td align='center'>
-                 " . short_datetime_thai($result_delivery_1['date(orderdate)']) . "
+                 " . short_datetime_thai($result_delivery_0['date(orderdate)']) . "
                 </td>";
                 $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_1['date(orderdate)'] . "' 
-                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
+                WHERE date(orderdate) = '" . $result_delivery_0['date(orderdate)'] . "' 
+                AND order_type = '0' AND orders.payno IS NULL ORDER BY orders.orderid ASC";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
