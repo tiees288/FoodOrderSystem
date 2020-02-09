@@ -1,4 +1,26 @@
 <?php
+// ------------------------------------ เข้ารหัส ------------------------------------- //
+function encrypt($string, $type)
+{
+    $secret_key = '2562foodordersystem420'; // iv secretkey
+    $secret_iv = 'foodordersystem4202562!'; //secret key iv
+
+    $output = false;
+
+    $encrypt_method = "AES-256-CBC";
+    $key = hash('sha256', $secret_key);
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+  
+    if ($type == "en") {
+        $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    } elseif ($type == "de") {
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+
+    return $output;
+}
+// ------------------------------------------------------------------------------------ //
+
 function tochristyear($dates)  // สำหรับ input type date พ.ศ. -> ค.ศ
 {
     $d1 = substr($dates, 0, 2);
