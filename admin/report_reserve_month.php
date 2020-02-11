@@ -50,7 +50,7 @@ $year    = $_POST['year'];
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:left; width:130px;">เบอร์โทรศัพท์</th>
             <th style="width:120px; text-align:right; padding-right:5px;">หมายเลขโต๊ะ</th>
-            <th style="text-align:center; width:125px;">รหัสการสั่ง</th>
+            <th style="text-align:center; width:60px;"></th>
         </tr>
         <?php
         $sql_reserve = "SELECT DISTINCT date(reserv_date_reservation) FROM reservations
@@ -113,26 +113,26 @@ $year    = $_POST['year'];
                                 echo "<tr><td height='30px'; colspan='7'>";
                     ?>
                             <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                            <td align="center">
-                                <?php
+                          <!--  <td align="center">
+                                <?php /*
                                 if (!$result_order1['orderid'] && $row_reservelist == 1)
                                     echo "-";
                                 else {
                                     echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                }
+                                }*/
                                 ?>
-                            </td>
+                            </td> -->
                         <?php
                             $row_reservelist++;
                         }
-                    } else {
+                    } else { /*
                         echo "<td align='center'>-</td>";
                         $row_order = 1; //นับแถว
                         while ($result_order1 = mysqli_fetch_array($query_order1)) {
                         ?>
                             <td align="center"><?= $result_order1['orderid'] ?></td>
             <?php
-                        }
+                        } */
                     }
                     $row_reserve1++;
                     $count_list1++;
@@ -196,27 +196,27 @@ $year    = $_POST['year'];
                                 echo "<tr><td height='30px'; colspan='7'>";
                     ?>
                             <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                            <td align="center">
-                                <?php
+                         <!--   <td align="center">
+                                <?php /*
                                 if (!$result_order1['orderid'] && $row_reservelist == 1)
                                     echo "-";
                                 else {
                                     echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                }
+                                } */
                                 ?>
-                            </td>
+                            </td> -->
                         <?php
                             $row_reservelist++;
                         }
-                    } else {
+                    } else {/*
                         echo "<td align='center'>-</td>";
                         $row_order = 1; //นับแถว
                         while ($result_order1 = mysqli_fetch_array($query_order1)) {
                         ?>
                             <td align="center"><?= $result_order1['orderid'] ?></td>
             <?php
-                        }
-                    }
+                        } */
+                    } 
                     $count_list0++;
                     $row_reserve1++;
                 }
@@ -277,26 +277,26 @@ $year    = $_POST['year'];
                                 echo "<tr><td height='30px'; colspan='7'>";
                     ?>
                             <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                            <td align="center">
-                                <?php
+                           <!--  <td align="center">
+                                <?php /*
                                 if (!$result_order1['orderid'] && $row_reservelist == 1)
                                     echo "-";
                                 else {
                                     echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                }
+                                } */
                                 ?>
-                            </td>
+                            </td> -->
                         <?php
                             $row_reservelist++;
                         }
                     } else {
-                        echo "<td align='center'>-</td>";
+                     /*    echo "<td align='center'>-</td>";
                         $row_order = 1; //นับแถว
-                        while ($result_order1 = mysqli_fetch_array($query_order1)) {
+                       while ($result_order1 = mysqli_fetch_array($query_order1)) {
                         ?>
-                            <td align="center"><?= $result_order1['orderid'] ?></td>
+                          <!--  <td align="center"><?= $result_order1['orderid'] ?></td> --?
             <?php
-                        }
+                        } */
                     }
                     $count_list2++;
                     $row_reserve1++;
