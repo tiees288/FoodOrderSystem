@@ -36,9 +36,9 @@ include("../conf/connection.php");
         <h3 class="text-center">ตั้งแต่วันที่ <?= fulldatetime_thai($startdate) ?> ถึงวันที่ <?= fulldatetime_thai($enddate) ?></h3>
         <br>
     </div>
-    <table border="0" width="1500px" align="center">
+    <table border="0" width="1600px" align="center">
         <tr>
-            <td colspan="13" align="right" style="border-bottom:1px solid;">
+            <td colspan="14" align="right" style="border-bottom:1px solid;">
                 วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")); ?>
             </td>
         </tr>
@@ -49,10 +49,11 @@ include("../conf/connection.php");
             <th style="text-align:center; width:130px;">วันที่สั่งอาหาร</th>
             <th style="text-align:center; width:130px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:120px;">รหัสการสั่ง</th>
-            <th style="text-align:left; width:150px;">สถานะการชำระ</th>
-            <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
+            <th style="text-align:left; width:130px;">สถานะการสั่ง</th>
+            <th style="text-align:left; width:130px;">สถานะการชำระ</th>
+            <th style="text-align:left; width:150px;">ชื่อลูกค้า</th>
             <th style="text-align:right; width:130px; padding-right:10px;">ราคารวม(บาท)</th>
-            <th style="text-align:left; width:180px;">ชื่ออาหาร</th>
+            <th style="text-align:left; width:150px;">ชื่ออาหาร</th>
             <th style="text-align:right; width:90px;">จำนวน</th>
             <th style="text-align:right; width:125px;">ราคาต่อหน่วย(บาท)</th>
             <th style="text-align:right; padding-right:15px; width:120px;">ราคา(บาท)</th>
@@ -111,6 +112,22 @@ include("../conf/connection.php");
                         $payment_status = "-";
                 }
 
+                switch ($result_delivery['order_status']) {
+                    case 0:
+                        $order_status = "<font color='orange'>ยังไม่แจ้งชำระ</font>";
+                        break;
+                    case 1:
+                        $order_status = "<font color='#0072EE'>รอการตรวจสอบ</font>";
+                        break;
+                    case 2:
+                        $order_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
+                        break;
+                    case 3:
+                        $order_status = "<font color='red'>ยกเลิก</font>";   
+                    default:
+                        $order_status = "-";
+                }
+
                 if ($row_date > 1) {
                     echo "</tr><tr><td></td>";
                 }
@@ -120,6 +137,7 @@ include("../conf/connection.php");
                 <td align="center"><?= short_datetime_thai($result_delivery['orderdate']) ?></td>
                 <td align="center"><?= $result_delivery['payno'] ? $result_delivery['payno'] : "-" ?></td>
                 <td align="center"><?= $result_delivery['orderid'] ?></td>
+                <td align="left"><?= $order_status ?></td>
                 <td align="left"><?= $payment_status ?></td>
                 <td align="left"><?= $result_delivery['cus_name'] ?></td>
                 <td align="right" style="padding-right:10px;"><?= $pay_amount ?></td>
@@ -131,7 +149,7 @@ include("../conf/connection.php");
                 $row_orderdet = 1;
                 while ($result_orderdet = mysqli_fetch_array($query_orderdet)) {
                     if ($row_orderdet > 1) {
-                        echo "</tr><td colspan='9'</td>";
+                        echo "</tr><td colspan='10'</td>";
                     }
                 ?>
                     <td align="left" height="30px"><?= $result_orderdet['food_name'] ?></td>
@@ -145,7 +163,7 @@ include("../conf/connection.php");
             }
             ?>
             <tr style="border-bottom:1px solid; height:30px;">
-                <td colspan="7"></td>
+                <td colspan="8"></td>
                 <td><b>รวม</b></td>
                 <td align="right" style="padding-right:10px;"><b><?= number_format($sum_day_delivery, 2) ?></b></td>
                 <td colspan="4"><b>บาท</b></td>
@@ -154,26 +172,26 @@ include("../conf/connection.php");
         }
         ?>
         <tr style="height:30px;">
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td style="padding-left:70px;" colspan="2"><b>รวมทั้งหมด</b></td>
             <td style="padding-right:10px;" align="right"><b><?= number_format($total_all, 2) ?></b></td>
             <td colspan="4"><b>บาท</b></td>
         </tr>
         <tr style="height:30px; color:#12BB4F;">
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td style="padding-left:70px;" colspan="2"><b>รวมชำระแล้วทั้งหมด</b></td>
             <td style="padding-right:10px;" align="right"><b><?= number_format($total_1, 2) ?></b></td>
             <td colspan="4"><b>บาท</b></td>
         </tr>
         <tr style="height:30px; color:orange;">
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td style="padding-left:70px;" colspan="2"><b>รวมยังไม่ได้ชำระทั้งหมด</b></td>
             <td style="padding-right:10px;" align="right"><b><?= number_format($total_0, 2) ?></b></td>
             <td colspan="4"><b>บาท</b></td>
         </tr>
         <tr style="height:30px; border-bottom:1px solid;">
-            <td colspan="6"></td>
-            <td style="color:red; padding-left:70px;" colspan="2"><b>รวมยกเลิกทั้งหมด</b></td>
+            <td colspan="7"></td>
+            <td style="color:red; padding-left:70px;" colspan="2"><b>รวมยกเลิกการสั่งทั้งหมด</b></td>
             <td style="color:red; padding-right:10px;" align="right"><b><?= number_format($total_2, 2) ?></b></td>
             <td style="color:red;" colspan="4"><b>บาท</b></td>
         </tr>
