@@ -48,7 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						cus_postnum		= '" . $cus_postnum . "',
 						cus_address		= '" . $address . "'";
 
-	if (mysqli_query($link, $sql)) {
-		echo "<script> alert('สมัครสมาชิกสำเร็จ รหัสลูกค้าคือ : ". mysqli_insert_id($link) ."'); window.location.assign('index.php')</script>";
+	if (!isset($_COOKIE['register'])) {
+		if (mysqli_query($link, $sql)) {
+			$new_cusid = mysqli_insert_id($link);
+			echo "<script> alert('สมัครสมาชิกสำเร็จ รหัสลูกค้าคือ : " . $new_cusid . "'); window.location.assign('index.php')</script>";
+		//	setcookie("register", $new_cusid, time() + 3600); // กัน Flood สมัครสมาชิก
+		}
+	} else {
+		echo "<script>alert('กรุณารออย่างน้อย 1 ชั่วโมง ก่อนการสมัครสมาชิกซ้ำ'); window.history.back();</script>";
 	}
 }
