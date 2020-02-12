@@ -123,7 +123,8 @@ include("../conf/connection.php");
                         $order_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
                         break;
                     case 3:
-                        $order_status = "<font color='red'>ยกเลิก</font>";   
+                        $order_status = "<font color='red'>ยกเลิก</font>";
+                        break;
                     default:
                         $order_status = "-";
                 }
