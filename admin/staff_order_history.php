@@ -133,7 +133,7 @@
                             ?>
                         </td>
                         <td align="center">
-                            <?php if ($result['order_status'] != 3 && $result['order_status'] != 2) { // ปุ่มเลือกรับชำระ
+                            <?php if ($result['order_status'] != 3) { // ปุ่มเลือกรับชำระ
                                 if ($result['order_date_delivered'] != "0000-00-00" || $result['order_type'] == 1) {
                             ?>
                                     <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
