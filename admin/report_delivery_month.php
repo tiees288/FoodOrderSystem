@@ -213,7 +213,7 @@ $year    = $_POST['year'];
                     $sql_deliverys = "SELECT * FROM orders
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
-                WHERE date(orderdate) = '" . $result_delivery_2['date(orderdate)'] . "'
+                WHERE date(order_date_delivered) = '" . $result_delivery_2['date(order_date_delivered)'] . "'
                 AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
