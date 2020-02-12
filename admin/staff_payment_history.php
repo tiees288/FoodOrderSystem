@@ -119,7 +119,9 @@
                             <td align="center" height="50px;">
                                 <?php
                                 if ($result_delivery['pay_status'] != 2) {
-                                    if ($result_delivery['order_date_tobedelivery'] != "0000-00-00" && $result_delivery['order_date_delivered'] == "0000-00-00") {
+                                    $today = date("Y-m-d");
+                                    $pay_date = date("Y-m-d", strtotime($result['pay_date']. ' + 3 days'));
+                                    if ($today < $pay_date) { // ตรวจสอบ เกิน 3 วันไม่สามารถยกเลิกใบเสร็จ
                                 ?>
                                         <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกการชำระ เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
                                         </a>

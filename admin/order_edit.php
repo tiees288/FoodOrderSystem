@@ -232,10 +232,10 @@ if (!isset($_GET['oid'])) {
                         <td align="right">
                             <?= number_format($orderdet_data['orderdet_price'], 2); ?></td>
                         <td class="text-center">
-                            <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="delete" type="button">-</button>
-                            <input <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
+                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 0) ? "disabled" : "" ?> class="delete" type="button">-</button>
+                            <input <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 0) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
                             <input type="text" name="id[]" value="<?= $orderdet_data['foodid'] ?>" hidden>
-                            <button <?= ($orderdet_data['orderdet_status'] == 2) ? "disabled" : "" ?> class="plus" type="button"> + </button>
+                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 0) ? "disabled" : "" ?> class="plus" type="button"> + </button>
                             <!-- จำนวนเหลือ ใน Stock -->
                             <input type="text" value="<?= $orderdet_data['orderdet_amount'] ?>" id="stock_<?= $i ?>" name="stock_<?= $i ?>" hidden>
                             <!-- =================== -->
@@ -244,11 +244,14 @@ if (!isset($_GET['oid'])) {
                             <?= number_format($orderdet_data['orderdet_price'] * $orderdet_data['orderdet_amount'], 2) ?>
                         </td>
                         <td align="center">
-                            <?php if ($orderdet_data['orderdet_status'] == 0) { ?>
+                            <?php 
+                            if ($order_data['order_type'] == 1) {
+                                if ($orderdet_data['orderdet_status'] == 0) { ?>
                                 <a href="save_edit_order.php?del_oid=<?= $orderdet_data['orderdetid'] ?>" onclick="if(confirm('ต้องการยกเลิกรายการอาหารนี้หรือไม่?')) return true; else return false;"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color:red;"></span></a>
                             <?php } elseif ($orderdet_data['orderdet_status'] == 2) {
                                 echo "<font color='red'>ยกเลิกแล้ว</font>";
-                            } ?>
+                            } 
+                        }?>
                         </td>
                     </tr>
                 <?php $i++;
@@ -324,8 +327,8 @@ if (!isset($_GET['oid'])) {
             </table>
 
             <div class="col-md-offset-3 col-md-6" style="text-align: center;">
-                <a class="btn btn-primary" href="show_food_typeall.php?oid=<?= $_GET['oid'] ?>" role="button">เพิ่มรายการ</a>
-                <input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันปรับปรุงการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+                <a class="btn btn-primary <?= $order_data['order_type'] == 0 ? "disabled" : "" ?>" id="od_more" href="show_food_typeall.php?oid=<?= $_GET['oid'] ?>" role="button">เพิ่มรายการ</a>
+                <input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันปรับปรุงการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" <?= $order_data['order_type'] == 0 ? "disabled" : "" ?> value="บันทึก" />
                 <input type="reset" name="reset" class="btn btn-danger" value="คืนค่า">
                 <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิกการสั่งอาหาร?')) return true; else return false;" class="btn btn-warning">ยกเลิกการสั่ง</button>
         </form>
