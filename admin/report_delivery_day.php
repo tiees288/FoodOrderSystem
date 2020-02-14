@@ -36,7 +36,7 @@ include("../conf/connection.php");
         <h3 class="text-center">ตั้งแต่วันที่ <?= fulldatetime_thai($startdate) ?> ถึงวันที่ <?= fulldatetime_thai($enddate) ?></h3>
         <br>
     </div>
-    <table border="0" width="1600px" align="center">
+    <table border="0" width="1660px" align="center">
         <tr>
             <td colspan="14" align="right" style="border-bottom:1px solid;">
                 วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")); ?>
@@ -51,7 +51,7 @@ include("../conf/connection.php");
             <th style="text-align:center; width:120px;">รหัสการสั่ง</th>
             <th style="text-align:left; width:130px;">สถานะการสั่ง</th>
             <th style="text-align:left; width:130px;">สถานะการชำระ</th>
-            <th style="text-align:left; width:150px;">ชื่อลูกค้า</th>
+            <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:right; width:130px; padding-right:10px;">ราคารวม(บาท)</th>
             <th style="text-align:left; width:150px;">ชื่ออาหาร</th>
             <th style="text-align:right; width:90px;">จำนวน</th>
