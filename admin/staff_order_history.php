@@ -193,7 +193,7 @@
                                     }
                                 } else { // กรณีหน้าสุดท้าย
                                     if ($page == $num_pages) {
-                                        $offset = $num_pages - 2;
+                                        $offset = $num_pages - ($num_pages-4);
                                     }
 
                                     for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
