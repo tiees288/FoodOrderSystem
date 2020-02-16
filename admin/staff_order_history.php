@@ -12,7 +12,6 @@
     <?php
 
     include("conf/header_admin.php");
-    //include("../conf/connection.php");
     include("../conf/function.php");
 
     $strKeyword = null;
@@ -88,7 +87,6 @@
 
                 if ($num_rows > 0) { // ค้นหพบรายการอาหาร ให้แสดง
                     while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                        // $ordertime = strtotime($result["orderdate"]);
 
                         $q_cus = mysqli_query($link, "SELECT cus_name FROM customers WHERE cusid = '" . $result['cusid'] . "'");
                         $cus_data = mysqli_fetch_assoc($q_cus);
@@ -163,7 +161,6 @@
                     if ($prev_page) {
                         echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_food=$strKeyword'>ก่อนหน้า</a></li>";
                     } else {
-                        // ทำให้คลิกไม่ได้
                         echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                     }
 
@@ -199,10 +196,8 @@
                                     for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
                                       
                                         if ($page - $offset == $page) {
-                                            //   echo "<b>aaaa" . ($page - $offset) . " </b>";
                                             echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
                                         } else {
-                                            //   echo $page-$offset . " ";
                                             echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_orders=$strKeyword'>" . ($page - $offset) . "</a>" . '</li>';
                                         }
                                         $offset--;
