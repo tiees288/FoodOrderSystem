@@ -155,6 +155,11 @@
             <div class="text-center">
                 <ul class="pagination">
                     <?php
+                    if ($page == 1) {
+                        echo '<li class="page-item disabled">' . " <a href='#'><<</a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=1&search_food=$strKeyword'><<</a></li>";
+                    }
                     if ($prev_page) {
                         echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_food=$strKeyword'>ก่อนหน้า</a></li>";
                     } else {
@@ -162,17 +167,78 @@
                         echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                     }
 
-                    for ($i = 1; $i <= $num_pages; $i++) {
-                        if ($i != $page) {
-                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_food=$strKeyword'>$i</a>" . '</li>';
+
+                    // ---------------------------- Pagination แบบจำกัดจำนวน ---------------------------- //
+                    // ----------------- ประกาศตัวแปรที่จำเป็น ----------------------
+                    $total_pagination = 5;        // จำนวนเลขหน้าที่แสดงได้สูงสุด
+                    $high = floor($total_pagination / 2); // หาร เพื่อหาค่า Mean
+                    $low = "-" . $high;
+                    if (($page + $high) > $num_pages) {
+                        $y = $num_pages + $low;
+                    } elseif (($page - $high) < 1) {
+                        $y =  $total_pagination;
+                    } else {
+                        $y = $total_pagination;
+                    }
+                    // ----------------------------------------------------------
+                    if ($page > 3) {
+                        if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
+                            $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
+                            for ($i = $low; $i <= $high; $i++) {
+                                if (($page + $high) <= $num_pages) {
+                                    if ($page + $i == $page) {
+                                        echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
+                                    } else {
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_food=$strKeyword'>" . ($page +$i) . "</a>" . '</li>';
+                                    }
+                                } else { // กรณีหน้าสุดท้าย
+                                    if ($page == $num_pages) {
+                                        $offset = $num_pages - 2;
+                                    }
+
+                                    for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
+                                      
+                                        if ($page - $offset == $page) {
+                                            //   echo "<b>aaaa" . ($page - $offset) . " </b>";
+                                            echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
+                                        } else {
+                                            //   echo $page-$offset . " ";
+                                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_orders=$strKeyword'>" . ($page - $offset) . "</a>" . '</li>';
+                                        }
+                                        $offset--;
+                                    }
+                                }
+                            }
                         } else {
-                            echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            for ($i = 1; $i <= $y; $i++) {
+                                if ($i == $page) {
+                                    echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                                } else {
+                                    echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_orders=$strKeyword'>$i</a>" . '</li>';
+                                }
+                            }
+                        }
+                    } else {
+                        // เงื่อนไขเดิม ก่อนทำ Pagination เพิ่ม
+                        for ($i = 1; $i <= (($num_pages < 5) ? $num_pages : "5"); $i++) {
+                            // แก้ไขเพิ่มเติม
+                            if ($i != $page) {
+                                echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_orders=$strKeyword'>$i</a>" . '</li>';
+                            } else {
+                                echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            }
                         }
                     }
+                    // ---------------------------------------------------------------------------------- //
                     if ($page != $num_pages) {
-                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_food=$strKeyword'>ถัดไป</a></li>";
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_orders=$strKeyword'>ถัดไป</a></li>";
                     } else {
                         echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
+                    }
+                    if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
+                        echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=".$num_pages."&search_orders=$strKeyword'>>></a></li>";
                     }
                     $conn = null;
                     ?>
