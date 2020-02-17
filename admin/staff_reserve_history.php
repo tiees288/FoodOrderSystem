@@ -44,7 +44,7 @@
                     <th style="text-align: center; width:100px;">เวลาที่นัด</th>
                     <th style="text-align:left; width: 250px;">ชื่อลูกค้า</th>
                     <th style="text-align:left; width: 180px;">สถานะ</th>
-                    <th style=" text-align:center; width:170px;">ปรับปรุงการจอง</th>
+                    <th style=" text-align:center; width:180px;">ปรับปรุงการจอง</th>
                     <th style=" text-align:center; width:180px;">รายละเอียดการจอง</th>
                 </thead>
 
