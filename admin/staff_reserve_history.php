@@ -104,54 +104,115 @@
                             default:
                                 echo "Error";
                         } ?>
-                            <tr>
-                                <td align="center"><?= $result["reserv_id"]; ?></td>
-                                <td align="center"> <?= dt_tothaiyear($result['reserv_date_reservation']) ?></td>
-                                <td align="center"> <?= tothaiyear($result["reserv_date_appointment"]); ?></td>
-                                <td align="center"> <?= substr($result["reserv_time_appointment"], 0, 5) ?></td>
-                                <td><?= $cus_data['cus_name'] ?></td>
-                                <td><?= $reserv_status ?></td>
-                                <td align="center">
-                                    <?php if ($result['reserv_status'] == 0) { ?>
-                                        <a href="reserve_edit.php?rid=<?= $result['reserv_id'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
-                            <?php } ?>
-                            <td align="center"><a href="reserve_detailed.php?rid=<?= $result['reserv_id'] ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i> ดูรายละเอียด</a></td>
-                            </tr>
-                    <?php }
-                    } else {
-                        echo '
+                        <tr>
+                            <td align="center"><?= $result["reserv_id"]; ?></td>
+                            <td align="center"> <?= dt_tothaiyear($result['reserv_date_reservation']) ?></td>
+                            <td align="center"> <?= tothaiyear($result["reserv_date_appointment"]); ?></td>
+                            <td align="center"> <?= substr($result["reserv_time_appointment"], 0, 5) ?></td>
+                            <td><?= $cus_data['cus_name'] ?></td>
+                            <td><?= $reserv_status ?></td>
+                            <td align="center">
+                                <?php if ($result['reserv_status'] == 0) { ?>
+                                    <a href="reserve_edit.php?rid=<?= $result['reserv_id'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
+                        <?php } ?>
+                        <td align="center"><a href="reserve_detailed.php?rid=<?= $result['reserv_id'] ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i> ดูรายละเอียด</a></td>
+                        </tr>
+                <?php }
+                } else {
+                    echo '
             <tr>
                 <td colspan="8" align="center">ไม่พบข้อมูลในระบบ</td>
             </tr>
         ';
-                    }
-                    ?>
+                }
+                ?>
             </table>
         </div>
         <nav aria-label="Page navigation example" class="navbar-center">
             <div class="text-center">
                 <ul class="pagination">
                     <?php
+                    if ($page == 1) {
+                        echo '<li class="page-item disabled">' . " <a href='#'><<</a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=1&search_reserve=$strKeyword'><<</a></li>";
+                    }
                     if ($prev_page) {
-                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_food=$strKeyword'>ก่อนหน้า</a></li>";
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_reserve=$strKeyword'>ก่อนหน้า</a></li>";
                     } else {
                         // ทำให้คลิกไม่ได้
                         echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                     }
 
-                    for ($i = 1; $i <= $num_pages; $i++) {
-                        if ($i != $page) {
-                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_food=$strKeyword'>$i</a>" . '</li>';
+                    // ---------------------------- Pagination แบบจำกัดจำนวน ---------------------------- //
+                    // ----------------- ประกาศตัวแปรที่จำเป็น ----------------------
+                    $total_pagination = 5;        // จำนวนเลขหน้าที่แสดงได้สูงสุด
+                    $high = floor($total_pagination / 2); // หาร เพื่อหาค่า Mean
+                    $low = "-" . $high;
+                    if (($page + $high) > $num_pages) {
+                        $y = $num_pages + $low;
+                    } elseif (($page - $high) < 1) {
+                        $y =  $total_pagination;
+                    } else {
+                        $y = $total_pagination;
+                    }
+                    // ----------------------------------------------------------
+                    if ($page > 4) {
+                        if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
+                            $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
+                            for ($i = $low; $i <= $high; $i++) {
+                                if (($page + $high) <= $num_pages) {
+                                    if ($page + $i == $page) {
+                                        echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
+                                    } else {
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_reserve=$strKeyword'>" . ($page + $i) . "</a>" . '</li>';
+                                    }
+                                } else { // กรณีหน้าสุดท้าย
+                                    if ($page == $num_pages) {
+                                        $offset = $num_pages - ($num_pages - 4);
+                                    }
+
+                                    for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
+
+                                        if ($page - $offset == $page) {
+                                            echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
+                                        } else {
+                                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_reserve=$strKeyword'>" . ($page - $offset) . "</a>" . '</li>';
+                                        }
+                                        $offset--;
+                                    }
+                                }
+                            }
                         } else {
-                            echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            for ($i = 1; $i <= $y; $i++) {
+                                if ($i == $page) {
+                                    echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                                } else {
+                                    echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_reserve=$strKeyword'>$i</a>" . '</li>';
+                                }
+                            }
+                        }
+                    } else {
+                        for ($i = 1; $i <= $num_pages; $i++) {
+                            if ($i != $page) {
+                                echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_reserve=$strKeyword'>$i</a>" . '</li>';
+                            } else {
+                                echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            }
                         }
                     }
+                    //----------------------------------------------------------------------------------
+
                     if ($page != $num_pages) {
-                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_food=$strKeyword'>ถัดไป</a></li>";
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_reserve=$strKeyword'>ถัดไป</a></li>";
                     } else {
                         echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
                     }
-                    $conn = null;
+                    if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
+                        echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=" . $num_pages . "&search_reserve=$strKeyword'>>></a></li>";
+                    }
                     ?>
             </div>
         </nav>
