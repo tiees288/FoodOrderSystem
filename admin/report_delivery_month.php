@@ -99,7 +99,7 @@ $year    = $_POST['year'];
                         echo "</tr><tr><td colspan='2' height='30px'></td>";
                     }
             ?>
-                    <td align="center"><?= $result_order['order_time_delivered'] ?></td>
+                    <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
                     <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
                     <td align="center"><?= $result_order['orderid'] ?></td>
                     <td align="center"><?= $result_order['payno'] ?></td>
@@ -162,7 +162,7 @@ $year    = $_POST['year'];
                         echo "</tr><tr><td colspan='2' height='30px'></td>";
                     }
             ?>
-                    <td align="center"><?= $result_order['order_time_delivered'] ?></td>
+                    <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
                     <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
                     <td align="center"><?= $result_order['orderid'] ?></td>
                     <td align="center"><?= $result_order['payno'] ? $result_order['payno'] : "-" ?></td>
@@ -223,15 +223,15 @@ $year    = $_POST['year'];
                             echo "</tr><tr><td colspan='2' height='30px'></td>";
                         }
             ?>
-                         <td align="center"><?= $result_order['order_time_delivered'] ?></td>
-                    <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
-                    <td align="center"><?= $result_order['orderid'] ?></td>
-                    <td align="center"><?= $result_order['payno'] ? $result_order['payno'] : "-" ?></td>
-                    <td align="center"><?= short_datetime_thai($result_order['order_date_tobedelivery']) . " " . substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>
-                    <td align="left"><?= $result_order['cus_name'] ?></td>
-                    <td align="left"><?= $result_order['cus_tel'] ?></td>
-                    <td align="left"><?= $result_order['order_delivery_place'] ?></td>
-                    <td align="right" style="padding-right:15px; color:red;"><?= number_format($result_order['order_totalprice'], 2) ?></td>
+                        <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
+                        <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
+                        <td align="center"><?= $result_order['orderid'] ?></td>
+                        <td align="center"><?= $result_order['payno'] ? $result_order['payno'] : "-" ?></td>
+                        <td align="center"><?= short_datetime_thai($result_order['order_date_tobedelivery']) . " " . substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>
+                        <td align="left"><?= $result_order['cus_name'] ?></td>
+                        <td align="left"><?= $result_order['cus_tel'] ?></td>
+                        <td align="left"><?= $result_order['order_delivery_place'] ?></td>
+                        <td align="right" style="padding-right:15px; color:red;"><?= number_format($result_order['order_totalprice'], 2) ?></td>
             <?php
                         $row_order++;
                     }
