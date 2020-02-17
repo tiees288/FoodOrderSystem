@@ -120,7 +120,7 @@
                                 <?php
                                 if ($result_delivery['pay_status'] != 2) {
                                     $today = date("Y-m-d");
-                                    $pay_date = date("Y-m-d", strtotime($result['pay_date']. ' + 3 days'));
+                                    $pay_date = date("Y-m-d", strtotime($result['pay_date'] . ' + 3 days'));
                                     if ($today < $pay_date) { // ตรวจสอบ เกิน 3 วันไม่สามารถยกเลิกใบเสร็จ
                                 ?>
                                         <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกการชำระ เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
@@ -144,6 +144,11 @@
             <div class="text-center">
                 <ul class="pagination">
                     <?php
+                    if ($page == 1) {
+                        echo '<li class="page-item disabled">' . " <a href='#'><<</a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=1&search_payment=$strKeyword'><<</a></li>";
+                    }
                     if ($prev_page) {
                         echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_payment=$strKeyword'>ก่อนหน้า</a></li>";
                     } else {
@@ -151,17 +156,73 @@
                         echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                     }
 
-                    for ($i = 1; $i <= $num_pages; $i++) {
-                        if ($i != $page) {
-                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_payment=$strKeyword'>$i</a>" . '</li>';
+                    // ---------------------------- Pagination แบบจำกัดจำนวน ---------------------------- //
+                    // ----------------- ประกาศตัวแปรที่จำเป็น ----------------------
+                    $total_pagination = 5;        // จำนวนเลขหน้าที่แสดงได้สูงสุด
+                    $high = floor($total_pagination / 2); // หาร เพื่อหาค่า Mean
+                    $low = "-" . $high;
+                    if (($page + $high) > $num_pages) {
+                        $y = $num_pages + $low;
+                    } elseif (($page - $high) < 1) {
+                        $y =  $total_pagination;
+                    } else {
+                        $y = $total_pagination;
+                    }
+                    // ----------------------------------------------------------
+                    if ($page > 4) {
+                        if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
+                            $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
+                            for ($i = $low; $i <= $high; $i++) {
+                                if (($page + $high) <= $num_pages) {
+                                    if ($page + $i == $page) {
+                                        echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
+                                    } else {
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_payment=$strKeyword'>" . ($page + $i) . "</a>" . '</li>';
+                                    }
+                                } else { // กรณีหน้าสุดท้าย
+                                    if ($page == $num_pages) {
+                                        $offset = $num_pages - ($num_pages - 4);
+                                    }
+
+                                    for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
+
+                                        if ($page - $offset == $page) {
+                                            echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
+                                        } else {
+                                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_payment=$strKeyword'>" . ($page - $offset) . "</a>" . '</li>';
+                                        }
+                                        $offset--;
+                                    }
+                                }
+                            }
                         } else {
-                            echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            for ($i = 1; $i <= $y; $i++) {
+                                if ($i == $page) {
+                                    echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                                } else {
+                                    echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_payment=$strKeyword'>$i</a>" . '</li>';
+                                }
+                            }
+                        }
+                    } else {
+                        for ($i = 1; $i <= $num_pages; $i++) {
+                            if ($i != $page) {
+                                echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_payment=$strKeyword'>$i</a>" . '</li>';
+                            } else {
+                                echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            }
                         }
                     }
+                    // ------------------------------------------------------------------------------------
                     if ($page != $num_pages) {
                         echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_payment=$strKeyword'>ถัดไป</a></li>";
                     } else {
                         echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
+                    }
+                    if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
+                        echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
+                    } else {
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=" . $num_pages . "&search_payment=$strKeyword'>>></a></li>";
                     }
                     $conn = null;
                     ?>

@@ -178,7 +178,7 @@
                         $y = $total_pagination;
                     }
                     // ----------------------------------------------------------
-                    if ($page > 3) {
+                    if ($page > 4) {
                         if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
                             $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
                             for ($i = $low; $i <= $high; $i++) {
@@ -186,7 +186,7 @@
                                     if ($page + $i == $page) {
                                         echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
                                     } else {
-                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_food=$strKeyword'>" . ($page +$i) . "</a>" . '</li>';
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_orders=$strKeyword'>" . ($page +$i) . "</a>" . '</li>';
                                     }
                                 } else { // กรณีหน้าสุดท้าย
                                     if ($page == $num_pages) {
