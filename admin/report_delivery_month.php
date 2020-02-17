@@ -51,7 +51,7 @@ $year    = $_POST['year'];
             <th style="text-align:center; width:150px;">วัน/เวลากำหนดส่ง</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:left; width:110px;">เบอร์โทรศัพท์</th>
-            <th style="text-align:left; width:190px;">สถานที่ส่ง</th>
+            <th style="text-align:left; width:210px;">สถานที่ส่ง</th>
             <th style="text-align:right; width:130px; padding-right:15px;">ราคา(บาท)</th>
         </tr>
         <?php
