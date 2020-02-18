@@ -10,7 +10,7 @@ $deliverydate = date("Y-m-d", strtotime(tochristyear($_POST['deliverydate'])));
 $sqlorder = "
 	INSERT INTO orders (orderdate, order_date_tobedelivery, order_time_tobedelivery, order_delivery_place, order_type, order_totalprice, cusid)
 	VALUES
-	('" . $orderdate . "','" . $deliverydate . "', '" . $_POST['deliverytime'] . "' ,'" . $_POST["deliveryplace"] . "','0','" . $totalprice . "', '" . $_SESSION['user_id'] . "') 
+	('" . $orderdate . "','" . $deliverydate . "', '" . $_POST['deliverytime'] . "' ,'" . $_POST["deliveryplace"] . "','2','" . $totalprice . "', '" . $_SESSION['user_id'] . "') 
   ";
 mysqli_query($link, $sqlorder) or die(mysqli_error($link));
 

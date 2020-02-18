@@ -49,6 +49,21 @@ if (!isset($_GET['oid'])) {
         default:
             echo "Error";
     }
+
+    
+    switch ($result['order_type']) {
+        case 0:
+            $order_type = "กลับบ้าน  โดยพนักงาน";
+            break;
+        case 1:
+            $order_type = "ทานที่ร้าน โดยพนักงาน";
+            break;
+        case 2:
+            $order_type = "กลับบ้าน  โดยลูกค้า";
+            break;
+        default:
+            echo "Error";
+}
     ?>
     <div class="container" style="padding-top: 135px;">
         <div class="col">
@@ -107,7 +122,7 @@ if (!isset($_GET['oid'])) {
                         <tr>
                             <td width="15%" height="40px"><b>ประเภทการสั่ง :</b></td>
                             <td>
-                                <?= ($order_data['order_type'] == 0) ? "สั่งกลับบ้าน" : "สั่งทานที่ร้าน"; ?>
+                                <?= $order_type ?>
                             </td>
                             <td width="15%" height="40px"><b>หมายเลขโต๊ะ :</b></td>
                             <td>

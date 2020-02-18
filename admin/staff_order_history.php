@@ -44,10 +44,10 @@
                     <th style="width:265px;">ชื่อลูกค้า</th>
                     <th style="text-align:right; width:140px;">ราคา (บาท)</th>
                     <th style="text-align:left; width:160px;">สถานะ</th>
-                    <th style=" text-align:center; width:180px;">รายละเอียดการสั่ง</th>
-                    <th style=" text-align:center; width:230px;">ปรับปรุงการสั่งอาหาร</th>
-                    <th style=" text-align:center; width:145px;">บันทึกจัดส่ง</th>
-                    <th style=" text-align:center; width:145px;">เลือกรับชำระ</th>
+                    <th style="text-align:left; width:250px;">ประเภทการสั่ง</th>
+                    <th style="text-align:center; width:230px;">ปรับปรุงการสั่งอาหาร</th>
+                    <th style="text-align:center; width:140px;">บันทึกจัดส่ง</th>
+                    <th style="text-align:center; width:140px;">เลือกรับชำระ</th>
                 </thead>
 
                 <?php
@@ -106,14 +106,30 @@
                                 break;
                             default:
                                 echo "Error";
+                            }
+
+                            switch ($result['order_type']) {
+                                case 0:
+                                    $order_type = "กลับบ้าน  โดยพนักงาน";
+                                    break;
+                                case 1:
+                                    $order_type = "ทานที่ร้าน โดยพนักงาน";
+                                    break;
+                                case 2:
+                                    $order_type = "กลับบ้าน  โดยลูกค้า";
+                                    break;
+                                default:
+                                    echo "Error";
                         } ?>
-                        <tr>
-                            <td align="center"><?= $result["orderid"]; ?></td>
+                        <tr height="51px;">
+                            <td align="center"><a href="order_detailed.php?oid=<?= $result['orderid'] ?>"><?= $result["orderid"]; ?></a></td>
                             <td align="center"> <?= dt_tothaiyear($result['orderdate']) ?></td>
                             <td><?= $cus_data['cus_name'] ?></td>
                             <td align="right"> <?= number_format($result["order_totalprice"], 2) ?></td>
                             <td><?= $order_status ?></td>
-                            <td align="center"><a href="order_detailed.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i> ดูรายละเอียด</a></td>
+                            <td align="left">
+                                <?= $order_type ?>
+                            </td>
                             <td align="center">
                                 <?php if ($result['order_status'] == 0 || $result['order_status'] == 1) { ?>
                                     <a href="order_edit.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> ปรับปรุง</a></td>
@@ -186,15 +202,15 @@
                                     if ($page + $i == $page) {
                                         echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
                                     } else {
-                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_orders=$strKeyword'>" . ($page +$i) . "</a>" . '</li>';
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_orders=$strKeyword'>" . ($page + $i) . "</a>" . '</li>';
                                     }
                                 } else { // กรณีหน้าสุดท้าย
                                     if ($page == $num_pages) {
-                                        $offset = $num_pages - ($num_pages-4);
+                                        $offset = $num_pages - ($num_pages - 4);
                                     }
 
                                     for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
-                                      
+
                                         if ($page - $offset == $page) {
                                             echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
                                         } else {
@@ -233,7 +249,7 @@
                     if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
                         echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
                     } else {
-                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=".$num_pages."&search_orders=$strKeyword'>>></a></li>";
+                        echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=" . $num_pages . "&search_orders=$strKeyword'>>></a></li>";
                     }
                     $conn = null;
                     ?>

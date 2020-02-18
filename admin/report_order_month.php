@@ -85,10 +85,13 @@ $year    = $_POST['year'];
 
                 switch ($result_order['order_type']) {
                     case 0:
-                        $order_type = "กลับบ้าน";
+                        $order_type = "กลับบ้าน  โดยพนักงาน";
                         break;
                     case 1:
-                        $order_type = "ทานที่ร้าน";
+                        $order_type = "ทานที่ร้าน โดยพนักงาน";
+                        break;
+                    case 2:
+                        $order_type = "กลับบ้าน  โดยลูกค้า";
                         break;
                     default:
                         $order_type = "";
@@ -135,7 +138,7 @@ $year    = $_POST['year'];
                 <td><?= $result_order['cus_name'] ?></td>
                 <td style="padding-right:20px;" align="right"><?= !empty($result_order['tables_no']) ? $result_order['tables_no'] : "-" ?></td>
                 <td align="left"><?= $order_status ?></td>
-                <td><?= $order_type ?></td>
+                <td colspan="2"><?= $order_type ?></td>
                 <td align="right" style="padding-right:15px;" colspan="3"><?= $order_totalprice ?></td>
                 </tr>
 
