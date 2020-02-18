@@ -51,7 +51,7 @@ if (!isset($_GET['oid'])) {
     }
 
     
-    switch ($result['order_type']) {
+    switch ($order_data['order_type']) {
         case 0:
             $order_type = "กลับบ้าน  โดยพนักงาน";
             break;

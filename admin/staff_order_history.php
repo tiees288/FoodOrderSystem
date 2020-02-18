@@ -106,20 +106,20 @@
                                 break;
                             default:
                                 echo "Error";
-                            }
+                        }
 
-                            switch ($result['order_type']) {
-                                case 0:
-                                    $order_type = "กลับบ้าน  โดยพนักงาน";
-                                    break;
-                                case 1:
-                                    $order_type = "ทานที่ร้าน โดยพนักงาน";
-                                    break;
-                                case 2:
-                                    $order_type = "กลับบ้าน  โดยลูกค้า";
-                                    break;
-                                default:
-                                    echo "Error";
+                        switch ($result['order_type']) {
+                            case 0:
+                                $order_type = "กลับบ้าน  โดยพนักงาน";
+                                break;
+                            case 1:
+                                $order_type = "ทานที่ร้าน โดยพนักงาน";
+                                break;
+                            case 2:
+                                $order_type = "กลับบ้าน  โดยลูกค้า";
+                                break;
+                            default:
+                                echo "Error";
                         } ?>
                         <tr height="50px;">
                             <td align="center"><a href="order_detailed.php?oid=<?= $result['orderid'] ?>"><?= $result["orderid"]; ?></a></td>
@@ -138,8 +138,12 @@
                         <td align="center">
                             <?php
                             if ($result['order_status'] != 3) {
-                                if ($result['order_type'] == "0" && $result['order_date_delivered'] == "0000-00-00") {
+                                if ($result['order_type'] == "0" && $result['order_date_delivered'] == "0000-00-00") { // กรณีพนักงานสั่งกลับบ้านให้ลูกค้า
                             ?>
+                                    <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
+                                <?php
+                                } elseif (($result['order_type'] == "2" && $result['order_date_delivered'] == "0000-00-00") && ($result['payno'] != NUll)) { // กรณีลูกค้าสั่งกลับบ้านเองจากหน้าร้าน
+                                ?>
                                     <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
                             <?php
                                 }
@@ -148,11 +152,24 @@
                         </td>
                         <td align="center">
                             <?php if ($result['order_status'] != 3 && $result['order_status'] != 2) { // ปุ่มเลือกรับชำระ
+                                if ($result['order_type'] == 2 && $result['order_status'] == 1) { //กรณีสั่งกลับบ้านโดยลูกค้า
                             ?>
-                                <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
-                    <?php
-                            } ?>
-                    </td>
+                                    <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
+                        <?php
+                                } else { // กรณ๊พนักงานสั่ง
+                                    if ($result['order_type'] == 0 && $result['order_date_delivered'] != "0000-00-00") { // กรณีสั่งกลับบ้านโดยพนักงาน
+                        ?>
+                            <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
+                        <?php
+                                    } elseif ($result['order_type'] == 1) { // กรณีทานที่ร้าน
+                        ?>
+                            <a href="staff_add_list_pay.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-wpforms"></i> รับชำระ</a></td>
+                <?php
+                                    }
+                                }
+                            }
+                ?>
+                </td>
                         </tr>
                 <?php }
                 } else {

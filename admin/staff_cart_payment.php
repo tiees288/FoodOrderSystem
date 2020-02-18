@@ -17,7 +17,7 @@
     <div class="container" style="padding-top: 135px;">
         <h1 class="page-header text-left">ตะกร้ารับชำระ</h1>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered" align="center" style="">
+            <table class="table table-striped table-bordered" align="center">
                 <thead>
                     <th style="text-align:center;" width="220px">รหัสการสั่ง</th>
                     <th style="text-align:center; width:230px;">วันที่สั่ง</th>
@@ -68,7 +68,20 @@
             </table>
         </div>
         <div class="col-md-offset-3 col-md-6" style="text-align: center;">
-            <a class="btn btn-primary" href="staff_order_history.php" role="button">เพิ่มรายการ</a>
+
+            <?php
+            if (isset($_SESSION['food_admin']['payment'])) { // ดึงค่า Order แรกในตะกร้ามาตรวจสอบประเภท
+                $sql_type = "SELECT order_type FROM orders WHERE orderid = '" . $_SESSION['food_admin']['payment']['orderid'][0] . "'";
+                $query_type = mysqli_query($link, $sql_type) or die(mysqli_error($link));
+                $result_type = mysqli_fetch_assoc($query_type);
+            } else {
+                $result_type = null; // ให้ ประเภท null
+            }
+
+            if ($result_type['order_type'] != 2 || (!isset($_SESSION['food_admin']['payment']))) {
+            ?>
+                <a class="btn btn-primary" href="staff_order_history.php" role="button">เพิ่มรายการ</a>
+            <?php } ?>
             <a class="btn btn-success <?php
                                         if (!isset($_SESSION['food_admin']['payment']['orderid'])) {
                                             echo "disabled";
