@@ -121,7 +121,7 @@
                                 default:
                                     echo "Error";
                         } ?>
-                        <tr height="51px;">
+                        <tr height="49px;">
                             <td align="center"><a href="order_detailed.php?oid=<?= $result['orderid'] ?>"><?= $result["orderid"]; ?></a></td>
                             <td align="center"> <?= dt_tothaiyear($result['orderdate']) ?></td>
                             <td><?= $cus_data['cus_name'] ?></td>
