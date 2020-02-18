@@ -26,9 +26,25 @@
         }*/
 
     $sql_order	    =	"SELECT * FROM orders WHERE orderid = '" . $_GET['oid'] . "' ";
-    $data_order    =	mysqli_query($link, $sql_order);
+    $data_order     =	mysqli_query($link, $sql_order);
     $result_order	=	mysqli_fetch_assoc($data_order);
 
+    if (isset($_SESSION['food_admin']['payment'])) {
+        if ($result_order['order_type'] == 2 ) {
+            echo "<script>alert('ไม่สามารถเลือกรายการนี้ได้'); window.history.back();</script>";
+            exit();
+        } else {
+            $sql_type = "SELECT order_type FROM orders WHERE orderid = '". $_SESSION['food_admin']['payment']['orderid'][0] ."'";
+            $query_type = mysqli_query($link, $sql_type) or die(mysqli_error($link));
+            $result_type = mysqli_fetch_assoc($query_type);
+
+           if ($result_type['order_type'] == 2) { // เช็คเมื่อหยิบ เข้าตะกร้ามากกว่า 1
+                echo "<script>alert('ไม่สามารถเลือกรายการนี้ได้'); window.history.back();</script>";
+                exit();
+            }
+        }
+    }
+  
     if (!isset($_SESSION['food_admin']['payment'])) {
         $_SESSION['food_admin']['payment']['orderid']['0'] = $result_order['orderid'];
         //$_SESSION['food_admin']['payment']['amount']['0'] = 1; // จำนวนสินค้า
@@ -45,4 +61,3 @@
         }
     }
     echo  "<script>window.location.assign('staff_cart_payment.php') </script>";
-?>
