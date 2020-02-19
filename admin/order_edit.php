@@ -249,7 +249,7 @@ if (!isset($_GET['oid'])) {
                             <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> class="delete" type="button">-</button>
                             <input <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
                             <input type="text" name="id[]" value="<?= $orderdet_data['foodid'] ?>" hidden>
-                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 0) ? "disabled" : "" ?> class="plus" type="button"> + </button>
+                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> class="plus" type="button"> + </button>
                             <!-- จำนวนเหลือ ใน Stock -->
                             <input type="text" value="<?= $orderdet_data['orderdet_amount'] ?>" id="stock_<?= $i ?>" name="stock_<?= $i ?>" hidden>
                             <!-- =================== -->
