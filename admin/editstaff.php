@@ -60,7 +60,7 @@
                  <div class="row">
                      <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">อีเมล :<span style="color:red;"></span> </label>
                      <div class="col-md-8">
-                         <input type="text" class="form-control" style="width:300px" value="<?php echo $result['staff_email']; ?>" name="staff_email">
+                         <input type="email" class="form-control" style="width:300px" value="<?php echo $result['staff_email']; ?>" name="staff_email">
                      </div>
                  </div>
              </div>
