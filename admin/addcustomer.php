@@ -43,7 +43,7 @@
                  <div class="row">
                      <label class="control-label col-md-4 text-right" style="padding-top:7px">อีเมล :<span style="color:red;"></span> </label>
                      <div class="col-md-8">
-                         <input type="text" class="form-control" style="width:300px" value="" name="cus_email">
+                         <input type="email" class="form-control" style="width:300px" value="" name="cus_email">
                      </div>
                  </div>
              </div>
