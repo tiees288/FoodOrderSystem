@@ -11,7 +11,18 @@
 	if (!isset($_SESSION)) {  // Check if sessio nalready start
 		session_start();
 	}
-	include("lib.php");
+
+	if ((isset($_COOKIE['user'])) && (!isset($_SESSION['user']))) {
+		$_SESSION['user_id'] = $_COOKIE['user_id'];
+		$_SESSION['user'] = $_COOKIE['user'];
+		$_SESSION['user_status'] = $_COOKIE['user_status'];
+	} elseif (isset($_SESSION['user']) && (!isset($_COOKIE['user']))) {
+		setcookie("user_id", $_SESSION['user_id'], time() + 86400, "/");
+		setcookie("user", $_SESSION['user'], time() + 86400, "/");
+		setcookie("user_status", $_SESSION['user_status'], time() + 86400, "/");
+	}
+
+	require_once("lib.php");
 	?>
 	<style type="text/css">
 		body {
@@ -178,6 +189,7 @@
 			.navbar .login-form .btn {
 				width: 100%;
 			}
+
 			#brand_details {
 				display: none;
 			}
@@ -189,7 +201,7 @@
 		.pagination>.active>span:hover,
 		.pagination>.active>a:focus,
 		.pagination>.active>span:focus {
-			background-color: #26BA56; 
+			background-color: #26BA56;
 			border-color: black;
 			cursor: pointer;
 			z-index: 2;
@@ -201,7 +213,6 @@
 			cursor: pointer;
 			z-index: 2;
 		}
-		
 	</style>
 </head>
 
