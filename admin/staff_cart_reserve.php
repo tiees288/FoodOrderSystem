@@ -55,7 +55,7 @@
                         </tr>
                     <?php } ?>
                     <tr>
-                        <td align="right" colspan="1"><b>รวมทั้หมด</b></td>
+                        <td align="right" colspan="1"><b>รวมทั้งหมด</b></td>
                         <td align="right"><b><?= number_format(array_sum($_SESSION['food_admin']['reserve']['seats']), 0) ?></b></td>
                         <td align=""><b>ที่นั่ง</b></td>
                     </tr>
