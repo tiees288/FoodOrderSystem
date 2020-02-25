@@ -6,21 +6,29 @@
         exit();
     }
     switch ($_GET['report_name']) {
-        case 'order_month' :
+        case 'order_month':
             $report_name = "รายงานการสั่งอาหารประจำเดือน";
             $report_file = "report_order_month.php";
+            $date_attr = "orderdate"; // ฟิลด์ข้อมูล
+            $date_table = "orders";
             break;
-        case 'reserve_month' :
+        case 'reserve_month':
             $report_name = "รายงานการจองประจำเดือน";
             $report_file = "report_reserve_month.php";
+            $date_attr = "reserv_date_reservation"; // ฟิลด์ข้อมูล
+            $date_table = "reservations";
             break;
-        case 'payment_month' :
+        case 'payment_month':
             $report_name = "รายงานการรับชำระประจำเดือน";
             $report_file = "report_payment_month.php";
+            $date_attr = "pay_date"; // ฟิลด์ข้อมูล
+            $date_table = "payment";
             break;
-        case 'delivery_month' :
+        case 'delivery_month':
             $report_name = "รายงานการส่งอาหารประจำเดือน";
             $report_file = "report_delivery_month.php";
+            $date_attr = "order_date_delivered"; // ฟิลด์ข้อมูล
+            $date_table = "orders";
             break;
         default:
             echo "<script>window.location.assign('index.php');</script>";
@@ -74,13 +82,13 @@
                 <div class="col-md-3">
                     <select name="year" id="year" class="form-control" required>
                         <option value="" selected disabled>-- กรุณาเลือกปี พ.ศ. ที่ต้องการ --</option>
-                        <option value="2019">2562</option>
                         <?php
-                        $yr_th = 2562;
-                        $yr_ch = 2019;
 
-                        for ($i = 1; $i <= 10; $i++) {
-                            echo "<option value='" . ($yr_ch + $i) . "'>" . ($yr_th + $i) . "</option>";
+                        $sql_year = "SELECT DISTINCT year($date_attr) FROM $date_table WHERE $date_attr != '0000-00-00'";
+                        $query_year = mysqli_query($link, $sql_year) or die(mysqli_error($link));
+
+                        while ($result_year = mysqli_fetch_array($query_year)) {
+                            echo "<option value='" . $result_year[0] . "' >" . ($result_year[0] + 543) . "</option>";
                         }
                         ?>
                     </select>
