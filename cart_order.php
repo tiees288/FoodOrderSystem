@@ -59,7 +59,7 @@
 								$food_img = "images/default_food.png";
 							else $food_img = $value['food_image'];
 
-							?>
+					?>
 							<tr>
 								<td align="right"><?php echo $value['foodid']; ?></td>
 								<td align="center"><img height="120" width="170" src="<?php echo $food_img ?>"></td>
@@ -173,38 +173,42 @@
 			let price = $('#' + id2).data('value');
 			let sum = parseInt(val) + 1;
 
-			if (val >= 250) {
-				alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+			if (isNaN(val) || val == "") {
+				$('#' + id).val('1');
 			} else {
-			prices = price.replace(/,/g, ''),
-				asANumber = +prices;
+				if (val >= 250) {
+					alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+				} else {
+					prices = price.replace(/,/g, ''),
+						asANumber = +prices;
 
-			let price2 = sum * prices;
-			let price3 = price2.toLocaleString(undefined, {
-				minimumFractionDigits: 2
-			});
-			$('#' + id).val(sum);
-			$('#' + id2).text(price3);
+					let price2 = sum * prices;
+					let price3 = price2.toLocaleString(undefined, {
+						minimumFractionDigits: 2
+					});
+					$('#' + id).val(sum);
+					$('#' + id2).text(price3);
 
-			let count_tr = ($('tr').length - 2);
-			var sum2 = [];
-			for (var i = 0; i < count_tr; i++) {
-				sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
-			}
-			let sum3 = sum2.reduce(add, 0);
-			let sum_tt = sum3.toLocaleString(undefined, {
-				minimumFractionDigits: 2
-			});
-			$('#sum').text(sum_tt)
-			$.ajax({
-				type: 'post',
-				url: 'update_qty_food.php',
-				data: $('form').serialize(),
-				success: function() {
-					//document.getElementById("demo").innerHTML = "Save your post done.";
-					//	alert('form was submitted');
+					let count_tr = ($('tr').length - 2);
+					var sum2 = [];
+					for (var i = 0; i < count_tr; i++) {
+						sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
+					}
+					let sum3 = sum2.reduce(add, 0);
+					let sum_tt = sum3.toLocaleString(undefined, {
+						minimumFractionDigits: 2
+					});
+					$('#sum').text(sum_tt)
+					$.ajax({
+						type: 'post',
+						url: 'update_qty_food.php',
+						data: $('form').serialize(),
+						success: function() {
+							//document.getElementById("demo").innerHTML = "Save your post done.";
+							//	alert('form was submitted');
+						}
+					})
 				}
-			})
 			}
 		});
 		$('.amount').keyup(function(event) {

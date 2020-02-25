@@ -334,7 +334,7 @@ if (!isset($_GET['oid'])) {
                                 <!-- =================== -->
                             </td>
                             <td class="text-right price-order2-<?= $i ?>" data-value="<?= number_format($_SESSION['food_admin']['list']['food_price'][$i], 2) ?>" id="price2-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food_admin']['list']['food_price'][$i] * $_SESSION['food_admin']['list']['amount'][$i], 2) ?></td>
-							<td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
+                            <td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
                             <td align="center" style="padding:25px; width:10px"><a href="staff_del_list_food.php?foodid=<?php echo $value['foodid']; ?>&oid=<?= $_GET['oid'] ?>"> <span class="glyphicon glyphicon-trash fa-2x" style="color:red; font-size:25px;" aria-hidden="true"></span></td>
                         </tr>
                     <?php } ?>
@@ -421,29 +421,38 @@ if (!isset($_GET['oid'])) {
             let id2 = id.replace('amount-', 'price-');
             let price = $('#' + id2).data('value');
             let sum = parseInt(val) + 1;
-            prices = price.replace(/,/g, ''),
-                asANumber = +prices;
 
-            let price2 = sum * prices;
-            let price3 = price2.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#' + id).val(sum);
-            $('#' + id2).text(price3);
+            if (isNaN(val) || val == "") {
+                $('#' + id).val('1');
+            } else {
+                if (val >= 250) {
+                    alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+                } else {
+                    prices = price.replace(/,/g, ''),
+                        asANumber = +prices;
 
-            let count_tr = ($('#foodlist tr').length);
+                    let price2 = sum * prices;
+                    let price3 = price2.toLocaleString(undefined, {
+                        minimumFractionDigits: 2
+                    });
+                    $('#' + id).val(sum);
+                    $('#' + id2).text(price3);
 
-            var sum2 = [];
-            for (var i = 0; i < count_tr; i++) {
-                if ($('.price-order-' + i).text() != "") {
-                    sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
+                    let count_tr = ($('#foodlist tr').length);
+
+                    var sum2 = [];
+                    for (var i = 0; i < count_tr; i++) {
+                        if ($('.price-order-' + i).text() != "") {
+                            sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
+                        }
+                    }
+                    let sum3 = sum2.reduce(add, 0);
+                    let sum_tt = sum3.toLocaleString(undefined, {
+                        minimumFractionDigits: 2
+                    });
+                    $('#sum').text(sum_tt)
                 }
             }
-            let sum3 = sum2.reduce(add, 0);
-            let sum_tt = sum3.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#sum').text(sum_tt)
         });
         $('.amount').keyup(function(event) {
             let id = $(this).attr('id');
@@ -590,38 +599,47 @@ if (!isset($_GET['oid'])) {
             let id2 = id.replace('amount2-', 'price2-');
             let price = $('#' + id2).data('value');
             let sum = parseInt(val) + 1;
-            prices = price.replace(/,/g, ''),
-                asANumber = +prices;
 
-            let price2 = sum * prices;
-            let price3 = price2.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#' + id).val(sum);
-            $('#' + id2).text(price3);
+            if (isNaN(val) || val == "") {
+                $('#' + id).val('1');
+            } else {
+                if (val >= 250) {
+                    alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+                } else {
+                    prices = price.replace(/,/g, ''),
+                        asANumber = +prices;
 
-            let count_tr = ($('#foodlist2 tr').length);
+                    let price2 = sum * prices;
+                    let price3 = price2.toLocaleString(undefined, {
+                        minimumFractionDigits: 2
+                    });
+                    $('#' + id).val(sum);
+                    $('#' + id2).text(price3);
 
-            var sum2 = [];
-            for (var i = 0; i < count_tr; i++) {
-                if ($('.price-order2-' + i).text() != "") {
-                    sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                    let count_tr = ($('#foodlist2 tr').length);
+
+                    var sum2 = [];
+                    for (var i = 0; i < count_tr; i++) {
+                        if ($('.price-order2-' + i).text() != "") {
+                            sum2.push(parseInt($('.price-order2-' + i).text().replace(',', '')));
+                        }
+                    }
+                    let sum3 = sum2.reduce(add, 0);
+                    let sum_tt = sum3.toLocaleString(undefined, {
+                        minimumFractionDigits: 2
+                    });
+                    $('#sum2').text(sum_tt)
+                    $.ajax({
+                        type: 'post',
+                        url: 'staff_update_qty_food2.php',
+                        data: $('form').serialize(),
+                        success: function() {
+                            //document.getElementById("demo").innerHTML = "Save your post done.";
+                            //	alert('form was submitted');
+                        }
+                    })
                 }
             }
-            let sum3 = sum2.reduce(add, 0);
-            let sum_tt = sum3.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#sum2').text(sum_tt)
-            $.ajax({
-                type: 'post',
-                url: 'staff_update_qty_food2.php',
-                data: $('form').serialize(),
-                success: function() {
-                    //document.getElementById("demo").innerHTML = "Save your post done.";
-                    //	alert('form was submitted');
-                }
-            })
         });
         $('.amount2').keyup(function(event) {
             let id = $(this).attr('id');
