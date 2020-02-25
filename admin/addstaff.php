@@ -81,7 +81,7 @@
                             <div class="form-group" style="margin-top:10px;">
                                 <label class="control-label col-md-2" style="text-align:right;">หมายเลขบัตรประชาชน:<span style="color:red;">*</span></label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" required minlength="13" maxlength="13" onkeypress="return isNumberKey(event)" style="" value="" name="staff_nationid">
+                                    <input type="text" class="form-control" required minlength="13" maxlength="13" onkeypress="return isNumberKey(event)" value="" name="staff_nationid">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="control-label">
