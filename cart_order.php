@@ -173,6 +173,9 @@
 			let price = $('#' + id2).data('value');
 			let sum = parseInt(val) + 1;
 
+			if (val >= 250) {
+				alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+			} else {
 			prices = price.replace(/,/g, ''),
 				asANumber = +prices;
 
@@ -202,7 +205,7 @@
 					//	alert('form was submitted');
 				}
 			})
-
+			}
 		});
 		$('.amount').keyup(function(event) {
 			let id = $(this).attr('id');
@@ -229,7 +232,7 @@
 
 				}
 				if (val > limit) {
-					alert('จำนวนอาหารต้องน้อยกว่า 250');
+					alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
 					$('#' + id).val(limit);
 					let price3 = price2.toLocaleString(undefined, {
 						minimumFractionDigits: 2
