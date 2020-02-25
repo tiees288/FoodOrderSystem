@@ -38,9 +38,9 @@
 					<div class="form-group">
 						<button type="submit" class="btn btn-success btn-block btn-md">เข้าสู่ระบบ</button>
 					</div>
-					<p class="hint-text text-left" data-toggle="modal" data-target="#forgetModal"><a href="#">ลืมรหัสผ่าน?</a></p>
+					<p class="hint-text text-left" data-toggle="modal" data-target="#forgetModal"><a href="#"><u>ลืมรหัสผ่าน?</u></a></p>
 
-					<div class="modal-footer">ยังไม่เป็นสมาชิก? <a href="register.php">สมัครสมาชิก</a></div>
+					<div class="modal-footer">ยังไม่เป็นสมาชิก? <a href="register.php"><u>สมัครสมาชิก</u></a></div>
 
 				</form>
 			</div>
@@ -59,12 +59,12 @@
 								</div>
 								<div class="row">
 									<label class="control-label col-sm-2 text-right"><i class="fa fa-envelope"></i> อีเมล :</label>
-									<div class="col-2 col-sm-1" style="padding-bottom:7px;"><a href="mailto:Aimaroy_99@gmail.com">Aimaroy_99@gmail.com</a></div>
+									<div class="col-2 col-sm-1" style="padding-bottom:7px;"><a href="mailto:Aimaroy_99@gmail.com"><u>Aimaroy_99@gmail.com</u></a></div>
 								</div>
 								<!-- Force next columns to break to new line at md breakpoint and up -->
 								<div class="row">
 									<label class="control-label col-sm-2 text-right"><i class="fa fa-phone"></i> เบอร์โทร :</label>
-									<div class="col-2 col-sm-2"><a href="tel:061-576-0437">061-576-0437</a></div>
+									<div class="col-2 col-sm-2"><a href="tel:061-576-0437"><u>061-576-0437</u></a></div>
 								</div>
 							</div>
 						</div>

@@ -27,7 +27,7 @@
               <div class="card-body text-center">
                 <i class="fa fa-phone fa-5x mb-3" aria-hidden="true"></i>
                 <h4 class="text-uppercase mb-5">เบอร์โทรศัพท์</h4>
-                <p>061-576-0437</p>
+                <p><a href="tel:0615760437"><u>061-576-0437</u></a></p>
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@
               <div class="card-body text-center">
                 <i class="fa fa-envelope-o fa-5x mb-3" aria-hidden="true"></i>
                 <h4 class="text-uppercase mb-5">email</h4>
-                <p>Aimaroy_99@gmail.com</p>
+                <p><a href="mailto:aimaroy_99@gmail.com"><u>Aimaroy_99@gmail.com</u></a></p>
               </div>
             </div>
           </div>
