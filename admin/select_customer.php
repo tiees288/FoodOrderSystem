@@ -127,7 +127,7 @@
                             } elseif ($_GET['ref'] == 'payment') {
                                 $ref_href = "staff_checkout_payment.php";
                             }
-                        
+
                     ?>
 
                         <tr>
@@ -137,8 +137,7 @@
                             <td><?= $result['cus_email'] ?></td>
                             <td><?= $cus_status ?></td>
                             <td align="center">
-                                <a <?php if ($result['cus_status'] == 1) {
-                                        echo "disabled"; ?> onclick="alert('ไม่สามารถเลือกลูกค้าได้ เนื่องจากเป็นลูกค้าบัญชีดำ');" <?php  } else { ?> href="<?= $ref_href ?>?cusid=<?= $result['cusid'] ?>" <?php } ?> class="btn btn-success btn-md">
+                                <a href="<?= $ref_href ?>?cusid=<?= $result['cusid'] ?>" <?php if ($result['cus_status'] == 1) { ?> onclick="alert('ท่านกำลังเลือกลูกค้าบัญชีดำ');" <?php } ?> class="btn btn-success btn-md">
                                     <span class="glyphicon glyphicon-user"></span> เลือก</a>
                             </td>
                         </tr>

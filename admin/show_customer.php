@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <select class="form-control input-md" name="search_type" style="width:220px;">
                         <option disabled selected value="">- เลือกข้อมูลที่ต้องการค้นหา -</option>
-                        <option value="" >ทั้งหมด</option>
+                        <option value="">ทั้งหมด</option>
                         <option <?php if ($search_type == "cusid") {
                                     echo "selected";
                                 } ?> value="cusid">รหัสลูกค้า</option>
@@ -140,29 +140,29 @@
                     default:
                         echo "Error";
                 } ?>
-                    <tr>
-                        <td align="right"><?= $result["cusid"]; ?></td>
-                        <td align="left"> <?= $result["cus_name"] ?></td>
-                        <td align="left"> <?= $result["cus_tel"]; ?></td>
-                        <td align="left"> <?= $result["cus_email"]; ?></td>
-                        <td><?= $cus_status ?></td>
-                        <td align="center"><a href="editcustomer.php?cusid=<?php echo $result['cusid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
+                <tr>
+                    <td align="right"><?= $result["cusid"]; ?></td>
+                    <td align="left"> <?= $result["cus_name"] ?></td>
+                    <td align="left"> <?= $result["cus_tel"]; ?></td>
+                    <td align="left"> <?= ($result["cus_email"] == "") ? "-" : $result["cus_email"] ?></td>
+                    <td><?= $cus_status ?></td>
+                    <td align="center"><a href="editcustomer.php?cusid=<?php echo $result['cusid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
 
-                        </td>
-                        <td align="center"><a href="#deletecustomer<?php echo $result['cusid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
-                        <?php include("customer_modal.php"); ?>
-                    </tr>
-            <?php }
-            } else {
-                include("customer_modal.php");
-                echo '
+                    </td>
+                    <td align="center"><a href="#deletecustomer<?php echo $result['cusid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
+                    <?php include("customer_modal.php"); ?>
+                </tr>
+        <?php }
+        } else {
+            include("customer_modal.php");
+            echo '
             <tr>
                 <td colspan="7" align="center">ไม่พบข้อมูลในระบบ</td>
             </tr>
         ';
-            }
-            ?>
-            </table>
+        }
+        ?>
+        </table>
     </div>
     <nav aria-label="Page navigation example" class="navbar-center">
         <div class="text-center">

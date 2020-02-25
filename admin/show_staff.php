@@ -151,33 +151,31 @@
                 } else {
                     $staff_tel = $result["staff_tel"];
                 }
+        ?>
+                <tr>
+                    <td align="right"><?= $result["staffid"]; ?></td>
+                    <td align="left"> <?= $result["staff_name"] ?></td>
+                    <td align="left"> <?= $staff_tel; ?></td>
+                    <td align="left"> <?= $staff_email ?></td>
+                    <td><?= $staff_status ?></td>
+                    <td align="center"><a href="editstaff.php?staffid=<?php echo $result['staffid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
 
-
-                ?>
-                    <tr>
-                        <td align="right"><?= $result["staffid"]; ?></td>
-                        <td align="left"> <?= $result["staff_name"] ?></td>
-                        <td align="left"> <?= $staff_tel; ?></td>
-                        <td align="left"> <?= $staff_email; ?></td>
-                        <td><?= $staff_status ?></td>
-                        <td align="center"><a href="editstaff.php?staffid=<?php echo $result['staffid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
-
-                        </td>
-                        <td align="center"><a href="#deletestaff<?php echo $result['staffid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
-                        <?php include("staff_modal.php"); ?>
-                    </tr>
-            <?php }
-            } else {
-                include("staff_modal.php");
-                echo '
+                    </td>
+                    <td align="center"><a href="#deletestaff<?php echo $result['staffid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
+                    <?php include("staff_modal.php"); ?>
+                </tr>
+        <?php }
+        } else {
+            include("staff_modal.php");
+            echo '
             <tr>
                 <td colspan="7" align="center">ไม่พบข้อมูลในระบบ</td>
             </tr>
         ';
-            }
-            ?>
+        }
+        ?>
 
-            </table>
+        </table>
     </div>
     <nav aria-label="Page navigation example" class="navbar-center">
         <div class="text-center">

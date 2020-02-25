@@ -60,7 +60,7 @@
     <div class="container" style="padding-top: 90px;">
         <div class="col">
             <h1 class="page-header text-center">แจ้งหลักฐานการชำระเงิน</h1>
-            <div class="container" style="width:850px">
+            <div class="container" style="width:980px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
                         <form method="POST" action="save_order_payment.php" enctype="multipart/form-data">
@@ -115,10 +115,11 @@
                     <thead>
                         <th style="text-align:right; width:150px;">รหัสรายการอาหาร</th>
                         <th style="width:160px;">ชื่ออาหาร</th>
-                        <th>หน่วยนับ</th>
+                        <th style="width:100px;">หน่วยนับ</th>
                         <th style="text-align:right; width:120px;">ราคา (บาท)</th>
                         <th style="text-align:right; width:90px;">จำนวน</th>
                         <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+                        <th>หมายเหตุ</th>
                     </thead>
                     <?php
                     $orderdet_sql = "SELECT * FROM orderdetails WHERE orderid = '" . $_GET['oid'] . "'";
@@ -138,11 +139,13 @@
                         <td class="text-right">
                             <?= number_format($orderdet_data['orderdet_amount'] * $orderdet_data['orderdet_price'], 2); ?>
                         </td>
+                        <td class="col-md-2"><?= ($orderdet_data['orderdet_note']) ? $orderdet_data['orderdet_note'] : "-" ?></td>
                         </tr>
                     <?php }   ?>
                     <tr>
                         <td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
                         <td class="text-right"><b><?= number_format($order_data['order_totalprice'], 2); ?></b></td>
+                    <td></td>
                     </tr>
             </div>
             </table>

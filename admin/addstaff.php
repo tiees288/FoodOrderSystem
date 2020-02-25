@@ -15,7 +15,6 @@
             <div class="container" style="padding-top: 135px;">
                 <div class="col">
                     <h1 class="page-header text-left">เพิ่มข้อมูลพนักงาน</h1>
-
                     <div class="col-md-offset-1 col-md-12">
                         <form class="form-horizontal" method="POST" action="add_staff.php" enctype="multipart/form-data">
                             <div class="form-group">
@@ -47,6 +46,7 @@
                                     </label>
                                 </div>
                             </div>
+
                             <div class="form-group" style="margin-top:10px;">
                                 <label class="control-label col-md-2" style="text-align:right;">อีเมล :<span style="color:red;"></span> </label>
                                 <div class="col-md-3">
@@ -58,6 +58,7 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <div class="form-group" style="margin-top:10px;">
                                 <label class="control-label col-md-2" style="text-align:right;">ที่อยู่ :<span style="color:red;">*</span> </label>
                                 <div class="col-md-3">

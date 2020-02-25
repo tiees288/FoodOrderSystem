@@ -36,7 +36,7 @@ include('../conf/function.php');
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวนที่นั่ง(คน) :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" style="width:150px" min="2" max="12" onkeypress="return isNumberKey(event)" value="<?php echo $result['tables_seats']; ?>" name="tables_seats">
+                        <input type="number" required class="form-control" style="width:150px" min="2" max="12" onkeypress="return isNumberKey(event)" value="<?php echo $result['tables_seats']; ?>" name="tables_seats">
                     </div>
                 </div>
             </div>

@@ -49,97 +49,120 @@
 	?>
 	<div class="container" style="padding-top: 90px;">
 		<h1 class="page-header text-left">แก้ไขข้อมูลผู้ใช้</h1>
-		<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="name">รหัสลูกค้า :</label>
-				<div class="col-md-6" style="width:350px">
-					<input type="text" class="form-control" id="userid" name="userid" value="<?= $_SESSION['user_id'] ?>" disabled>
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" id="name" name="name" value="<?= $get_user['cus_name'] ?>" pattern="^[ก-๏a-zA-Z\s]+$" required>
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="name">วันเกิด :<font color="red"></font></label>
-				<div class="col-md-2" style="width:450">
-					<input class="form-control datepicker" autocomplete="off" onfocus="$(this).blur();" onkeypress="return false; this.preventDefault();" id="birthdate" type="text" name="birthdate" style="padding-left:10px;" value="<?= $cus_birth ?>" >
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="number_phone">เบอร์โทรศัพท์ :<font color="red">*</font>
-				</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" id="number_phone" name="number_phone" pattern="[0]{1}[2,6,8,9]{1}[0-9]{7,}" oninvalid="this.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="9" maxlength="10" value="<?= $get_user['cus_tel'] ?>" required>
+		<div class="col-md-offset-1 col-md-10">
+			<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+				<div class="form-group">
+					<label class="control-label col-md-2" for="name">รหัสลูกค้า :</label>
+					<div class="col-md-2">
+						<input type="text" class="form-control" id="userid" name="userid" value="<?= $_SESSION['user_id'] ?>" disabled>
+					</div>
 				</div>
 
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="email">อีเมล :<font color="red">*</font></label>
-				<div class="col-md-6">
-					<input type="email" class="form-control" id="email" name="email" value="<?= $get_user['cus_email'] ?>" required>
-				</div>
-				<div class="col-md-4">
-
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="address">ที่อยู่ :<font color="red">*</font></label>
-				<div class="col-md-6">
-					<textarea name="address" cols="30" rows="4" required class="form-control"><?= $get_user['cus_address'] ?></textarea>
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
-				<div class="col-md-6" style="width:200px">
-					<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
+				<div class="form-group">
+					<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" id="name" name="name" value="<?= $get_user['cus_name'] ?>" pattern="^[ก-๏a-zA-Z\s]+$" required>
+					</div>
 				</div>
 
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="user_name">ชื่อผู้ใช้ :</label>
-				<div class="col-md-6" style="width:200px">
-					<input type="text" class="form-control" name="user_name" value="<?= $get_user['cus_user'] ?>" readonly>
+				<div class="form-group">
+					<label class="control-label col-md-2" for="name">วันเกิด :<font color="red"></font></label>
+					<div class="col-md-3">
+						<input style="padding-left:15px;" class="form-control datepicker" autocomplete="off" onfocus="$(this).blur();" onkeypress="return false; this.preventDefault();" id="birthdate" type="text" name="birthdate" value="<?= $cus_birth ?>">
+					</div>
+					<div class="col-md-4 col-md-offset-1">
+						<label class="control-label colmd-3">
+							<font color="#BEBEBE">กรุณากรอกวันเกิดของท่านตามจริง</font>
+						</label>
+					</div>
 				</div>
 
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="password">รหัสผ่าน :<font color="red"></font></label>
-				<div class="col-md-6">
-					<input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
+				<div class="form-group">
+					<label class="control-label col-md-2" for="number_phone">เบอร์โทรศัพท์ :<font color="red">*</font>
+					</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="number_phone" name="number_phone" pattern="[0]{1}[2,6,8,9]{1}[0-9]{7,}" oninvalid="this.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="9" maxlength="10" value="<?= $get_user['cus_tel'] ?>" required>
+					</div>
+					<div class="col-md-offset-1 col-md-6">
+						<label class="control-label col-md-1d3">
+							<font color="#BEBEBE">กรอกเบอร์โทรศัพท์ อย่างน้อย 9 ตัว</font>
+						</label>
+					</div>
 				</div>
 
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<label class="control-label col-md-2" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
-				</label>
-				<div class="col-md-6">
-					<input type="password" class="form-control" name="cf_password" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")' minlength="8" maxlength="16" value="">
+				<div class="form-group">
+					<label class="control-label col-md-2" for="email">อีเมล :<font color="red">*</font></label>
+					<div class="col-md-4">
+						<input type="email" class="form-control" id="email" name="email" value="<?= $get_user['cus_email'] ?>" required>
+					</div>
+					<div class="col-md-6">
+						<label class="control-label">
+							<font color="#BEBEBE">กรอกอีเมลให้ถูกต้องตามรูปแบบ เช่น email@example.com</font>
+						</label>
+					</div>
 				</div>
 
-			</div>
-			<div class="col-md-1"></div>
-			<div class="form-group">
-				<div class="col-md-offset-4 col-md-6">
-					<button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-					<button type="reset" class="btn btn-danger">คืนค่า</button>
-					<button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
+				<div class="form-group">
+					<label class="control-label col-md-2" for="address">ที่อยู่ :<font color="red">*</font></label>
+					<div class="col-md-4">
+						<textarea name="address" cols="30" rows="4" required class="form-control"><?= $get_user['cus_address'] ?></textarea>
+					</div>
 				</div>
-			</div>
-		</form>
 
+				<div class="form-group">
+					<label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
+					<div class="col-md-2">
+						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
+					</div>
+					<div class="col-md-4 col-md-offset-2">
+						<label class="control-label">
+							<font color="#BEBEBE">กรอกเป็นตัวเลข 5 ตัว</font>
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-2" for="user_name">ชื่อผู้ใช้ :</label>
+					<div class="col-md-2">
+						<input type="text" class="form-control" name="user_name" value="<?= $get_user['cus_user'] ?>" readonly>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-2" for="password">รหัสผ่าน :<font color="red"></font></label>
+					<div class="col-md-3">
+						<input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
+					</div>
+					<div class="col-md-4 col-md-offset-1"">
+						<label class="control-label colmd-3">
+							<font color="#BEBEBE">กรอกอย่างน้อย 8-16 ตัว</font>
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-2" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
+					</label>
+					<div class="col-md-3">
+						<input type="password" class="form-control" name="cf_password" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")' minlength="8" maxlength="16" value="">
+					</div>
+					<div class="col-md-4 col-md-offset-1">
+						<label class="control-label colmd-3">
+							<font color="#BEBEBE">กรอกอย่างน้อย 8-16 ตัว ให้ตรงกับรหัสผ่าน</font>
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-4 col-md-6">
+						<button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
+						<button type="reset" class="btn btn-danger">คืนค่า</button>
+						<button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 	<?php include("conf/footer.php"); ?>
 </body>
