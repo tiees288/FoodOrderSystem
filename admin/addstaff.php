@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-md-3 col-md-offset-4" style="padding-top:10px;">
                     <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-                    <button type="reset" class="btn btn-danger">คืนค่า</button>
+                    <button type="reset" class="btn btn-danger">ล้างค่า</button>
                     <button type="button" class="btn btn-info" onclick="window.history.back()">ย้อนกลับ</button>
                     </form>
                 </div>

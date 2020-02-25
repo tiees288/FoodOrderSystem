@@ -174,36 +174,39 @@
             let price = $('#' + id2).data('value');
             let sum = parseInt(val) + 1;
 
-            prices = price.replace(/,/g, ''),
-                asANumber = +prices;
+            if (val >= 250) {
+                alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
+            } else {
+                prices = price.replace(/,/g, ''),
+                    asANumber = +prices;
 
-            let price2 = sum * prices;
-            let price3 = price2.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#' + id).val(sum);
-            $('#' + id2).text(price3);
+                let price2 = sum * prices;
+                let price3 = price2.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                });
+                $('#' + id).val(sum);
+                $('#' + id2).text(price3);
 
-            let count_tr = ($('tr').length - 2);
-            var sum2 = [];
-            for (var i = 0; i < count_tr; i++) {
-                sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
-            }
-            let sum3 = sum2.reduce(add, 0);
-            let sum_tt = sum3.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-            });
-            $('#sum').text(sum_tt)
-            $.ajax({
-                type: 'post',
-                url: 'staff_update_qty_food.php',
-                data: $('form').serialize(),
-                success: function() {
-                    //document.getElementById("demo").innerHTML = "Save your post done.";
-                    //	alert('form was submitted');
+                let count_tr = ($('tr').length - 2);
+                var sum2 = [];
+                for (var i = 0; i < count_tr; i++) {
+                    sum2.push(parseInt($('.price-order-' + i).text().replace(',', '')));
                 }
-            })
-
+                let sum3 = sum2.reduce(add, 0);
+                let sum_tt = sum3.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                });
+                $('#sum').text(sum_tt)
+                $.ajax({
+                    type: 'post',
+                    url: 'staff_update_qty_food.php',
+                    data: $('form').serialize(),
+                    success: function() {
+                        //document.getElementById("demo").innerHTML = "Save your post done.";
+                        //	alert('form was submitted');
+                    }
+                })
+            }
         });
         $('.amount').keyup(function(event) {
             let id = $(this).attr('id');
@@ -230,7 +233,7 @@
 
                 }
                 if (val > limit) {
-                    alert('จำนวนอาหารต้องน้อยกว่า 250');
+                    alert('จำนวนอาหารไม่สามารถมากกว่า 250 ได้');
                     $('#' + id).val(limit);
                     let price3 = price2.toLocaleString(undefined, {
                         minimumFractionDigits: 2

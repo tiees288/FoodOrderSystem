@@ -25,104 +25,129 @@
     ?>
     <div class="container" style="padding-top: 135px;">
         <h1 class="page-header text-left">แก้ไขข้อมูลผู้ใช้</h1>
-        <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="name">รหัสพนักงาน :</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" id="userid" name="userid" value="<?= $_SESSION['staff_id'] ?>" style="width:350px" disabled>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" id="name" name="name" value="<?= $get_user['staff_name'] ?>" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="name">วันเกิด :<font color="red">*</font></label>
-                <div class="col-md-2" style="width:450">
-                    <input class="form-control datepicker1" id="birthdate" type="text" style="padding-left:10px;" onkeypress="return false;" onfocus="$(this).blur();" name="birthdate" value="<?= tothaiyear($get_user['staff_birth']) ?>" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="number_phone">เบอร์โทรศัพท์ :<font color="red">*</font>
-                </label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" id="number_phone" name="number_phone" pattern="[0]{1}[2,6,8,9]{1}[0-9]{7,}" oninvalid="this.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="9" maxlength="10" value="<?= $get_user['staff_tel'] ?>" required>
+        <div class="col-md-offset-1 col-md-10">
+            <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="name">รหัสพนักงาน :</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="userid" name="userid" value="<?= $_SESSION['staff_id'] ?>" disabled>
+                    </div>
                 </div>
 
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="email">อีเมล :<font color="red"></font></label>
-                <div class="col-md-6">
-                    <input type="email" class="form-control" id="email" name="email" value="<?= $get_user['staff_email'] ?>">
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="name" name="name" value="<?= $get_user['staff_name'] ?>" required>
+                    </div>
                 </div>
 
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="address">ที่อยู่ :<font color="red">*</font></label>
-                <div class="col-md-6">
-                    <textarea name="address" cols="30" rows="4" required class="form-control"><?= $get_user['staff_address'] ?></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
-                <div class="col-md-6" style="width:200px">
-                    <input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['staff_postnum'] ?>" required>
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="name">วันเกิด :<font color="red">*</font></label>
+                    <div class="col-md-3">
+                        <input class="form-control datepicker1" id="birthdate" type="text" style="padding-left:10px;" onkeypress="return false;" onfocus="$(this).blur();" name="birthdate" value="<?= tothaiyear($get_user['staff_birth']) ?>" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label colmd-3">
+                            <font color="#BEBEBE">กรุณากรอกวันเกิดของท่านตามจริง</font>
+                        </label>
+                    </div>
                 </div>
 
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="user_name">ชื่อผู้ใช้ :</label>
-                <div class="col-md-6" style="width:200px">
-                    <input type="text" class="form-control" name="user_name" value="<?= $get_user['staff_username'] ?>" readonly>
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="number_phone">เบอร์โทรศัพท์ :<font color="red">*</font></label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="number_phone" name="number_phone" pattern="[0]{1}[2,6,8,9]{1}[0-9]{7,}" oninvalid="this.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="9" maxlength="10" value="<?= $get_user['staff_tel'] ?>" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-1d3">
+                            <font color="#BEBEBE">กรอกเบอร์โทรศัพท์ อย่างน้อย 9 ตัว</font>
+                        </label>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="postnumber">หมายเลขบัตรประชาชน :</label>
-                <div class="col-md-6" style="width:450px;">
-                    <input type="text" class="form-control" id="ืnationid" name="nationid" value="<?= $get_user['staff_nationid'] ?>" disabled>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="password">รหัสผ่าน :<font color="red"></font></label>
-                <div class="col-md-6">
-                    <input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
-                </div>
-
-            </div>
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <label class="control-label col-md-2" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
-                </label>
-                <div class="col-md-6">
-                    <input type="password" class="form-control" name="cf_password" minlength="8" maxlength="16" value="" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")'>
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="email">อีเมล :<font color="red"></font></label>
+                    <div class="col-md-3">
+                        <input type="email" class="form-control" id="email" name="email" value="<?= $get_user['staff_email'] ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">
+                            <font color="#BEBEBE">กรอกอีเมลให้ถูกต้องตามรูปแบบ เช่น email@example.com</font>
+                        </label>
+                    </div>
                 </div>
 
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-1"></div>
-                <div class="col-md-offset-4 col-md-6">
-                    <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-                    <button type="reset" class="btn btn-danger">คืนค่า</button>
-                    <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="address">ที่อยู่ :<font color="red">*</font></label>
+                    <div class="col-md-4">
+                        <textarea name="address" cols="30" rows="4" required class="form-control"><?= $get_user['staff_address'] ?></textarea>
+                    </div>
                 </div>
-            </div>
-        </form>
 
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['staff_postnum'] ?>" required>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <label class="control-label">
+                            <font color="#BEBEBE">กรอกเป็นตัวเลข 5 ตัว</font>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="user_name">ชื่อผู้ใช้ :</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="user_name" value="<?= $get_user['staff_username'] ?>" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="postnumber">หมายเลขบัตรประชาชน :</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="ืnationid" name="nationid" value="<?= $get_user['staff_nationid'] ?>" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">
+                            <font color="#BEBEBE"> กรอกหมายเลขบัตรประชาชนให้ครบ 13 หลัก</font>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="password">รหัสผ่าน :<font color="red"></font></label>
+                    <div class="col-md-3">
+                        <input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label colmd-3">
+                            <font color="#BEBEBE">กรอกอย่างน้อย 8-16 ตัว</font>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
+                    </label>
+                    <div class="col-md-3">
+                        <input type="password" class="form-control" name="cf_password" minlength="8" maxlength="16" value="" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")'>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label colmd-3">
+                            <font color="#BEBEBE">กรอกอย่างน้อย 8-16 ตัว ให้ตรงกับรหัสผ่าน</font>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-6">
+                        <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
+                        <button type="reset" class="btn btn-danger">คืนค่า</button>
+                        <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <?php include("../conf/footer.php"); ?>
 </body>
@@ -139,23 +164,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name        =    $_POST['user_name'];
     $password        =    $_POST['password'];
     $cus_postnum    =    $_POST['postnumber'];
-    $data_user1     = mysqli_query($link, "SELECT * FROM staff WHERE staff_username = '" . $user_name . "'");
-    $data1             = mysqli_fetch_assoc($data_user1);
+    //$data_user1     = mysqli_query($link, "SELECT * FROM staff WHERE staff_username = '" . $user_name . "'");
+    //$data1             = mysqli_fetch_assoc($data_user1);
 
-    /*if(($data1['c_user'] != "") and ($_SESSION['user_id'] != $_POST['cusid'] )){
-			echo "<script> alert('ชื่อผู้ใช้ซ้ำ'); window.history.back(); </script>"; 
-		
-				
-			exit();
-		}*/
     if ($password == "" && $_POST['cf_password'] == "") {
         // กรณีไม่เปลี่ยน Password
         $sql_update     = "UPDATE staff SET 
 							staff_name		= '" . $name . "',
 							staff_birth		= '" . $cus_birth . "',
-							staff_address		= '" . $address . "',
+							staff_address	= '" . $address . "',
 							staff_tel		= '" . $number_phone . "',
-							staff_postnum		= '" . $cus_postnum . "',
+                            staff_nationid  = '" . $_POST['nationid'] . "',
+							staff_postnum	= '" . $cus_postnum . "',
 							staff_email		= '" . $email . "'  WHERE staffid = '" . $_SESSION['staff_id'] . "'";
     } else {
         if ($password != $_POST['cf_password']) {
@@ -166,19 +186,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_update     = "UPDATE staff SET 
 			staff_name		= '" . $name . "',
 			staff_birth		= '" . $cus_birth . "',
-			staff_tel			= '" . $number_phone . "',
+			staff_tel		= '" . $number_phone . "',
+            staff_nationid  = '" . $_POST['nationid'] . "',
 			staff_email		= '" . $email . "',
-			staff_address		= '" . $address . "',
-			staff_postnum		= '" . $cus_postnum . "',
+			staff_address	= '" . $address . "',
+			staff_postnum	= '" . $cus_postnum . "',
 			staff_password	= '" . sha1($password) . "' WHERE staffid = '" . $_SESSION['staff_id'] . "'";
     }
 
+     // ตรวจสอบหมายเลขบัตรประชาชนซ้ำ
+    $sql_chk_nation = "SELECT staffid FROM staff WHERE staff_nationid = '" . $_POST['nationid'] . "' AND staff_username != '$user_name'";
+    $query_chk_nation = mysqli_query($link, $sql_chk_nation) or die(mysqli_error($link));
 
-    //อัพแดท ข้อมูล ผู้ใช้งาน
+       if (mysqli_num_rows($query_chk_nation) > 0) {
+        echo "<script>alert('หมายเลขบัตรประชาชนนี้ถูกใช้แล้ว'); window.history.back(); </script>";
+        exit();
+    }
+
     if (mysqli_query($link, $sql_update) or die(mysqli_error($link))) {
-        //   $data_user     = mysqli_query($link, "SELECT * FROM customerห WHERE cusid = '" . $_SESSION['user_id'] . "'");
-        // $data         = mysqli_fetch_assoc($data_user);
-        //	$_SESSION['user'] 	= $data['cus_user'];	
         echo "<script> alert('แก้ไขข้อมูลเรียบร้อยแล้ว'); window.location.assign('index.php')</script>";
     }
 }
