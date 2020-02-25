@@ -46,7 +46,7 @@
                 <div class="form-group" style="margin-top:10px;">
                     <label class="control-label col-md-2 text-right" style="padding-top:7px">วันเกิด :<span style="color:red;"></span> </label>
                     <div class="col-md-3">
-                        <input type="text" required class="form-control datepicker-cus" onkeypress="event.preventDefault(); return false;" value="<?= $cus_birth ?>" name="cus_birth">
+                        <input type="text" class="form-control datepicker-cus" onkeypress="event.preventDefault(); return false;" value="<?= $cus_birth ?>" name="cus_birth">
                     </div>
                     <div class="col-md-4">
                         <label class="control-label colmd-3">
