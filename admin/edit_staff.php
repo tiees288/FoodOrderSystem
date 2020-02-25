@@ -20,12 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $staff_nationid =   $_POST['staff_nationid'];
     $staff_level    =   $_POST['staff_level'];
     $staff_status   =   $_POST['staff_status'];
-    $data_staff1    = mysqli_query($link, "SELECT * FROM staff WHERE staffid = '" . $staffid . "'") or die(mysqli_error($link));
-    $data1          = mysqli_fetch_assoc($data_staff1);
+ //   $data_staff1    = mysqli_query($link, "SELECT * FROM staff WHERE staffid = '" . $staffid . "'") or die(mysqli_error($link));
+  //  $data1          = mysqli_fetch_assoc($data_staff1);
 
 
-    $chk_nationid    = mysqli_query($link, "SELECT * FROM staff WHERE staff_nationid = '" . $staff_nationid . "'");
+    $chk_nationid    = mysqli_query($link, "SELECT * FROM staff WHERE staff_nationid = '" . $staff_nationid . "' && staffid != '$staffid'");
     //ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
+    if (mysqli_num_rows($chk_nationid) > 0) {
+        echo "<script> alert('หมายเลขบัตรประชาชนนี้ถูกใช้ไปแล้ว'); window.history.back();</script>";
+        exit();
+    }
 
     $sql_update     = "UPDATE staff SET 
 			staff_name		= '" . $name . "',

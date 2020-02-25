@@ -14,26 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$staff_postnum	=	$_POST['staff_postnum'];
 	$staff_nationid =	$_POST['staff_nationid'];
 	$staff_level 	= 	$_POST['staff_level'];
-	/*
-	//ตรวจสอบ user ซ้ำ
-	$chk_username	= mysqli_query($link, "SELECT * FROM customers WHERE cus_user = '" . $user_name . "'");
-	//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
-	if (mysqli_num_rows($chk_username) != "") {
-		echo "<script> alert('ชื่อผู้ใช้ถูกใช้แล้ว');</script>";
-		exit();
-	} */
-	if ($email != "") {
-		$chk_email	= mysqli_query($link, "SELECT * FROM staff WHERE staff_email = '" . $email . "'");
-		//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
-		if (mysqli_num_rows($chk_email) != "0") {
-			echo "<script> alert('อีเมลล์ถูกใช้แล้ว'); window.history.back();</script>";
-			exit();
-		}
-	}
+
 	$chk_nationid	= mysqli_query($link, "SELECT * FROM staff WHERE staff_nationid = '" . $staff_nationid . "'");
 	//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
 	if (mysqli_num_rows($chk_nationid) != "0") {
-		echo "<script> alert('รหัสบัตรประชาชนถูกใช้แล้ว'); window.history.back();</script>";
+		echo "<script> alert('หมาบเลขบัตรประชาชนนี้ถูกใช้แล้ว'); window.history.back();</script>";
 		exit();
 	}
 	//ถ้าไม่มีให้เพิ่มข้อมูล
