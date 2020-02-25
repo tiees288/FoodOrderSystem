@@ -221,13 +221,13 @@ if (!isset($_GET['oid'])) {
                 </div>
             </div>
             <h3 class="page-header text-center">รายการอาหาร</h3>
-            <table class="table table-striped table-bordered" style="width:980px;" align="center" id="foodlist">
+            <table class="table table-striped table-bordered" style="width:1100px;" align="center" id="foodlist">
                 <thead>
                     <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
                     <th width="140px">ชื่ออาหาร</th>
                     <th width="90px">หน่วยนับ</th>
                     <th style="text-align:right; width:110px;">ราคา (บาท)</th>
-                    <th style="text-align:center; width:70px;">จำนวน</th>
+                    <th style="text-align:center; width:100px;">จำนวน</th>
                     <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
                     <th>หมายเหตุ</th>
                     <th style="text-align: center; width:85px;">ยกเลิก</th>
@@ -284,22 +284,22 @@ if (!isset($_GET['oid'])) {
         ?>
             <h3 class="page-header text-center">ตะกร้าสั่งเพิ่ม</h3>
 
-            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:980px;">
+            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:1100px;">
                 <thead>
                     <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
                     <th style="width:140px;">ชื่ออาหาร</th>
                     <th style="width:90px;">หน่วยนับ</th>
                     <th style="text-align:right; width:110px;">ราคา (บาท)</th>
-                    <th style="text-align:center; width:70px;">จำนวน</th>
-                    <th style="width:140px; text-align:right">ราคารวม (บาท)</th>
+                    <th style="text-align:center; width:100px;">จำนวน</th>
+                    <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
                     <th>หมายเหตุ</th>
-                    <th style="width:60px; text-align:center;">ยกเลิก</th>
+                    <th style="width:85px; text-align:center;">ยกเลิก</th>
                 </thead>
 
                 <?php
                 if (!isset($_SESSION['food_admin']['list']['foodid'])) {
                     echo '<tr>
-			<td colspan="7" class="text-center">ไม่มีสินค้าในตะกร้า</td>
+			<td colspan="8" class="text-center">ไม่มีสินค้าในตะกร้า</td>
 		</tr>';
                 } else {
 
