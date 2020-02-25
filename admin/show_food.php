@@ -74,11 +74,12 @@
             <table class="table table-striped table-bordered" align="center">
                 <thead>
                     <th style="text-align:right; width:150px;">รหัสรายการอาหาร</th>
-                    <th style="text-align: left; width:190px;">ชื่อรายการอาหาร</th>
+                    <th style="text-align: left; width:180px;">ชื่อรายการอาหาร</th>
                     <th style="width:100px;">หน่วยนับ</th>
-                    <th style="text-align:right; width:130px;">ราคา (บาท)</th>
+                    <th style="text-align:right; width:120px;">ราคา (บาท)</th>
                     <th style="text-align:center; width:26px;">รูปภาพ</th>
-                    <th style="text-align:left; width:120px;">สถานะ</th>
+                    <th style="text-align:left; width:100px;">สถานะ</th>
+                    <th style="text-align:center; width:130px;">เพิ่มจำนวน</th>
                     <th style=" text-align:center;">แก้ไข</th>
                     <th style=" text-align:center;">ลบ</th>
                 </thead>
@@ -153,10 +154,10 @@
                         <td align="left"> <?= $result["food_name"] ?></td>
                         <td><?= $result['food_count'] ?></td>
                         <td align="right"> <?= number_format($result["food_price"], 2); ?></td>
-                        <td align="center"><img width="200px" height="140px" src="<?= $food_img ?>"></td>
+                        <td align="center"><img width="140px" height="100px" src="<?= $food_img ?>"></td>
                         <td><?= $food_status ?></td>
+                        <td align="center"><a href="#morefood<?= $result['foodid'] ?>" class="btn btn-primary"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
                         <td align="center"><a href="editfood.php?foodid=<?php echo $result['foodid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
-
                         </td>
                         <td align="center"><a href="#deletefood<?php echo $result['foodid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
                         <?php include("food_modal.php"); ?>

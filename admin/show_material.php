@@ -67,8 +67,9 @@
                     <th style="text-align: left; width:250px;">ชื่อวัตถุดิบ</th>
                     <th style="width:170px;">หน่วยนับ</th>
                     <th style="text-align:left; width:170px;">สถานะ</th>
-                    <th style=" text-align:center; width:140px;">แก้ไข</th>
-                    <th style=" text-align:center; width:140px;">ลบ</th>
+                    <th style="text-align:center; width:130px;">เพิ่มจำนวน</th>
+                    <th style=" text-align:center; width:130px;">แก้ไข</th>
+                    <th style=" text-align:center; width:130px;">ลบ</th>
                 </thead>
         </div>
         <?php
@@ -136,6 +137,7 @@
                         <td align="left"> <?= $result["material_name"] ?></td>
                         <td align="left"> <?= $result["material_count"] ?></td>
                         <td><?= $material_status ?></td>
+                        <td align="center"><a href="#morematerial<?= $result['materialid'] ?>" class="btn btn-primary"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
                         <td align="center"><a href="editmaterial.php?materialid=<?php echo $result['materialid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
 
                         </td>

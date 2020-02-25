@@ -221,14 +221,15 @@ if (!isset($_GET['oid'])) {
                 </div>
             </div>
             <h3 class="page-header text-center">รายการอาหาร</h3>
-            <table class="table table-striped table-bordered" style="width:950px;" align="center" id="foodlist">
+            <table class="table table-striped table-bordered" style="width:980px;" align="center" id="foodlist">
                 <thead>
                     <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
                     <th width="140px">ชื่ออาหาร</th>
                     <th width="90px">หน่วยนับ</th>
                     <th style="text-align:right; width:110px;">ราคา (บาท)</th>
-                    <th style="text-align:center;">จำนวน</th>
+                    <th style="text-align:center; width:70px;">จำนวน</th>
                     <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+                    <th>หมายเหตุ</th>
                     <th style="text-align: center; width:85px;">ยกเลิก</th>
                 </thead>
                 <?php
@@ -246,10 +247,10 @@ if (!isset($_GET['oid'])) {
                         <td align="right">
                             <?= number_format($orderdet_data['orderdet_price'], 2); ?></td>
                         <td class="text-center">
-                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> class="delete" type="button">-</button>
-                            <input <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center; <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
+                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 2) ? "disabled" : "" ?> class="delete" type="button">-</button>
+                            <input <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 2) ? "disabled" : "" ?> type="text" maxlength="3" class="amount" onkeypress="return isNumberKey(event)" style="width:35px; text-align:center;" <?= $orderdet_data['orderdet_status'] == 2 ? "" : NULL ?>" autocomplete="off" id="amount-<?= $orderdet_data['foodid'] ?>" value="<?= $orderdet_data['orderdet_amount'] ?>" size="1" name="qty_<?= $i ?>">
                             <input type="text" name="id[]" value="<?= $orderdet_data['foodid'] ?>" hidden>
-                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] != 1) ? "disabled" : "" ?> class="plus" type="button"> + </button>
+                            <button <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 2) ? "disabled" : "" ?> class="plus" type="button"> + </button>
                             <!-- จำนวนเหลือ ใน Stock -->
                             <input type="text" value="<?= $orderdet_data['orderdet_amount'] ?>" id="stock_<?= $i ?>" name="stock_<?= $i ?>" hidden>
                             <!-- =================== -->
@@ -257,9 +258,10 @@ if (!isset($_GET['oid'])) {
                         <td class="text-right <?php if ($orderdet_data['orderdet_status'] != 2) echo 'price-order-' . $i; ?>" id="price-<?= $orderdet_data['foodid'] ?>" data-value="<?= number_format($orderdet_data['orderdet_price'], 2) ?>">
                             <?= number_format($orderdet_data['orderdet_price'] * $orderdet_data['orderdet_amount'], 2) ?>
                         </td>
+                        <td class="col-md-2"><textarea class="form-control" name="order_note_edit_<?= $orderdet_data['orderdetid'] ?>"><?= $orderdet_data['orderdet_note'] ?></textarea></td>
                         <td align="center">
                             <?php
-                            if ($order_data['order_type'] == 1) {
+                            if ($order_data['order_type'] != 2) {
                                 if ($orderdet_data['orderdet_status'] == 0) { ?>
                                     <a href="save_edit_order.php?del_oid=<?= $orderdet_data['orderdetid'] ?>" onclick="if(confirm('ต้องการยกเลิกรายการอาหารนี้หรือไม่?')) return true; else return false;"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color:red;"></span></a>
                             <?php } elseif ($orderdet_data['orderdet_status'] == 2) {
@@ -273,23 +275,24 @@ if (!isset($_GET['oid'])) {
                 <tr>
                     <td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
                     <td class="text-right" id="sum"><b><?= number_format($order_data['order_totalprice'], 2); ?></b></td>
-                    <td></td>
+                    <td colspan="2"></td>
                 </tr>
         </div>
         </table>
         <?php
-        if ($order_data['order_type'] == 1) {
+        if ($order_data['order_type'] != 2) {
         ?>
             <h3 class="page-header text-center">ตะกร้าสั่งเพิ่ม</h3>
 
-            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:950px;">
+            <table class="table table-striped table-bordered" id="foodlist2" align="center" style="width:980px;">
                 <thead>
                     <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
-                    <th style="width:180px;">ชื่ออาหาร</th>
-                    <th style="width:110px;">หน่วยนับ</th>
-                    <th style="text-align:right; width:100px;">ราคา (บาท)</th>
-                    <th style="text-align:center; width:135px;">จำนวน</th>
+                    <th style="width:140px;">ชื่ออาหาร</th>
+                    <th style="width:90px;">หน่วยนับ</th>
+                    <th style="text-align:right; width:110px;">ราคา (บาท)</th>
+                    <th style="text-align:center; width:70px;">จำนวน</th>
                     <th style="width:140px; text-align:right">ราคารวม (บาท)</th>
+                    <th>หมายเหตุ</th>
                     <th style="width:60px; text-align:center;">ยกเลิก</th>
                 </thead>
 
@@ -331,13 +334,14 @@ if (!isset($_GET['oid'])) {
                                 <!-- =================== -->
                             </td>
                             <td class="text-right price-order2-<?= $i ?>" data-value="<?= number_format($_SESSION['food_admin']['list']['food_price'][$i], 2) ?>" id="price2-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food_admin']['list']['food_price'][$i] * $_SESSION['food_admin']['list']['amount'][$i], 2) ?></td>
-                            <td align="center" style="padding:25px; width:10px"><a href="staff_del_list_food.php?foodid=<?php echo $value['foodid']; ?>&oid=<?= $_GET['oid'] ?>"> <span class="glyphicon glyphicon-trash fa-2x" style="color:red;" aria-hidden="true"></span></td>
+							<td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
+                            <td align="center" style="padding:25px; width:10px"><a href="staff_del_list_food.php?foodid=<?php echo $value['foodid']; ?>&oid=<?= $_GET['oid'] ?>"> <span class="glyphicon glyphicon-trash fa-2x" style="color:red; font-size:25px;" aria-hidden="true"></span></td>
                         </tr>
                     <?php } ?>
                     <tr>
                         <td align="right" colspan="5"><b>ราคารวมทั้งหมด</b></td>
                         <td class="text-right"><b id="sum2"><?= number_format(array_sum($sum_price), 2); ?></b></td>
-                        <td align="center"></td>
+                        <td align="center" colspan="2"></td>
                     </tr>
             <?php }
             }
@@ -346,14 +350,14 @@ if (!isset($_GET['oid'])) {
 
             <div class="col-md-offset-3 col-md-6" style="text-align: center;">
                 <?php
-                if ($order_data['order_type'] == 1) {
+                if ($order_data['order_type'] != 2) {
                 ?>
                     <a class="btn btn-primary" id="od_more" href="show_food_typeall.php?oid=<?= $_GET['oid'] ?>" role="button">เพิ่มรายการ</a>
                     <input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันปรับปรุงการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+                    <input type="reset" name="reset" class="btn btn-danger" value="คืนค่า">
                 <?php
                 }
                 ?>
-                <input type="reset" name="reset" class="btn btn-danger" value="คืนค่า">
                 <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิกการสั่งอาหาร?')) return true; else return false;" class="btn btn-warning">ยกเลิกการสั่ง</button>
                 </form>
                 <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
