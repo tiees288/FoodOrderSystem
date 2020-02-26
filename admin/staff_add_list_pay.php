@@ -33,6 +33,13 @@ if (!isset($_SESSION['food_admin']['payment'])) {
     $_SESSION['food_admin']['payment']['orderid']['0'] = $result_order['orderid'];
     //$_SESSION['food_admin']['payment']['amount']['0'] = 1; // จำนวนสินค้า
     //$_SESSION['food_admin']['payment']['seats']['0'] = $result_order['order_seats'];
+
+    if ($result_order['order_type'] == 2) {
+        echo  "<script>window.location.assign('staff_checkout_payment.php') </script>";
+    } else {
+        echo  "<script>window.location.assign('staff_cart_payment.php') </script>";
+    }
+
 } else {
     $key = array_search($_GET['oid'], $_SESSION['food_admin']['payment']['orderid']);
 
@@ -58,5 +65,5 @@ if (!isset($_SESSION['food_admin']['payment'])) {
         $count = count($_SESSION['food_admin']['payment']['orderid']);
         $_SESSION['food_admin']['payment']['orderid'][$count] = $result_order['orderid'];
     }
+    echo  "<script>window.location.assign('staff_cart_payment.php') </script>";
 }
-echo  "<script>window.location.assign('staff_cart_payment.php') </script>";
