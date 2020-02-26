@@ -68,19 +68,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result_check = mysqli_fetch_array($query_check);
 
                 if (mysqli_num_rows($query_check) > 0) { // กรณีตรวจสอบว่ามีในรายการสั่งอยู่แล้ว
-                    
-                    $orderdet_note2 = $_POST['order_note_'.$_SESSION['food_admin']['list']['foodid'][$i]];
+
+                    $orderdet_note2 = $_POST['order_note_' . $_SESSION['food_admin']['list']['foodid'][$i]];
 
                     echo $orderdet_note2;
                     if ($result_check['orderdet_status'] == 2) { // กรณีอาหารถูกยกเลิกไปก่อนหน้า
                         $sql_update_oderdet_status = "UPDATE orderdetails SET
                             orderdet_status = '0',
-                          
+                            orderdet_note = '$orderdet_note2',
                             orderdet_amount = '" . $_SESSION['food_admin']['list']['amount'][$i] . "'
                         WHERE orderdetid = '" . $result_check['orderdetid'] . "'";
                         mysqli_query($link, $sql_update_oderdet_status) or die(mysqli_error($link));
                     } else {
                         $sql_update_oderdet_status = "UPDATE orderdetails SET
+                            orderdet_note =  + concat(orderdet_note, '" . "\n" . "' , '$orderdet_note2'),
                             orderdet_amount = orderdet_amount + '" . $_SESSION['food_admin']['list']['amount'][$i] . "'
                         WHERE orderdetid = '" . $result_check['orderdetid'] . "'";
                         mysqli_query($link, $sql_update_oderdet_status) or die(mysqli_error($link));
@@ -90,9 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     food_recomend = (food_recomend + '" . $_SESSION['food_admin']['list']['amount'][$i] . "') WHERE foodid = '" . $_SESSION['food_admin']['list']['foodid'][$i] . "'";
                     mysqli_query($link, $sql_recommend) or die(mysqli_error($link));
                 } else { // กรณีไม่มีรายการเดิมอยู่ ให้เพิ่มเข้าไปใหม่
+                    $orderdet_note2 = $_POST['order_note_' . $_SESSION['food_admin']['list']['foodid'][$i]];
 
                     $sql_addfoodlist =    "INSERT INTO orderdetails ( `orderdet_amount`, `orderdet_status`,`orderdet_price`,`orderid`, foodid, orderdet_note) 
-            VALUES ('" . $_SESSION['food_admin']['list']['amount'][$i] . "', '0','" . $_SESSION['food_admin']['list']['food_price'][$i] . "','" . $oid . "', '" . $_SESSION['food_admin']['list']['foodid'][$i] . "')";
+            VALUES ('" . $_SESSION['food_admin']['list']['amount'][$i] . "', '0','" . $_SESSION['food_admin']['list']['food_price'][$i] . "','" . $oid . "', '" . $_SESSION['food_admin']['list']['foodid'][$i] . "', '$orderdet_note2')";
                     mysqli_query($link, $sql_addfoodlist) or die(mysqli_error($link));
 
                     $sql_recommend =  "UPDATE foods SET
@@ -108,8 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['food_admin']['list']);
         }
 
-        //    echo "<script>alert('ปรับปรุงการสั่งอาหาร รหัสการสั่ง " . $_POST['orderid'] . " เรียบร้อย'); window.location.assign('staff_order_history.php');</script>";
-
+        echo "<script>alert('ปรับปรุงการสั่งอาหาร รหัสการสั่ง " . $_POST['orderid'] . " เรียบร้อย'); window.location.assign('staff_order_history.php');</script>";
+    
     } elseif (isset($_POST['cancel'])) { // กรณียกเลิกการสั่ง
         $sql_cancel = "UPDATE orders SET
             order_status = 3 WHERE orderid = '" . $_POST['orderid'] . "'";
