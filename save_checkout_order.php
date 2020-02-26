@@ -29,8 +29,6 @@ for ($i = 0; $i < count($_SESSION['food']['list']['foodid']); $i++) {
 
 }
 
-
-
 unset($_SESSION['food']['list']);
 
 echo '<script>alert("บันทึกการสั่งอาหารเรียบร้อยแล้ว\nรหัสการสั่งคือ '. str_pad($last_orderid,5,0,STR_PAD_LEFT) .'"); window.location.assign("order_history.php")</script>';

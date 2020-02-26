@@ -30,7 +30,7 @@
     <div class="container" style="padding-top: 135px;">
         <div class="col">
             <h1 class="page-header text-center">บันทึกการส่ง</h1>
-            <div class="container" style="width:860px">
+            <div class="container" style="width:970px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
                         <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_delivery.php">
@@ -87,11 +87,12 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
-                        <th style="width:120px;">ชื่ออาหาร</th>
-                        <th style="width:80px;">หน่วยนับ</th>
-                        <th style="text-align:right; width:100px;">ราคา (บาท)</th>
-                        <th style="text-align:right; width:55px;">จำนวน</th>
+                        <th style="width:160px;">ชื่ออาหาร</th>
+                        <th style="width:100px;">หน่วยนับ</th>
+                        <th style="text-align:right; width:110px;">ราคา (บาท)</th>
+                        <th style="text-align:right; width:90px;">จำนวน</th>
                         <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+                        <th>หมายเหตุ</th>
                     </thead>
                     <?php
                     $sql_orderdet = "SELECT orderid FROM orders WHERE orderid = '" . $_GET['oid'] . "'";
@@ -115,6 +116,9 @@
                                 <td align="right"><?= $result_orderdet2['orderdet_price'] ?></td>
                                 <td align="right"><?= $result_orderdet2['orderdet_amount'] ?></td>
                                 <td align="right"><?= number_format(($result_orderdet2['orderdet_amount'] * $result_orderdet2['orderdet_price']), 2) ?></td>
+                                <td class="col-md-2">
+                                    <?= ($result_orderdet2['orderdet_note']) ? $result_orderdet2['orderdet_note'] : "-" ?>
+                                </td>
                         </tr>
                 <?php $i++;
                                 $sum_total += ($result_orderdet2['orderdet_amount'] * $result_orderdet2['orderdet_price']);
@@ -124,6 +128,7 @@
                 <tr>
                     <td colspan="5" align="right"><b>ราคารวมทั้งหมด</b></td>
                     <td align="right"><b><?= number_format($sum_total, 2) ?></b></td>
+                    <td></td>
                 </tr>
 
                 </table>

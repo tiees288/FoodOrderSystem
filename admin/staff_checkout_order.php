@@ -40,7 +40,7 @@
     <div class="container" style="padding-top: 135px;">
         <div class="col">
             <h1 class="page-header text-center">บันทึกการสั่งอาหาร</h1>
-            <div class="container" style="width:860px">
+            <div class="container" style="width:970px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
                         <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_order.php">
@@ -133,10 +133,11 @@
                     <thead>
                         <th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
                         <th style="width:160px;">ชื่ออาหาร</th>
-                        <th>หน่วยนับ</th>
-                        <th style="text-align:right; width:120px;">ราคา (บาท)</th>
-                        <th style="text-align:right; width:90px;">จำนวน</th>
+                        <th style="width:100px;">หน่วยนับ</th>
+                        <th style="text-align:right; width:110px;">ราคา (บาท)</th>
+                        <th style="text-align:right; width:70px;">จำนวน</th>
                         <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+                        <th>หมายเหตุ</th>
                     </thead>
                     <?php
                     $count_product = count($_SESSION['food_admin']['list']['foodid']);
@@ -157,12 +158,16 @@
                             <input type="text" name="id[]" value="<?= $value['foodid'] ?>" hidden>
                         </td>
                         <td class="text-right price-order-<?= $i ?>" data-value="<?= $_SESSION['food_admin']['list']['food_price'][$i] ?>" id="price-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food_admin']['list']['food_price'][$i] * $_SESSION['food_admin']['list']['amount'][$i], 2) ?></td>
+                        <td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
                         </tr>
-                    <?php }    ?>
+                    <?php
+                    }
+                    ?>
                     <tr>
                         <td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
                         <td class="text-right"><b><?= number_format(array_sum($sum_price), 2); ?></b></td>
                         <input type="text" name="totalprice" id="totalprice" value="<?= array_sum($sum_price); ?>" hidden />
+                        <td></td>
                     </tr>
             </div>
             </table>

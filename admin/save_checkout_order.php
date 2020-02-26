@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     for ($i = 0; $i < count($_SESSION['food_admin']['list']['foodid']); $i++) {
 
-        $sql_addfoodlist =    "INSERT INTO orderdetails ( `orderdet_amount`, `orderdet_status`,`orderdet_price`,`orderid`, foodid) 
-	VALUES ('" . $_SESSION['food_admin']['list']['amount'][$i] . "', '0','" . $_SESSION['food_admin']['list']['food_price'][$i] . "','" . $last_orderid . "', '" . $_SESSION['food_admin']['list']['foodid'][$i] . "')";
+        $sql_addfoodlist =    "INSERT INTO orderdetails ( `orderdet_amount`, `orderdet_status`,`orderdet_price`,`orderid`, foodid, orderdet_note) 
+	VALUES ('" . $_SESSION['food_admin']['list']['amount'][$i] . "', '0','" . $_SESSION['food_admin']['list']['food_price'][$i] . "','" . $last_orderid . "', '" . $_SESSION['food_admin']['list']['foodid'][$i] . "', '" . $_POST['order_note_' . $_SESSION['food_admin']['list']['foodid'][$i]] . "')";
 
         mysqli_query($link, $sql_addfoodlist) or die(mysqli_error($link));
 
