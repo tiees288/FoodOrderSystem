@@ -156,7 +156,7 @@
                         <td align="right"> <?= number_format($result["food_price"], 2); ?></td>
                         <td align="center"><img width="140px" height="100px" src="<?= $food_img ?>"></td>
                         <td><?= $food_status ?></td>
-                        <td align="center"><a href="#morefood<?= $result['foodid'] ?>" class="btn btn-primary"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
+                        <td align="center"><a href="#morefood<?= $result['foodid'] ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
                         <td align="center"><a href="editfood.php?foodid=<?php echo $result['foodid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
                         </td>
                         <td align="center"><a href="#deletefood<?php echo $result['foodid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>

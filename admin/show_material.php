@@ -137,7 +137,7 @@
                         <td align="left"> <?= $result["material_name"] ?></td>
                         <td align="left"> <?= $result["material_count"] ?></td>
                         <td><?= $material_status ?></td>
-                        <td align="center"><a href="#morematerial<?= $result['materialid'] ?>" class="btn btn-primary"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
+                        <td align="center"><a href="#morematerial<?= $result['materialid'] ?>" data-toggle="modal" class="btn btn-primary"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
                         <td align="center"><a href="editmaterial.php?materialid=<?php echo $result['materialid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
 
                         </td>

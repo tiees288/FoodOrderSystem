@@ -1,56 +1,53 @@
-<div class="modal fade" id="editmaterial<?php echo $result['materialid']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="morematerial<?php echo $result['materialid']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <center>
-                    <h4 class="modal-title" id="myModalLabel">แก้ไขข้อมูลว้ตถุดิบ</h4>
+                    <h4 class="modal-title" id="myModalLabel">เพิ่มจำนวนวัตถุดิบ</h4>
                 </center>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form method="POST" action="edit_material.php" enctype="multipart/form-data">
+                    <form method="POST" action="material_qty_add.php" enctype="multipart/form-data">
                         <div class="form-group" style="margin-top:10px;">
                             <div class="row">
-                                <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รหัสวัตถุดิบ :</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" style="width:150px" value="<?= $result['materialid'] ?>" name="materialid" readonly>
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">รหัสวัตถุดิบ :</label>
+                                <div class="col-md-6">
+                                    <?= $result['materialid'] ?>
+                                    <input type="text" hidden value="<?= $result['materialid'] ?>" name="materialid">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="row">
-                                <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ชื่อวัตถุดิบ :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8" style="">
-                                    <input type="text" class="form-control" value="<?= $result['material_name'] ?>" style="width:280px" required name="material_name">
+                            <div class="row" style="padding-top:6px;">
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">ชื่อวัตถุดิบ :<span style="color:red;"></span> </label>
+                                <div class="col-md-6">
+                                    <?= $result['material_name'] ?>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group" style="margin-top:10px;">
-                            <div class="row">
-                                <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8">
-                                    <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" value="<?= $result['material_qty'] ?>" min="0" max="300" required name="material_qty">
+                            <div class="row" style="padding-top:6px;">
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
+                                <div class="col-md-6">
+                                   <?= $result['material_qty'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" style="padding-top:6px;">
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
+                                <div class="col-md-6">
+                                    <?= $result['material_count'] ?>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8" style="">
-                                    <input type="text" class="form-control" style="width:250px" value="<?= $result['material_count'] ?>" required name="material_count">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">สถานะ :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8">
-                                    <select class="form-control" style="width:200px" name="material_status">
-                                        <option value="" disabled selected>-- กรุณาเลือกสถานะ --</option>
-                                        <option <?php if ($result['material_status'] == 0) echo "selected"; ?> value="0">ใช้งาน</option>
-                                        <option <?php if ($result['material_status'] == 1) echo "selected"; ?> value="1">ยกเลิก</option>
-                                    </select>
+                                <label class="control-label col-md-offset-1 col-md-4" style="margin-top:7px; text-align:right;">จำนวนที่ต้องการเพิ่ม :<span style="color:red;">*</span> </label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" min="1" max="300" required name="material_qty_add">
                                 </div>
                             </div>
                         </div>
@@ -58,7 +55,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-                <button type="reset" class="btn btn-danger">คืนค่า</button>
+                <button type="reset" class="btn btn-danger">ล้างค่า</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
                 </form>
             </div>
@@ -146,7 +143,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label class="control-label col-md-4" style="text-align:right;" >ชื่อวัตถุดิบ :</label>
+                                <label class="control-label col-md-4" style="text-align:right;">ชื่อวัตถุดิบ :</label>
                                 <div class="col-md-8" style="">
                                     <?= $result['material_name'] ?>
                                 </div>
@@ -154,7 +151,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label class="control-label col-md-4" style="text-align:right;" >สถานะ :</label>
+                                <label class="control-label col-md-4" style="text-align:right;">สถานะ :</label>
                                 <div class="col-md-8">
                                     <?php if ($result['material_status'] == 0) {
                                         echo "<span style='color:#12BB4F';>ใช้งาน</span>";
