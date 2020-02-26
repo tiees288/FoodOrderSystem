@@ -72,7 +72,7 @@ if (!isset($_GET['oid'])) {
     <div class="container" style="padding-top: 135px;">
         <div class="col">
             <h1 class="page-header text-center">ปรับปรุงรายการสั่งอาหาร</h1>
-            <div class="container" style="width:850px">
+            <div class="container" style="width:970px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <form id="basket" class="form" name="edit_order" method="POST" action="save_edit_order.php">
                         <table width="750px" border="0" align="center">
