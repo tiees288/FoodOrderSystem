@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="postnumber">หมายเลขบัตรประชาชน :</label>
+                    <label class="control-label col-md-3" for="postnumber">หมายเลขบัตรประชาชน :<font color="red">*</font></label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="ืnationid" name="nationid" value="<?= $get_user['staff_nationid'] ?>" required>
                     </div>
