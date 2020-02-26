@@ -182,7 +182,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="control-label col-md-4" style="text-align:right;">รหัสรายการอาหาร :</label>
-                                <div class="col-md-8" style="">
+                                <div class="col-md-8" >
                                     <input type="text" style="width:150px" value="<?php echo $result['foodid']; ?>" name="foodid" hidden>
                                     <?php echo $result['foodid']; ?>
                                 </div>

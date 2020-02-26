@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group" style="margin-top:10px;">
                             <div class="row" style="padding-top:6px;">
-                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">จำนวน :<span style="color:red;"></span> </label>
                                 <div class="col-md-6">
                                    <?= $result['material_qty'] ?>
                                 </div>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row" style="padding-top:6px;">
-                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
+                                <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">หน่วยนับ :<span style="color:red;"></span> </label>
                                 <div class="col-md-6">
                                     <?= $result['material_count'] ?>
                                 </div>
@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ชื่อวัตถุดิบ :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8" style="">
+                                <div class="col-md-8" >
                                     <input type="text" class="form-control" style="width:300px" required name="material_name">
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
-                                <div class="col-md-8" style="">
+                                <div class="col-md-8" >
                                     <input type="text" class="form-control" style="width:300px" required name="material_count">
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="control-label col-md-4" style="text-align:right;">ชื่อวัตถุดิบ :</label>
-                                <div class="col-md-8" style="">
+                                <div class="col-md-8">
                                     <?= $result['material_name'] ?>
                                 </div>
                             </div>
