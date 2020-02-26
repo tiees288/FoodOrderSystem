@@ -52,7 +52,12 @@
                 <div class="row">
                     <label class="control-label col-md-4"></label>
                     <div class="col-md-8">
-                        <img height="100" width="150" style="border:1px solid black;" src="../<?php echo $result['food_image']; ?>">
+                        <?php
+                        if ($result['food_image'] == "")
+                            $food_img = "../images/default_food.png";
+                        else $food_img = "../" . $result['food_image'];
+                        ?>
+                        <img height="100" width="150" style="border:1px solid black;" src="<?php echo $food_img; ?>">
                     </div>
                 </div>
             </div>
@@ -83,7 +88,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
+                        <input type="number" class="form-control" style="width:150px" min="0" max="300" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
                     </div>
                 </div>
             </div>
