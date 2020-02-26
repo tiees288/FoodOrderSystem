@@ -137,7 +137,7 @@ include("../conf/connection.php");
                 <td width="12%" align="right" style="padding-right:5px;"><b>ประเภทการชำระ : </b></td>
                 <td width="15%"><?= $result_payment['pay_type'] == 0 ? "เงินสด" : "เงินโอน" ?></td>
                 <td width="10%" align="right" style="padding-right:5px;"><b>หมายเหตุ : </b></td>
-                <td width="10%"><?= $result_payment['pay_note'] == "" ? "-" : $result_payment['pay_note'] ?></td>
+                <td width="20%"><?= $result_payment['pay_note'] == "" ? "-" : $result_payment['pay_note'] ?></td>
                 <td rowspan="3" align="center">
                     <?php
                     if ($result_payment['pay_status'] == 2) {
@@ -150,7 +150,7 @@ include("../conf/connection.php");
                 <td width="20%" align="right" style="padding-right:5px;"><b>ลายเซ็นลูกค้า : </b></td>
                 <td>...............................</td>
                 <td align="right" style="padding-right:5px;"><b>วันที่ชำระ : </b></td>
-                <td><?= tothaiyear($result_payment['pay_date']) ?></td>
+                <td ><?= fulldatetime_thai(dt_tothaiyear($result_payment['pay_date'])) ?></td>
             </tr>
             <tr>
                 <td width="20%" align="right" style="padding-right:5px;"><b>ชื่อพนักงาน : </b></td>
