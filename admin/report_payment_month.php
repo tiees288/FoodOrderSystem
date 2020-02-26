@@ -142,16 +142,10 @@ $year    = $_POST['year'];
         <?php
         }
         ?>
-        <tr style="">
+        <tr>
             <td colspan="3" height="27px"></td>
             <td colspan="2" style="padding-left:70px;"><b>รวมทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right:10px;"><b><?= number_format($status_all, 2) ?></b></td>
-            <td><b>บาท</b></td>
-        </tr>
-        <tr style="color:orange;">
-            <td colspan="3" height="27px"></td>
-            <td colspan="2" style="padding-left:70px;"><b>รวมยังไม่ชำระทั้งหมด(บาท)</b></td>
-            <td align="right" style="padding-right:10px;"><b><?= number_format($status_0, 2) ?></b></td>
             <td><b>บาท</b></td>
         </tr>
         <tr style="color:#12BB4F;">

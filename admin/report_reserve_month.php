@@ -49,8 +49,7 @@ $year    = $_POST['year'];
             <th style="text-align:center; width:100px;">เวลานัด</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:left; width:130px;">เบอร์โทรศัพท์</th>
-            <th style="width:120px; text-align:right; padding-right:5px;">หมายเลขโต๊ะ</th>
-            <th style="text-align:center; width:60px;"></th>
+            <th style="width:100px; text-align:left; ">หมายเหตุ</th>
         </tr>
         <?php
         $sql_reserve = "SELECT DISTINCT date(reserv_date_reservation) FROM reservations
@@ -104,46 +103,19 @@ $year    = $_POST['year'];
                     <td align="center"><?= substr($result_reserve1['reserv_time_appointment'], 0, 5) ?></td>
                     <td><?= $result_reserve1['cus_name'] ?></td>
                     <td><?= $result_reserve1['cus_tel'] ?></td>
-                    <?php
-                    if (mysqli_num_rows($query_reservelist) > 0) {
-                        $row_reservelist = 1; //นับแถว
-                        while ($result_reservelist = mysqli_fetch_array($query_reservelist)) {
-                            $result_order1 = mysqli_fetch_array($query_order1);
-                            if ($row_reservelist > 1)
-                                echo "<tr><td height='30px'; colspan='7'>";
-                    ?>
-                            <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                          <!--  <td align="center">
-                                <?php /*
-                                if (!$result_order1['orderid'] && $row_reservelist == 1)
-                                    echo "-";
-                                else {
-                                    echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                }*/
-                                ?>
-                            </td> -->
-                        <?php
-                            $row_reservelist++;
-                        }
-                    } else { /*
-                        echo "<td align='center'>-</td>";
-                        $row_order = 1; //นับแถว
-                        while ($result_order1 = mysqli_fetch_array($query_order1)) {
-                        ?>
-                            <td align="center"><?= $result_order1['orderid'] ?></td>
+                    <td align="left" ><?= ($result_reserve1['reserv_note']) ? $result_reserve1['reserv_note'] : "-" ?></td>
+
             <?php
-                        } */
-                    }
                     $row_reserve1++;
-                    $count_list1++;
                 }
                 echo "</tr>";
                 $row_date++;
+                $count_list1++;
             }
             ?>
         </tr>
         <tr height="30px" style="border-bottom:1px solid;">
-            <td colspan="7" align="right"><b>รวม</b></td>
+            <td colspan="6" align="right"><b>รวม</b></td>
             <td style="padding-right:15px; text-align:right"><b><?= $count_list1 ?></b></td>
             <td><b>รายการ</b></td>
         </tr>
@@ -187,155 +159,98 @@ $year    = $_POST['year'];
                     <td align="center"><?= substr($result_reserve1['reserv_time_appointment'], 0, 5) ?></td>
                     <td><?= $result_reserve1['cus_name'] ?></td>
                     <td><?= $result_reserve1['cus_tel'] ?></td>
-                    <?php
-                    if (mysqli_num_rows($query_reservelist) > 0) {
-                        $row_reservelist = 1; //นับแถว
-                        while ($result_reservelist = mysqli_fetch_array($query_reservelist)) {
-                            $result_order1 = mysqli_fetch_array($query_order1);
-                            if ($row_reservelist > 1)
-                                echo "<tr><td height='30px'; colspan='7'>";
-                    ?>
-                            <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                         <!--   <td align="center">
-                                <?php /*
-                                if (!$result_order1['orderid'] && $row_reservelist == 1)
-                                    echo "-";
-                                else {
-                                    echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                } */
-                                ?>
-                            </td> -->
-                        <?php
-                            $row_reservelist++;
-                        }
-                    } else {/*
-                        echo "<td align='center'>-</td>";
-                        $row_order = 1; //นับแถว
-                        while ($result_order1 = mysqli_fetch_array($query_order1)) {
-                        ?>
-                            <td align="center"><?= $result_order1['orderid'] ?></td>
-            <?php
-                        } */
-                    } 
+                    <td align="left" ><?= ($result_reserve1['reserv_note']) ? $result_reserve1['reserv_note'] : "-" ?></td>
+        </tr>
+<?php
                     $count_list0++;
                     $row_reserve1++;
                 }
-                echo "</tr>";
-                $row_date++;
             }
-            ?>
-        <tr height="30px" style="border-bottom:1px solid;">
-            <td colspan="7" align="right"><b>รวม</b></td>
-            <td style="padding-right:15px; text-align:right"><b><?= $count_list0 ?></b></td>
-            <td><b>รายการ</b></td>
-        </tr>
-        <tr>
-            <td style="padding-left:15px; height:30px; color:red">ยกเลิก</td>
-            <!-- เพิ่มข้อมูล -->
-            <?php
-            $status = 2; // เลขสถานะ
-            $sql_reserve_b .= "AND reserv_status = '$status'";
-            $query_date_reserve1 = mysqli_query($link, $sql_reserve_b) or die(mysqli_error($link));
-            $row_date = 1;
-            while ($result_date_reserve1 = mysqli_fetch_array($query_date_reserve1)) {
-                $row_reserve1 = 1;
-                if ($row_date > 1) {
-                    echo "<td></td>";
-                }
-                echo "
+?>
+<tr height="30px" style="border-bottom:1px solid;">
+    <td colspan="6" align="right"><b>รวม</b></td>
+    <td style="padding-right:15px; text-align:right"><b><?= $count_list0 ?></b></td>
+    <td><b>รายการ</b></td>
+</tr>
+<tr>
+    <td style="padding-left:15px; height:30px; color:red">ยกเลิก</td>
+    <!-- เพิ่มข้อมูล -->
+    <?php
+    $status = 2; // เลขสถานะ
+    $sql_reserve_b .= "AND reserv_status = '$status'";
+    $query_date_reserve1 = mysqli_query($link, $sql_reserve_b) or die(mysqli_error($link));
+    $row_date = 1;
+    while ($result_date_reserve1 = mysqli_fetch_array($query_date_reserve1)) {
+        $row_reserve1 = 1;
+        if ($row_date > 1) {
+            echo "<td></td>";
+        }
+        echo "
                 <td align='center'>
                  " . short_datetime_thai($result_date_reserve1['date(reserv_date_reservation)']) . "
                 </td>";
 
-                $sql_reserve1 = "SELECT * FROM reservations 
+        $sql_reserve1 = "SELECT * FROM reservations 
                     LEFT JOIN customers ON reservations.cusid = customers.cusid
                     WHERE date(reserv_date_reservation) = '" . $result_date_reserve1['date(reserv_date_reservation)'] . "'
                     AND reserv_status = '$status'";
-                $query_reserve1 = mysqli_query($link, $sql_reserve1) or die(mysqli_error($link));
-                $row_reserve1 = 1; // นับแถว
+        $query_reserve1 = mysqli_query($link, $sql_reserve1) or die(mysqli_error($link));
+        $row_reserve1 = 1; // นับแถว
 
-                while ($result_reserve1 = mysqli_fetch_array($query_reserve1)) {
-                    $sql_order1 = "SELECT orderid FROM orders WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
-                    $query_order1 = mysqli_query($link, $sql_order1) or die(mysqli_error($link));
-                    $sql_reservelist = "SELECT tables_no FROM reservelist WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
-                    $query_reservelist = mysqli_query($link, $sql_reservelist) or die(mysqli_error($link));
-                    if ($row_reserve1 > 1) {
-                        echo "<tr><td colspan='2'></td>";
-                    }
-            ?>
-                    <td align="center" height="30px"><?= $result_reserve1['reserv_id'] ?></td>
-                    <td align="center"><?= short_datetime_thai($result_reserve1['reserv_date_appointment'])  ?></td>
-                    <td align="center"><?= substr($result_reserve1['reserv_time_appointment'], 0, 5) ?></td>
-                    <td><?= $result_reserve1['cus_name'] ?></td>
-                    <td><?= $result_reserve1['cus_tel'] ?></td>
-                    <?php
-                    if (mysqli_num_rows($query_reservelist) > 0) {
-                        $row_reservelist = 1; //นับแถว
-                        while ($result_reservelist = mysqli_fetch_array($query_reservelist)) {
-                            $result_order1 = mysqli_fetch_array($query_order1);
-                            if ($row_reservelist > 1)
-                                echo "<tr><td height='30px'; colspan='7'>";
-                    ?>
-                            <td align="right" style="padding-right:15px;"><?= $result_reservelist['tables_no'] ?></td>
-                           <!--  <td align="center">
-                                <?php /*
-                                if (!$result_order1['orderid'] && $row_reservelist == 1)
-                                    echo "-";
-                                else {
-                                    echo $result_order1['orderid'] ? $result_order1['orderid'] : "</tr>";
-                                } */
-                                ?>
-                            </td> -->
-                        <?php
-                            $row_reservelist++;
-                        }
-                    } else {
-                     /*    echo "<td align='center'>-</td>";
-                        $row_order = 1; //นับแถว
-                       while ($result_order1 = mysqli_fetch_array($query_order1)) {
-                        ?>
-                          <!--  <td align="center"><?= $result_order1['orderid'] ?></td> --?
-            <?php
-                        } */
-                    }
-                    $count_list2++;
-                    $row_reserve1++;
-                }
-                echo "</tr>";
-                $row_date++;
+        while ($result_reserve1 = mysqli_fetch_array($query_reserve1)) {
+            $sql_order1 = "SELECT orderid FROM orders WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
+            $query_order1 = mysqli_query($link, $sql_order1) or die(mysqli_error($link));
+            $sql_reservelist = "SELECT tables_no FROM reservelist WHERE reserv_id = '" . $result_reserve1['reserv_id'] . "'";
+            $query_reservelist = mysqli_query($link, $sql_reservelist) or die(mysqli_error($link));
+            if ($row_reserve1 > 1) {
+                echo "<tr><td colspan='2'></td>";
             }
-            ?>
-        </tr>
-        <tr height="30px" style="border-bottom:1px solid;">
-            <td colspan="7" align="right"><b>รวม</b></td>
-            <td style="padding-right:15px; text-align:right"><b><?= $count_list2 ?></b></td>
-            <td><b>รายการ</b></td>
-        </tr>
-        <!-- ส่วนสรุปรายงาน -->
-        <tr>
-            <td colspan="5"></td>
-            <td colspan="2" style="padding-left: 70px; height:30px;"><b>รวมทั้งหมด</b></td>
-            <td align="right" style="padding-right:15px;"><b><?= $count_list0 + $count_list1 + $count_list2 ?></b></td>
-            <td><b>รายการ</b></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-            <td colspan="2" style="padding-left: 70px; color:#12BB4F; height:30px;"><b>รวมยืนยันการจองทั้งหมด</b></td>
-            <td style="text-align:right; padding-right:15px; color:#12BB4F;"><b><?= $count_list1 ?></b></td>
-            <td style="color:#12BB4F;"><b>รายการ</b></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-            <td colspan="2" style="padding-left: 70px; color:#0072EE; height:30px;"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
-            <td style="text-align:right; padding-right:15px; color:#0072EE;"><b><?= $count_list0 ?></b></td>
-            <td style="color:#0072EE;"><b>รายการ</b></td>
-        </tr>
-        <tr style="border-bottom: 1px solid;">
-            <td colspan="5"></td>
-            <td colspan="2" style="padding-left: 70px; height:30px; color:red;"><b>รวมยกเลิกทั้งหมด</b></td>
-            <td style="text-align:right; padding-right:15px; color:red;"><b><?= $count_list2 ?></b></td>
-            <td style="color:red;"><b>รายการ</b></td>
-        </tr>
+    ?>
+            <td align="center" height="30px"><?= $result_reserve1['reserv_id'] ?></td>
+            <td align="center"><?= short_datetime_thai($result_reserve1['reserv_date_appointment'])  ?></td>
+            <td align="center"><?= substr($result_reserve1['reserv_time_appointment'], 0, 5) ?></td>
+            <td><?= $result_reserve1['cus_name'] ?></td>
+            <td><?= $result_reserve1['cus_tel'] ?></td>
+            <td align="left" ><?= ($result_reserve1['reserv_note']) ? $result_reserve1['reserv_note'] : "-" ?></td>
+    <?php
+            echo "</tr>";
+            $row_reserve1++;
+        }
+        $count_list2++;
+        $row_date++;
+    }
+    ?>
+</tr>
+<tr height="30px" style="border-bottom:1px solid;">
+    <td colspan="6" align="right"><b>รวม</b></td>
+    <td style="padding-right:15px; text-align:right"><b><?= $count_list2 ?></b></td>
+    <td><b>รายการ</b></td>
+</tr>
+<!-- ส่วนสรุปรายงาน -->
+<tr>
+    <td colspan="4"></td>
+    <td colspan="2" style="padding-left: 30px; height:30px;"><b>รวมทั้งหมด</b></td>
+    <td align="right" style="padding-right:15px;"><b><?= $count_list0 + $count_list1 + $count_list2 ?></b></td>
+    <td><b>รายการ</b></td>
+</tr>
+<tr>
+    <td colspan="4"></td>
+    <td colspan="2" style="color:#12BB4F; padding-left:30px; height:30px;"><b>รวมยืนยันการจองทั้งหมด</b></td>
+    <td style="text-align:right; padding-right:15px; color:#12BB4F;"><b><?= $count_list1 ?></b></td>
+    <td style="color:#12BB4F;"><b>รายการ</b></td>
+</tr>
+<tr>
+    <td colspan="4"></td>
+    <td colspan="2" style="padding-left: 30px; color:#0072EE; height:30px;"><b>รวมรอการตรวจสอบทั้งหมด</b></td>
+    <td style="text-align:right; padding-right:15px; color:#0072EE;"><b><?= $count_list0 ?></b></td>
+    <td style="color:#0072EE;"><b>รายการ</b></td>
+</tr>
+<tr style="border-bottom: 1px solid;">
+    <td colspan="4"></td>
+    <td colspan="2" style="padding-left: 30px; height:30px; color:red;"><b>รวมยกเลิกทั้งหมด</b></td>
+    <td style="text-align:right; padding-right:15px; color:red;"><b><?= $count_list2 ?></b></td>
+    <td style="color:red;"><b>รายการ</b></td>
+</tr>
     </table>
     <br>
 </body>

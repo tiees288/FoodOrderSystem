@@ -112,7 +112,7 @@ include("../conf/connection.php");
 
 
                     <?php
-                    $sql_tables = "SELECT tables_no, reservlist_amount FROM reservelist
+                    $sql_tables = "SELECT tables_no, reservlist_amount, reservlist_note FROM reservelist
                     WHERE reserv_id = '" . $result_reserve['reserv_id'] . "'";
                     $query_tables = mysqli_query($link, $sql_tables) or die(mysqli_error($link));
 
@@ -124,12 +124,7 @@ include("../conf/connection.php");
                     ?>
                         <td style="height:25px;" align="right"><?= $result_tables['tables_no'] ?></td>
                         <td align="right" style="padding-right:10px;"><?= $result_tables['reservlist_amount'] ?></td>
-
-                        <?php
-                        if ($row_tables == 1) {
-                        ?>
-                            <td style="padding-left:15px;" align="left"><?= ($result_reserve['reserv_note'] != "") ? "" : "-" ?></td>
-                        <?php } ?>
+                        <td style="padding-left:15px;" align="left"><?= ($result_tables['reservlist_note'] != "") ? $result_tables['reservlist_note'] : "<span style='padding-left:5px;'>-</span>" ?></td>
                 </tr>
         <?php
                         $row_tables++;
