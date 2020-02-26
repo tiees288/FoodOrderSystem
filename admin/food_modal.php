@@ -39,7 +39,12 @@
                             <div class="row">
                                 <label class="control-label col-md-offset-1 col-md-4"></label>
                                 <div class="col-md-6">
-                                    <img height="100" width="150" style="border:1px solid black;" src="../<?php echo $result['food_image']; ?>">
+                                    <?php
+                                    if ($result['food_image'] == "")
+                                        $food_img = "../images/default_food.png";
+                                    else $food_img = "../" . $result['food_image'];
+                                    ?>
+                                    <img height="100" width="150" style="border:1px solid black;" src="<?php echo $food_img; ?>">
                                 </div>
                             </div>
                         </div>
@@ -175,14 +180,19 @@
                             <div class="row">
                                 <label class="control-label col-md-4"></label>
                                 <div class="col-md-8">
-                                    <img height="100" width="150" style="border:1px solid black;" src="../<?php echo $result['food_image']; ?>">
+                                    <?php
+                                    if ($result['food_image'] == "")
+                                        $food_img = "../images/default_food.png";
+                                    else $food_img = "../" . $result['food_image'];
+                                    ?>
+                                    <img height="100" width="150" style="border:1px solid black;" src="<?= $food_img ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <label class="control-label col-md-4" style="text-align:right;">รหัสรายการอาหาร :</label>
-                                <div class="col-md-8" >
+                                <div class="col-md-8">
                                     <input type="text" style="width:150px" value="<?php echo $result['foodid']; ?>" name="foodid" hidden>
                                     <?php echo $result['foodid']; ?>
                                 </div>
