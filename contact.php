@@ -47,6 +47,7 @@
                 <i class="fa fa-clock-o fa-5x mb-3" aria-hidden="true"></i>
                 <h4 class="text-uppercase mb-5">เวลาทำการ</h4>
                 <p>8.00น.-18.00 น.</p>
+                <p>ปิดทำการทุกวันอาทิตย์</p>
               </div>
             </div>
           </div>
