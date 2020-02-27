@@ -71,17 +71,17 @@
 		}
 
 		.navbar ul.nav li a {
-			color: #999;
+			color: #8F8D8D;
 		}
 
 		.navbar ul.nav li a:hover,
 		.navbar ul.nav li a:focus {
-			color: #29c68c !important;
+			color: #8F8D8D !important;
 		}
 
 		.navbar ul.nav li.active>a,
 		.navbar ul.nav li.open>a {
-			color: #26bb84 !important;
+			color: #8F8D8D !important;
 			background: transparent !important;
 		}
 
@@ -99,7 +99,7 @@
 
 		.navbar .form-inline .btn {
 			border-radius: 2px;
-			color: #fff;
+			color: #8F8D8D;
 			border-color: #29c68c;
 			background: #29c68c;
 			outline: none;

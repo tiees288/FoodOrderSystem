@@ -61,63 +61,68 @@
 									<td><input class="form-control" autocomplete="off" type="time" min="09:00" max="19:00" required oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง 09:00-19.00')" oninput="this.setCustomValidity('')" style="height:32px; width:180px" id="deliverytime" name="deliverytime" required></td>
 								</tr>
 								<tr>
-									<td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
-									<td height="85px"><textarea name="deliveryplace" style="width:250px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
+									<td width="20%" height="30px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
+									<td height="80px"><textarea name="deliveryplace" style="width:250px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
 									</td>
 									<td colspan="2" align="right" style="vertical-align: top; ">
 										<font color="red" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
 									</td>
 								</tr>
+								<tr>
+									<td colspan="2" align="right" style="padding-right:10px; vertical-align: top; ">
+										<font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น</font>
+									</td>
+								</tr>
 							</table>
 				</div>
-					<h3 class="page-header text-center">รายการอาหาร</h3>
-					<table class="table table-striped table-bordered">
-						<thead>
-							<th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
-							<th style="width:160px;">ชื่ออาหาร</th>
-							<th style="width:100px;">หน่วยนับ</th>
-							<th style="text-align:right; width:110px;">ราคา (บาท)</th>
-							<th style="text-align:right; width:70px;">จำนวน</th>
-							<th style="width:130px; text-align:right">ราคารวม (บาท)</th>
-							<th>หมายเหตุ</th>
-						</thead>
-						<?php
-						$count_product = count($_SESSION['food']['list']['foodid']);
-						for ($i = 0; $i < $count_product; $i++) {
-							$sql_sum		=	"SELECT * FROM foods WHERE foodid = '" . $_SESSION['food']['list']['foodid'][$i] . "' ";
-							$data_sum		=	mysqli_query($link, $sql_sum);
-							$value			=	mysqli_fetch_assoc($data_sum);
-							$sum_price[] 	= 	$_SESSION['food']['list']['food_price'][$i] * $_SESSION['food']['list']['amount'][$i];
-							$product_id[] 	= 	$value['foodid'];
+				<h3 class="page-header text-center">รายการอาหาร</h3>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<th style="width:150px; text-align:right;">รหัสรายการอาหาร</th>
+						<th style="width:160px;">ชื่ออาหาร</th>
+						<th style="width:100px;">หน่วยนับ</th>
+						<th style="text-align:right; width:110px;">ราคา (บาท)</th>
+						<th style="text-align:right; width:70px;">จำนวน</th>
+						<th style="width:130px; text-align:right">ราคารวม (บาท)</th>
+						<th>หมายเหตุ</th>
+					</thead>
+					<?php
+					$count_product = count($_SESSION['food']['list']['foodid']);
+					for ($i = 0; $i < $count_product; $i++) {
+						$sql_sum		=	"SELECT * FROM foods WHERE foodid = '" . $_SESSION['food']['list']['foodid'][$i] . "' ";
+						$data_sum		=	mysqli_query($link, $sql_sum);
+						$value			=	mysqli_fetch_assoc($data_sum);
+						$sum_price[] 	= 	$_SESSION['food']['list']['food_price'][$i] * $_SESSION['food']['list']['amount'][$i];
+						$product_id[] 	= 	$value['foodid'];
 
-						?>
-							<td class="text-right"><?php echo $value['foodid']; ?></td>
-							<td><?php echo $value['food_name']; ?></td>
-							<td><?= $value['food_count'] ?></td>
-							<td align="right"><?php echo $value['food_price']; ?></td>
-							<td class="text-right">
-								<?= $_SESSION['food']['list']['amount'][$i] ?>
-								<input type="text" name="id[]" value="<?= $value['foodid'] ?>" hidden>
-							</td>
-							<td class="text-right price-order-<?= $i ?>" data-value="<?= $_SESSION['food']['list']['food_price'][$i] ?>" id="price-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food']['list']['food_price'][$i] * $_SESSION['food']['list']['amount'][$i], 2) ?></td>
-							<td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
-							</tr>
-						<?php }	?>
-						<tr>
-							<td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
-							<td class="text-right"><b><?= number_format(array_sum($sum_price), 2); ?></b></td>
-							<input type="text" name="totalprice" id="totalprice" value="<?= array_sum($sum_price); ?>" hidden />
-							<td></td>
+					?>
+						<td class="text-right"><?php echo $value['foodid']; ?></td>
+						<td><?php echo $value['food_name']; ?></td>
+						<td><?= $value['food_count'] ?></td>
+						<td align="right"><?php echo $value['food_price']; ?></td>
+						<td class="text-right">
+							<?= $_SESSION['food']['list']['amount'][$i] ?>
+							<input type="text" name="id[]" value="<?= $value['foodid'] ?>" hidden>
+						</td>
+						<td class="text-right price-order-<?= $i ?>" data-value="<?= $_SESSION['food']['list']['food_price'][$i] ?>" id="price-<?= $value['foodid']  ?>"><?= number_format($_SESSION['food']['list']['food_price'][$i] * $_SESSION['food']['list']['amount'][$i], 2) ?></td>
+						<td class="col-md-2"><textarea class="form-control" name="order_note_<?= $value['foodid'] ?>"></textarea></td>
 						</tr>
-				</div>
-				</table>
-				<div class="col-md-offset-3 col-md-6" style="text-align: center;">
-					<input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
-					<button type="reset" class="btn btn-danger">ล้างค่า</button></form>
-					<button type="back" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
-				</div>
+					<?php }	?>
+					<tr>
+						<td colspan="5" class="text-right"><b>ราคารวมทั้งหมด</b></td>
+						<td class="text-right"><b><?= number_format(array_sum($sum_price), 2); ?></b></td>
+						<input type="text" name="totalprice" id="totalprice" value="<?= array_sum($sum_price); ?>" hidden />
+						<td></td>
+					</tr>
+			</div>
+			</table>
+			<div class="col-md-offset-3 col-md-6" style="text-align: center;">
+				<input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+				<button type="reset" class="btn btn-danger">ล้างค่า</button></form>
+				<button type="back" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 			</div>
 		</div>
+	</div>
 	</div>
 	<?php include("conf/footer.php"); ?>
 </body>
