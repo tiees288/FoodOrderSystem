@@ -57,13 +57,13 @@ if (!isset($_GET['oid'])) {
 
     switch ($order_data['order_type']) {
         case 0:
-            $order_type = "กลับบ้าน  โดยพนักงาน";
+            $order_type = "กลับบ้าน สั่งโดยพนักงาน";
             break;
         case 1:
-            $order_type = "ทานที่ร้าน โดยพนักงาน";
+            $order_type = "ทานที่ร้าน สั่งโดยพนักงาน";
             break;
         case 2:
-            $order_type = "กลับบ้าน  โดยลูกค้า";
+            $order_type = "กลับบ้าน สั่งโดยลูกค้า";
             break;
         default:
             echo "Error";
@@ -221,13 +221,13 @@ if (!isset($_GET['oid'])) {
                 </div>
             </div>
             <h3 class="page-header text-center">รายการอาหาร</h3>
-            <table class="table table-striped table-bordered" style="width:1100px;" align="center" id="foodlist">
+            <table class="table table-striped table-bordered" style="width:1080px;" align="center" id="foodlist">
                 <thead>
                     <th style="text-align:right; width:150px">รหัสรายการอาหาร</th>
                     <th width="140px">ชื่ออาหาร</th>
                     <th width="90px">หน่วยนับ</th>
                     <th style="text-align:right; width:110px;">ราคา (บาท)</th>
-                    <th style="text-align:center; width:100px;">จำนวน</th>
+                    <th style="text-align:center; width:105px;">จำนวน</th>
                     <th style="width:130px; text-align:right">ราคารวม (บาท)</th>
                     <th>หมายเหตุ</th>
                     <th style="text-align: center; width:85px;">ยกเลิก</th>
@@ -258,7 +258,7 @@ if (!isset($_GET['oid'])) {
                         <td class="text-right <?php if ($orderdet_data['orderdet_status'] != 2) echo 'price-order-' . $i; ?>" id="price-<?= $orderdet_data['foodid'] ?>" data-value="<?= number_format($orderdet_data['orderdet_price'], 2) ?>">
                             <?= number_format($orderdet_data['orderdet_price'] * $orderdet_data['orderdet_amount'], 2) ?>
                         </td>
-                        <td class="col-md-2"><textarea class="form-control" name="order_note_edit_<?= $orderdet_data['orderdetid'] ?>"><?= $orderdet_data['orderdet_note'] ?></textarea></td>
+                        <td class="col-md-2"><textarea <?= ($orderdet_data['orderdet_status'] == 2 || $order_data['order_type'] == 2) ? "disabled" : "" ?> class="form-control" name="order_note_edit_<?= $orderdet_data['orderdetid'] ?>"><?= $orderdet_data['orderdet_note'] ?></textarea></td>
                         <td align="center">
                             <?php
                             if ($order_data['order_type'] != 2) {

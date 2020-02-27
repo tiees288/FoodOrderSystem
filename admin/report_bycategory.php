@@ -28,7 +28,7 @@
     <br>
 
 
-    <table border="0" width="75%" align="center">
+    <table border="0" width="900px" align="center">
         <tr>
             <td colspan="7" align="right" style="border-bottom:1px solid;">
                 วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")); ?>
@@ -39,8 +39,9 @@
             <th class="" width="20%" style="padding-left:15px" width="20%">ชื่ออาหาร</th>
             <th class="text-right" width="15%">ราคา (บาท)</th>
             <th class="text-left" style="padding-left:20px;" width="15%">หน่วยนับ</th>
-            <th class="text-left" width="15%">สถานะ</th>
-            <th class="text-center" width="40%">รูปอาหาร</th>
+            <th class="text-left" width="10%">สถานะ</th>
+            <th style="text-align:center; width:15%">รายการแนะนำ</th>
+            <th class="text-center" style="padding-right:10px;" width="40%">รูปอาหาร</th>
         <tr>
 
             <?php
@@ -83,6 +84,12 @@
                         $food_status = "<font color='red'>ยกเลิก</font>";
                         $cont_notsell++;
                     }
+                    // รายการแนะนำ ใช่ หรือ ไม่
+                    if ($result['food_recomend'] > 30) {
+                        $food_recommend = "ใช่";
+                    } else {
+                        $food_recommend = "-";
+                    }
 
                     if ($result['food_image'] == "")
                         $food_img = "../images/default_food.png";
@@ -90,11 +97,12 @@
 
                     $qty++; // นับจำนวนของอาหารแต่ละประเภท
             ?>
-            <td class="" style="padding:15px;"><?= $result['food_name'] ?></td>
-            <td class="text-right"><?= number_format($result['food_price'], 2); ?></td>
-            <td class="text-left" style="padding-left:20px;"><?= $result['food_count']; ?></td>
-            <td class="text-left"><?= $food_status; ?></td>
-            <td class="text-center" style="padding:2px;"><img style="border:1px solid;" height="60px" width="80px" src="<?= $food_img ?>"></td>
+                <td class="" style="padding:15px;"><?= $result['food_name'] ?></td>
+                <td class="text-right"><?= number_format($result['food_price'], 2); ?></td>
+                <td class="text-left" style="padding-left:20px;"><?= $result['food_count']; ?></td>
+                <td class="text-left"><?= $food_status; ?></td>
+                <td><center><?= $food_recommend ?></center></td>
+                <td class="text-center" style="padding:2px;"><img style="border:1px solid;" height="60px" width="80px" src="<?= $food_img ?>"></td>
         </tr>
     <?php
                     $row_catg++;
@@ -104,6 +112,7 @@
         <td style="padding-top:10px" colspan="3" align="right"><b>รวม</b></td>
         <td style="padding-top:10px; padding-right:20px; text-align:right;" align="center"><?= $qty ?></td>
         <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
+        <td></td>
     </tr>
 <?php
                 $sumqty[] = $qty;
@@ -138,6 +147,7 @@
     <td colspan="2" style="padding-top:10px;">
         <font color="red"><b>รายการ</b></font>
     </td>
+    <td></td>
 </tr>
     </table>
 </div>

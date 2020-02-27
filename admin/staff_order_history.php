@@ -22,7 +22,7 @@
         $strKeyword = $_GET["search_orders"];
     }
     ?>
-    <div class="container" style="padding-top: 135px; width:90%">
+    <div class="container" style="padding-top: 135px; width:1430px">
 
         <h1 class="page-header text-left">แสดง/ยกเลิกการสั่งอาหาร</h1>
         <div class="row">
@@ -110,19 +110,19 @@
 
                         switch ($result['order_type']) {
                             case 0:
-                                $order_type = "กลับบ้าน  โดยพนักงาน";
+                                $order_type = "กลับบ้าน สั่งโดยพนักงาน";
                                 break;
                             case 1:
-                                $order_type = "ทานที่ร้าน โดยพนักงาน";
+                                $order_type = "ทานที่ร้าน สั่งโดยพนักงาน";
                                 break;
                             case 2:
-                                $order_type = "กลับบ้าน  โดยลูกค้า";
+                                $order_type = "กลับบ้าน สั่งโดยลูกค้า";
                                 break;
                             default:
                                 echo "Error";
                         } ?>
                         <tr height="50px;">
-                            <td align="center"><a href="order_detailed.php?oid=<?= $result['orderid'] ?>"><?= $result["orderid"]; ?></a></td>
+                            <td align="center"><u><a href="order_detailed.php?oid=<?= $result['orderid'] ?>"><?= $result["orderid"]; ?></a></u></td>
                             <td align="center"> <?= dt_tothaiyear($result['orderdate']) ?></td>
                             <td><?= $cus_data['cus_name'] ?></td>
                             <td align="right"> <?= number_format($result["order_totalprice"], 2) ?></td>

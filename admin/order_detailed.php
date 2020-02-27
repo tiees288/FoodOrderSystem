@@ -53,13 +53,13 @@ if (!isset($_GET['oid'])) {
     
     switch ($order_data['order_type']) {
         case 0:
-            $order_type = "กลับบ้าน  โดยพนักงาน";
+            $order_type = "กลับบ้าน สั่งโดยพนักงาน";
             break;
         case 1:
-            $order_type = "ทานที่ร้าน โดยพนักงาน";
+            $order_type = "ทานที่ร้าน สั่งโดยพนักงาน";
             break;
         case 2:
-            $order_type = "กลับบ้าน  โดยลูกค้า";
+            $order_type = "กลับบ้าน สั่งโดยลูกค้า";
             break;
         default:
             echo "Error";

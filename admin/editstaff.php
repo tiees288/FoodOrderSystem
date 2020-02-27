@@ -46,7 +46,7 @@
                      </div>
                      <div class="col-md-3">
                          <label class="control-label colmd-3">
-                             <font color="#BEBEBE">กรุณากรอกวันเกิดของท่านตามจริง</font>
+                             <font color="#8F8D8D">กรุณากรอกวันเกิดของท่านตามจริง</font>
                          </label>
                      </div>
                  </div>
@@ -58,7 +58,7 @@
                      </div>
                      <div class="col-md-4">
                          <label class="control-label colmd-3">
-                             <font color="#BEBEBE">กรอกเบอร์โทรศัพท์ อย่างน้อย 9 ตัว</font>
+                             <font color="#8F8D8D">กรอกเบอร์โทรศัพท์ อย่างน้อย 9 ตัว</font>
                          </label>
                      </div>
                  </div>
@@ -70,7 +70,7 @@
                      </div>
                      <div class="col-md-7">
                          <label class="control-label colmd-3">
-                             <font color="#BEBEBE">กรอกอีเมลให้ถูกต้องตามรูปแบบ เช่น email@example.com</font>
+                             <font color="#8F8D8D">กรอกอีเมลให้ถูกต้องตามรูปแบบ เช่น email@example.com</font>
                          </label>
                      </div>
                  </div>
@@ -88,7 +88,7 @@
                      </div>
                      <div class="col-md-4 col-md-offset-1">
                          <label class="control-label">
-                             <font color="#BEBEBE">กรอกเป็นตัวเลข 5 ตัว</font>
+                             <font color="#8F8D8D">กรอกเป็นตัวเลข 5 ตัว</font>
                          </label>
                      </div>
                  </div>
@@ -100,7 +100,7 @@
                      </div>
                      <div class="col-md-4">
                          <label class="control-label">
-                             <font color="#BEBEBE">กรอกหมายเลขบัตรประชาชนให้ครบ 13 หลัก</font>
+                             <font color="#8F8D8D">กรอกหมายเลขบัตรประชาชนให้ครบ 13 หลัก</font>
                          </label>
                      </div>
                  </div>

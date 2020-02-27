@@ -80,12 +80,12 @@
 		}
 
 		.navbar ul.nav li a {
-			color: #999;
+			color: #8F8D8D;
 		}
 
 		.navbar ul.nav li a:hover,
 		.navbar ul.nav li a:focus {
-			color: #29c68c !important;
+			color: #8F8D8D !important;
 		}
 
 		.navbar ul.nav li.active>a,

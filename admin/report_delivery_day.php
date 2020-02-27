@@ -50,7 +50,7 @@ include("../conf/connection.php");
             <th style="text-align:center; width:130px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:120px;">รหัสการสั่ง</th>
             <th style="text-align:left; width:190px;">ประเภทการสั่ง</th>
-            <th style="text-align:left; width:140px;">สถานะการชำระ</th>
+            <th style="text-align:left; width:140px;">สถานะการสั่ง</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:right; width:130px; padding-right:10px;">ราคารวม(บาท)</th>
             <th style="text-align:left; width:140px;">ชื่ออาหาร</th>
@@ -92,6 +92,7 @@ include("../conf/connection.php");
             while ($result_delivery = mysqli_fetch_array($query_delivery)) {
                 $sum_day_delivery += $result_delivery['order_totalprice'];
                 $total_all += $result_delivery['order_totalprice'];
+              /*
                 switch ($result_delivery['pay_status']) {
                     case 0:
                         $payment_status = "<font color='orange'>ยังไม่ชำระ</font>";
@@ -111,7 +112,7 @@ include("../conf/connection.php");
                     default:
                         $payment_status = "-";
                 }
-
+*/
                 switch ($result_delivery['order_type']) {
                     case 0:
                         $order_type = "กลับบ้าน  โดยพนักงาน";
@@ -124,25 +125,33 @@ include("../conf/connection.php");
                         break;
                     default:
                         echo "Error";
-            }
-            /*
+                }
+
                 switch ($result_delivery['order_status']) {
                     case 0:
                         $order_status = "<font color='orange'>ยังไม่แจ้งชำระ</font>";
+                        $pay_amount = "<font color='orange'>" . $result_delivery['order_totalprice'] . "</font>";
+                        $total_0 += $result_delivery['order_totalprice'];
                         break;
                     case 1:
                         $order_status = "<font color='#0072EE'>รอการตรวจสอบ</font>";
+                        $pay_amount = "<font color='#0072EE'>" . $result_delivery['order_totalprice'] . "</font>";
+                        $total_3 += $result_delivery['order_totalprice'];
                         break;
                     case 2:
                         $order_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
+                        $pay_amount = "<font color='#12BB4F'>" . $result_delivery['order_totalprice'] . "</font>";
+                        $total_1 += $result_delivery['order_totalprice'];
                         break;
                     case 3:
                         $order_status = "<font color='red'>ยกเลิก</font>";
+                        $pay_amount = "<font color='red'>" . $result_delivery['order_totalprice'] . "</font>";
+                        $total_2 += $result_delivery['order_totalprice'];
                         break;
                     default:
                         $order_status = "-";
                 }
-*/
+
                 if ($row_date > 1) {
                     echo "</tr><tr><td></td>";
                 }
@@ -153,7 +162,7 @@ include("../conf/connection.php");
                 <td align="center"><?= $result_delivery['payno'] ? $result_delivery['payno'] : "-" ?></td>
                 <td align="center"><?= $result_delivery['orderid'] ?></td>
                 <td align="left"><?= $order_type ?></td>
-                <td align="left"><?= $payment_status ?></td>
+                <td align="left"><?= $order_status ?></td>
                 <td align="left"><?= $result_delivery['cus_name'] ?></td>
                 <td align="right" style="padding-right:10px;"><?= $pay_amount ?></td>
                 <?php
@@ -192,16 +201,16 @@ include("../conf/connection.php");
             <td style="padding-right:10px;" align="right"><b><?= number_format($total_all, 2) ?></b></td>
             <td colspan="4"><b>บาท</b></td>
         </tr>
+        <tr style="height:30px; color:orange;">
+            <td colspan="7"></td>
+            <td style="padding-left:70px;" colspan="2"><b>รวมยังไม่ได้แจ้งชำระทั้งหมด</b></td>
+            <td style="padding-right:10px;" align="right"><b><?= number_format($total_0, 2) ?></b></td>
+            <td colspan="4"><b>บาท</b></td>
+        </tr>
         <tr style="height:30px; color:#12BB4F;">
             <td colspan="7"></td>
             <td style="padding-left:70px;" colspan="2"><b>รวมชำระแล้วทั้งหมด</b></td>
             <td style="padding-right:10px;" align="right"><b><?= number_format($total_1, 2) ?></b></td>
-            <td colspan="4"><b>บาท</b></td>
-        </tr>
-        <tr style="height:30px; color:orange;">
-            <td colspan="7"></td>
-            <td style="padding-left:70px;" colspan="2"><b>รวมยังไม่ได้ชำระทั้งหมด</b></td>
-            <td style="padding-right:10px;" align="right"><b><?= number_format($total_0, 2) ?></b></td>
             <td colspan="4"><b>บาท</b></td>
         </tr>
         <tr style="height:30px; border-bottom:1px solid;">
