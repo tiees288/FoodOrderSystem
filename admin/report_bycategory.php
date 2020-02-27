@@ -68,7 +68,7 @@
 
             ?>
         <tr>
-            <td class="text-left catg" style=""><?= $foodtype ?></td>
+            <td class="text-left catg" ><?= $foodtype ?></td>
 
             <?php
                 $row_catg = 1;
@@ -121,12 +121,12 @@
                 // $i++;
             }
 ?>
-<tr style="">
+<tr>
     <td style="padding-top:10px" colspan="3" align="right"><b>รวมทั้งหมด</b></td>
     <td style="padding-top:10px; padding-right:20px;" align="right"><?= number_format(array_sum($sumqty)) ?></td>
     <td colspan="2" style="padding-top:10px"><b>รายการ</b></td>
 </tr>
-<tr style="">
+<tr>
     <td style="padding-top:10px; " colspan="3" align="right"><b>
             <font color='#10C13A'>รวมยังขายอยู่ทั้งหมด</font>
         </b></td>

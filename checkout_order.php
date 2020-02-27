@@ -62,14 +62,14 @@
 								</tr>
 								<tr>
 									<td width="20%" height="30px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
-									<td height="80px"><textarea name="deliveryplace" style="width:250px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
+									<td height="81px"><textarea name="deliveryplace" style="width:250px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
 									</td>
 									<td colspan="2" align="right" style="vertical-align: top; ">
 										<font color="red" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2" align="right" style="padding-right:10px; vertical-align: top; ">
+									<td colspan="2" align="right" style="padding-right:10px; margin-top:0px; vertical-align: top; ">
 										<font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น</font>
 									</td>
 								</tr>

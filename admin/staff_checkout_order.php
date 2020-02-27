@@ -123,7 +123,10 @@
                                 <tr class="order_type0">
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
                                     <td height="70px"><textarea name="deliveryplace" style="width:230px;" id="deliveryplace" cols="15" rows="3" class="form-control"><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
-                                    </td>
+                                </tr>
+                                <tr class="order_type0">
+                                    <td colspan="2" align="right" style="padding-right:25px; vertical-align: top; ">
+                                        <font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น</font>
                                     </td>
                                 </tr>
                             </table>
