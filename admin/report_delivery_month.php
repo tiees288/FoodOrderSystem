@@ -35,7 +35,7 @@ $year    = $_POST['year'];
         <h3 class="text-center">เดือน <?= fullmonth($month) ?> พ.ศ. <?= $year + 543 ?></h3>
         <br>
     </div>
-    <table border="0" width="1420px" align="center">
+    <table border="0" width="1450px" align="center">
         <tr>
             <td colspan="11" align="right" style="border-bottom:1px solid;">
                 วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")); ?>

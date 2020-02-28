@@ -50,13 +50,13 @@ include("../conf/connection.php");
             <th style="text-align:center; width:130px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:120px;">รหัสการสั่ง</th>
             <th style="text-align:left; width:190px;">ประเภทการสั่ง</th>
-            <th style="text-align:left; width:140px;">สถานะการสั่ง</th>
+            <th style="text-align:left; width:150px;">สถานะการสั่ง</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
             <th style="text-align:right; width:130px; padding-right:10px;">ราคารวม(บาท)</th>
             <th style="text-align:left; width:140px;">ชื่ออาหาร</th>
             <th style="text-align:right; width:90px;">จำนวน</th>
             <th style="text-align:right; width:125px;">ราคาต่อหน่วย(บาท)</th>
-            <th style="text-align:right; padding-right:15px; width:120px;">ราคา(บาท)</th>
+            <th style="text-align:right; padding-right:15px; width:110px;">ราคา(บาท)</th>
         </tr>
         <?php
         $sql_date = "SELECT DISTINCT date(order_date_delivered) FROM orders 
