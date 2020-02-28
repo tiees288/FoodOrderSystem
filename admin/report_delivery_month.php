@@ -58,7 +58,7 @@ $year    = $_POST['year'];
         $sql_delivery = "SELECT DISTINCT date(order_date_delivered) FROM orders
             LEFT JOIN payment ON orders.payno = payment.payno
             WHERE (month(order_date_delivered) = '$month' AND year(order_date_delivered) = '$year'
-            AND order_type = '0' AND orders.order_date_delivered != '0000-00-00')";
+            AND order_type != '1' AND orders.order_date_delivered != '0000-00-00')";
         $query_delivery = mysqli_query($link, $sql_delivery) or die(mysqli_error($link));
         $sql_delivery_1 = $sql_delivery_0 = $sql_delivery_2 = $sql_delivery;
         $sum_a = $sum_b = $sum_c = 0;
@@ -72,8 +72,8 @@ $year    = $_POST['year'];
             <td style="padding-left:15px; height:30px; color:#12BB4F">ชำระแล้ว</td>
 
             <?php
-            $status = 1; // เลขสถานะ
-            $sql_delivery_1 .= "AND pay_status = '$status'";
+            $status = 2; // เลขสถานะ
+            $sql_delivery_1 .= "AND order_status = '$status'";
             $query_delivery_1 = mysqli_query($link, $sql_delivery_1) or die(mysqli_error($link));
 
             $row_delivery_date = 1; // นับแถว
@@ -90,7 +90,7 @@ $year    = $_POST['year'];
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(order_date_delivered) = '" . $result_delivery_1['date(order_date_delivered)'] . "' 
-                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
+                AND order_type != '1' AND order_status = '$status' ORDER BY orders.orderid ASC";
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
                 $row_order = 1; //นับแถว
                 while ($result_order = mysqli_fetch_array($query_deliveys)) {
