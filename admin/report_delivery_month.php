@@ -151,7 +151,7 @@ $year    = $_POST['year'];
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(order_date_delivered) = '" . $result_delivery_0['date(order_date_delivered)'] . "' 
-                AND order_type = '0' AND orders.order_date_delivered != '0000-00-00' AND orders.order_status = '$status'
+                AND order_type != '1' AND orders.order_date_delivered != '0000-00-00' AND orders.order_status = '$status'
                 ORDER BY orders.orderid ASC";
 
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
@@ -214,7 +214,7 @@ $year    = $_POST['year'];
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(order_date_delivered) = '" . $result_delivery_2['date(order_date_delivered)'] . "'
-                AND order_type = '0' AND order_status = '$status' ORDER BY orders.orderid ASC";
+                AND order_type != '1' AND order_status = '$status' ORDER BY orders.orderid ASC";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
                     while ($result_order = mysqli_fetch_array($query_deliveys)) {
