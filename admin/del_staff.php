@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($_SESSION['staff_id'] == $_POST['staffid']) {
-        echo "<script>alert('กรุณาตรวจสอบข้อมูลที่ต้องการลบ'); window.location.assign('show_staff.php')</script>";
+        echo "<script>alert('ไม่สามารถลบได้'); window.location.assign('show_staff.php')</script>";
         exit();
     }
 

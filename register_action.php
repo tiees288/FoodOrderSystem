@@ -28,13 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo "<script> alert('ชื่อผู้ใช้ถูกใช้แล้ว'); window.history.back();</script>";
 		exit();
 	}
-
+	/*
 	$chk_email	= mysqli_query($link, "SELECT * FROM customers WHERE cus_email = '" . $email . "'");
 	//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
 	if (mysqli_num_rows($chk_email) != "0") {
 		echo "<script> alert('อีเมลล์ถูกใช้แล้ว'); window.history.back();</script>";
 		exit();
 	}
+	*/
 	//ถ้าไม่มีให้เพิ่มข้อมูล
 	//	echo "$name $number_phone $cus_birth $email $address $user_name $password $cus_postnum";
 	$sql		=	"INSERT INTO customers SET 

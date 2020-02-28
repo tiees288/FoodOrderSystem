@@ -19,20 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo "<script> alert('ชื่อผู้ใช้ถูกใช้แล้ว');</script>";
 		exit();
 	} */
+
 	$chk_user	= mysqli_query($link, "SELECT * FROM customers WHERE cus_user = '" . $cus_tel . "'");
 	//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
 	if (mysqli_num_rows($chk_user) != "0") {
-		echo "<script> alert('ชื่อผู้ใช้นี้ถูกใข้ไปแล้ว'); window.history.back();</script>";
+		echo "<script> alert('เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว'); window.history.back();</script>";
 		exit();
 	}
-
+/*
 	$chk_email	= mysqli_query($link, "SELECT * FROM customers WHERE cus_email = '" . $cus_email . "'");
 	//ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
 	if (mysqli_num_rows($chk_email) != "0") {
 		echo "<script> alert('อีเมลล์ถูกใช้แล้ว'); window.history.back();</script>";
 		exit();
 	}
-
+*/
 	$sql		=	"INSERT INTO customers SET 
 						cus_name		= '" . $cus_name . "',
 						cus_birth		= '" . $cus_birth . "',

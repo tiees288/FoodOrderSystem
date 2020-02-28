@@ -137,7 +137,7 @@
                             <td><?= $result['cus_email'] ?></td>
                             <td><?= $cus_status ?></td>
                             <td align="center">
-                                <a href="<?= $ref_href ?>?cusid=<?= $result['cusid'] ?>" <?php if ($result['cus_status'] == 1) { ?> onclick="alert('ท่านกำลังเลือกลูกค้าบัญชีดำ');" <?php } ?> class="btn btn-success btn-md">
+                        <a href="<?= $ref_href ?>?cusid=<?= $result['cusid'] ?>" <?php if ($result['cus_status'] == 1) { ?> onclick=" if (confirm('ลูกค้าบัญชีดำ ต้องการทำรายการต่อหรือไม่?') ) {} else return false;" <?php } ?> class="btn btn-success btn-md">
                                     <span class="glyphicon glyphicon-user"></span> เลือก</a>
                             </td>
                         </tr>
