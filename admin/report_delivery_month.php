@@ -49,10 +49,10 @@ $year    = $_POST['year'];
             <th style="text-align:center; width:100px;">รหัสการสั่ง</th>
             <th style="text-align:center; width:100px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:150px;">วัน/เวลากำหนดส่ง</th>
-            <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
+            <th style="text-align:left; width:160px;">ชื่อลูกค้า</th>
             <th style="text-align:left; width:110px;">เบอร์โทรศัพท์</th>
-            <th style="text-align:left; width:210px;">สถานที่ส่ง</th>
-            <th style="text-align:right; width:130px; padding-right:15px;">ราคา(บาท)</th>
+            <th style="text-align:left; width:225px;">สถานที่ส่ง</th>
+            <th style="text-align:right; width:110px; padding-right:15px;">ราคา(บาท)</th>
         </tr>
         <?php
         $sql_delivery = "SELECT DISTINCT date(order_date_delivered) FROM orders
@@ -124,11 +124,11 @@ $year    = $_POST['year'];
         <!-- ----- -->
 
         <tr>
-            <td style="padding-left:15px; height:30px; color:orange">ยังไม่ชำระ</td>
+            <td style="padding-left:15px; height:30px; color:orange">ยังไม่แจ้งชำระ</td>
 
             <?php
-            $status = ""; // เลขสถานะ
-            $sql_delivery_0 .= " AND orders.payno IS NULL";
+            $status = "0"; // เลขสถานะ
+            $sql_delivery_0 .= " AND order_status = '$status'";
             $query_delivery_0 = mysqli_query($link, $sql_delivery_0) or die(mysqli_error($link));
 
             $row_delivery_date = 1; // นับแถว
@@ -151,7 +151,7 @@ $year    = $_POST['year'];
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(order_date_delivered) = '" . $result_delivery_0['date(order_date_delivered)'] . "' 
-                AND order_type = '0' AND orders.order_date_delivered != '0000-00-00' AND orders.payno IS NULL 
+                AND order_type = '0' AND orders.order_date_delivered != '0000-00-00' AND orders.order_status = '$status'
                 ORDER BY orders.orderid ASC";
 
                 $query_deliveys = mysqli_query($link, $sql_deliverys);
@@ -190,8 +190,8 @@ $year    = $_POST['year'];
             <td style="padding-left:15px; height:30px; color:red">ยกเลิก</td>
 
             <?php
-            $status = 2; // เลขสถานะ
-            $sql_delivery_2 .= " AND pay_status = '$status'";
+            $status = 3; // เลขสถานะ
+            $sql_delivery_2 .= " AND order_Status = '$status'";
             $query_delivery_2 = mysqli_query($link, $sql_delivery_2) or die(mysqli_error($link));
 
             $row_delivery_date = 1; // นับแถว
@@ -214,7 +214,7 @@ $year    = $_POST['year'];
                     LEFT JOIN payment ON orders.payno = payment.payno
                     LEFT JOIN customers ON orders.cusid = customers.cusid
                 WHERE date(order_date_delivered) = '" . $result_delivery_2['date(order_date_delivered)'] . "'
-                AND order_type = '0' AND pay_status = '$status' ORDER BY orders.orderid ASC";
+                AND order_type = '0' AND order_status = '$status' ORDER BY orders.orderid ASC";
                     $query_deliveys = mysqli_query($link, $sql_deliverys);
                     $row_order = 1; //นับแถว
                     while ($result_order = mysqli_fetch_array($query_deliveys)) {
@@ -258,7 +258,7 @@ $year    = $_POST['year'];
         </tr>
         <tr height="30px" style="color:orange;">
             <td colspan="9"></td>
-            <td colspan="1"><b>รวมยังไม่ชำระทั้งหมด(บาท)</b></td>
+            <td colspan="1"><b>รวมยังไม่แจ้งชำระทั้งหมด(บาท)</b></td>
             <td align="right" style="padding-right:15px;"><b><?= number_format($sum_b, 2) ?></b></td>
         </tr>
         <tr height="30px" style="border-bottom:1px solid;">
