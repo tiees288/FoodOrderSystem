@@ -66,10 +66,13 @@
                                     <td><input class="form-control" type="time" min="09:00" max="19:00" required oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง 09:00-19.00')" oninput="this.setCustomValidity('')" style="height:32px; width:180px" id="reserv_time_appointment" name="reserv_time_appointment" required></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" height="20px"></td>
-                                    <td style="vertical-align: top;">
-                                        <font color="red" style="font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
-                                    </td>
+                                <td></td>
+									<td colspan="1" align="center">
+										<font color="red" style="padding-right:70px; font-size: 13px;">จองล่วงหน้า ไม่เกิน 5 วัน</font>
+									</td>
+									<td colspan="2" style="text-align:right">
+										<font color="red" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
+									</td>
                                 </tr>
                             </table>
                 </div>
