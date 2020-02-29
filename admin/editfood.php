@@ -36,7 +36,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ชื่อรายการอาหาร :<span style="color:red;">*</span> </label>
                     <div class="col-md-8" style="width:300px;">
-                        <input type="text" class="form-control" value="<?php echo $result['food_name']; ?>" name="food_name">
+                        <input type="text" class="form-control" required value="<?php echo $result['food_name']; ?>" name="food_name">
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ราคา (บาท) :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_price']; ?>" name="food_price">
+                        <input type="text" class="form-control" required style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_price']; ?>" name="food_price">
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ประเภท :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <select class="form-control" style="width:200px" name="food_type">
+                        <select class="form-control" required style="width:200px" name="food_type">
                             <option value="" disabled selected>-- กรุณาเลือกประเภท --</option>
                             <option <?php if ($result['food_type'] == 0) echo "selected"; ?> value="0">ประเภทผัด</option>
                             <option <?php if ($result['food_type'] == 1) echo "selected"; ?> value="1">ประเภททอด</option>
@@ -88,7 +88,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" style="width:150px" min="0" max="300" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
+                        <input type="number" class="form-control" required style="width:150px" min="0" max="300" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" style="width:150px" minlength="3" value="<?php echo $result['food_count']; ?>" name="food_count">
+                        <input type="text" class="form-control" required style="width:150px" minlength="3" value="<?php echo $result['food_count']; ?>" name="food_count">
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รายการแนะนำ :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_recomend']; ?>" name="food_recomend">
+                        <input type="number" class="form-control" required style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_recomend']; ?>" name="food_recomend">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">สถานะ:<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <select class="form-control" style="width:200px" name="food_status">
+                        <select class="form-control" required style="width:200px" name="food_status">
                             <option value="" disabled selected>-- กรุณาเลือกสถานะ --</option>
                             <option <?php if ($result['food_status'] == 0) echo "selected"; ?> value="0">ใช้งาน</option>
                             <option <?php if ($result['food_status'] == 1) echo "selected"; ?> value="1">ยกเลิก</option>
