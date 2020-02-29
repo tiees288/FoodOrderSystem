@@ -168,6 +168,11 @@
         <div class="text-center">
             <ul class="pagination">
                 <?php
+                if ($page == 1) {
+                    echo '<li class="page-item disabled">' . " <a href='#'><<</a></li>";
+                } else {
+                    echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=1&search_customer=$strKeyword&search_type=$search_type''><<</a></li>";
+                }
                 if ($prev_page) {
                     echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_customer=$strKeyword&search_type=$search_type'>ก่อนหน้า</a></li>";
                 } else {
@@ -175,17 +180,75 @@
                     echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                 }
 
-                for ($i = 1; $i <= $num_pages; $i++) {
-                    if ($i != $page) {
-                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_customer=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+
+                // ---------------------------- Pagination แบบจำกัดจำนวน ---------------------------- //
+                // ----------------- ประกาศตัวแปรที่จำเป็น ----------------------
+                $total_pagination = 5;        // จำนวนเลขหน้าที่แสดงได้สูงสุด
+                $high = floor($total_pagination / 2); // หาร เพื่อหาค่า Mean
+                $low = "-" . $high;
+                if (($page + $high) > $num_pages) {
+                    $y = $num_pages + $low;
+                } elseif (($page - $high) < 1) {
+                    $y =  $total_pagination;
+                } else {
+                    $y = $total_pagination;
+                }
+                // ----------------------------------------------------------
+                if ($page > 4) {
+                    if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
+                        $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
+                        for ($i = $low; $i <= $high; $i++) {
+                            if (($page + $high) <= $num_pages) {
+                                if ($page + $i == $page) {
+                                    echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
+                                } else {
+                                    echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_customer=$strKeyword&search_type=$search_type'>" . ($page + $i) . "</a>" . '</li>';
+                                }
+                            } else { // กรณีหน้าสุดท้าย
+                                if ($page == $num_pages) {
+                                    $offset = $num_pages - ($num_pages - 4);
+                                }
+
+                                for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
+
+                                    if ($page - $offset == $page) {
+                                        echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
+                                    } else {
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_customer=$strKeyword&search_type=$search_type'>" . ($page - $offset) . "</a>" . '</li>';
+                                    }
+                                    $offset--;
+                                }
+                            }
+                        }
                     } else {
-                        echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                        for ($i = 1; $i <= $y; $i++) {
+                            if ($i == $page) {
+                                echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            } else {
+                                echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_customer=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+                            }
+                        }
+                    }
+                } else {
+                    // เงื่อนไขเดิม ก่อนทำ Pagination เพิ่ม
+                    for ($i = 1; $i <= $num_pages; $i++) {
+                        if ($i != $page) {
+                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_customer=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+                        } else {
+                            echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                        }
                     }
                 }
+                // ------------------------------------------------------------------------
                 if ($page != $num_pages) {
                     echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_customer=$strKeyword&search_type=$search_type'>ถัดไป</a></li>";
                 } else {
                     echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
+                }
+                if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
+                    echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
+                } else {
+                    echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=" . $num_pages . "&search_customer=$strKeyword&search_type=$search_type'>>></a></li>";
                 }
                 $conn = null;
                 ?>
