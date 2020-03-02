@@ -15,6 +15,24 @@
 <link rel="shortcut icon" href="favicon.ico" />
 
 <script>
+    function check_place() {
+        var order_type = document.getElementById("order_type").value;
+        if (order_type == 0 && order_type != "") { // กรณีกลับบ้าน
+            var place = new RegExp('10120');
+            var delivery_input = document.getElementById("deliveryplace").value
+
+            if (place.test(delivery_input)) {
+                return true;
+            } else {
+                alert('กรุณาระบุสถานที่จัดส่งให้ถูกต้อง');
+                //  e.preventDefault();
+                return false;
+            }
+        } else {
+            // กรณีทานที่ร้าน
+            return true;
+        }
+    }
     // --------------------- Protect Coppy --------------------------
 
     document.onkeydown = function(e) {

@@ -70,6 +70,7 @@
             return true;
         } else {
             alert('กรุณาระบุสถานที่จัดส่งให้ถูกต้อง');
+          //  e.preventDefault();
             return false;
         }
     }

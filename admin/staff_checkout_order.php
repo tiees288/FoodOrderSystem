@@ -176,7 +176,7 @@
             </table>
             <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-offset-3 col-md-6" style="text-align: center;">
-                    <input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+                    <input type="submit" name="submit" id="submit_order" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) { if (check_place()) return true; else return false; } else return false;" class="btn btn-success" value="บันทึก" />
                     <button type="reset" class="btn btn-danger">ล้างค่า</button></form>
                     <button type="back" class="btn btn-info" onclick="window.location.assign('select_customer.php?ref=order');">ย้อนกลับ</button>
                 </div>
