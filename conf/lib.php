@@ -57,11 +57,23 @@
             startDate: 'now',
             autoclose: true, //Set เป็นปี พ.ศ.
             inline: true
-        }) //กำหนดเป็นวันปัจุบัน       
+        }); //กำหนดเป็นวันปัจุบัน       
     });
 </script>
 
 <script type="text/javascript">
+    function check_place() {
+        var place = new RegExp('10120');
+        var delivery_input = document.getElementById("deliveryplace").value
+
+        if (place.test(delivery_input)) {
+            return true;
+        } else {
+            alert('ตรวจสอบสถานที่จัดส่ง');
+            return false;
+        }
+    }
+
     function validate_delverytime() {
         delivery = document.getElementsByName("deliverydate")[0].value; // Input ที่เป็นวันที่
         d = delivery.slice(0, 2);

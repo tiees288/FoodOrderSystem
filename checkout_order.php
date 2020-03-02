@@ -117,12 +117,11 @@
 			</div>
 			</table>
 			<div class="col-md-offset-3 col-md-6" style="text-align: center;">
-				<input type="submit" name="submit" id="submit" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+				<input type="submit" name="submit" id="submit_order" onclick="if(confirm('ยืนยันรายการสั่งอาหาร?')) check_place(); else return false;" class="btn btn-success" value="บันทึก" />
 				<button type="reset" class="btn btn-danger">ล้างค่า</button></form>
 				<button type="back" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 			</div>
 		</div>
-	</div>
 	</div>
 	<?php include("conf/footer.php"); ?>
 </body>
