@@ -69,7 +69,7 @@
         if (place.test(delivery_input)) {
             return true;
         } else {
-            alert('ตรวจสอบสถานที่จัดส่ง');
+            alert('กรุณาระบุสถานที่จัดส่งให้ถูกต้อง');
             return false;
         }
     }
