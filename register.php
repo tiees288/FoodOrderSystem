@@ -184,6 +184,7 @@
 					if (data == "true") {
 						console.log("true");
 						$("#user-r").html("<i style='margin-top:7px; color:green; font-size:20px;' class='fa fa-check'></i>");
+						$("#register").unbind('submit');
 					} else {
 						console.log("false");
 						$("#user-r").html("<i style='margin-top:7px; color:red; font-size:20px;' class='fa fa-times'></i>");
@@ -195,7 +196,6 @@
 					}
 					$("#loading").hide();
 				},
-				timeout: 3000
 			});
 		}
 	}
