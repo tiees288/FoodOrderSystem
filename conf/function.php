@@ -1,5 +1,16 @@
 <?php
 // ------------------------------------ เข้ารหัส ------------------------------------- //
+function utf8_strlen($s)
+{
+
+    $c = strlen($s);
+    $l = 0;
+
+    for ($i = 0; $i < $c; ++$i) if ((ord($s[$i]) & 0xC0) != 0x80) ++$l;
+
+    return $l;
+}
+
 function encrypt($string, $type)
 {
     $secret_key = '2562foodordersystem420'; // iv secretkey
@@ -10,7 +21,7 @@ function encrypt($string, $type)
     $encrypt_method = "AES-256-CBC";
     $key = hash('sha256', $secret_key);
     $iv = substr(hash('sha256', $secret_iv), 0, 16);
-  
+
     if ($type == "en") {
         $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
     } elseif ($type == "de") {
@@ -98,7 +109,8 @@ function dt_tothaiyear2($dates) // สำหรับ input type date/time ค.�
     }
 }
 
-function fullmonth($month) {
+function fullmonth($month)
+{
     $months = array(
         '',
         'มกราคม',
@@ -178,7 +190,7 @@ function fulldatetime_thai($dates)
         $m = substr($m, 1, 1);
     }
 
-  
+
     $months = array(
         '',
         'มกราคม',
@@ -211,18 +223,18 @@ function short_datetime_thai($dates)
     $d = substr($dates_n, 0, 2);
     $m = substr($dates_n, 3, 2);
     $y = substr($dates_n, 6, 4);
-   // $hi = substr($dates_n, 11, 5);
+    // $hi = substr($dates_n, 11, 5);
 
 
     if ($d < 10) {
         $d = substr($d, 1, 1);
-      //  $d = "0".$d;
+        //  $d = "0".$d;
     }
     if ($m < 10) {
         $m = substr($m, 1, 1);
     }
 
-  
+
     $months = array(
         '',
         'ม.ค.',
