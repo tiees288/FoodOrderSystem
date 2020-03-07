@@ -190,7 +190,7 @@
 						$("#user-r").html("<i style='margin-top:7px; color:red; font-size:20px;' class='fa fa-times'></i>");
 						$("#register").bind('submit', function(e) {
 							e.preventDefault();
-							alert("ชื่อผุู้ใช้งานซ้ำ กรุณาใช้ชื่อผู้ใช้อื่น");
+							alert("กรุณาตรวจสอบชื่อผุู้ใช้งาน");
 							//$("#user_name").focus();
 						});
 					}
