@@ -155,7 +155,7 @@
 					<div class="form-group">
 						<div class="col-md-offset-4 col-md-6">
 							<button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-							<button type="reset" class="btn btn-danger">ล้างค่า</button>
+							<button type="reset" onclick='$("#user-r").html("");' class="btn btn-danger">ล้างค่า</button>
 							<button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 						</div>
 					</div>
