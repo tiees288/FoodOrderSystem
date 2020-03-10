@@ -5,6 +5,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	require('conf/connection.php');
 	require_once("conf/function.php");
+	if (utf8_strlen($_POST['name'] > 30)) {
+		echo "<script>alert('กรุณากรอก ชื่อ-นามสกุล ระหว่าง 5-30 ตัวอักษร'); window.history.back();</script>";
+		exit();
+	}
 
 	$name			=	$_POST['name'];
 	$number_phone	=	$_POST['number_phone'];

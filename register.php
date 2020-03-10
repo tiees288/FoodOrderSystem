@@ -51,7 +51,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="name" minlength="5" name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
+							<input type="text" class="form-control" id="name" minlength="5" maxlength="30"  name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
 						</div>
 					</div>
 
