@@ -13,7 +13,7 @@ include("../conf/connection.php");
 ?>
 
 <head>
-    <title>ใบเสร็จรับเงิน เลขที่ <?= $_GET['bill'] ?> | ระบบขายอาหารตามสั่ง</title>
+    <title>ใบแจ้งรับชำระเงิน รหัสการสั่ง <?= str_pad($_GET['oid'], 5, 0, STR_PAD_LEFT) ?> | ระบบขายอาหารตามสั่ง</title>
     <style type="text/css" media="print">
         @page {
             size: auto;
@@ -26,15 +26,7 @@ include("../conf/connection.php");
     $sql_payment = "SELECT * FROM orders
     LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.orderid = '" . $_GET['oid'] . "'";
     $result_payment = mysqli_fetch_assoc(mysqli_query($link, $sql_payment));
-    /*
-    $sql_staff = "SELECT staff_name FROM staff WHERE staffid = '" . $result_payment['staffid'] . "'";
-    $result_staff = mysqli_fetch_assoc(mysqli_query($link, $sql_staff));
 
-    if ($result_payment['pay_billdate'] == "0000-00-00 00:00:00") {
-        mysqli_query($link, "UPDATE payment SET pay_billdate = '" . date("Y-m-d H:i:s") . "'
-            WHERE payno = '" . $_GET['bill'] . "'");
-        echo "<script>window.location.reload();</script>";
-    } */
     ?>
     <div class="container" style="padding-top:20px; width:1100px; margin-top:15px; border:1px solid;">
         <h3 class="text-center">ใบแจ้งรับชำระเงิน</h3>
@@ -82,36 +74,30 @@ include("../conf/connection.php");
                 <th style="border-top:1px solid;"></th>
             </tr>
             <?php
-            /*
-            $sql_order = "SELECT * FROM orders WHERE payno = '" . $_GET['bill'] . "'";
-            $q_order = mysqli_query($link, $sql_order);
-            */
             $sum_final = 0;
-
-            // echo mysqli_num_rows($q_order);
             ?>
             <tr>
                 <td>
-                <?php
-                $sql_orderdet = "SELECT * FROM orderdetails LEFT JOIN foods ON orderdetails.foodid = foods.foodid WHERE orderdetails.orderid = '" . $result_payment['orderid'] . "'";
-                $q_orderdet = mysqli_query($link, $sql_orderdet);
-                $i = 1;
-                $sumdet = 0;
+                    <?php
+                    $sql_orderdet = "SELECT * FROM orderdetails LEFT JOIN foods ON orderdetails.foodid = foods.foodid WHERE orderdetails.orderid = '" . $result_payment['orderid'] . "'";
+                    $q_orderdet = mysqli_query($link, $sql_orderdet);
+                    $i = 1;
+                    $sumdet = 0;
 
-                while ($ressult_orderdet = mysqli_fetch_array($q_orderdet)) {
-                    if ($i >= 2)
-                        echo "</tr><tr><td colspan='1'></td>";
-                ?>
-                    <td><?= $ressult_orderdet['food_name'] ?></td>
-                    <td align="right" style="padding-right:10px; height:25px;"><?= $ressult_orderdet['orderdet_amount'] ?></td>
-                    <td><?= $ressult_orderdet['food_count'] ?></td>
-                    <td align="right"><?= $ressult_orderdet['food_price'] ?></td>
-                    <td align="right" style="padding-right:10px;"><?= number_format($ressult_orderdet['food_price'] * $ressult_orderdet['orderdet_amount'], 2) ?></td>
-                <?php $i++;
-                    $sumdet += ($ressult_orderdet['food_price'] * $ressult_orderdet['orderdet_amount']);
-                    if ($i >= 2)
-                        echo "</tr>";
-                } ?>
+                    while ($ressult_orderdet = mysqli_fetch_array($q_orderdet)) {
+                        if ($i >= 2)
+                            echo "</tr><tr><td colspan='1'></td>";
+                    ?>
+                <td><?= $ressult_orderdet['food_name'] ?></td>
+                <td align="right" style="padding-right:10px; height:25px;"><?= $ressult_orderdet['orderdet_amount'] ?></td>
+                <td><?= $ressult_orderdet['food_count'] ?></td>
+                <td align="right"><?= $ressult_orderdet['food_price'] ?></td>
+                <td align="right" style="padding-right:10px;"><?= number_format($ressult_orderdet['food_price'] * $ressult_orderdet['orderdet_amount'], 2) ?></td>
+            <?php $i++;
+                        $sumdet += ($ressult_orderdet['food_price'] * $ressult_orderdet['orderdet_amount']);
+                        if ($i >= 2)
+                            echo "</tr>";
+                    } ?>
             </tr>
             <tr>
                 <td colspan="4"></td>
@@ -132,29 +118,27 @@ include("../conf/connection.php");
             <td align="right" style="padding-right:10px; border-top:1px solid;"><b><?= number_format($sum_final, 2) ?></b></td>
             <td style=" border-top:1px solid;"><b>บาท</b></td>
         </table>
-        <table width="100%" border="0">
+        <table width="50%" border="0">
             <tr>
-                <td width="12%" align="right" style="padding-right:5px;"><b>ประเภทการชำระ : </b></td>
-                <td width="15%"><?= $result_payment['pay_type'] == 0 ? "เงินสด" : "เงินโอน" ?></td>
-                <td width="10%" align="right" style="padding-right:5px;"><b>หมายเหตุ : </b></td>
-                <td width="20%"><?= $result_payment['pay_note'] == "" ? "-" : $result_payment['pay_note'] ?></td>
-                <td rowspan="3" align="center">
+                <td width="12%" align="right" style="padding-right:5px;"><b>ประเภทการสั่ง : </b></td>
+                <td width="15%">
                     <?php
-                    if ($result_payment['pay_status'] == 2) {
-                        echo '<font size="5px" color="red"><b>*** ใบเสร็จนี้ได้ถูกยกเลิกแล้ว ***</b></font>';
+                    if ($result_payment['order_type'] == 0) {
+                        echo "กลับบ้าน สั่งโดยพนักงาน";
+                    } elseif ($result_payment['order_type'] == 1) {
+                        echo "ทานที่ร้าน สั่งโดยพนักงาน";
+                    } elseif ($result_payment['order_type'] == 2) {
+                        echo "กลับบ้าน สั่งโดยลูกค้า";
                     }
                     ?>
                 </td>
             </tr>
+
             <tr>
                 <td width="20%" align="right" style="padding-right:5px;"><b>ลายเซ็นลูกค้า : </b></td>
                 <td>...............................</td>
-                <td align="right" style="padding-right:5px;"><b>วันที่ชำระ : </b></td>
-                <td><?= fulldatetime_thai(dt_tothaiyear($result_payment['pay_date'])) ?></td>
             </tr>
-            <tr>
-                <td width="20%" align="right" style="padding-right:5px;"><b>ชื่อพนักงาน : </b></td>
-                <td><?= $result_staff['staff_name'] ?></td>
+
         </table>
         <div class="row">
             <div class="col-md-3 col-md-offset-9 text-right" style="padding-bottom:25px;">
