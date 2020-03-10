@@ -7,6 +7,30 @@
 	?>
 
 	<link rel="shortcut icon" href="favicon.ico" />
+	<style>
+		.loader {
+			display: none;
+			margin-top: 5px;
+			border: 5px solid #f3f3f3;
+			/* Light grey */
+			border-top: 5px solid #3498db;
+			/* Blue */
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			animation: spin 2s linear infinite;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 
 </head>
 
@@ -23,7 +47,7 @@
 		<div class="col">
 			<h1 class="page-header text-left">สมัครสมาชิก</h1>
 			<div class="col-md-offset-1 col-md-10">
-				<form class="form-horizontal" action="register_action.php" method="post">
+				<form class="form-horizontal" id="register" action="register_action.php" method="post">
 					<div class="form-group">
 						<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
 						<div class="col-md-4">
@@ -84,15 +108,19 @@
 							<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" required>
 						</div>
 						<div class="col-md-4">
-							<label class="control-label" >
+							<label class="control-label">
 								<font color="#8F8D8D">กรอกเป็นตัวเลข 5 ตัว</font>
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2" for="user_name">ชื่อผู้ใช้ :<font color="red">*</font></label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="user_name" name="user_name" minlength="5" pattern="^[a-zA-Z0-9\s]+$" required style="width:250">
+						<div class="col-md-3">
+							<input type="text" class="form-control" onblur="check_form(this.val,'username');" id="user_name" name="user_name" minlength="5" pattern="^[a-zA-Z0-9\s]+$" required>
+						</div>
+						<div class="col-md-1">
+							<div id="loading" class="loader"></div>
+							<span id="user-r"></span>
 						</div>
 						<div class="col-md-4">
 							<label class="control-label">
@@ -127,7 +155,7 @@
 					<div class="form-group">
 						<div class="col-md-offset-4 col-md-6">
 							<button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-							<button type="reset" class="btn btn-danger">ล้างค่า</button>
+							<button type="reset" onclick='$("#user-r").html("");' class="btn btn-danger">ล้างค่า</button>
 							<button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 						</div>
 					</div>
@@ -139,3 +167,36 @@
 		<p>
 			<?php include("conf/footer.php"); ?>
 </body>
+<script>
+	function check_form(data2, type) {
+		if ($("#user_name").val() != "") {
+			//console.log($("#user_name").val());
+			$("#loading").show();
+			$.ajax({
+				url: "ajax_register.php",
+				data: 'user_name=' + $("#user_name").val(),
+				type: "POST",
+				error: function(data) {
+					$("#loading").hide();
+					$("#user-availability-status").html("Error!");
+				},
+				success: function(data) {
+					if (data == "true") {
+						console.log("true");
+						$("#user-r").html("<i style='margin-top:7px; color:green; font-size:20px;' class='fa fa-check'></i>");
+						$("#register").unbind('submit');
+					} else {
+						console.log("false");
+						$("#user-r").html("<i style='margin-top:7px; color:red; font-size:20px;' class='fa fa-times'></i>");
+						$("#register").bind('submit', function(e) {
+							e.preventDefault();
+							alert("ชื่อผู้ใช้งานซ้ำ หรือรูปแบบที่กรอกไม่ถูกต้อง");
+							//$("#user_name").focus();
+						});
+					}
+					$("#loading").hide();
+				},
+			});
+		}
+	}
+</script>
