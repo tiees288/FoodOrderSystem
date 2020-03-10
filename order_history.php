@@ -26,7 +26,6 @@
     }
     ?>
     <div class="container" style="padding-top: 90px;">
-
         <h1 class="page-header text-left">แสดงรายการสั่งอาหาร</h1>
         <div class="row">
             <form class="form-inline">
