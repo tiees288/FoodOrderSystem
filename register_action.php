@@ -5,8 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	require('conf/connection.php');
 	require_once("conf/function.php");
-	if (utf8_strlen($_POST['name'] > 30)) {
-		echo "<script>alert('กรุณากรอก ชื่อ-นามสกุล ระหว่าง 5-30 ตัวอักษร'); window.history.back();</script>";
+	
+	if (utf8_strlen($_POST['name'] > 25)) {
+		echo "<script>alert('กรุณากรอก ชื่อ-นามสกุล ระหว่าง 5-25 ตัวอักษร'); window.history.back();</script>";
 		exit();
 	}
 
