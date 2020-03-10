@@ -60,7 +60,7 @@
 								<tr>
 									<td></td>
 									<td colspan="1" align="center">
-										<font color="red" style="padding-right:70px; font-size: 13px;">จองล่วงหน้า ไม่เกิน 5 วัน</font>
+										<font color="red" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font>
 									</td>
 									<td colspan="2" style="text-align:right">
 										<font color="red" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
