@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     include("../conf/connection.php");
     include("../conf/function.php");
+    require_once("../conf/lib.php");
 
     $totalprice = $_POST['totalprice'];
     $orderdate = dt_tochristyear($_POST['orderdate']);
@@ -55,7 +56,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     unset($_SESSION['food_admin']['list']);
-
-    echo '<script>alert("บันทึกการสั่งอาหารเรียบร้อยแล้ว\nรหัสการสั่งคือ ' . str_pad($last_orderid, 5, 0, STR_PAD_LEFT) . '"); window.location.assign("staff_order_history.php")</script>';
+    if ($_POST['order_type'] == 0) {
+        echo '<script> 
+        $(document).ready(function(){
+            alert("บันทึกการสั่งอาหารเรียบร้อยแล้ว\nรหัสการสั่งคือ ' . str_pad($last_orderid, 5, 0, STR_PAD_LEFT) . '");
+            window.open("bill_payment.php?bill=' . str_pad($last_orderid, 5, 0, STR_PAD_LEFT) . '","_blank");
+            window.location.assign("staff_payment_history.php");
+        });
+        </script>';
+    } else {
+        echo '<script>alert("บันทึกการสั่งอาหารเรียบร้อยแล้ว\nรหัสการสั่งคือ ' . str_pad($last_orderid, 5, 0, STR_PAD_LEFT) . '"); window.location.assign("staff_order_history.php")</script>';
+    }
     mysqli_close($link);
 }

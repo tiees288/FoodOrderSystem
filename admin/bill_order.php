@@ -28,7 +28,7 @@ include("../conf/connection.php");
     $result_payment = mysqli_fetch_assoc(mysqli_query($link, $sql_payment));
 
     ?>
-    <div class="container" style="padding-top:20px; width:1100px; margin-top:15px; border:1px solid;">
+    <div class="container" style="padding-top:20px; width:900px; margin-top:15px; border:1px solid;">
         <h3 class="text-center">ใบแจ้งรับชำระเงิน</h3>
         <h5 class="text-center">หน้าหอพัก Grand modern condo ตรงข้ามมหาวิทยาลัยกรุงเทพ วิทยาเขตรังสิต</h5>
         <h5 class="text-center" style="padding-bottom:30px;">หมู่ 5 ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120</h5>
@@ -37,39 +37,42 @@ include("../conf/connection.php");
             <tr>
                 <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>รหัสการสั่งอาหาร : </b></td>
                 <td width="200px"><?= $result_payment['orderid'] ?></td>
-                <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่ออก : </b></td>
-                <td width="200px"><?= fulldatetime_thai(dt_tothaiyear(date("d-m-Y"))) ?></td>
+                <!-- <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่ออก : </b></td> -->
+                <!--  <td width="200px"><?php // fulldatetime_thai(dt_tothaiyear(date("d-m-Y"))) 
+                                        ?></td> -->
+                <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่สั่งอาหาร : </b></td>
+                <td width="200px"><?= fulldatetime_thai(dt_tothaiyear($result_payment['orderdate'])) ?></td>
+
             </tr>
             <tr>
                 <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>ชื่อลูกค้า : </b></td>
                 <td width="200px"> <?= $result_payment['cus_name'] ?></td>
-                <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่สั่งอาหาร : </b></td>
-                <td width="200px"><?= fulldatetime_thai(dt_tothaiyear($result_payment['orderdate'])) ?></td>
-            </tr>
-            <tr>
-                <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>เบอร์โทรศัพท์ : </b></td>
-                <td width="200px"><?= $result_payment['cus_tel'] ?></td>
                 <td width="150px" style="text-align: right; padding-right:10px;"><b>วันกำหนดส่ง : </b></td>
                 <td width="200px"><?= ($result_payment['order_date_tobedelivery'] != "0000-00-00") ? fulldatetime_thai(tothaiyear($result_payment['order_date_tobedelivery'])) : "-"  ?></td>
             </tr>
             <tr>
-                <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>สถานที่จัดส่ง : </b></td>
-                <td width="200px"><?= $result_payment['order_delivery_place']  ?></td>
+                <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>เบอร์โทรศัพท์ : </b></td>
+                <td width="200px"><?= $result_payment['cus_tel'] ?></td>
                 <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่ส่ง : </b></td>
                 <td width="200px"><?= ($result_payment['order_date_delivered'] != "0000-00-00") ?  fulldatetime_thai(dt_tothaiyear($result_payment['order_date_delivered'])) : "-" ?></td>
+            </tr>
+            <tr>
+                <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>สถานที่จัดส่ง : </b></td>
+                <td width="200px"><?= $result_payment['order_delivery_place']  ?></td>
+
             </tr>
             <tr>
                 <td height="20px"></td>
             </tr>
         </table>
 
-        <table width="95%" border="0">
+        <table width="90%" align="center" border="0">
             <tr>
                 <th style="text-align:right; padding-right:20px; width:13%; height:40px; border-top :1px solid;"></th>
-                <th style="height:40px; border-top :1px solid;">รายการอาหาร</th>
+                <th style="height:40px; width:150px; border-top :1px solid;">รายการอาหาร</th>
                 <th style="height:40px; border-top :1px solid; text-align: right; padding-right:10px;">จำนวน</th>
                 <th style="height:40px; border-top :1px solid; ">หน่วยนับ</th>
-                <th style="height:40px; border-top :1px solid; text-align: right; width:15%;">ราคาต่อหน่วย (บาท)</th>
+                <th style="height:40px; border-top :1px solid; text-align: right; width:170px;">ราคาต่อหน่วย (บาท)</th>
                 <th style=" height:40px; border-top :1px solid; text-align: right; padding-right:10px;">ราคา (บาท)</th>
                 <th style="border-top:1px solid;"></th>
             </tr>
@@ -141,7 +144,7 @@ include("../conf/connection.php");
 
         </table>
         <div class="row">
-            <div class="col-md-3 col-md-offset-9 text-right" style="padding-bottom:25px;">
+            <div class="col-md-4 col-md-offset-8 text-right" style="padding-bottom:25px;">
                 <b>วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")) ?></b>
             </div>
         </div>
