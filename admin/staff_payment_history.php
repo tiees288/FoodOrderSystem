@@ -122,6 +122,10 @@
                                     $today = date("Y-m-d");
                                     $pay_date = date("Y-m-d", strtotime($result['pay_date'] . ' + 3 days'));
                                     if ($today < $pay_date) { // ตรวจสอบ เกิน 3 วันไม่สามารถยกเลิกใบเสร็จ
+                                        $sql_od1 = "SELECT order_type FROM orders WHERE payno = '". $result['payno'] ."' ";
+                                        $query_od1 = mysqli_query($link, $sql_od1);
+                                        $result_od1 = mysqli_fetch_assoc($query_od1);
+                                        if ($result_od1['order_type'] == 1)
                                 ?>
                                         <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกการชำระ เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
                                         </a>
