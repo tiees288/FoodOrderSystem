@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $totalprice = $_POST['totalprice'];
     $orderdate = dt_tochristyear($_POST['orderdate']);
     $deliverydate = tochristyear($_POST['deliverydate']);
+    $deliveryplace = $_POST["deliveryplace"] . " " . $_POST['postnum'];
+
     $reservid = NULL;
     if (!empty($_POST['reserv_id'])) {
         $reservid = $_POST['reserv_id'];
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         orderdate               = '" . $orderdate . "', 
         order_date_tobedelivery = '" . $deliverydate . "',
         order_time_tobedelivery = '" . $_POST['deliverytime'] . "',
-        order_delivery_place    = '" . $_POST["deliveryplace"] . "',
+        order_delivery_place    = '" . $deliveryplace . "',
         order_type              = '" . $_POST['order_type'] . "',
         order_totalprice        = '" . $totalprice . "',
         cusid                   = '" . $_POST['cusid'] . "',

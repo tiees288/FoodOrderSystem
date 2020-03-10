@@ -64,12 +64,12 @@
 <script type="text/javascript">
     function check_place() {
         var place = new RegExp('10120');
-        var delivery_input = document.getElementById("deliveryplace").value
+        var delivery_input = document.getElementById("postnum").value
 
         if (place.test(delivery_input)) {
             return true;
         } else {
-            alert('กรุณาระบุสถานที่จัดส่งให้ถูกต้อง');
+            alert('กรุณาระบุรหัสไปรษณีย์ให้ถูกต้อง');
           //  e.preventDefault();
             return false;
         }

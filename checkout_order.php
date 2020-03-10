@@ -61,12 +61,16 @@
 									<td><input class="form-control" autocomplete="off" type="time" min="09:00" max="19:00" required oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง 09:00-19.00')" oninput="this.setCustomValidity('')" style="height:32px; width:180px" id="deliverytime" name="deliverytime" required></td>
 								</tr>
 								<tr>
-									<td width="20%" height="30px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
-									<td height="81px"><textarea name="deliveryplace" style="width:250px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
-									</td>
+									<td colspan="2"></td>
 									<td colspan="2" align="right" style="vertical-align: top; ">
 										<font color="red" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
 									</td>
+								</tr>
+								<tr>
+									<td width="20%" height="30px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
+									<td height="81px"><textarea name="deliveryplace" style="width:230px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address']  ?></textarea></td>
+									<td width="15%" height="32px"><b>รหัสไปรษณีย์ :<span style="color:red;">*</span></b></td>
+									<td><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
 								</tr>
 								<tr>
 									<td colspan="2" align="right" style="padding-right:10px; margin-top:0px; vertical-align: top; ">

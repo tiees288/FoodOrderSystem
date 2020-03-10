@@ -19,8 +19,7 @@
         var order_type = document.getElementById("order_type").value;
         if (order_type == 0 && order_type != "") { // กรณีกลับบ้าน
             var place = new RegExp('10120');
-            var delivery_input = document.getElementById("deliveryplace").value
-
+            var delivery_input = document.getElementById("postnum").value
             if (place.test(delivery_input)) {
                 return true;
             } else {

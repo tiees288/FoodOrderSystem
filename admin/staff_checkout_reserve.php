@@ -38,7 +38,7 @@
                         <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_reserve.php">
                             <table width="750px" border="0" align="center">
                                 <tr>
-                                    <td align="center" height="36px" colspan="4"><a href="select_customer.php?ref=reserve">เลือกลูกค้า</a></td>
+                                    <td align="center" height="36px" colspan="4"><a href="select_customer.php?ref=reserve"><u>เลือกลูกค้า</u></a></td>
                                 </tr>
                                 <tr>
                                     <td width="34px" height="36px"><b>รหัสลูกค้า :</b></td>
