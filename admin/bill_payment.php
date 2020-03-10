@@ -44,7 +44,7 @@ include("../conf/connection.php");
         <table width="90%" border="0" align="center">
             <tr>
                 <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>เลขที่ : </b></td>
-                <td width="200px"><?= $result_payment['payno'] ?></td>
+                <td width="200px"><?= $_GET['bill'] ?></td>
                 <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่ออก : </b></td>
                 <td width="200px"><?= fulldatetime_thai(dt_tothaiyear($result_payment['pay_billdate'])) ?></td>
             </tr>
