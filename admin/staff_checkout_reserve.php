@@ -76,7 +76,8 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4" align="center">
-                                        <font color="red" style="font-size: 18px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
+                                        <hr style="border: 0.1px solid #b8b8b8;">
+                                        <font color="red" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
                                     </td>
                                 </tr>
                             </table>
