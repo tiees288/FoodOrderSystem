@@ -68,7 +68,7 @@
 								</tr>
 								<tr>
 									<td colspan="4" align="center">
-									<hr style="border: 0.1px solid #b8b8b8;">
+									<hr style="border-top: 0.1px solid #b8b8b8; margin: 10px; padding-bottom:0px;">
 										<font color="red" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
 									</td>
 								</tr>
