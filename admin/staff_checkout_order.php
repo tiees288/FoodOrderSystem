@@ -122,7 +122,7 @@
                                 </tr>
                                 <tr class="order_type0">
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
-                                    <td height="70px"><textarea name="deliveryplace" style="width:230px;" id="deliveryplace" cols="15" rows="3" class="form-control"><?= $cus_data['cus_address'] . " " . $cus_data['cus_postnum'] ?></textarea></td>
+                                    <td height="70px"><textarea name="deliveryplace" style="width:230px;" id="deliveryplace" cols="15" rows="3" class="form-control"><?= $cus_data['cus_address'] ?></textarea></td>
                                     <td height="42px" width="15%"><b>รหัสไปรษณีย์ :<span style="color:red;">*</span></b></td>
 									<td><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
                                 </tr>
