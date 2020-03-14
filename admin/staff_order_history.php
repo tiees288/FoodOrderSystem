@@ -141,7 +141,7 @@
                             <?php
                             if (($result['order_type'] == 0) && ($result['order_status'] == 0)) {
                             ?>
-                                <a href="bill_order.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> ใบแจ้งชำระเงิน</a></td>
+                                <a href="bill_order.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> ใบแจ้งรับชำระเงิน</a></td>
                     <?php
                             }
                     ?>
