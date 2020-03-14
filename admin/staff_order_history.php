@@ -47,7 +47,7 @@
                     <th style="text-align:left; width:250px;">ประเภทการสั่ง</th>
                     <th style="text-align:center; width:200px;">ปรับปรุงการสั่งอาหาร</th>
                     <th style="text-align:center; width:180px;">ใบแจ้งรับชำระเงิน</th>
-                    <th style="text-align:center; width:140px;">บันทึกจัดส่ง</th>
+                    <th style="text-align:center; width:140px;">บันทึกการส่ง</th>
                     <th style="text-align:center; width:140px;">เลือกรับชำระ</th>
                 </thead>
 
@@ -151,11 +151,11 @@
                         if ($result['order_status'] != 3) {
                             if ($result['order_type'] == "0" && $result['order_date_delivered'] == "0000-00-00") { // กรณีพนักงานสั่งกลับบ้านให้ลูกค้า
                         ?>
-                                <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
+                                <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกการส่ง</a>
                             <?php
                             } elseif (($result['order_type'] == "2" && $result['order_date_delivered'] == "0000-00-00") && ($result['payno'] != NUll)) { // กรณีลูกค้าสั่งกลับบ้านเองจากหน้าร้าน
                             ?>
-                                <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกจัดส่ง</a>
+                                <a href="staff_checkout_delivery.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> บันทึกการส่ง</a>
                         <?php
                             }
                         }
