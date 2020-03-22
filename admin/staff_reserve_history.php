@@ -193,7 +193,7 @@
                             }
                         }
                     } else {
-                        for ($i = 1; $i <= $num_pages; $i++) {
+                        for ($i = 1; $i <= (($num_pages < 5) ? $num_pages : "5"); $i++) {
                             if ($i != $page) {
                                 echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_reserve=$strKeyword'>$i</a>" . '</li>';
                             } else {

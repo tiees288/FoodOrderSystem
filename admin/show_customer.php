@@ -231,7 +231,7 @@
                     }
                 } else {
                     // เงื่อนไขเดิม ก่อนทำ Pagination เพิ่ม
-                    for ($i = 1; $i <= $num_pages; $i++) {
+                    for ($i = 1; $i <= (($num_pages < 5) ? $num_pages : "5"); $i++) {
                         if ($i != $page) {
                             echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_customer=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
                         } else {
