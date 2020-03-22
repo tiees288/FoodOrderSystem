@@ -77,7 +77,7 @@
                     <th style="text-align: left; width:180px;">ชื่อรายการอาหาร</th>
                     <th style="width:100px;">หน่วยนับ</th>
                     <th style="text-align:right; width:120px;">ราคา (บาท)</th>
-                    <th style="text-align:center; width:26px;">รูปภาพ</th>
+                    <th style="text-align:center; width:140px;">รูปภาพ</th>
                     <th style="text-align:left; width:100px;">สถานะ</th>
                     <th style="text-align:center; width:130px;">เพิ่มจำนวน</th>
                     <th style=" text-align:center;">แก้ไข</th>
@@ -147,38 +147,43 @@
                 if ($result['food_image'] == "")
                     $food_img = "../images/default_food.png";
                 else $food_img = "../" . $result['food_image'];
-                ?>
+        ?>
 
-                    <tr>
-                        <td align="right"><?= $result["foodid"]; ?></td>
-                        <td align="left"> <?= $result["food_name"] ?></td>
-                        <td><?= $result['food_count'] ?></td>
-                        <td align="right"> <?= number_format($result["food_price"], 2); ?></td>
-                        <td align="center"><img width="140px" height="100px" src="<?= $food_img ?>"></td>
-                        <td><?= $food_status ?></td>
-                        <td align="center"><a href="#morefood<?= $result['foodid'] ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
-                        <td align="center"><a href="editfood.php?foodid=<?php echo $result['foodid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
-                        </td>
-                        <td align="center"><a href="#deletefood<?php echo $result['foodid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
-                        <?php include("food_modal.php"); ?>
-                    </tr>
-            <?php }
-            } else {
-                echo '
+                <tr>
+                    <td align="right"><?= $result["foodid"]; ?></td>
+                    <td align="left"> <?= $result["food_name"] ?></td>
+                    <td><?= $result['food_count'] ?></td>
+                    <td align="right"> <?= number_format($result["food_price"], 2); ?></td>
+                    <td align="center"><img width="140px" height="100px" src="<?= $food_img ?>"></td>
+                    <td><?= $food_status ?></td>
+                    <td align="center"><a href="#morefood<?= $result['foodid'] ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-refresh"></i> เพิ่มจำนวน</a></td>
+                    <td align="center"><a href="editfood.php?foodid=<?php echo $result['foodid']; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i> แก้ไข</a>
+                    </td>
+                    <td align="center"><a href="#deletefood<?php echo $result['foodid']; ?>" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i> ลบ</a></td>
+                    <?php include("food_modal.php"); ?>
+                </tr>
+        <?php }
+        } else {
+            echo '
             <tr>
-                <td colspan="8" align="center">ไม่พบข้อมูลในระบบ</td>
+                <td colspan="9" align="center">ไม่พบข้อมูลในระบบ</td>
             </tr>
         ';
-            }
-            if ($num_rows == 0) {
-                include("food_modal.php");
-            } ?>
-            </table>
+        }
+        if ($num_rows == 0) {
+            include("food_modal.php");
+        } ?>
+        </table>
     </div>
     <nav aria-label="Page navigation example" class="navbar-center">
         <div class="text-center">
             <ul class="pagination">
                 <?php
+                if ($page == 1) {
+                    echo '<li class="page-item disabled">' . " <a href='#'><<</a></li>";
+                } else {
+                    echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=1&search_food=$strKeyword&search_type=$search_type''><<</a></li>";
+                }
                 if ($prev_page) {
                     echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$prev_page&search_food=$strKeyword&search_type=$search_type'>ก่อนหน้า</a></li>";
                 } else {
@@ -186,17 +191,73 @@
                     echo '<li class="page-item disabled"><a href="#" >ก่อนหน้า</a></li>';
                 }
 
-                for ($i = 1; $i <= $num_pages; $i++) {
-                    if ($i != $page) {
-                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_food=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+                // ---------------------------- Pagination แบบจำกัดจำนวน ---------------------------- //
+                // ----------------- ประกาศตัวแปรที่จำเป็น ----------------------
+                $total_pagination = 5;        // จำนวนเลขหน้าที่แสดงได้สูงสุด
+                $high = floor($total_pagination / 2); // หาร เพื่อหาค่า Mean
+                $low = "-" . $high;
+                if (($page + $high) > $num_pages) {
+                    $y = $num_pages + $low;
+                } elseif (($page - $high) < 1) {
+                    $y =  $total_pagination;
+                } else {
+                    $y = $total_pagination;
+                }
+                // ----------------------------------------------------------
+                if ($page > 4) {
+                    if ($page >= $total_pagination - 3) { // กรณีมากกว่าหน้าแรก
+                        $offset = 3; // ฮอฟเซทการแสดงผลหน้าสุดท้าย
+                        for ($i = $low; $i <= $high; $i++) {
+                            if (($page + $high) <= $num_pages) {
+                                if ($page + $i == $page) {
+                                    echo '<li class="page-item active"><a href="#">' . ($page + $i) . '</a></li>';
+                                } else {
+                                    echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page + $i) . "&search_food=$strKeyword&search_type=$search_type'>" . ($page + $i) . "</a>" . '</li>';
+                                }
+                            } else { // กรณีหน้าสุดท้าย
+                                if ($page == $num_pages) {
+                                    $offset = $num_pages - ($num_pages - 4);
+                                }
+
+                                for ($i = 0; $i <= 2, (($page - $offset) <= $num_pages); $i++) {
+
+                                    if ($page - $offset == $page) {
+                                        echo '<li class="page-item active"><a href="#">' . ($page - $offset) . '</a></li>';
+                                    } else {
+                                        echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=" . ($page - $offset) . "&search_food=$strKeyword&search_type=$search_type'>" . ($page - $offset) . "</a>" . '</li>';
+                                    }
+                                    $offset--;
+                                }
+                            }
+                        }
                     } else {
-                        echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                        for ($i = 1; $i <= $y; $i++) {
+                            if ($i == $page) {
+                                echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                            } else {
+                                echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_food=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+                            }
+                        }
+                    }
+                } else {
+                    for ($i = 1; $i <= (($num_pages < 5) ? $num_pages : "5"); $i++) {
+                        if ($i != $page) {
+                            echo "<li class='page-item n'><a href='$_SERVER[SCRIPT_NAME]?Page=$i&search_food=$strKeyword&search_type=$search_type'>$i</a>" . '</li>';
+                        } else {
+                            echo '<li class="page-item active"><a href="#">' . $i . '</a></li>';
+                        }
                     }
                 }
+
                 if ($page != $num_pages) {
                     echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=$next_page&search_food=$strKeyword&search_type=$search_type'>ถัดไป</a></li>";
                 } else {
                     echo '<li class="page-item disabled">' . "<a href ='#'>ถัดไป</a></li> ";
+                }
+                if ($page == $num_pages) { // ปุ่มหน้าสุดท้าย
+                    echo '<li class="page-item disabled">' . " <a href='#'>>></a></li>";
+                } else {
+                    echo '<li class="page-item n">' . " <a href='$_SERVER[SCRIPT_NAME]?Page=" . $num_pages . "&search_food=$strKeyword&search_type=$search_type'>>></a></li>";
                 }
                 $conn = null;
                 ?>
