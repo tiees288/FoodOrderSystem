@@ -136,7 +136,7 @@
                                         if ($result_od1['order_type'] == 1) {
                                             if ($cus_data['payno_cancel'] == "") {
                                 ?>
-                                                <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกการชำระ เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
+                                                <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกใบเสร็จรับเงิน เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
                                                 </a>
                                 <?php
                                             }
