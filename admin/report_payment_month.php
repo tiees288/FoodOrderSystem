@@ -110,9 +110,15 @@ $year    = $_POST['year'];
                         break;
                 }
 
-                $sql_cus = "SELECT cus.cus_name, date(orders.orderdate) FROM orders
-                    LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
-                WHERE orders.payno = '" . $result_payment['payno'] . "'";
+                if ($result_payment['pay_status'] == 1) {
+                    $sql_cus = "SELECT cus.cus_name, date(orders.orderdate) FROM orders
+                        LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
+                    WHERE orders.payno = '" . $result_payment['payno'] . "'";
+                } elseif ($result_payment['pay_status'] == 2) {
+                    $sql_cus = "SELECT cus.cus_name, date(orders.orderdate) FROM orders
+                        LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
+                    WHERE orders.payno_cancel = '" . $result_payment['payno'] . "'";                    
+                }
                 $result_cus = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
 
                 if ($row_payment > 1) {

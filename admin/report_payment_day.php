@@ -111,15 +111,26 @@ include("../conf/connection.php");
                         $payment_type = "-";
                 }
 
-
-
-                $sql_cus = "SELECT cus.cus_name FROM payment
+                if ($result_payment['pay_status'] == 1) {
+                    $sql_cus = "SELECT cus.cus_name FROM payment
                     LEFT JOIN orders ON payment.payno = orders.payno
                     LEFT JOIN customers as cus ON orders.cusid = cus.cusid 
                 WHERE payment.payno = '" . $result_payment['payno'] . "'";
+                } else if ($result_payment['pay_status'] == 2) {
+                    $sql_cus = "SELECT cus.cus_name FROM payment
+                    LEFT JOIN orders ON payment.payno = orders.payno_cancel
+                    LEFT JOIN customers as cus ON orders.cusid = cus.cusid 
+                WHERE payment.payno = '" . $result_payment['payno'] . "'";
+                }
                 $query_cus = mysqli_query($link, $sql_cus);
                 $result_cus = mysqli_fetch_assoc($query_cus);
 
+                if ($result_cus['cus_name'] == "") {
+                    mysqli_free_result($query_cus);
+
+                    $query_cus = mysqli_query($link, $sql_cus);
+                    $result_cus = mysqli_fetch_assoc($query_cus);
+                }
         ?>
                 <tr>
                     <td></td>
@@ -129,8 +140,13 @@ include("../conf/connection.php");
                     <td><?= $payment_status ?></td>
                     <td align="right" style="padding-right:5px;"><?= $pay_amount ?></td>
                     <?php
-                    $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
+                    if ($result_payment['pay_status'] == 1) {
+                        $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
                         WHERE payno = '" . $result_payment['payno'] . "'";
+                    } elseif ($result_payment['pay_status'] == 2) {
+                        $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
+                        WHERE payno_cancel = '" . $result_payment['payno'] . "'";
+                    }
                     $query_date2 = mysqli_query($link, $sql_date2);
 
                     $row_order_day = 1; // จำนวนแถว วันที่
@@ -140,8 +156,15 @@ include("../conf/connection.php");
                         }
 
                         echo "<td align='center'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td>";
-                        $sql_order = "SELECT orderid, order_totalprice, tables_no
-                        FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' AND payno = '" . $result_payment['payno'] . "'";
+                        if ($result_payment['pay_status'] == 1) {
+                            $sql_order = "SELECT orderid, order_totalprice, tables_no
+                                FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' 
+                                AND payno = '" . $result_payment['payno'] . "'";
+                        } elseif ($result_payment['pay_status'] == 2) {
+                            $sql_order = "SELECT orderid, order_totalprice, tables_no
+                            FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' 
+                            AND payno_cancel = '" . $result_payment['payno'] . "'";
+                        }
                         $query_order = mysqli_query($link, $sql_order);
 
                         $row_order = 1; // จำนวนแถว การสั่ง
