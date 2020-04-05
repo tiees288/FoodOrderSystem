@@ -16,6 +16,7 @@ if (isset($_GET['pno'])) { // กรณียกเลิกเฉพาะร�
     $sql_payment = "UPDATE payment SET
         pay_status = 2 WHERE payno = '$pno'";
     $sql_order = "UPDATE orders SET
+        payno_cancel = payno,
         order_status = 0 WHERE payno = '$pno'";
 
     if (mysqli_query($link, $sql_payment) && mysqli_query($link, $sql_order)) {

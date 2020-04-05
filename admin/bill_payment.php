@@ -23,8 +23,16 @@ include("../conf/connection.php");
 
 <body>
     <?php
-    $sql_payment = "SELECT * FROM payment LEFT JOIN orders ON payment.payno = orders.payno
-    LEFT JOIN customers ON orders.cusid = customers.cusid WHERE payment.payno = '" . $_GET['bill'] . "'";
+    $sql_p = "SELECT pay_status FROM payment WHERE payno = '" . $_GET['bill'] . "'";
+    $result_p = mysqli_fetch_assoc(mysqli_query($link, $sql_p));
+    //echo $result_p['pay_status'];
+    if ($result_p['pay_status'] == 2) {
+        $sql_payment = "SELECT * FROM payment LEFT JOIN orders ON payment.payno = orders.payno_cancel
+            LEFT JOIN customers ON orders.cusid = customers.cusid WHERE payment.payno = '" . $_GET['bill'] . "'";
+    } elseif ($result_p['pay_status'] == 1) {
+        $sql_payment = "SELECT * FROM payment LEFT JOIN orders ON payment.payno = orders.payno
+            LEFT JOIN customers ON orders.cusid = customers.cusid WHERE payment.payno = '" . $_GET['bill'] . "'";
+    }
     $result_payment = mysqli_fetch_assoc(mysqli_query($link, $sql_payment));
 
     $sql_staff = "SELECT staff_name FROM staff WHERE staffid = '" . $result_payment['staffid'] . "'";
@@ -83,7 +91,11 @@ include("../conf/connection.php");
                 <th style="border-top:1px solid;"></th>
             </tr>
             <?php
-            $sql_order = "SELECT * FROM orders WHERE payno = '" . $_GET['bill'] . "'";
+            if ($result_p['pay_status'] == "2") {
+                $sql_order = "SELECT * FROM orders WHERE payno_cancel = '" . $_GET['bill'] . "'";
+            } elseif ($result_p['pay_status'] == "1") {
+                $sql_order = "SELECT * FROM orders WHERE payno = '" . $_GET['bill'] . "'";
+            }
             $q_order = mysqli_query($link, $sql_order);
             $sum_final = 0;
 
@@ -150,7 +162,7 @@ include("../conf/connection.php");
                 <td width="20%" align="right" style="padding-right:5px;"><b>ลายเซ็นลูกค้า : </b></td>
                 <td>...............................</td>
                 <td align="right" style="padding-right:5px;"><b>วันที่ชำระ : </b></td>
-                <td ><?= fulldatetime_thai(dt_tothaiyear($result_payment['pay_date'])) ?></td>
+                <td><?= fulldatetime_thai(dt_tothaiyear($result_payment['pay_date'])) ?></td>
             </tr>
             <tr>
                 <td width="20%" align="right" style="padding-right:5px;"><b>ชื่อพนักงาน : </b></td>

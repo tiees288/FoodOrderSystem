@@ -134,7 +134,7 @@
                             <td align="right"><?= $result['cusid'] ?></td>
                             <td><?= $result['cus_name'] ?></td>
                             <td><?= $result['cus_tel'] ?></td>
-                            <td><?= $result['cus_email'] ?></td>
+                            <td><?= ($result['cus_email'] != "") ? $result['cus_email'] : "-" ?></td>
                             <td><?= $cus_status ?></td>
                             <td align="center">
                         <a href="<?= $ref_href ?>?cusid=<?= $result['cusid'] ?>" <?php if ($result['cus_status'] == 1) { ?> onclick=" if (confirm('ลูกค้าบัญชีดำ ต้องการทำรายการต่อหรือไม่?') ) {} else return false;" <?php } ?> class="btn btn-success btn-md">

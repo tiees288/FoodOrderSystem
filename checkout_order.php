@@ -73,8 +73,9 @@
 									<td><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
 								</tr>
 								<tr>
-									<td colspan="2" align="right" style="padding-right:10px; margin-top:0px; vertical-align: top; ">
-										<font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น</font>
+									<td colspan="2" align="center" style="padding-left:120px; margin-top:0px; vertical-align: top; ">
+										<font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
+											<br>ในระยะทางไม่เกิน 3 กี่โลเมตร</font>
 									</td>
 								</tr>
 							</table>

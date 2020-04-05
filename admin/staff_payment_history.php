@@ -85,9 +85,17 @@
                 if ($num_rows > 0) { // ค้นหพบรายการอาหาร ให้แสดง
                     while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
                         // $ordertime = strtotime($result["orderdate"]);
-                        $sql_cus = "SELECT orders.orderid, customers.cusid, customers.cus_name FROM orders
+                        $sql_cus = "SELECT orders.orderid, orders.payno_cancel,customers.cusid, customers.cus_name FROM orders
                             LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.payno = '" . $result['payno'] . "'";
-                        $cus_data = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
+                        $query_cusd = mysqli_query($link, $sql_cus) or die(mysqli_error($link));
+                        $cus_data = mysqli_fetch_assoc($query_cusd);
+
+                        if (!isset($cus_data['cusid'])) {
+                            mysqli_free_result($query_cusd);
+                            $sql_cus = "SELECT orders.orderid, orders.payno_cancel, customers.cusid, customers.cus_name FROM orders
+                            LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.payno_cancel = '" . $result['payno'] . "'";
+                            $cus_data = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
+                        }
 
                         switch ($result['pay_status']) {
                             case 0:
@@ -126,10 +134,12 @@
                                         $query_od1 = mysqli_query($link, $sql_od1);
                                         $result_od1 = mysqli_fetch_assoc($query_od1);
                                         if ($result_od1['order_type'] == 1) {
+                                            if ($cus_data['payno_cancel'] == "") {
                                 ?>
-                                            <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกการชำระ เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
-                                            </a>
+                                                <a href="staff_cancel_payment.php?pno=<?= $result['payno'] ?>" onclick="if(confirm('ต้องการยกเลิกใบเสร็จรับเงิน เลขที่ <?= $result['payno'] ?> ใช่หรือไม่?')) return true; else return false;" class="btn btn-danger"><i class="fa fa-times"></i> ยกเลิกใบเสร็จรับเงิน
+                                                </a>
                                 <?php
+                                            }
                                         }
                                     }
                                 } ?>

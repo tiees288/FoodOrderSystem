@@ -14,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql_add_qty = "UPDATE materials SET material_qty = material_qty + '$qty_add' WHERE materialid = '$materialid'";
 
     if (mysqli_query($link,$sql_add_qty)) {
-        echo "<script> alert('เพิ่มจำนวนรายการอาหาร รหัสวัตถุดิบ: ". $materialid ." เรียบร้อยแล้ว'); window.location.assign('show_material.php');</script>";
+        echo "<script> alert('เพิ่มจำนวนวัตถุดิบ รหัสวัตถุดิบ: ". $materialid ." เรียบร้อยแล้ว'); window.location.assign('show_material.php');</script>";
     } else {
-        echo "<script> alert('เพิ่มจำนวนรายการอาหาร รหัสวัตถุดิบ: ". $materialid ." ผิดพลาด'); window.history.back();</script>";
+        echo "<script> alert('เพิ่มจำนวนวัตถุดิบ รหัสวัตถุดิบ: ". $materialid ." ผิดพลาด'); window.history.back();</script>";
     }
 
 }

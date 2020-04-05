@@ -143,7 +143,7 @@ if (!isset($_GET['rid'])) {
             </div>
             <div class="row">
                 <div class="col-md-7 col-md-offset-3" style="text-align: center; padding-top:20px;">
-                    <input type="submit" <?= $editable ?> name="submit" id="submit" onclick="if(confirm('ยืนยันแก้ไขรายการจอง?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
+                    <input type="submit" <?= $editable ?> name="submit" id="submit" onclick="if(confirm('ยืนยันการปรับปรุงการจอง?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
                     <button type="reset" class="btn btn-danger">คืนค่า</button>
                     <button type="submit" name="confirms" onclick="if(confirm('ต้องการยืนยันการจอง?')) return true; else return false;" class="btn btn-primary">ยืนยันการจอง</button>
                     <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิการจอง?')) return true; else return false;" class="btn btn-warning">ยกเลิกการจอง</button></form>
