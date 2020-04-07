@@ -58,7 +58,7 @@ include("../conf/connection.php");
         <?php
         $sql_date = "SELECT DISTINCT date(pay_date) FROM payment WHERE (date(pay_date) >= date('" . tochristyear($_POST['startdate']) . "') AND date(pay_date) <= date('" . tochristyear($_POST['enddate']) . "'))";
         $query_date = mysqli_query($link, $sql_date) or die(mysqli_error($link));
-        $total_pay = $total_bank_trans = $total_cash = 0;
+        $total_pay = $total_bank_trans = $total_cash = $pay_status_1 = $pay_status_2 = 0;
 
         if (mysqli_num_rows($query_date) == 0) {
             echo "<script>alert('ไม่พบข้อมูลที่ท่านค้นหา'); window.close();</script>";
@@ -87,9 +87,11 @@ include("../conf/connection.php");
                         break;
                     case 1:
                         $payment_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
+                        $pay_status_1 += $result_payment['payamount'];
                         break;
                     case 2:
                         $payment_status = "<font color='red'>ยกเลิก</font>";
+                        $pay_status_2 += $result_payment['payamount'];
                         break;
                     default:
                         $payment_status = "-";
@@ -216,7 +218,7 @@ include("../conf/connection.php");
         </b></td>
     <td colspan="3"></td>
 </tr>
-<tr style="border-bottom:1px solid;">
+<tr>
     <td colspan="3"></td>
     <td align="right" colspan="2"><b>
             <font color='#1E87C9'>รวมชำระด้วยเงินสดทั้งหมด(บาท)</font>
@@ -226,6 +228,32 @@ include("../conf/connection.php");
         </b></td>
     <td style="padding-left:10px;"><b>
             <font color='#1E87C9'>บาท</font>
+        </b></td>
+    <td colspan="3"></td>
+</tr>
+<tr>
+    <td colspan="3"></td>
+    <td align="right" colspan="2"><b>
+            <font color='#12BB4F'>รวมชำระแล้วทั้งหมด(บาท)</font>
+        </b></td>
+    <td align="right"><b>
+            <font color='#12BB4F'><?= number_format($pay_status_1, 2) ?></font>
+        </b></td>
+    <td style="padding-left:10px;"><b>
+            <font color='#12BB4F'>บาท</font>
+        </b></td>
+    <td colspan="3"></td>
+</tr>
+<tr style="border-bottom:1px solid;">
+    <td colspan="3"></td>
+    <td align="right" colspan="2"><b>
+            <font color='red'>รวมยกเลิกทั้งหมด(บาท)</font>
+        </b></td>
+    <td align="right"><b>
+            <font color='red'><?= number_format($pay_status_2, 2) ?></font>
+        </b></td>
+    <td style="padding-left:10px;"><b>
+            <font color='red'>บาท</font>
         </b></td>
     <td colspan="3"></td>
 </tr>

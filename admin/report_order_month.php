@@ -198,7 +198,7 @@ $year    = $_POST['year'];
         <tr>
             <td colspan="4" style="height:25px;"></td>
             <td colspan="2" align="">
-                <font color="#12BB4F"><b>รวมยังไม่แจ้งชำระทั้งหมด(บาท)</b></font>
+                <font color="#12BB4F"><b>รวมชำระแล้วทั้งหมด(บาท)</b></font>
             </td>
             <td align="right" style="padding-right: 15px;">
                 <font color="#12BB4F"><b><?= $total_trans_2 ?></b></font>
