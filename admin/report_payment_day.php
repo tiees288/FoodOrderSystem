@@ -140,7 +140,7 @@ include("../conf/connection.php");
                     <td><?= $result_cus['cus_name'] ?></td>
                     <td><?= $payment_type ?></td>
                     <td><?= $payment_status ?></td>
-                    <td align="right" style="padding-right:5px;"><?= $pay_amount ?></td>
+                    <td align="right" style="padding-right:5px;"><?= number_format($pay_amount, 2) ?></td>
                     <?php
                     if ($result_payment['pay_status'] == 1) {
                         $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
