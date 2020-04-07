@@ -100,13 +100,13 @@ include("../conf/connection.php");
                 switch ($result_payment['pay_type']) {
                     case 0:
                         $payment_type = "<font color='#1E87C9'>เงินสด</font>";
-                        $pay_amount = "<font color='#1E87C9'>" . $result_payment['payamount'] . "</font>";
+                        $pay_amount = "<font color='#1E87C9'>" . number_format($result_payment['payamount'], 2) . "</font>";
                         $total_cash += $result_payment['payamount'];
 
                         break;
                     case 1:
                         $payment_type = "<font color='#EB6BD8'>เงินโอน</font>";
-                        $pay_amount = "<font color='#EB6BD8'>" . $result_payment['payamount'] . "</font>";
+                        $pay_amount = "<font color='#EB6BD8'>" . number_format($result_payment['payamount'],2) . "</font>";
                         $total_bank_trans += $result_payment['payamount'];
                         break;
                     default:
@@ -140,7 +140,7 @@ include("../conf/connection.php");
                     <td><?= $result_cus['cus_name'] ?></td>
                     <td><?= $payment_type ?></td>
                     <td><?= $payment_status ?></td>
-                    <td align="right" style="padding-right:5px;"><?= number_format($pay_amount, 2) ?></td>
+                    <td align="right" style="padding-right:5px;"><?= $pay_amount ?></td>
                     <?php
                     if ($result_payment['pay_status'] == 1) {
                         $sql_date2 = "SELECT DISTINCT date(orderdate) FROM orders
