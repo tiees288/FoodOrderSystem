@@ -85,22 +85,22 @@ include("../conf/connection.php");
                 switch ($result_order['order_status']) {
                     case 0:
                         $order_status = "<font color='orange'>ยังไม่แจ้งชำระ</font>";
-                        $order_totalprice = "<font color='orange'>" . $result_order['order_totalprice'] . "</font>";
+                        $order_totalprice = "<font color='orange'>" . number_format($result_order['order_totalprice'], 2) . "</font>";
                         $total_trans_0++;
                         break;
                     case 1:
                         $order_status = "<font color='#0072EE'>รอการตรวจสอบ</font>";
-                        $order_totalprice = "<font color='#0072EE'>" . $result_order['order_totalprice'] . "</font>";
+                        $order_totalprice = "<font color='#0072EE'>" . number_format($result_order['order_totalprice'], 2) . "</font>";
                         $total_trans_1++;
                         break;
                     case 2:
                         $order_status = "<font color='#12BB4F'>ชำระแล้ว</font>";
-                        $order_totalprice = "<font color='#12BB4F'>" . $result_order['order_totalprice'] . "</font>";
+                        $order_totalprice = "<font color='#12BB4F'>" . number_format($result_order['order_totalprice'], 2) . "</font>";
                         $total_trans_2++;
                         break;
                     case 3:
                         $order_status = "<font color='red'>ยกเลิก</font>";
-                        $order_totalprice = "<font color='red'>" . $result_order['order_totalprice'] . "</font>";
+                        $order_totalprice = "<font color='red'>" . number_format($result_order['order_totalprice'], 2) . "</font>";
                         $total_trans_3++;
                         break;
                     default:
@@ -204,7 +204,7 @@ include("../conf/connection.php");
         <tr>
             <td colspan="2" style="height:30px;"></td>
             <td colspan="2" align="">
-                <font color="#12BB4F"><b>รวมยังไม่แจ้งชำระทั้งหมด(บาท)</b></font>
+                <font color="#12BB4F"><b>รวมชำระแล้วทั้งหมด(บาท)</b></font>
             </td>
             <td align="right">
                 <font color="#12BB4F"><b><?= number_format($total_2, 2) ?></b></font>
