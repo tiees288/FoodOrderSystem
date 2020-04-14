@@ -54,6 +54,7 @@
                                     <td height="40px" width="15%"><b>วันที่สั่ง :</b></td>
                                     <td width="35%">
                                         <?= dt_tothaiyear($result_order['orderdate']) ?>
+                                        <input type="text" hidden id="orderdate" name="orderdate" value="<?= substr($result_order['orderdate'],0,10) ?>"
                                     </td>
                                     <td width="16%" height="40px"><b>เบอร์โทรศัพท์ :</b></td>
                                     <td><?php echo $result_order['cus_tel'] ?></td>
