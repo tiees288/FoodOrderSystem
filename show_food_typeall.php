@@ -11,6 +11,7 @@
 <body>
 	<?php
 	include("conf/header.php");
+	require_once('conf/connection.php');
 
 	/*ini_set('display_errors', 1);
 	error_reporting(~0);*/
@@ -18,13 +19,13 @@
 	$strKeyword = null;
 	$food_type = null;
 	if (isset($_POST["search_food"])) {
-		$strKeyword = $_POST["search_food"];
+		$strKeyword = mysqli_real_escape_string($link, $_POST["search_food"]);
 	}
 	if (isset($_GET["search_food"])) {
-		$strKeyword = $_GET["search_food"];
+		$strKeyword = mysqli_real_escape_string($link, $_GET["search_food"]);
 	}
 	if (isset($_GET["food_type"])) {
-		$food_type = $_GET['food_type'];
+		$food_type = mysqli_real_escape_string($link, $_GET['food_type']);
 	}
 	?>
 	<div class="container" style="padding-top: 90px;">
@@ -88,10 +89,9 @@
 					<th style="text-align: center;">ตะกร้าสินค้า</th>
 				</thead>
 				<?php
-				include('conf/connection.php');
 
 				if (isset($_GET["food_type"])) {
-					$food_type = $_GET['food_type'];
+					$food_type = mysqli_real_escape_string($link, $_GET['food_type']);
 				}
 
 				$sql = "SELECT * FROM foods WHERE food_name LIKE '%" . $strKeyword . "%' AND food_status = '0' AND food_type LIKE '%" . $food_type . "%'";

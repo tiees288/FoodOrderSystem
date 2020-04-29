@@ -66,7 +66,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" style="width:150px" minlength="3" value="" name="food_count">
+                        <input type="text" class="form-control" required style="width:150px" minlength="3" value="" name="food_count">
                     </div>
                 </div>
             </div><hr>

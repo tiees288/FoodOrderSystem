@@ -151,15 +151,20 @@
 							</label>
 						</div>
 					</div>
-
+					<div class="col-md-offset-3 col-md-3">
+						<div class="g-recaptcha" data-callback="makeaction" data-sitekey="6Ld1aOEUAAAAANHUmu7MueMRPoSkDeQWrAl4QMIC"></div>
+					</div>
 					<div class="form-group">
-						<div class="col-md-offset-4 col-md-6">
-							<button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
-							<button type="reset" class="btn btn-danger">ล้างค่า</button>
+						<div class="col-md-offset-4 col-md-6" style="padding-top:10px;">
+							<button type="submit" id="submit" disabled class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
+							<button type="reset" onclick='$("#user-r").html("");' class="btn btn-danger">ล้างค่า</button>
 							<button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 						</div>
 					</div>
 				</form>
+
+				<script src='https://www.google.com/recaptcha/api.js'></script>
+
 			</div>
 		</div>
 	</div>
@@ -167,7 +172,12 @@
 		<p>
 			<?php include("conf/footer.php"); ?>
 </body>
+
 <script>
+	function makeaction() {
+		document.getElementById('submit').disabled = false;
+	}
+
 	function check_form(data2, type) {
 		if ($("#user_name").val() != "") {
 			//console.log($("#user_name").val());

@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
     function check_place() {
-        var place = new RegExp('10120');
+        var place = new RegExp('12120');
         var delivery_input = document.getElementById("postnum").value
 
         if (place.test(delivery_input)) {

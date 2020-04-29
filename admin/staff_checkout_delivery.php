@@ -54,8 +54,7 @@
                                     <td height="40px" width="15%"><b>วันที่สั่ง :</b></td>
                                     <td width="35%">
                                         <?= dt_tothaiyear($result_order['orderdate']) ?>
-                                    </td>
-                                    <td width="16%" height="40px"><b>เบอร์โทรศัพท์ :</b></td>
+                                        <input type="text" hidden id="orderdate" name="orderdate" value="<?= substr($result_order['orderdate'], 0, 10) ?>" </td> <td width="16%" height="40px"><b>เบอร์โทรศัพท์ :</b></td>
                                     <td><?php echo $result_order['cus_tel'] ?></td>
                                 </tr>
                                 <tr>
@@ -77,9 +76,7 @@
                                 </tr>
                                 <tr>
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;"></span></b></td>
-                                    <td height="75px"><?= $result_order['cus_address'] . " รหัสไปรษณีย์ " . $result_order['cus_postnum'] ?></td>
-                                    </td>
-                                    </td>
+                                    <td height="75px"><?= $result_order['order_delivery_place'] ?></td>
                                 </tr>
                             </table>
                 </div>

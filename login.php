@@ -88,17 +88,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$username	= mysqli_real_escape_string($link, $_POST['username']);
 	$password	= mysqli_real_escape_string($link, $_POST['password']);
 
-	$sql		=	"SELECT cusid, cus_user, cus_name, cus_password, cus_status FROM customers WHERE cus_user = '" . $username . "' AND cus_password = '" . sha1($password) . "' ";
-
+	$sql		=	"SELECT cusid, cus_user, cus_name, cus_password, cus_status FROM customers WHERE cus_user = '" . $username . "'";
 	$data 		= 	mysqli_query($link, $sql);
 	//เช็คผู้ใช้งานซ้ำ
 	if (mysqli_num_rows($data) != "0") {
-		$data_user 	=	mysqli_fetch_assoc($data);
-		$_SESSION['user_id']	= $data_user['cusid'];
-		$_SESSION['user'] 		= $data_user['cus_user'];
-		$_SESSION['user_status'] = $data_user['cus_status'];
-
-		echo "<script> alert('เข้าสู่ระบบสำเร็จ');window.location.assign('index.php') </script>";
+		$data_user = mysqli_fetch_assoc($data);
+		if (sha1($password) == $data_user['cus_password']) {
+			$_SESSION['user_id']	= $data_user['cusid'];
+			$_SESSION['user'] 		= $data_user['cus_user'];
+			$_SESSION['user_status'] = $data_user['cus_status'];
+			mysqli_close($link);
+			echo "<script> alert('เข้าสู่ระบบสำเร็จ');window.location.assign('index.php') </script>";
+		} else {
+			echo "<script> alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'); </script>";
+		}
 	} else {
 		echo "<script> alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'); </script>";
 	}
