@@ -108,7 +108,7 @@
                             <td align="center"> <?= dt_tothaiyear($result['orderdate']) ?></td>
                             <td align="right"> <?= number_format($result["order_totalprice"], 2) ?></td>
                             <td><?= $order_status ?></td>
-                            <td align="center"><?php if (($result['order_status'] == 0)) { ?>
+                            <td align="center"><?php if (($result['order_status'] == 0) && $result['order_type'] == 2) { ?>
                                     <a href="order_payment.php?oid=<?= $result['orderid'] ?>" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> แจ้งหลักฐาน</a>
                                 <?php } elseif ($result['order_status'] == 1 || $result['order_status'] == 2) { ?>
                                     <?php if ($result['order_status'] == 2 && empty($result['order_evidence'])) {

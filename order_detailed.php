@@ -111,7 +111,7 @@ if (!isset($_GET['oid'])) {
                             <tr>
                                 <td width="20%" height="32px"><b>สถานที่จัดส่ง :</b></td>
                                 <td width="30%" height="75px">
-                                    <?= $order_data['order_delivery_place'] ?>
+                                    <?= $order_data['order_type'] != '1' ? $order_data['order_delivery_place'] : "-" ?>
                                 </td>
                             </tr>
                         </table>
