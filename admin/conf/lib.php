@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="lib/css/bootstrap.min.css">
 <!--<script src="lib/js/jquery.min.js"></script>-->
-<script src="../lib/js/jquery-3.5.0.min.js"></script>
+<script src="lib/js/jquery-3.5.0.min.js"></script>
 <script src="lib/js/bootstrap.min.js"></script>
 
 
