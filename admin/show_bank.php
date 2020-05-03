@@ -55,7 +55,7 @@
                                     echo "selected";
                                 } ?> value="bank_status">สถานะ</option>
                     </select>
-                    <input class="form-control" type="text" name="search_bank" placeholder="ค้นหารข้อมูลธนาคาร" style="width:220px;" aria-label="Search">
+                    <input class="form-control" type="text" name="search_bank" placeholder="ค้นหาข้อมูลธนาคาร" style="width:220px;" aria-label="Search">
                 </div>
                 <button type="submit" class="btn btn-success mb-2">ค้นหา</button>
 
