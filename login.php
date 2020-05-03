@@ -106,6 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo "<script> alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'); </script>";
 	}
 
-	mysqli_close($link);
+	// mysqli_close($link);
 }
 ?>
