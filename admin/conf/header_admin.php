@@ -258,7 +258,7 @@
 						<li class="divider dropdown-divider"></li>
 						<li><a href="<?= ($_SESSION['staff_level'] == 1) ? "UserManualAdmin.pdf" : "UserManualEmployee.pdf" ?>"  target="_blank" class="dropdown-item"><i class="fa fa-book"></i> คู่มือการใช้งาน</a></li>
 						<li class="divider dropdown-divider"></li>
-						<li><a href="logout.php" class="dropdown-item"><i class="fa fa-power-off"></i> ออกจากระบบ</a></li>
+						<li><a onclick="if(confirm('ต้องการออกจากระบบใช่หรือไม่?')) return true; else return false;" href="logout.php" class="dropdown-item"><i class="fa fa-power-off"></i> ออกจากระบบ</a></li>
 					</ul>
 				</li>
 			</ul>
