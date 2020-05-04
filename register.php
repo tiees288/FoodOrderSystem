@@ -46,6 +46,7 @@
 				rules: {
 					name: {
 						required: true,
+						minlength: 5,
 					},
 					email: {
 						required: true,
@@ -86,12 +87,14 @@
 				messages: {
 					name: {
 						required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
+						minlength: "<font color='red'>กรุณากรอก มากกว่า 5 ตัวอักษร</font>",
 					},
 					number_phone: {
 						required: "<font color='red'>กรุณากรอกหมายเลขโทรศัพท์</font>",
 						digits: "<font color='red'>กรุณากรอกหมายเลขโทรศัพท์</font>",
 						minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณาระบุหมายเลขโทรศัพท์ให้ถูกต้อง</font>",
 					},
 					email: {
 						required: "<font color='red'>กรุณากรอกอีเมลของท่าน</font>",
@@ -145,7 +148,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="name" minlength="5" maxlength="30" name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
+							<input type="text" class="form-control" id="name" name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
 						</div>
 					</div>
 
