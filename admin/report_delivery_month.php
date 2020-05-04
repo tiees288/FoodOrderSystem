@@ -45,13 +45,13 @@ $year    = $_POST['year'];
             <th style="text-align:left; padding-left:15px; width:120px;">สถานะการสั่ง</th>
             <th style="text-align:center; width:100px">วันที่ส่ง</th>
             <th style="text-align:center; width:100px">เวลาส่ง</th>
-            <th style="text-align:center; width:130px;">วันที่สั่งอาหาร</th>
+            <th style="text-align:center; width:150px;">วัน/เวลาสั่งอาหาร</th>
             <th style="text-align:center; width:100px;">รหัสการสั่ง</th>
             <th style="text-align:center; width:100px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:center; width:150px;">วัน/เวลากำหนดส่ง</th>
             <th style="text-align:left; width:160px;">ชื่อลูกค้า</th>
             <th style="text-align:left; width:110px;">เบอร์โทรศัพท์</th>
-            <th style="text-align:left; width:225px;">สถานที่ส่ง</th>
+            <th style="text-align:left; width:235px;">สถานที่ส่ง</th>
             <th style="text-align:right; width:110px; padding-right:15px;">ราคา(บาท)</th>
         </tr>
         <?php
@@ -99,8 +99,8 @@ $year    = $_POST['year'];
                         echo "</tr><tr><td colspan='2' height='30px'></td>";
                     }
             ?>
-                    <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
-                    <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
+                    <td align="center"><?= substr($result_order['order_time_delivered'], 0, 5) ?></td>
+                    <td align="center"><?= short_datetime_thai($result_order['orderdate']) . " " . substr($result_order['orderdate'], 11, 5) ?></td>
                     <td align="center"><?= $result_order['orderid'] ?></td>
                     <td align="center"><?= $result_order['payno'] ?></td>
                     <td align="center"><?= short_datetime_thai($result_order['order_date_tobedelivery']) . " " . substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>
@@ -162,8 +162,8 @@ $year    = $_POST['year'];
                         echo "</tr><tr><td colspan='2' height='30px'></td>";
                     }
             ?>
-                    <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
-                    <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
+                    <td align="center"><?= substr($result_order['order_time_delivered'], 0, 5) ?></td>
+                    <td align="center"><?= short_datetime_thai($result_order['orderdate']) . " " . substr($result_order['orderdate'], 11, 5) ?></td>
                     <td align="center"><?= $result_order['orderid'] ?></td>
                     <td align="center"><?= $result_order['payno'] ? $result_order['payno'] : "-" ?></td>
                     <td align="center"><?= short_datetime_thai($result_order['order_date_tobedelivery']) . " " . substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>
@@ -223,8 +223,8 @@ $year    = $_POST['year'];
                             echo "</tr><tr><td colspan='2' height='30px'></td>";
                         }
             ?>
-                        <td align="center"><?= substr($result_order['order_time_delivered'],0,5) ?></td>
-                        <td align="center"><?= short_datetime_thai($result_order['orderdate']) ?></td>
+                        <td align="center"><?= substr($result_order['order_time_delivered'], 0, 5) ?></td>
+                        <td align="center"><?= short_datetime_thai($result_order['orderdate']) . " " . substr($result_order['orderdate'], 11, 5) ?></td>
                         <td align="center"><?= $result_order['orderid'] ?></td>
                         <td align="center"><?= $result_order['payno'] ? $result_order['payno'] : "-" ?></td>
                         <td align="center"><?= short_datetime_thai($result_order['order_date_tobedelivery']) . " " . substr($result_order['order_time_tobedelivery'], 0, 5) ?></td>

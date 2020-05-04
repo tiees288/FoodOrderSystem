@@ -35,7 +35,7 @@ $year    = $_POST['year'];
         <h3 class="text-center">เดือน <?= fullmonth($month) ?> พ.ศ. <?= $year + 543 ?></h3>
         <br>
     </div>
-    <table border="0" width="1050px" align="center">
+    <table border="0" width="1150px" align="center">
         <tr>
             <td colspan="8" align="right" style="border-bottom:1px solid;">
                 วันที่พิมพ์ <?= fulldate_thai(date("d-m-Y")); ?>
@@ -46,7 +46,7 @@ $year    = $_POST['year'];
             <th style="text-align:center; width:160px;">เลขที่ใบเสร็จ</th>
             <th style="text-align:left; width:160px;">ประเภทการชำระ</th>
             <th style="text-align:left; width:180px;">ชื่อลูกค้า</th>
-            <th style="text-align:center; width:150px;">วันที่สั่งอาหาร</th>
+            <th style="text-align:center; width:150px;">วันที่/เวลาสั่งอาหาร</th>
             <th style="text-align:right; padding-right:10px; width:150px;">ยอดชำระ(บาท)</th>
             <th style="text-align:left; width:170px;">ชื่อพนักงาน</th>
             <th style="text-align:left; width:120px;">สถานะ</th>
@@ -111,13 +111,13 @@ $year    = $_POST['year'];
                 }
 
                 if ($result_payment['pay_status'] == 1) {
-                    $sql_cus = "SELECT cus.cus_name, date(orders.orderdate) FROM orders
+                    $sql_cus = "SELECT cus.cus_name, orders.orderdate, date(orders.orderdate) FROM orders
                         LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
                     WHERE orders.payno = '" . $result_payment['payno'] . "'";
                 } elseif ($result_payment['pay_status'] == 2) {
-                    $sql_cus = "SELECT cus.cus_name, date(orders.orderdate) FROM orders
+                    $sql_cus = "SELECT cus.cus_name, orders.orderdate,date(orders.orderdate) FROM orders
                         LEFT JOIN customers AS cus ON orders.cusid = cus.cusid
-                    WHERE orders.payno_cancel = '" . $result_payment['payno'] . "'";                    
+                    WHERE orders.payno_cancel = '" . $result_payment['payno'] . "'";
                 }
                 $result_cus = mysqli_fetch_assoc(mysqli_query($link, $sql_cus));
 
@@ -129,7 +129,7 @@ $year    = $_POST['year'];
                 <td align="center"><?= $result_payment['payno'] ?></td>
                 <td><?= $pay_type ?></td>
                 <td><?= $result_cus['cus_name'] ?></td>
-                <td align="center"><?= short_datetime_thai($result_cus['date(orders.orderdate)']) ?></td>
+                <td align="center"><?= short_datetime_thai($result_cus['date(orders.orderdate)']) . " " . substr($result_cus['orderdate'],11,5) ?></td>
                 <td align="right" style="padding-right:10px;"><?= $pay_amount ?></td>
                 <td><?= $result_payment['staff_name']  ?></td>
                 <td><?= $pay_status ?></td>

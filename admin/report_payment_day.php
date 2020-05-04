@@ -157,7 +157,7 @@ include("../conf/connection.php");
                             echo "</tr><tr><td colspan='6'></td>";
                         }
 
-                        echo "<td align='center'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td>";
+                        echo "<td align='left' style='padding-left:20px;'>" . short_datetime_thai($result_date2['date(orderdate)']) . "</td>";
                         if ($result_payment['pay_status'] == 1) {
                             $sql_order = "SELECT orderid, order_totalprice, tables_no
                                 FROM orders WHERE date(orderdate) = '" . $result_date2['date(orderdate)'] . "' 
