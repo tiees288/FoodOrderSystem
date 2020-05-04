@@ -29,6 +29,17 @@
 				return true;
 			return false;
 		}
+
+		function reset_form() {
+			var number_phone = document.getElementById('number_phone');
+			var post_num = document.getElementById('postnumber');
+			var cf_password = document.getElementById('cf_password');
+
+			post_num.setCustomValidity('');
+			number_phone.setCustomValidity('');
+			cf_password.setCustomValidity('');
+		}
+
 	</script>
 
 </head>
@@ -50,7 +61,7 @@
 	<div class="container" style="padding-top: 90px;">
 		<h1 class="page-header text-left">แก้ไขข้อมูลผู้ใช้</h1>
 		<div class="col-md-offset-1 col-md-10">
-			<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<form class="form-horizontal" onreset="reset_form()" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-2" for="name">รหัสลูกค้า :</label>
 					<div class="col-md-2">
@@ -112,7 +123,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
 					<div class="col-md-2">
-						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
+						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')"  oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
 					</div>
 					<div class="col-md-4 col-md-offset-2">
 						<label class="control-label">
@@ -145,7 +156,7 @@
 					<label class="control-label col-md-2" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
 					</label>
 					<div class="col-md-3">
-						<input type="password" class="form-control" name="cf_password" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")' minlength="8" maxlength="16" value="">
+						<input type="password" class="form-control" id="cf_password" name="cf_password" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")' minlength="8" maxlength="16" value="">
 					</div>
 					<div class="col-md-4 col-md-offset-1">
 						<label class="control-label colmd-3">
