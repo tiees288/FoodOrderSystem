@@ -117,8 +117,8 @@
 					number_phone: {
 						required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
 						digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
-						minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
-						maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+						minlength: "<font color='red'>กรุณากรอกไม่น้อยกว่า 9 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกไม่เกิน 10 ตัวอักษร</font>",
 						pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
 					},
 					email: {
@@ -127,11 +127,10 @@
 					},
 					postnumber: {
 						required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
-						minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
-						maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						minlength: "<font color='red'>กรุุณากรอกให้ครบ 5 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุุณากรอกให้ครบ 5 ตัวอักษร</font>",
 						pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
 					},
-
 					address: {
 						required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
 					},
