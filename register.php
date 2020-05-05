@@ -44,7 +44,6 @@
 				rules: {
 					name: {
 						required: true,
-						minlength: 5,
 					},
 					email: {
 						required: true,
@@ -86,6 +85,7 @@
 					name: {
 						required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
 						//minlength: "<font color='red'>กรุณากรอก มากกว่า 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณากรอกเฉพาะ ตัวอักษรเท่านั้น",
 					},
 					number_phone: {
 						required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",

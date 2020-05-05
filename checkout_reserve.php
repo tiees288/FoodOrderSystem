@@ -4,8 +4,33 @@
 	if (!isset($_SESSION)) {  // Check if sessio nalready start
 		session_start();
 	}
+	include("conf/header.php");
 	?>
 	<link rel="shortcut icon" href="favicon.ico" />
+	<script>
+	
+	$(document).ready(function() {
+			$("#checkout_order").validate({
+				// Specify validation rules
+				messages: {
+					reserv_date_appointment: {
+						required: "<font size='2' style='padding-left:45px;' color='red'>กรุณาเลือกวันที่นัด</font>",
+					},
+					reserv_time_appointment: {
+						required: "<font size='2' style='padding-left:15px;' color='red'>กรุณาเลือกเวลากำหนดส่ง</font>",
+						min: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+						max: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+					},
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
+	
+	</script>
+
 </head>
 
 <body>
@@ -19,7 +44,7 @@
 		echo "<script>alert('ไม่สามารถจองโต๊ะได้ กรุณาติดต่อพนักงาน'); window.location.assign('cart_order.php');</script>";
 		exit();
 	}
-	include("conf/header.php");
+
 	include("conf/connection.php");
 	include_once("conf/function.php");
 
@@ -60,16 +85,16 @@
 								<tr>
 									<td></td>
 									<td colspan="1" align="center">
-										<font color="red" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font><br>
+										<font color="097DB6" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font><br>
 									</td>
 									<td colspan="2" style="text-align:right">
-										<font color="red" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
+										<font color="097DB6" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center">
-									<hr style="border-top: 1px solid #D5D5D5; margin: 10px; padding-bottom:0px;">
-										<font color="red" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
+										<hr style="border-top: 1px solid #D5D5D5; margin: 10px; padding-bottom:0px;">
+										<font color="097DB6" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
 									</td>
 								</tr>
 							</table>

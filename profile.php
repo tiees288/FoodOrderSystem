@@ -65,6 +65,7 @@
 			console.log($('#password').val());
 			return $('#password').val().length > 0;
 		}
+		passwords = $('#password').val();
 		// Wait for the DOM to be ready
 		$(document).ready(function() {
 			console.log('ready');
@@ -106,7 +107,7 @@
 						minlength: 8,
 						equalTo: {
 							depends: isPasswordPresent,
-							param: "password",
+							param: '#password',
 						}
 					},
 				},
