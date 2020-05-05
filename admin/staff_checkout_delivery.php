@@ -7,6 +7,7 @@
     include("conf/header_admin.php");
     ?>
     <link rel="shortcut icon" href="favicon.ico" />
+
 </head>
 
 <body>
@@ -72,7 +73,31 @@
                                         <input class="form-control datepicker-deliver" onkeypress="return false; event.preventDefault();" onfocus="$(this).blur();" autocomplete="off" type="text" style="height:32px; width:180px" id="order_date_delivered" name="order_date_delivered" required></td>
                                     </td>
                                     <td width="15%" height="32px"><b>เวลาส่ง :<span style="color:red;">*</span></b></td>
-                                    <td><input class="form-control" autocomplete="off" type="time" min="09:00" max="18:00" style="height:32px; width:180px" id="order_time_delivered" name="order_time_delivered" required></td>
+
+                                    <?php
+                                    $orderdates = substr($result_order['orderdate'], 0, 10);
+                                    $ordertime = substr($result_order['orderdate'], 11, 5);
+                                    $same_date = "0";
+                                    $todaydates = date("Y-m-d");
+                                    $max_time = "19:00";
+
+                                    if ($orderdates == $todaydates) {
+                                        // กรณีวันเดียวกัน
+                                        if ($ordertime >= "19:00") {
+                                            $same_date = "1";
+                                            $min_time = "09:00";
+                                        } else {
+                                            $min_time = date("H:i", strtotime($ordertime . "+30 minutes"));
+                                        }
+                                    } elseif ($todaydates > $orderdates) {
+                                        // กรณีวันที่ปัจจุบัน 
+                                        $min_time = "09:00";
+                                    } else {
+                                        $min_time = "09:00";
+                                    }
+                                    ?>
+
+                                    <td><input class="form-control" autocomplete="off" type="time" min="<?= $min_time ?>" max="<?= $max_time ?>" style="height:32px; width:180px" id="order_time_delivered" name="order_time_delivered" oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง <?= $min_time ?>-<?= $max_time ?>')" oninput="this.setCustomValidity('')" required></td>
                                 </tr>
                                 <tr>
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;"></span></b></td>
@@ -134,5 +159,32 @@
                     <button type="reset" class="btn btn-danger">ล้างค่า</button></form>
                     <button type="back" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
                 </div>
-
             </div>
+
+            <script>
+                $(function() {
+                    var delivery_orderdate = new Date($('#orderdate').val());
+                    var end_date = 'now';
+
+                    if (<?= $same_date ?>) {
+                        <?php // กรณีวันเดียวกัน และเกิน 19:00 
+                        ?>
+                        end_date = new Date("<?= date("Y-m-d", strtotime($orderdates . "+1 day")) ?>");
+                        delivery_orderdate = end_date;
+                    }
+
+                    $('.datepicker-deliver').datepicker({
+                        language: 'th-th', //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+                        format: 'dd/mm/yyyy',
+                        disableTouchKeyboard: true,
+                        todayBtn: false,
+                        clearBtn: true,
+                        closeBtn: false,
+                        daysOfWeekDisabled: [0],
+                        endDate: end_date,
+                        startDate: delivery_orderdate,
+                        autoclose: true, //Set เป็นปี พ.ศ.
+                        inline: true
+                    }) //กำหนดเป็นวันปัจุบัน       
+                });
+            </script>

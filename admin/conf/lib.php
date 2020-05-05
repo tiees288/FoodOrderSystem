@@ -75,21 +75,6 @@
             inline: true
         }) //กำหนดเป็นวันปัจุบัน       
 
-        var delivery_orderdate = new Date($('#orderdate').val());
-        $('.datepicker-deliver').datepicker({
-            language: 'th-th', //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-            format: 'dd/mm/yyyy',
-            disableTouchKeyboard: true,
-            todayBtn: false,
-            clearBtn: true,
-            closeBtn: false,
-            daysOfWeekDisabled: [0],
-            endDate: 'now',
-            startDate: delivery_orderdate,
-            autoclose: true, //Set เป็นปี พ.ศ.
-            inline: true
-        }) //กำหนดเป็นวันปัจุบัน       
-
         var start_report = new Date(2019, 4, 1);
         var end_report = new Date(start_report.getFullYear() + 10, 11, 32);
         // Report Selector
