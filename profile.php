@@ -10,6 +10,8 @@
 		echo  "<script> alert('กรุณาเข้าสู่ระบบ');window.location.assign('index.php') </script>";
 		exit();
 	}
+	include("conf/header.php");
+
 	?>
 
 	<script type="text/javascript">
@@ -30,6 +32,25 @@
 			return false;
 		}
 
+		// function valid(target) {
+		// 	var name = $('#name').val();
+		// 	var name2 = document.getElementById('name');
+
+
+		// 	$('#profile').validator();
+
+		// 	// if (1) {
+		// 	// 	console.log("Checked.");
+		// 	// 	//name2.setCustomValidity("ERROR");
+		// 	// 	target.setCustomValidity("ERROR");
+
+
+
+		// 	// }
+
+		// 	console.log(name);
+		// }
+
 		function reset_form() {
 			var number_phone = document.getElementById('number_phone');
 			var post_num = document.getElementById('postnumber');
@@ -40,13 +61,103 @@
 			cf_password.setCustomValidity('');
 		}
 
+		function isPasswordPresent() {
+			console.log($('#password').val());
+			return $('#password').val().length > 0;
+		}
+		passwords = $('#password').val();
+		// Wait for the DOM to be ready
+		$(document).ready(function() {
+			console.log('ready');
+			$("#profile").validate({
+				// Specify validation rules
+				focusout: true,
+				rules: {
+					name: {
+						required: true,
+					},
+					email: {
+						required: true,
+						email: true,
+					},
+					number_phone: {
+						required: true,
+						digits: true,
+						minlength: 10,
+						maxlength: 10,
+					},
+					postnumber: {
+						required: true,
+						minlength: 5,
+						maxlength: 5,
+					},
+					password: {
+						//required: true is not required
+						minlength: {
+							depends: isPasswordPresent,
+							param: 8
+						},
+						maxlength: {
+							depends: isPasswordPresent,
+							param: 16
+						},
+					},
+					cf_password: {
+						required: isPasswordPresent,
+						minlength: 8,
+						equalTo: {
+							depends: isPasswordPresent,
+							param: '#password',
+						}
+					},
+				},
+				messages: {
+					name: {
+						required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
+					},
+					number_phone: {
+						required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+						digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+						minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
+					},
+					email: {
+						required: "<font color='red'>กรุณากรอกอีเมลของท่าน</font>",
+						email: "<font color='red'>กรุณากรอกอีเมลในรูปแบบที่ถูกต้อง</font>",
+					},
+					postnumber: {
+						required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
+						minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
+					},
+
+					address: {
+						required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
+					},
+					password: {
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+					cf_password: {
+						required: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกัน</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
 	</script>
 
 </head>
 
 <body>
 	<?php
-	include("conf/header.php");
 	require_once("conf/connection.php");
 	require_once("conf/function.php");
 
@@ -61,7 +172,7 @@
 	<div class="container" style="padding-top: 90px;">
 		<h1 class="page-header text-left">แก้ไขข้อมูลผู้ใช้</h1>
 		<div class="col-md-offset-1 col-md-10">
-			<form class="form-horizontal" onreset="reset_form()" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<form class="form-horizontal" name="profile" id="profile" onchange="//validators()" onreset="reset_form()" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-2" for="name">รหัสลูกค้า :</label>
 					<div class="col-md-2">
@@ -122,10 +233,10 @@
 
 				<div class="form-group">
 					<label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
-					<div class="col-md-2">
-						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')"  oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
 					</div>
-					<div class="col-md-4 col-md-offset-2">
+					<div class="col-md-3 col-md-offset-1">
 						<label class="control-label">
 							<font color="#8F8D8D">กรอกเป็นตัวเลข 5 ตัว</font>
 						</label>
@@ -143,11 +254,11 @@
 				<div class="form-group">
 					<label class="control-label col-md-2" for="password">รหัสผ่าน :<font color="red"></font></label>
 					<div class="col-md-3">
-						<input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
+						<input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="16" value="">
 					</div>
 					<div class="col-md-4 col-md-offset-1"">
-						<label class="control-label colmd-3">
-							<font color="#8F8D8D">กรอกอย่างน้อย 8-16 ตัว</font>
+						<label class=" control-label colmd-3">
+						<font color="#8F8D8D">กรอกอย่างน้อย 8-16 ตัว</font>
 						</label>
 					</div>
 				</div>

@@ -13,6 +13,25 @@ include('conf/header_admin.php');
 include('../conf/function.php');
 ?>
 <title>แก้ไขข้อมูลโต๊ะ | Food Order System</title>
+
+<script>
+    $(document).ready(function() {
+        $("#edittable").validate({
+            messages: {
+                tables_seats: {
+                    required: "<font color='red'>กรุณากรอกจำนวนที่นั่ง</font>",
+                    min: "<font color='red'>กรุณากรอกจำนวนที่นั่งมากกว่า 2 ที่นั่ง</font>",
+                    max: "<font color='red'>กรุณากรอกจำนวนที่นั่งไม่เกิน 12 ที่นั่ง</font>",
+                },
+            },
+            onfocusout: function(element) {
+                // "eager" validation
+                this.element(element);
+            },
+        });
+    });
+</script>
+
 </head>
 
 <body>
@@ -23,7 +42,7 @@ include('../conf/function.php');
     ?>
     <div class="container" style="padding-top: 135px; padding-bottom:15px;">
         <h1 class="page-header text-left">แก้ไขข้อมูลโต๊ะ</h1>
-        <form method="POST" action="edit_table.php" enctype="multipart/form-data">
+        <form method="POST" id="edittable" action="edit_table.php" enctype="multipart/form-data">
             <div class="form-group" style="margin-top:10px;">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หมายเลขโต๊ะ :</label>
@@ -68,7 +87,7 @@ include('../conf/function.php');
             <div class="col-md-4 col-md-offset-5">
                 <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
                 <button type="reset" class="btn btn-danger">คืนค่า</button>
-                <button type="button" class="btn btn-info" onclick="window.history.back();" >ย้อนกลับ</button>
+                <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
         </form>
     </div>
     </div>

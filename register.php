@@ -4,6 +4,7 @@
 	if (!isset($_SESSION)) {  // Check if sessio nalready start
 		session_start();
 	}
+	include("conf/header.php");
 	?>
 
 	<link rel="shortcut icon" href="favicon.ico" />
@@ -31,7 +32,108 @@
 			}
 		}
 	</style>
-
+	<script>
+		function isPasswordPresent() {
+			console.log($('#password').val());
+			return $('#password').val().length > 0;
+		}
+		// Wait for the DOM to be ready
+		$(document).ready(function() {
+			$("#register").validate({
+				// Specify validation rules
+				rules: {
+					name: {
+						required: true,
+					},
+					email: {
+						required: true,
+						email: true,
+					},
+					number_phone: {
+						required: true,
+						digits: true,
+						minlength: 10,
+						maxlength: 10,
+					},
+					address: "required",
+					postnumber: {
+						required: true,
+						minlength: 5,
+						maxlength: 5,
+					},
+					password: {
+						required: true,
+						minlength: {
+							depends: isPasswordPresent,
+							param: 8
+						},
+						maxlength: {
+							depends: isPasswordPresent,
+							param: 16
+						},
+					},
+					cf_password: {
+						required: true,
+						minlength: 8,
+						equalTo: {
+							depends: isPasswordPresent,
+							param: "password",
+						}
+					},
+				},
+				messages: {
+					name: {
+						required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
+						//minlength: "<font color='red'>กรุณากรอก มากกว่า 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณากรอกเฉพาะ ตัวอักษรเท่านั้น",
+					},
+					number_phone: {
+						required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+						digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+						minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
+					},
+					email: {
+						required: "<font color='red'>กรุณากรอกอีเมลของท่าน</font>",
+						email: "<font color='red'>กรุณากรอกอีเมลในรูปแบบที่ถูกต้อง</font>",
+					},
+					postnumber: {
+						required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
+						minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
+					},
+					user_name: {
+						required: true,
+						minlength: 5,
+					},
+					address: {
+						required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
+					},
+					user_name: {
+						required: "<font color='red'>กรุณากรอกชื่อผู้ใช้ที่ต้องการ</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณากรอกเป็นตัวอักษร A-z และ 0-9 อย่างน้อย 5 ตัว</font>",
+					},
+					password: {
+						required: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+					cf_password: {
+						required: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกับ รหัสผ่าน</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -41,7 +143,6 @@
 		exit();
 	} // ตรวจสอบว่ามีการเข้าสู่ระแบบแล้วหรือยัง
 
-	include("conf/header.php");
 	?>
 	<div class="container" style="padding-top: 90px;">
 		<div class="col">
@@ -51,7 +152,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2" for="name">ชื่อ - นามสกุล :<font color="red">*</font></label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="name" minlength="5" maxlength="30"  name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
+							<input type="text" class="form-control" id="name" name="name" pattern="^[ก-๏a-zA-Z\s]+$" required>
 						</div>
 					</div>
 
@@ -99,7 +200,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2" for="address">ที่อยู่ :<font color="red">*</font></label>
 						<div class="col-md-5">
-							<textarea name="address" id="" cols="30" rows="4" class="form-control"></textarea>
+							<textarea name="address" id="address" cols="30" rows="4" class="form-control"></textarea>
 						</div>
 					</div>
 					<div class="form-group">

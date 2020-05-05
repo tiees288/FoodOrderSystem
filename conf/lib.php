@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="lib/css/bootstrap.min.css">
 <!-- <script src="lib/js/jquery.min.js"></script> -->
 <script src="lib/date/jquery-3.4.1.min.js"></script>
+<script src="lib/js/jquery.validate.min.js"></script>
+<script src="lib/js/jquery-validate-addition.min.js"></script>
+
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 <script src="lib/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="lib/date/js/bootstrap-datepicker.js"></script>
