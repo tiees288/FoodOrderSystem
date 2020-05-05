@@ -19,6 +19,9 @@
                     bank_branch: {
                         required: "<font color='red'>กรุณากรอกสาขาของธนาคาร</font>",
                     },
+                    bank_details: {
+                        required: "<font color='red'>กรุณากรอกหมายเลขบัญชีธนาคาร</font>",
+                    },
                 },
                 onfocusout: function(element) {
                     // "eager" validation

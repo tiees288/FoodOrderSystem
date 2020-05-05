@@ -24,6 +24,9 @@
                     bank_branch: {
                         required: "<font color='red'>กรุณากรอกสาขาของธนาคาร</font>",
                     },
+                    bank_details: {
+                        required: "<font color='red'>กรุณากรอกหมายเลขบัญชีธนาคาร</font>",
+                    },
                     bank_status: {
                         required: "<font color='red'>กรุณาเลือกสถานะ</font>",
                     }

@@ -119,7 +119,7 @@
 						digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
 						minlength: "<font color='red'>กรุณากรอกไม่น้อยกว่า 9 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุณากรอกไม่เกิน 10 ตัวอักษร</font>",
-						pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
+						pattern: "<font color='red'>กรุณากรอกบอร์โทรศัพท์ให้ถูกต้อง</font>",
 					},
 					email: {
 						required: "<font color='red'>กรุณากรอกอีเมลของท่าน</font>",
