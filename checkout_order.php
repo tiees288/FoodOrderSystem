@@ -4,9 +4,41 @@
 	if (!isset($_SESSION)) {  // Check if sessio nalready start
 		session_start();
 	}
+	include("conf/header.php");
 	?>
 
 	<link rel="shortcut icon" href="favicon.ico" />
+	<script>
+		$(document).ready(function() {
+			$("#checkout_order").validate({
+				// Specify validation rules
+				rules: {
+
+
+				},
+				messages: {
+					deliverydate: {
+						required: "<font size='2' style='padding-left:13px;' color='red'>กรุณาเลือกวันที่กำหนดส่ง</font>",
+					},
+					deliverytime: {
+						required: "<font size='2' color='red'>กรุณาเลือกเวลากำหนดส่ง</font>",
+						min: "<font size='2' color='red'>กรุณาเระบในเวลาที่กำหนด</font>",
+						max: "<font size='2' color='red'>กรุณาเระบุในเวลาที่กำหนด</font>",
+					},
+					deliveryplace: {
+						required: "<font size='2' color='red'>กรุณากรอกสถานที่ส่ง</font>",
+					},
+					postnum: {
+						required: "<font size='2' color='red'>กรุณากรอกรหัสไปรษณีย์</font>",		
+					},
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -22,7 +54,7 @@
 	}
 
 
-	include("conf/header.php");
+
 	include("conf/connection.php");
 	include_once("conf/function.php");
 
@@ -33,20 +65,20 @@
 	<div class="container" style="padding-top: 90px;">
 		<div class="col">
 			<h1 class="page-header text-center">บันทึกการสั่งอาหาร</h1>
-			<div class="container" style="width:980px">
+			<div class="container" style="width:1000px">
 				<div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
 					<p>
 						<form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_order.php">
 							<table width="750px" border="0" align="center">
 								<tr>
-									<td width="34px" height="36px"><b>รหัสลูกค้า :</b></td>
-									<td width="30%"><?php echo $_SESSION['user_id'] ?></td>
+									<td width="30px" height="36px"><b>รหัสลูกค้า :</b></td>
+									<td width="25%"><?php echo $_SESSION['user_id'] ?></td>
 									<td width="20%" height="36px"><b>ชื่อ-นามสกุล :</b></td>
 									<td><?php echo $cus_data['cus_name']; ?></td>
 								</tr>
 								<tr>
 									<td height="40px" width="15%"><b>วันที่สั่ง :</b></td>
-									<td width="35%">
+									<td width="30%">
 										<input class="form-control" style="height:32px; width:210px" id="orderdate" type="datetime-local" name="orderdate" value="<?= dt_tothaiyear2(date('Y-m-d H:i')); ?>" readonly>
 									</td>
 									<td width="16%" height="40px"><b>เบอร์โทรศัพท์ :</b></td>
@@ -54,7 +86,7 @@
 								</tr>
 								<tr>
 									<td width="15%" height="32px"><b>วันที่กำหนดส่ง :<span style="color:red;">*</span></b></td>
-									<td width="35%">
+									<td width="33%">
 										<input class="form-control datepicker-checkout" autocomplete="off" style="height:32px; width:215px" id="deliverydate" onfocus="$(this).blur();" onchange="validate_delverytime();" onkeypress="return false;" onpaste="return false" type="text" name="deliverydate" required>
 									</td>
 									<td width="15%" height="32px"><b>เวลากำหนดส่ง :<span style="color:red;">*</span></b></td>
@@ -63,18 +95,18 @@
 								<tr>
 									<td colspan="2"></td>
 									<td colspan="2" align="right" style="vertical-align: top; ">
-										<font color="red" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
+										<font color="097DB6" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
 									</td>
 								</tr>
 								<tr>
 									<td width="20%" height="30px"><b>สถานที่จัดส่ง :<span style="color:red;">*</span></b></td>
 									<td height="81px"><textarea name="deliveryplace" style="width:230px;" id="deliveryplace" cols="15" rows="3" class="form-control" required><?= $cus_data['cus_address']  ?></textarea></td>
-									<td width="15%" height="32px"><b>รหัสไปรษณีย์ :<span style="color:red;">*</span></b></td>
-									<td><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
+									<td width="10%" height="32px"><b>รหัสไปรษณีย์ :<span style="color:red;">*</span></b></td>
+									<td width="20%"><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
 								</tr>
 								<tr>
 									<td colspan="2" align="center" style="padding-left:120px; margin-top:0px; vertical-align: top; ">
-										<font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
+										<font color="097DB6" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
 											<br>ในระยะทางไม่เกิน 3 กี่โลเมตร</font>
 									</td>
 								</tr>
