@@ -39,10 +39,8 @@
 		}
 		// Wait for the DOM to be ready
 		$(document).ready(function() {
-			console.log('ready');
 			$("#register").validate({
 				// Specify validation rules
-				focusout: true,
 				rules: {
 					name: {
 						required: true,
@@ -104,6 +102,7 @@
 						required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
 						minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
 					},
 					user_name: {
 						required: true,
@@ -113,7 +112,9 @@
 						required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
 					},
 					user_name: {
-						required: "<font color='red'>กรุณากรอกชื่อผู้ใช้ที่ต้องการ</font>"
+						required: "<font color='red'>กรุณากรอกชื่อผู้ใช้ที่ต้องการ</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณากรอกเป็นตัวอักษร A-z และ 0-9 อย่างน้อย 5 ตัว</font>",
 					},
 					password: {
 						required: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
@@ -126,7 +127,10 @@
 						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
 					},
 				},
-
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
 			});
 		});
 	</script>
