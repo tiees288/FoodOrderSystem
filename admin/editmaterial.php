@@ -35,7 +35,7 @@
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ชื่อวัตถุดิบ :<span style="color:red;">*</span> </label>
-                    <div class="col-md-8" style="">
+                    <div class="col-md-8" >
                         <input type="text" class="form-control" value="<?= $result['material_name'] ?>" style="width:280px" required name="material_name">
                     </div>
                 </div>
@@ -44,14 +44,14 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" value="<?= $result['material_qty'] ?>" min="0" max="300" required name="material_qty">
+                        <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" value="<?= $result['material_qty'] ?>" min="0" required name="material_qty">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">หน่วยนับ :<span style="color:red;">*</span> </label>
-                    <div class="col-md-8" style="">
+                    <div class="col-md-8">
                         <input type="text" class="form-control" style="width:250px" value="<?= $result['material_count'] ?>" required name="material_count">
                     </div>
                 </div>

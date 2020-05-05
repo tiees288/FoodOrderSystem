@@ -17,8 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 food_price	    = '" . $_POST['food_price'] . "',
                 food_qty	    = '" . $_POST['food_qty'] . "',
                 food_count	    = '" . $_POST['food_count'] . "',
-                food_status     = '" . $_POST['food_status'] . "',
-                food_recomend   = '" . $_POST['food_recomend'] . "'  WHERE foodid = '" . $_POST['foodid'] . "' ";
+                food_status     = '" . $_POST['food_status'] . "'  WHERE foodid = '" . $_POST['foodid'] . "' ";
 
         if (mysqli_query($link, $sql_update) or die(mysqli_error($link))) {
             echo "<script> alert('แก้ไขข้อมูล หัสรายการอาหาร: " . $_POST['foodid'] . " เรียบร้อยแล้ว'); window.location.assign('show_food.php')</script>";
@@ -31,9 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 food_qty	    = '" . $_POST['food_qty'] . "',
                 food_count	    = '" . $_POST['food_count'] . "',
                 food_image      = '" . "images/food/" . $food_image . "',
-                food_status     = '" . $_POST['food_status'] . "',
-    
-                food_recomend  = '" . $_POST['food_recomend'] . "'  WHERE foodid = '" . $_POST['foodid'] . "' ";
+                food_status     = '" . $_POST['food_status'] . "' WHERE foodid = '" . $_POST['foodid'] . "' ";
         if (in_array($file_extension, $extension)) {
             if (move_uploaded_file($_FILES['food_image']['tmp_name'], "../images/food/" . $food_image)) {
 

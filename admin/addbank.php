@@ -34,9 +34,9 @@
             </div>
             <div class="form-group" style="margin-top:10px;">
                 <div class="row">
-                    <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รายละเอียด :</label>
+                    <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">เลขที่บัญชี :<span style="color:red;">*</span></label>
                     <div class="col-md-8">
-                        <textarea style="width:300px" class="form-control" rows="3" cols="2" name="bank_details"></textarea>
+                        <textarea style="width:300px" required class="form-control" rows="3" cols="2" name="bank_details"></textarea>
                     </div>
                 </div>
             </div>

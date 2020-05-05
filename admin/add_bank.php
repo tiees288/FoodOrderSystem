@@ -5,12 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //	include_once('../conf/function.php');
 
 
-    /*  $chk_bankname    = mysqli_query($link, "SELECT * FROM banks WHERE bank_name = '" . $_POST['bank_name'] . "'");
+     $chk_bankdetails    = mysqli_query($link, "SELECT * FROM banks WHERE bank_details = '" . $_POST['bank_details'] . "'");
     //ถ้าในฐานข้อมูลมี ผู้ใช้งานแล้ว
-    if (mysqli_num_rows($chk_bankname) != "0") {
-        echo "<script> alert('บมีอยู่ในระบบแล้ว'); window.history.back();</script>";
+    if (mysqli_num_rows($chk_bankdetails) != "0") {
+        echo "<script> alert('เลขที่บัญชีนี้ มีในระบบแล้ว'); window.history.back();</script>";
         exit();
-    }*/
+    }
 
     $sql        =    "INSERT INTO banks SET 
 						bank_name		= '" . $_POST['bank_name'] . "',
