@@ -115,19 +115,21 @@
 						required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
 					},
 					number_phone: {
-						required: "<font color='red'>กรุณากรอกหมายเลขโทรศัพท์</font>",
-						digits: "<font color='red'>กรุณากรอกหมายเลขโทรศัพท์</font>",
+						required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+						digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
 						minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
 					},
 					email: {
-						required: "<font color='red'>Please enter email address</font>",
-						email: "<font color='red'>Please enter a valid email address.</font>",
+						required: "<font color='red'>กรุณากรอกอีเมลของท่าน</font>",
+						email: "<font color='red'>กรุณากรอกอีเมลในรูปแบบที่ถูกต้อง</font>",
 					},
 					postnumber: {
 						required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
 						minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+						pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
 					},
 
 					address: {
@@ -143,7 +145,10 @@
 						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
 					},
 				},
-
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
 			});
 		});
 	</script>
@@ -227,10 +232,10 @@
 
 				<div class="form-group">
 					<label class="control-label col-md-2" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['cus_postnum'] ?>" required>
 					</div>
-					<div class="col-md-4 col-md-offset-2">
+					<div class="col-md-3 col-md-offset-1">
 						<label class="control-label">
 							<font color="#8F8D8D">กรอกเป็นตัวเลข 5 ตัว</font>
 						</label>
