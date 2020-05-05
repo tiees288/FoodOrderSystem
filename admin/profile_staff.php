@@ -10,12 +10,92 @@
         echo  "<script> alert('กรุณาเข้าสู่ระบบ');window.location.assign('index.php') </script>";
         exit();
     }
+    include("conf/header_admin.php");
     ?>
+
+    <script>
+        function isPasswordPresent() {
+            console.log($('#password').val());
+            return $('#password').val().length > 0;
+        }
+        $(document).ready(function() {
+            $("#profilestaff").validate({
+                rules: {
+                    password: {
+                        //required: true is not required
+                        minlength: {
+                            depends: isPasswordPresent,
+                            param: 8
+                        },
+                        maxlength: {
+                            depends: isPasswordPresent,
+                            param: 16
+                        },
+                    },
+                    cf_password: {
+                        required: isPasswordPresent,
+                        minlength: 8,
+                        equalTo: {
+                            depends: isPasswordPresent,
+                            param: '#password',
+                        }
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
+                        //minlength: "<font color='red'>กรุณากรอก มากกว่า 5 ตัวอักษร</font>",
+                        pattern: "<font color='red'>กรุณากรอกเฉพาะ ตัวอักษรเท่านั้น",
+                    },
+                    birthdate: {
+                        required: "<font color='red'>กรุณาเลือกวันเกิด</font>",
+                    },
+                    number_phone: {
+                        required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+                        digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+                        minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
+                        maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+                        pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
+                    },
+                    email: {
+                        email: "<font color='red'>กรุณากรอกอีเมลในรูปแบบที่ถูกต้อง</font>",
+                    },
+                    postnumber: {
+                        required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
+                        minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+                        maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+                        pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
+                    },
+                    address: {
+                        required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
+                    },
+                    nationid: {
+                        required: "<font color='red'>กรุณาเกรอกหมายเลขบัตรประชาชน</font>",
+                        max: "<font color='red'>กรุณากรอกให้ครบ 13 หลัก</font>",
+                        min: "<font color='red'>กรุณากรอกให้ครบ 13 หลัก</font>",
+                    },
+                    password: {
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+					cf_password: {
+						required: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกัน</font>",
+						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+					},
+                },
+                onfocusout: function(element) {
+                    // "eager" validation
+                    this.element(element);
+                },
+            });
+        });
+    </script>
+
 </head>
 
 <body>
     <?php
-    include("conf/header_admin.php");
     require_once("../conf/connection.php");
     require_once("../conf/function.php");
 
@@ -26,7 +106,7 @@
     <div class="container" style="padding-top: 135px;">
         <h1 class="page-header text-left">แก้ไขข้อมูลผู้ใช้</h1>
         <div class="col-md-offset-1 col-md-10">
-            <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form class="form-horizontal" id="profilestaff" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class="form-group">
                     <label class="control-label col-md-3" for="name">รหัสพนักงาน :</label>
                     <div class="col-md-2">
@@ -85,10 +165,10 @@
 
                 <div class="form-group">
                     <label class="control-label col-md-3" for="postnumber">รหัสไปรษณีย์ :<font color="red">*</font></label>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <input type="text" class="form-control" id="postnumber" name="postnumber" pattern="[1-9]{1}[0-9]{3}[0]{1}" oninvalid="this.setCustomValidity('กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง')" oninput="this.setCustomValidity('')" onkeypress="return isNumberKey(event)" type="text" minlength="5" maxlength="5" value="<?= $get_user['staff_postnum'] ?>" required>
                     </div>
-                    <div class="col-md-4 col-md-offset-1">
+                    <div class="col-md-3 col-m-1">
                         <label class="control-label">
                             <font color="#8F8D8D">กรอกเป็นตัวเลข 5 ตัว</font>
                         </label>
@@ -105,7 +185,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" for="postnumber">หมายเลขบัตรประชาชน :<font color="red">*</font></label>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="ืnationid" name="nationid" value="<?= $get_user['staff_nationid'] ?>" required>
+                        <input type="text" class="form-control" id="nationid" name="nationid" value="<?= $get_user['staff_nationid'] ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="control-label">
@@ -117,7 +197,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" for="password">รหัสผ่าน :<font color="red"></font></label>
                     <div class="col-md-3">
-                        <input type="password" class="form-control" name="password" minlength="8" maxlength="16" value="">
+                        <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="16" value="">
                     </div>
                     <div class="col-md-4">
                         <label class="control-label colmd-3">
@@ -130,7 +210,7 @@
                     <label class="control-label col-md-3" for="cf_password">ยืนยันรหัสผ่าน :<font color="red"></font>
                     </label>
                     <div class="col-md-3">
-                        <input type="password" class="form-control" name="cf_password" minlength="8" maxlength="16" value="" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")'>
+                        <input type="password" class="form-control" id="cf_password" name="cf_password" minlength="8" maxlength="16" value="" oninput='cf_password.setCustomValidity(cf_password.value != password.value ? "กรุณากรอกรหัสผ่านให้ตรงกัน!" : "")'>
                     </div>
                     <div class="col-md-4">
                         <label class="control-label colmd-3">
@@ -194,11 +274,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			staff_password	= '" . sha1($password) . "' WHERE staffid = '" . $_SESSION['staff_id'] . "'";
     }
 
-     // ตรวจสอบหมายเลขบัตรประชาชนซ้ำ
+    // ตรวจสอบหมายเลขบัตรประชาชนซ้ำ
     $sql_chk_nation = "SELECT staffid FROM staff WHERE staff_nationid = '" . $_POST['nationid'] . "' AND staff_username != '$user_name'";
     $query_chk_nation = mysqli_query($link, $sql_chk_nation) or die(mysqli_error($link));
 
-       if (mysqli_num_rows($query_chk_nation) > 0) {
+    if (mysqli_num_rows($query_chk_nation) > 0) {
         echo "<script>alert('หมายเลขบัตรประชาชนนี้ถูกใช้แล้ว'); window.history.back(); </script>";
         exit();
     }
