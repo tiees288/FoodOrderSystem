@@ -19,6 +19,7 @@
                 },
                 food_price: {
                     required: "<font color='red'>กรุณากรอกจำนวนวัตถุดิบ</font>",
+                    min: "<font color='red'>กรุณากรอกราคาไม่น้อยกว่า 5 บาท</font>",
                 },
                 food_type: {
                     required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
@@ -57,7 +58,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ราคา (บาท) :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" style="width:150px" min="1" onkeypress="return isNumberKey(event)" value="" name="food_price" required>
+                        <input type="text" class="form-control" style="width:150px" min="5" onkeypress="return isNumberKey(event)" value="" name="food_price" required>
                     </div>
                 </div>
             </div>

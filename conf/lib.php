@@ -73,7 +73,7 @@
         if (place.test(delivery_input)) {
             return true;
         } else {
-            alert('กรุณาระบุรหัสไปรษณีย์ให้ถูกต้อง');
+            alert('จัดส่งเฉพาะรหัสไปรษณีย์ 12120 เท่านั้น');
           //  e.preventDefault();
             return false;
         }

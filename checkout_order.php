@@ -103,7 +103,7 @@
 								<tr>
 									<td colspan="5" align="center" style="margin-top:0px; vertical-align: top; ">
 										<font color="097DB6" style="font-size: 15px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
-											ในระยะทางไม่เกิน 3 กิโลเมตร โดยจะต้องเป็นรหัสไปรษณีย์ 12120 เท่านั้น</font>
+											โดยจะต้องเป็นรหัสไปรษณีย์ 12120 เท่านั้น</font>
 									</td>
 								</tr>
 							</table>

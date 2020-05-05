@@ -23,6 +23,7 @@
                 },
                 food_price: {
                     required: "<font color='red'>กรุณากรอกจำนวนวัตถุดิบ</font>",
+                    min: "<font color='red'>กรุณากรอกราคาไม่น้อยกว่า 5 บาท</font>",
                 },
                 food_type: {
                     required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
@@ -117,7 +118,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" required style="width:150px" min="0" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
+                        <input type="number" class="form-control" required style="width:150px" min="5" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
                     </div>
                 </div>
             </div>
