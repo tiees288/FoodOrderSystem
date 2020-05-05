@@ -9,12 +9,42 @@
     include('conf/header_admin.php');
     ?>
     <title>เพิ่มข้อมูลรายการอาหาร | Food Order System</title>
+
+    <script>
+    $(document).ready(function() {
+        $("#addfood").validate({
+            messages: {
+                food_name: {
+                    required: "<font color='red'>กรุณากรอกชื่อวัตถุดิบ</font>",
+                },
+                food_price: {
+                    required: "<font color='red'>กรุณากรอกจำนวนวัตถุดิบ</font>",
+                },
+                food_type: {
+                    required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
+                },
+                food_qty: {
+                    required: "<font color='red'>กรุณากรอกจำนวนรายการอาหาร</font>",
+                    min: "<font color='red'>กรุณากรอกเป็นจำนวนเต็ม</font>",
+                },
+                food_count: {
+                    required: "<font color='red'>กรุณากรอกหน่วยนับ</font>",
+
+                },
+            },
+            onfocusout: function(element) {
+                this.element(element);
+            },
+        });
+    });
+</script>
+
 </head>
 
 <body>
     <div class="container" style="padding-top: 135px;">
         <h1 class="page-header text-left">เพิ่มข้อมูลรายการอาหาร</h1>
-        <form method="POST" action="add_food.php" enctype="multipart/form-data">
+        <form method="POST" id="addfood" action="add_food.php" enctype="multipart/form-data">
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">ชื่อรายการอาหาร :<span style="color:red;">*</span> </label>

@@ -13,6 +13,53 @@
         include('../conf/function.php');
         ?>
      <title>แก้ไขข้อมูลพนักงาน | Food Order System</title>
+
+     <script>
+                $(document).ready(function() {
+                    $("#editstaff").validate({
+                        messages: {
+                            staff_name: {
+                                required: "<font color='red'>กรุณากรอก ชื่อ-นามสกุล</font>",
+                                //minlength: "<font color='red'>กรุณากรอก มากกว่า 5 ตัวอักษร</font>",
+                                pattern: "<font color='red'>กรุณากรอกเฉพาะ ตัวอักษรเท่านั้น",
+                            },
+                            staff_birth: {
+                                required: "<font color='red'>กรุณาเลือกวันเกิด</font>",
+                            },
+                            staff_tel: {
+                                required: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+                                digits: "<font color='red'>กรุณากรอกเบอร์โทรศัพท์</font>",
+                                minlength: "<font color='red'>กรุณาระบุ ไม่น้อยกว่า 9 ตัวอักษร</font>",
+                                maxlength: "<font color='red'>กรุณาระบุ ไม่เกิน 10 ตัวอักษร</font>",
+                                pattern: "<font color='red'>กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง</font>",
+                            },
+                            staff_email: {
+                                email: "<font color='red'>กรุณากรอกอีเมลในรูปแบบที่ถูกต้อง</font>",
+                            },
+                            staff_postnum: {
+                                required: "<font color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
+                                minlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+                                maxlength: "<font color='red'>กรุุณากรอก ให้ครบ 5 ตัวอักษร</font>",
+                                pattern: "<font color='red'>กรุุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</font>",
+                            },
+                            staff_address: {
+                                required: "<font color='red'>กรุณากรอกที่อยู่ของท่าน</font>",
+                            },
+                            staff_level: {
+                                required: "<font color='red'>กรุณาเลือกระดับของพนักงาน</font>",
+                            },
+                            staff_nationid: {
+                                required: "<font color='red'>กรุณาเกรอกหมายเลขบัตรประชาชน</font>",
+                                max: "<font color='red'>กรุณากรอกให้ครบ 13 หลัก</font>",
+                                min: "<font color='red'>กรุณากรอกให้ครบ 13 หลัก</font>",
+                            },
+                        },
+                        onfocusout: function(element) {
+                            this.element(element);
+                        },
+                    });
+                });
+            </script>
  </head>
 
  <body>
@@ -24,7 +71,7 @@
      <div class="container" style="padding-top: 135px; padding-bottom:15px;">
          <h1 class="page-header text-left">แก้ไขข้อมูลพนักงาน</h1>
          <div class="col-md-offset-1 col-md-12">
-             <form method="POST" class="form-horizontal" action="edit_staff.php" enctype="multipart/form-data">
+             <form method="POST" id="editstaff" class="form-horizontal" action="edit_staff.php" enctype="multipart/form-data">
                  <div class="form-group" style="margin-top:10px;">
                      <label class="control-label col-md-2" style="text-align:right;">รหัสพนักงาน :</label>
                      <div class="col-md-8">

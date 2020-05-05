@@ -13,6 +13,35 @@
     include('../conf/function.php');
     ?>
     <title>แก้ไขข้อมูลรายการอาหาร | Food Order System</title>
+
+    <script>
+    $(document).ready(function() {
+        $("#editfood").validate({
+            messages: {
+                food_name: {
+                    required: "<font color='red'>กรุณากรอกชื่อวัตถุดิบ</font>",
+                },
+                food_price: {
+                    required: "<font color='red'>กรุณากรอกจำนวนวัตถุดิบ</font>",
+                },
+                food_type: {
+                    required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
+                },
+                food_qty: {
+                    required: "<font color='red'>กรุณากรอกจำนวนรายการอาหาร</font>",
+                    min: "<font color='red'>กรุณากรอกเป็นจำนวนเต็ม</font>",
+                },
+                food_count: {
+                    required: "<font color='red'>กรุณากรอกหน่วยนับ</font>",
+
+                },
+            },
+            onfocusout: function(element) {
+                this.element(element);
+            },
+        });
+    });
+</script>
 </head>
 
 <body>
@@ -23,7 +52,7 @@
     ?>
     <div class="container" style="padding-top: 135px; padding-bottom:15px;">
         <h1 class="page-header text-left">แก้ไขข้อมูลรายการอาหาร</h1>
-        <form method="POST" action="edit_food.php" enctype="multipart/form-data">
+        <form method="POST" id="editfood" action="edit_food.php" enctype="multipart/form-data">
             <div class="form-group" style="margin-top:10px;">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รหัสรายการอาหาร :</label>
@@ -88,7 +117,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" required style="width:150px" min="0" max="300" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
+                        <input type="number" class="form-control" required style="width:150px" min="0" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_qty']; ?>" name="food_qty">
                     </div>
                 </div>
             </div>
