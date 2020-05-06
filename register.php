@@ -121,9 +121,10 @@
 						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
 					},
 					cf_password: {
-						required: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกับ รหัสผ่าน</font>",
+						required: "<font color='red'>กรุณากรอกยืนยันรหัสผ่าน</font>",
 						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						equalTo: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกัน</font>",
 					},
 				},
 				onfocusout: function(element) {
