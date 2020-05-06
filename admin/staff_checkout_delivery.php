@@ -6,8 +6,28 @@
     }
     include("conf/header_admin.php");
     ?>
-    <link rel="shortcut icon" href="favicon.ico" />
 
+    <script>
+        $(document).ready(function() {
+            $("#checkout_delivery").validate({
+                // Specify validation rules
+                messages: {
+                    order_date_delivered: {
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือกวันที่ส่ง</font>",
+                    },
+                    order_time_delivered: {
+                        required: "<font size='2' style='padding-left:20px;' color='red'>กรุณาเลือกเวลาส่ง</font>",
+                        min: "<font size='2' style='padding-left:20px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+                        max: "<font size='2' style='padding-left:20px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+                    },
+                },
+                onfocusout: function(element) {
+                    // "eager" validation
+                    this.element(element);
+                },
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -34,7 +54,7 @@
             <div class="container" style="width:970px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
-                        <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_delivery.php">
+                        <form id="checkout_delivery" class="form" name="checkout_order" method="POST" action="save_checkout_delivery.php">
                             <table width="750px" border="0" align="center">
                                 <tr>
                                     <td width="34px" height="36px"><b>รหัสการสั่งอาหาร :</b></td>
@@ -187,4 +207,26 @@
                         inline: true
                     }) //กำหนดเป็นวันปัจุบัน       
                 });
+
+                $("#order_date_delivered").change(function() {
+
+                            function addZero(i) {
+                                if (i < 10) {
+                                    i = "0" + i;
+                                }
+                                return i;
+                            }
+
+                            today = new Date();
+                            delivered_date = $('#order_date_delivered');
+                            delivered_time = $('#order_time_delivered');
+                            today_str = addZero(today.getDate()) + '/' + ((today.getMonth() < 10) ? "0" : "") + (today.getMonth() + 1) + '/' + (today.getFullYear() + 543)
+
+                                // reset 
+                                delivered_time.val('');
+
+                                if (delivered_date.val() == today_str) {
+                                    delivered_time.attr("max", today.getHours() + ":" + addZero(today.getMinutes()));
+                                }
+                            });
             </script>

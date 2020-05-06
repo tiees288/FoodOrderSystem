@@ -4,28 +4,41 @@
     if (!isset($_SESSION)) {  // Check if sessio nalready start
         session_start();
     }
+    include("conf/header_admin.php");
     ?>
-    <link rel="shortcut icon" href="favicon.ico" />
+
+    <script>
+        $(document).ready(function() {
+            $("#checkout_payment").validate({
+                // Specify validation rules
+                rules: {
+                    bankid: "required",
+                },
+                messages: {
+                    bankid: {
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือกช่องทางการชำระเงิน</font>",
+                    },
+                },
+                onfocusout: function(element) {
+                    // "eager" validation
+                    this.element(element);
+                },
+            });
+        });
+    </script>
 </head>
 
 <body>
     <?php
-    include("conf/header_admin.php");
-
     if (!isset($_SESSION['food_admin']['payment']['orderid'])) {
         echo "<script>alert('กรุณาเลือก รหัสการสั่งที่ต้องการรับชำะ'); window.location.assign('staff_cart_payment.php');</script>";
         exit();
     }
 
-  /*  if (!isset($_GET['cusid'])) {
-        echo "<script>window.location.assign('select_customer.php?ref=reserve');</script>";
-        exit();
-    } */
-
     include("../conf/connection.php");
     include_once("../conf/function.php");
 
-    $sql_cusdata    = "SELECT customers.cusid, customers.cus_tel, customers.cus_name FROM orders LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.orderid = '". $_SESSION['food_admin']['payment']['orderid']['0'] ."'";
+    $sql_cusdata    = "SELECT customers.cusid, customers.cus_tel, customers.cus_name FROM orders LEFT JOIN customers ON orders.cusid = customers.cusid WHERE orders.orderid = '" . $_SESSION['food_admin']['payment']['orderid']['0'] . "'";
     $q = mysqli_query($link, $sql_cusdata);
     $cus_data = mysqli_fetch_assoc($q);
     ?>
@@ -33,18 +46,22 @@
         <div class="col">
             <h1 class="page-header text-center">บันทึกรับชำระ</h1>
             <div class="container" style="width:850px">
-                <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
-                    <p>
-                        <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_payment.php">
+                <form id="checkout_payment" class="form" name="checkout_order" method="POST" action="save_checkout_payment.php">
+                    <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
+                        <p>
                             <table width="750px" border="0" align="center">
                                 <!--<tr>
                                     <td align="center" height="36px" colspan="4"><a href="select_customer.php?ref=payment">เลือกลูกค้า</a></td>
                                 </tr> -->
                                 <tr>
+                                    <td style="height:10px;"></td>
+                                </tr>
+                                <tr>
                                     <td width="34px" height="36px"><b>รหัสลูกค้า :</b></td>
                                     <td width="30%">
                                         <?= $cus_data['cusid']; ?>
-                                       <!-- <input type="text" hidden name="cusid" id="cusid" value="<?php // $cus_data['cusid'] ?>"> -->
+                                        <!-- <input type="text" hidden name="cusid" id="cusid" value="<?php // $cus_data['cusid'] 
+                                                                                                        ?>"> -->
                                     </td>
                                     <td width="20%" height="36px"><b>ชื่อ-นามสกุล :</b></td>
                                     <td><?php echo $cus_data['cus_name']; ?></td>
@@ -58,48 +75,48 @@
                                     <td><?php echo $cus_data['cus_tel'] ?></td>
                                 </tr>
                             </table>
-                </div>
-                <h3 class="page-header text-center">รายการสั่งอาหาร</h3>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <th style="text-align:center; width:20%;">รหัสการสั่ง</th>
-                        <th style="text-align:center; width:30%;">วันที่สั่ง</th>
-                        <th style="text-align:right; width:25%;">หมายเลขโต๊ะ</th>
-                        <th style="text-align:right;">ราคารวม (บาท)</th>
+                    </div>
+                    <h3 class="page-header text-center">รายการสั่งอาหาร</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <th style="text-align:center; width:20%;">รหัสการสั่ง</th>
+                            <th style="text-align:center; width:30%;">วันที่สั่ง</th>
+                            <th style="text-align:right; width:25%;">หมายเลขโต๊ะ</th>
+                            <th style="text-align:right;">ราคารวม (บาท)</th>
 
-                    </thead>
-                    <?php
-                    $count_product = count($_SESSION['food_admin']['payment']['orderid']);
-                    $sum_price = 0;
+                        </thead>
+                        <?php
+                        $count_product = count($_SESSION['food_admin']['payment']['orderid']);
+                        $sum_price = 0;
 
-                    for ($i = 0; $i < $count_product; $i++) {
-                        $sql_sum        =    "SELECT * FROM orders WHERE orderid = '" . $_SESSION['food_admin']['payment']['orderid'][$i] . "' ";
-                        $data_sum        =    mysqli_query($link, $sql_sum);
-                        $value            =    mysqli_fetch_assoc($data_sum);
-                        $sum_price      +=  $value['order_totalprice'];
-                        //		$product_id[] 	= 	$value['tables_no'];
+                        for ($i = 0; $i < $count_product; $i++) {
+                            $sql_sum        =    "SELECT * FROM orders WHERE orderid = '" . $_SESSION['food_admin']['payment']['orderid'][$i] . "' ";
+                            $data_sum        =    mysqli_query($link, $sql_sum);
+                            $value            =    mysqli_fetch_assoc($data_sum);
+                            $sum_price      +=  $value['order_totalprice'];
+                            //		$product_id[] 	= 	$value['tables_no'];
 
-                    ?>
-                        <td align="center"><?php echo $value['orderid']; ?></td>
-                        <td align="center"><?php echo dt_tothaiyear($value['orderdate']); ?></td>
-                        <td align="right"><?= ($value['tables_no'] != "") ? $value['tables_no'] : "-" ?></td>
-                        <td align="right"><?php echo $value['order_totalprice']; ?></td>
+                        ?>
+                            <td align="center"><?php echo $value['orderid']; ?></td>
+                            <td align="center"><?php echo dt_tothaiyear($value['orderdate']); ?></td>
+                            <td align="right"><?= ($value['tables_no'] != "") ? $value['tables_no'] : "-" ?></td>
+                            <td align="right"><?php echo $value['order_totalprice']; ?></td>
+                            </tr>
+                        <?php }    ?>
+                        <tr>
+                            <td colspan="3" class="text-right"><b>รวมทั้งหมด</b></td>
+                            <td class="text-right">
+                                <b><?= number_format($sum_price, 2); ?></b>
+                                <input hidden name="sum_price" id="sum_price" value="<?= $sum_price ?>">
+                            </td>
                         </tr>
-                    <?php }    ?>
-                    <tr>
-                        <td colspan="3" class="text-right"><b>รวมทั้งหมด</b></td>
-                        <td class="text-right">
-                            <b><?= number_format($sum_price, 2); ?></b>
-                            <input hidden name="sum_price" id="sum_price" value="<?= $sum_price ?>">
-                        </td>
-                    </tr>
             </div>
             </table>
             <div class="row" style="padding-bottom: 2%; padding-top:1%;">
                 <label class="control-label col-md-2 col-md-offset-1 text-right">ช่องทาง :<font style="color: red;">*</font></label>
                 <div class="col-md-7">
-                    <select class="form-control" name="bankid" id="bankid" required>
-                        <option selected disabled value="" >-- กรุณาเลือกช่องทางการชำระเงิน --</option>
+                    <select name="bankid" id="bankid" class="form-control" required>
+                        <option selected disabled value="">-- กรุณาเลือกช่องทางการชำระเงิน --</option>
                         <option value="0">เงินสด</option>
                         <?php
                         $sql_bank = "SELECT * FROM banks WHERE bank_status = 0";

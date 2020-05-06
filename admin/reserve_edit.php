@@ -1,26 +1,45 @@
-<?php
-
-if (!isset($_GET['rid'])) {
-    echo "<script>window.location.assign('reserve_history.php')</script>";
-    exit();
-}
-?>
-
 <head>
     <title>ปรับปรุงการจอง | Food Order System</title>
     <?php
+
+    if (!isset($_GET['rid'])) {
+        echo "<script>window.location.assign('reserve_history.php')</script>";
+        exit();
+    }
+
     if (!isset($_SESSION)) {  // Check if sessio nalready start
         session_start();
     }
 
+    include('conf/header_admin.php');
     ?>
-    <link rel="shortcut icon" href="favicon.ico" />
+
+    <script>
+        $(document).ready(function() {
+            $("#edit_reserve").validate({
+                // Specify validation rules
+                messages: {
+                    reserv_date_appointment: {
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือกวันที่นัด</font>",
+                    },
+                    reserv_time_appointment: {
+                        required: "<font size='2' style='padding-left:15px;' color='red'>กรุณาเลือกเวลานัด</font>",
+                        min: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+                        max: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+                    },
+                },
+                onfocusout: function(element) {
+                    // "eager" validation
+                    this.element(element);
+                },
+            });
+        });
+    </script>
 </head>
 
 <body>
     <?php
 
-    include("conf/header_admin.php");
     include("../conf/connection.php");
     include_once("../conf/function.php");
 
@@ -49,7 +68,7 @@ if (!isset($_GET['rid'])) {
             <div class="container" style="width:850px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
-                        <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_edit_reserve.php">
+                        <form id="edit_reserve" class="form" name="checkout_order" method="POST" action="save_edit_reserve.php">
                             <table width="750px" border="0" align="center">
                                 <tr>
 
@@ -87,20 +106,20 @@ if (!isset($_GET['rid'])) {
                                         $editable = "";
                                     }
                                     ?>
-                                    <td width="15%" height="32px"><b>วันที่นัด :</b></td>
+                                    <td width="15%" height="32px"><b>วันที่นัด :<span style="color:red;">*</span></b></td>
                                     <td width="25%">
                                         <input class="form-control datepicker-checkout" <?= $editable ?> autocomplete="off" style="height:32px; width:215px; margin-left:-5%;" onchange="validate_reservetime();" onfocus="$(this).blur();" id="reserv_date_appointment" onkeypress="return false" onpaste="return false" type="text" name="reserv_date_appointment" required value="<?= tothaiyear($reserve_data['reserv_date_appointment']) ?>">
                                     </td>
-                                    <td width="15%" height="32px"><b>เวลานัด :</b></td>
+                                    <td width="15%" height="32px"><b>เวลานัด :<span style="color:red;">*</span></b></td>
                                     <td>
                                         <input class="form-control" type="time" min="09:00" max="19:00" <?= $editable ?> required oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง 09:00-19.00')" oninput="this.setCustomValidity('')" style="height:32px; width:180px; margin-left:-5%;" id="reserv_time_appointment" name="reserv_time_appointment" required value="<?= substr($reserve_data['reserv_time_appointment'], 0, 5) ?>">
                                     </td>
                                 </tr>
-                                    <tr>
-                                        <td colspan="4" align="center" height="20px">
-                                            <font color="red">** สามารถปรับปรุง วัน/เวลานัดหลังจากทำการจอง ภายใน 1 ชั่วโมงเท่านั้น **</font>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="4" align="center" height="20px">
+                                        <font color="097DB6">** สามารถปรับปรุง วัน/เวลานัดหลังจากทำการจอง ภายใน 1 ชั่วโมงเท่านั้น **</font>
+                                    </td>
+                                </tr>
                             </table>
                 </div>
                 <h3 class="page-header text-center">รายการจอง</h3>

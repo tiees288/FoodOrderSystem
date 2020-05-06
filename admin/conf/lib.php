@@ -26,7 +26,7 @@
             if (place.test(delivery_input)) {
                 return true;
             } else {
-                alert('กรุณาระบุสถานที่จัดส่งให้ถูกต้อง');
+                alert('จัดส่งเฉพาะรหัสไปรษณีย์ 12120 เท่านั้น');
                 //  e.preventDefault();
                 return false;
             }

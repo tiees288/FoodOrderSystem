@@ -45,13 +45,33 @@
     if ((!isset($_SESSION['staff']))) {
         echo "<script>alert('กรุณาตรวจสอบสิทธิการเข้าใช้งาน'); window.location.assign('login_staff.php')</script>";
     }
+    include("conf/header_admin.php");
     ?>
-    <link rel="shortcut icon" href="favicon.ico" />
+
+<script>
+        $(document).ready(function() {
+            $("#report_month").validate({
+                // Specify validation rules
+                messages: {
+                    month: {
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือก เดือน ที่ต้องการค้นหา</font>",
+                    },
+                    year: {
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือก ปีพ.ศ. ต้องการค้นหา</font>",
+                    },
+                },
+                onfocusout: function(element) {
+                    // "eager" validation
+                    this.element(element);
+                },
+            });
+        });
+    </script>
+
 </head>
 
 <body>
     <?php
-    include("conf/header_admin.php");
     include("../conf/connection.php");
     include("../conf/function.php");
     ?>
@@ -59,7 +79,7 @@
         <h1 class="page-header text-left"><?= $report_name ?></h1>
 
         <div class="row" style="padding-top:15px;">
-            <form name="report" action="<?= $report_file ?>" method="POST" target="_blank">
+            <form name="report_month" id="report_month" action="<?= $report_file ?>" method="POST" target="_blank">
                 <label class="control-label col-md-offset1 col-md-2 text-right" style="padding-top:5px;">เดือน :<font color="red">*</font> </label>
                 <div class="col-md-3">
                     <select name="month" id="month" class="form-control" required>

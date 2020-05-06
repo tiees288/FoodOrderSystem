@@ -34,7 +34,6 @@
 	</style>
 	<script>
 		function isPasswordPresent() {
-			console.log($('#password').val());
 			return $('#password').val().length > 0;
 		}
 		// Wait for the DOM to be ready

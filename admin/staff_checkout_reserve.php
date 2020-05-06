@@ -4,14 +4,37 @@
     if (!isset($_SESSION)) {  // Check if sessio nalready start
         session_start();
     }
+    include("conf/header_admin.php");
     ?>
-    <link rel="shortcut icon" href="favicon.ico" />
+    <!-- <link rel="shortcut icon" href="favicon.ico" /> -->
+
+    <script>
+	
+	$(document).ready(function() {
+			$("#checkout_reserve").validate({
+				// Specify validation rules
+				messages: {
+					reserv_date_appointment: {
+						required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือกวันที่นัด</font>",
+					},
+					reserv_time_appointment: {
+						required: "<font size='2' style='padding-left:15px;' color='red'>กรุณาเลือกเวลานัด</font>",
+						min: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+						max: "<font size='2' style='padding-left:15px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+					},
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
+	</script>
 </head>
 
 <body>
     <?php
-    include("conf/header_admin.php");
-
+ 
     if (!isset($_SESSION['food_admin']['reserve']['tables_no'])) {
         echo "<script>alert('กรุณาเลือกโต๊ะที่ต้องการจอง'); window.location.assign('staff_cart_reserve.php');</script>";
         exit();
@@ -35,7 +58,7 @@
             <div class="container" style="width:850px">
                 <div class="panel panel-default" align="center" style="background-color:#FBFBFB;">
                     <p>
-                        <form id="checkout_order" class="form" name="checkout_order" method="POST" action="save_checkout_reserve.php">
+                        <form id="checkout_reserve" class="form" name="checkout_order" method="POST" action="save_checkout_reserve.php">
                             <table width="750px" border="0" align="center">
                                 <tr>
                                     <td align="center" height="36px" colspan="4"><a href="select_customer.php?ref=reserve"><u>เลือกลูกค้า</u></a></td>
@@ -68,16 +91,16 @@
                                 <tr>
                                     <td></td>
                                     <td colspan="1" align="center">
-                                        <font color="red" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font>
+                                        <font color="097DB6" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font>
                                     </td>
                                     <td colspan="2" style="text-align:right">
-                                        <font color="red" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
+                                        <font color="097DB6" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" align="center">
                                         <hr style="border-top: 1px solid #D5D5D5; margin: 10px; padding-bottom:0px;">
-                                        <font color="red" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
+                                        <font color="097DB6" style="font-size: 16px;">** ไม่สามารถเปลี่ยนแปลงได้ภายหลัง หากต้องการเปลี่ยนแปลง กรุณาติดต่อพนักงาน **</font>
                                     </td>
                                 </tr>
                             </table>
@@ -94,9 +117,9 @@
                     $count_product = count($_SESSION['food_admin']['reserve']['tables_no']);
                     for ($i = 0; $i < $count_product; $i++) {
                         $sql_sum        =    "SELECT * FROM tables WHERE tables_no = '" . $_SESSION['food_admin']['reserve']['tables_no'][$i] . "' ";
-                        $data_sum        =    mysqli_query($link, $sql_sum);
-                        $value            =    mysqli_fetch_assoc($data_sum);
-                        $sum_seats      = array_sum($_SESSION['food_admin']['reserve']['seats']);
+                        $data_sum       =    mysqli_query($link, $sql_sum);
+                        $value          =    mysqli_fetch_assoc($data_sum);
+                        $sum_seats      =    array_sum($_SESSION['food_admin']['reserve']['seats']);
                         //		$product_id[] 	= 	$value['tables_no'];
 
                     ?>

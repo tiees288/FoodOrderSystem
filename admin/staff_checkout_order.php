@@ -7,7 +7,41 @@
     include("conf/header_admin.php");
     ?>
 
-    <link rel="shortcut icon" href="favicon.ico" />
+<script>
+		$(document).ready(function() {
+			$("#checkout_order").validate({
+				// Specify validation rules
+				messages: {
+                    order_type: {
+                        required: "<font size='2' style='padding-left:25px;' color='red'>กรุณาเลือกประเภทการสั่ง</font>",
+                    },
+					deliverydate: {
+						required: "<font size='2' style='padding-left:30px;' color='red'>กรุณาเลือกวันที่กำหนดส่ง</font>",
+					},
+					deliverytime: {
+						required: "<font size='2' style='padding-left:20px;' color='red'>กรุณาเลือกเวลากำหนดส่ง</font>",
+						min: "<font size='2' style='padding-left:20px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+						max: "<font size='2' style='padding-left:20px;' color='red'>กรุณาระบุในเวลาที่กำหนด</font>",
+					},
+					deliveryplace: {
+						required: "<font size='2' style='padding-left:50px;' color='red'>กรุณากรอกสถานที่ส่ง</font>",
+					},
+					postnum: {
+						required: "<font size='2' color='red'>กรุณากรอกรหัสไปรษณีย์</font>",
+					},
+                    tables_no: {
+						required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือกเหมายเลขโต๊ะ</font>",
+                    },
+				},
+				onfocusout: function(element) {
+					// "eager" validation
+					this.element(element);
+				},
+			});
+		});
+	</script>
+
+
 </head>
 
 <body>
@@ -85,7 +119,7 @@
                                 </tr>
                                 <tr class="order_type0">
                                     <td colspan="4" align="right" style="vertical-align: top; ">
-                                        <font color="red" style="font-size: 13px; padding-right:0px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
+                                        <font color="097DB6" style="font-size: 13px; padding-right:0px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
                                     </td>
                                 </tr>
                                 <tr class="order_type1">
@@ -127,10 +161,10 @@
                                     <td><input class="form-control" height="32px" value="<?= $cus_data['cus_postnum'] ?>" id="postnum" name="postnum" required></td>
                                 </tr>
                                 <tr class="order_type0">
-                                    <td colspan="2" align="center" style="padding-left:120px; margin-top:0px; vertical-align: top; ">
-                                        <font color="red" style="font-size: 13px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
-                                            <br>ในระยะทางไม่เกิน 3 กี่โลเมตร</font>
-                                    </td>
+                                <td colspan="5" align="center" style="margin-top:0px; vertical-align: top; ">
+										<font color="097DB6" style="font-size: 15px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
+											โดยจะต้องเป็นรหัสไปรษณีย์ 12120 เท่านั้น</font>
+									</td>
                                 </tr>
                             </table>
                 </div>
