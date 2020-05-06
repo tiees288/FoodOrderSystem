@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 		if ($password != $_POST['cf_password']) {
-			echo "<script> alert('รหัสผ่านไม่ตรงกัน'); window.history.back(); </script>";
+			echo "<script> alert('กรุณากรอกหัสผ่านไห้ตรงกัน'); window.history.back(); </script>";
 			exit();
 		}
 

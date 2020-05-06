@@ -75,8 +75,7 @@
 						required: true,
 						minlength: 8,
 						equalTo: {
-							depends: isPasswordPresent,
-							param: "password",
+							param: "#password",
 						}
 					},
 				},
