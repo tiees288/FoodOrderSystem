@@ -57,7 +57,7 @@
                         required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือก เดือน ที่ต้องการค้นหา</font>",
                     },
                     year: {
-                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือก ปีพ.ศ. ต้องการค้นหา</font>",
+                        required: "<font size='2' style='padding-left:35px;' color='red'>กรุณาเลือก ปี พ.ศ. ต้องการค้นหา</font>",
                     },
                 },
                 onfocusout: function(element) {

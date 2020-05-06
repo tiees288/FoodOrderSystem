@@ -15,10 +15,10 @@
         $("#addfood").validate({
             messages: {
                 food_name: {
-                    required: "<font color='red'>กรุณากรอกชื่อวัตถุดิบ</font>",
+                    required: "<font color='red'>กรุณากรอกชื่อรายการอาหาร</font>",
                 },
                 food_price: {
-                    required: "<font color='red'>กรุณากรอกจำนวนวัตถุดิบ</font>",
+                    required: "<font color='red'>กรุณากรอกราคารายการอาหาร</font>",
                     min: "<font color='red'>กรุณากรอกราคาไม่น้อยกว่า 5 บาท</font>",
                 },
                 food_type: {
