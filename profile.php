@@ -142,6 +142,7 @@
 						required: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกัน</font>",
 						minlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
 						maxlength: "<font color='red'>กรุณากรอกอย่างน้อย 8-16 ตัวอักษร</font>",
+						equalTo: "<font color='red'>กรุณากรอกรหัสผ่านให้ตรงกัน</font>"
 					},
 				},
 				onfocusout: function(element) {
