@@ -89,7 +89,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" style="width:150px" min="0" max="999" onkeypress="return isNumberKey(event)" value="" name="food_qty" required>
+                        <input type="number" class="form-control" style="width:150px" min="0" onkeypress="return isNumberKey(event)" value="" name="food_qty" required>
                     </div>
                 </div>
             </div>
