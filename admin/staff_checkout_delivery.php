@@ -210,23 +210,26 @@
 
                 $("#order_date_delivered").change(function() {
 
-                            function addZero(i) {
-                                if (i < 10) {
-                                    i = "0" + i;
-                                }
-                                return i;
-                            }
+                    function addZero(i) {
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;
+                    }
 
-                            today = new Date();
-                            delivered_date = $('#order_date_delivered');
-                            delivered_time = $('#order_time_delivered');
-                            today_str = addZero(today.getDate()) + '/' + ((today.getMonth() < 10) ? "0" : "") + (today.getMonth() + 1) + '/' + (today.getFullYear() + 543)
+                    today = new Date();
+                    delivered_date = $('#order_date_delivered');
+                    delivered_time = $('#order_time_delivered');
+                    today_str = addZero(today.getDate()) + '/' + ((today.getMonth() < 10) ? "0" : "") + (today.getMonth() + 1) + '/' + (today.getFullYear() + 543)
 
-                                // reset 
-                                delivered_time.val('');
+                    // reset 
+                    delivered_time.val('');
 
-                                if (delivered_date.val() == today_str) {
-                                    delivered_time.attr("max", today.getHours() + ":" + addZero(today.getMinutes()));
-                                }
-                            });
+                    if (delivered_date.val() == today_str) {
+                        delivered_time.attr("max", today.getHours() + ":" + addZero(today.getMinutes()));
+                    } else if (delivered_date.val() < today_str) {
+                        delivered_time.attr("max", "19:00");
+
+                    }
+                });
             </script>
