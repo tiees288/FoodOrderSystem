@@ -61,7 +61,7 @@
                             <div class="row">
                                 <label class="control-label col-md-offset-1 col-md-4" style="margin-top:7px; text-align:right;">จำนวนที่ต้องการเพิ่ม :<span style="color:red;">*</span> </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" style="width:150px" min="0" max="300" onkeypress="return isNumberKey(event)" required name="food_qty_add">
+                                    <input type="number" class="form-control" style="width:150px" min="0" onkeypress="return isNumberKey(event)" required name="food_qty_add">
                                 </div>
                             </div>
                         </div>
