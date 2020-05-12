@@ -106,8 +106,10 @@
                                         if ($ordertime >= "19:00") {
                                             $same_date = "1";
                                             $min_time = "09:00";
+                                            // $max_time = "19:00";
                                         } else {
                                             $min_time = date("H:i", strtotime($ordertime . "+30 minutes"));
+                                            // $max_time = "19:00";
                                         }
                                     } elseif ($todaydates > $orderdates) {
                                         // กรณีวันที่ปัจจุบัน 
@@ -226,7 +228,13 @@
                     delivered_time.val('');
 
                     if (delivered_date.val() == today_str) {
-                        delivered_time.attr("max", today.getHours() + ":" + addZero(today.getMinutes()));
+                        var t_now = today.getHours() + ":" + addZero(today.getMinutes());
+                        if (t_now > '19:00') {
+                         //   console.log('More than 19:00')
+                            delivered_time.attr("max", "19:00");
+                        } else {
+                            delivered_time.attr("max", t_now);
+                        }
                     } else if (delivered_date.val() < today_str) {
                         delivered_time.attr("max", "19:00");
 
