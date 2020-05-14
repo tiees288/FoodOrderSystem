@@ -108,7 +108,7 @@
                                             $min_time = "09:00";
                                             // $max_time = "19:00";
                                         } else {
-                                            $min_time = date("H:i", strtotime($ordertime . "+30 minutes"));
+                                        $min_time = date("H:i", strtotime($ordertime /*. "+30 minutes" */));
                                             // $max_time = "19:00";
                                         }
                                     } elseif ($todaydates > $orderdates) {
