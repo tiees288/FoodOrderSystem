@@ -49,7 +49,7 @@
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวน :<span style="color:red;">*</span> </label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" value="" min="0" max="300" required name="material_qty">
+                        <input type="number" class="form-control" onkeypress="return isNumberKey(event)" style="width:150px" value="" min="0" required name="material_qty">
                     </div>
                 </div>
             </div>
