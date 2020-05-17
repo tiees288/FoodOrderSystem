@@ -53,7 +53,7 @@
                             <div class="row" style="padding-top:6px;">
                                 <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">จำนวน :<span style="color:red;"></span> </label>
                                 <div class="col-md-6">
-                                    <?php echo $result['food_qty']; ?>
+                                    <?php echo number_format($result['food_qty']); ?>
                                 </div>
                             </div>
                         </div>

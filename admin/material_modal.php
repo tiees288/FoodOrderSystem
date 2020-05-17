@@ -31,7 +31,7 @@
                             <div class="row" style="padding-top:6px;">
                                 <label class="control-label col-md-offset-1 col-md-4" style="text-align:right;">จำนวน :<span style="color:red;"></span> </label>
                                 <div class="col-md-6">
-                                   <?= $result['material_qty'] ?>
+                                   <?= number_format($result['material_qty']) ?>
                                 </div>
                             </div>
                         </div>
