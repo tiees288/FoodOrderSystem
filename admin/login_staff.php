@@ -17,7 +17,6 @@
          html {
              height: 100%;
              background-repeat: no-repeat;
-             background-color: ;
              background-image: linear-gradient(to left, rgb(0, 153, 0), rgb(153, 200, 174));
          }
 
@@ -139,12 +138,6 @@
              transition: all 0.218s;
          }
 
-
-         .btn.btn-signin:active,
-         .btn.btn-signin:focus {
-             /*background-color: rgb(122, 97, 33);*/
-         }
-
          .forgot-password {
              color: rgb(104, 145, 162);
          }
@@ -161,6 +154,7 @@
      <div class="container" style="padding-top:70px;">
          <div class="card card-container">
              <h3 style="margin: auto; text-align:center; color:gray;">เข้าสู่ระบบ</h3><br>
+             <h4 style="margin: auto; text-align:center; color:gray;">ระบบขายอาหารตามสั่ง</h4><br>
              <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
              <img id="profile-img" class="profile-img-card" src="images/login-logo.png" />
              <p id="profile-name" class="profile-name-card"></p>
@@ -171,9 +165,41 @@
 
                  <button class="btn btn-lg btn-success btn-block btn-signin" type="submit">เข้าสู่ระบบ</button>
              </form><!-- /form -->
-
+             <div class="col-md-offset-7 col-md-6 text-center">
+                 <a href="#forgetModal" data-toggle="modal" data-target="#forgetModal"><u>ลืมรหัสผ่าน?</u></a>
+             </div>
          </div><!-- /card-container -->
      </div><!-- /container -->
+     <!-- Modal -->
+     <div class="modal fade" id="forgetModal" tabindex="-1" role="dialog" aria-labelledby="forgetModal" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="forgetModal"><b>ลืมรหัสผ่าน<b></h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                     <div class="container" style="min-height: 0%!important;">
+                         <div class="row">
+                             <div class="col-md-3" style="padding-bottom:7px;"><b>กรุณาติดต่อพนักงาน</b></div>
+                         </div>
+                         <div class="row">
+                             <label class="control-label col-sm-2 text-right"><i class="fa fa-envelope"></i> อีเมล :</label>
+                             <div class="col-2 col-sm-1" style="padding-bottom:7px;"><a href="mailto:Aimaroy_99@gmail.com"><u>Aimaroy_99@gmail.com</u></a></div>
+                         </div>
+                         <!-- Force next columns to break to new line at md breakpoint and up -->
+                         <div class="row">
+                             <label class="control-label col-sm-2 text-right"><i class="fa fa-phone"></i> เบอร์โทร :</label>
+                             <div class="col-2 col-sm-2"><a href="tel:061-576-0437"><u>061-576-0437</u></a></div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                 </div>
+             </div>
+         </div>
+     </div>
  </body>
  <?php
 
