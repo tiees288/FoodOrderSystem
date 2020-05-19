@@ -11,34 +11,34 @@
     <title>เพิ่มข้อมูลรายการอาหาร | Food Order System</title>
 
     <script>
-    $(document).ready(function() {
-        $("#addfood").validate({
-            messages: {
-                food_name: {
-                    required: "<font color='red'>กรุณากรอกชื่อรายการอาหาร</font>",
-                },
-                food_price: {
-                    required: "<font color='red'>กรุณากรอกราคารายการอาหาร</font>",
-                    min: "<font color='red'>กรุณากรอกราคาไม่น้อยกว่า 5 บาท</font>",
-                },
-                food_type: {
-                    required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
-                },
-                food_qty: {
-                    required: "<font color='red'>กรุณากรอกจำนวนรายการอาหาร</font>",
-                    min: "<font color='red'>กรุณากรอกเป็นจำนวนเต็ม</font>",
-                },
-                food_count: {
-                    required: "<font color='red'>กรุณากรอกหน่วยนับ</font>",
+        $(document).ready(function() {
+            $("#addfood").validate({
+                messages: {
+                    food_name: {
+                        required: "<font color='red'>กรุณากรอกชื่อรายการอาหาร</font>",
+                    },
+                    food_price: {
+                        required: "<font color='red'>กรุณากรอกราคารายการอาหาร</font>",
+                        min: "<font color='red'>กรุณากรอกราคาไม่น้อยกว่า 5 บาท</font>",
+                    },
+                    food_type: {
+                        required: "<font color='red'>กรุณาเลือกประภทรายการอาหาร</font>",
+                    },
+                    food_qty: {
+                        required: "<font color='red'>กรุณากรอกจำนวนรายการอาหาร</font>",
+                        min: "<font color='red'>กรุณากรอกเป็นจำนวนเต็ม</font>",
+                    },
+                    food_count: {
+                        required: "<font color='red'>กรุณากรอกหน่วยนับ</font>",
 
+                    },
                 },
-            },
-            onfocusout: function(element) {
-                this.element(element);
-            },
+                onfocusout: function(element) {
+                    this.element(element);
+                },
+            });
         });
-    });
-</script>
+    </script>
 
 </head>
 
@@ -65,8 +65,11 @@
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รูปภาพ :<span style="color:red;"></span></label>
-                    <div class="col-md-8" style="width:300px;">
-                        <input type="file" class="form-control" id="food_image" name="food_image" accept="image/gif, image/jpeg, image/png" >
+                    <div class="col-md-5" style="width:300px;">
+                        <input type="file" class="form-control" id="food_image" name="food_image" accept="image/gif, image/jpeg, image/png">
+                    </div>
+                    <div class="col-md-4" style="margin-top:7px;">
+                        <font>รองรับไฟล์รูปภาพ .jpg และ .png เท่านั้น</font>
                     </div>
                 </div>
             </div>
@@ -100,7 +103,8 @@
                         <input type="text" class="form-control" required style="width:150px" minlength="3" value="" name="food_count">
                     </div>
                 </div>
-            </div><hr>
+            </div>
+            <hr>
             <div class="col-md-4 col-md-offset-5">
                 <button type="submit" class="btn btn-success" onclick="if(confirm('ยืนยันการทำรายการ?')) return true; else return false;">บันทึก</button>
                 <button type="reset" class="btn btn-danger">ล้างค่า</button>

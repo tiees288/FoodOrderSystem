@@ -102,8 +102,7 @@
 								</tr>
 								<tr>
 									<td colspan="5" align="center" style="margin-top:0px; vertical-align: top; ">
-										<font color="097DB6" style="font-size: 15px;">สถานที่ส่งจะต้องอยู่ในบริเวณ ม.กรุงเทพ เท่านั้น
-											โดยจะต้องเป็นรหัสไปรษณีย์ 12120 เท่านั้น</font>
+										<font color="097DB6" style="font-size: 15px;">ทางร้านจัดส่งเฉพาะในบริเวณรหัสไปรษณีย์ 12120 เท่านั้น</font>
 									</td>
 								</tr>
 							</table>

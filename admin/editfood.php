@@ -94,8 +94,11 @@
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รูปภาพ :</label>
-                    <div class="col-md-8" style="width:300px;">
+                    <div class="col-md-5" style="width:300px;">
                         <input type="file" class="form-control" id="food_image" name="food_image" accept="image/gif, image/jpeg, image/png">
+                    </div>
+                    <div class="col-md-4" style="margin-top:7px;">
+                        <font>รองรับไฟล์รูปภาพ .jpg และ .png เท่านั้น</font>
                     </div>
                 </div>
             </div>
@@ -132,7 +135,7 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">รายการแนะนำ :<span style="color:red;">*</span> </label>
+                    <label class="control-label col-md-4" style="margin-top:7px; text-align:right;">จำนวนที่สั่งล่าสุด :<span style="color:red;"></span> </label>
                     <div class="col-md-8">
                         <input type="number" disabled class="form-control" required style="width:150px" min="0" onkeypress="return isNumberKey(event)" value="<?php echo $result['food_recomend']; ?>" name="food_recomend">
                     </div>

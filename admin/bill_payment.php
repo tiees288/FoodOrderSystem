@@ -66,13 +66,13 @@ include("../conf/connection.php");
                 <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>เบอร์โทรศัพท์ : </b></td>
                 <td width="200px"><?= $result_payment['cus_tel'] ?></td>
                 <td width="150px" style="text-align: right; padding-right:10px;"><b>วันกำหนดส่ง : </b></td>
-                <td width="200px"><?= ($result_payment['order_date_tobedelivery'] != "0000-00-00") ? fulldatetime_thai(tothaiyear($result_payment['order_date_tobedelivery'])) : "-"  ?></td>
+                <td width="200px"><?= ($result_payment['order_date_tobedelivery'] != "0000-00-00") ? fulldatetime_thai(tothaiyear($result_payment['order_date_tobedelivery']))." ". substr($result_payment['order_time_tobedelivery'],0,5) : "-"  ?></td>
             </tr>
             <tr>
                 <td width="150px" style="text-align: right; height:25px; padding-right:10px;"><b>สถานที่จัดส่ง : </b></td>
                 <td width="200px"><?= $result_payment['order_delivery_place']  ?></td>
                 <td width="150px" style="text-align: right; padding-right:10px;"><b>วันที่ส่ง : </b></td>
-                <td width="200px"><?= ($result_payment['order_date_delivered'] != "0000-00-00") ?  fulldatetime_thai(dt_tothaiyear($result_payment['order_date_delivered'])) : "-" ?></td>
+                <td width="200px"><?= ($result_payment['order_date_delivered'] != "0000-00-00") ?  fulldatetime_thai(dt_tothaiyear($result_payment['order_date_delivered'])) ." ". substr($result_payment['order_time_delivered'],0,5) : "-" ?></td>
             </tr>
             <tr>
                 <td height="20px"></td>

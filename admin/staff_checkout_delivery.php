@@ -122,8 +122,12 @@
                                     <td><input class="form-control" autocomplete="off" type="time" min="<?= $min_time ?>" max="<?= $max_time ?>" style="height:32px; width:180px" id="order_time_delivered" name="order_time_delivered" oninvalid="this.setCustomValidity('กรุณากรอกเวลาระหว่าง <?= $min_time ?>-<?= $max_time ?>')" oninput="this.setCustomValidity('')" required></td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2" align="center"><font color="097DB6" style="font-size: 15px;">เวลาส่งภายใน เวลา 09:00 - 19:00 น.</font></td>
+                                </tr>
+                                <tr>
                                     <td width="20%" height="32px"><b>สถานที่จัดส่ง :<span style="color:red;"></span></b></td>
-                                    <td height="75px"><?= $result_order['order_delivery_place'] ?></td>
+                                    <td height="45px"><?= $result_order['order_delivery_place'] ?></td>
                                 </tr>
                             </table>
                 </div>
