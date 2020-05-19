@@ -86,7 +86,7 @@
 										<font color="097DB6" style="padding-right:70px; font-size: 13px;">จองนัดล่วงหน้า ไม่เกิน 5 วัน</font><br>
 									</td>
 									<td colspan="2" style="text-align:right">
-										<font color="097DB6" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 </font>
+										<font color="097DB6" style="padding-right: 35px; font-size: 13px; ">กำหนดจองภายในเวลา 08:00 - 18:00 น.</font>
 									</td>
 								</tr>
 								<tr>

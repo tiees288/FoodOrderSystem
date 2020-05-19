@@ -91,7 +91,7 @@
 								<tr>
 									<td colspan="2"></td>
 									<td colspan="2" align="right" style="vertical-align: top; ">
-										<font color="097DB6" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
+										<font color="097DB6" style="font-size: 13px;">กำหนดส่งภายในเวลา 09:00 - 19:00 น. </font>
 									</td>
 								</tr>
 								<tr>

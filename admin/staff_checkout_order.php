@@ -119,7 +119,7 @@
                                 </tr>
                                 <tr class="order_type0">
                                     <td colspan="4" align="right" style="vertical-align: top; ">
-                                        <font color="097DB6" style="font-size: 13px; padding-right:0px;">กำหนดส่งภายในเวลา 09:00 - 19:00 </font>
+                                        <font color="097DB6" style="font-size: 13px; padding-right:0px;">กำหนดส่งภายในเวลา 09:00 - 19:00 น.</font>
                                     </td>
                                 </tr>
                                 <tr class="order_type1">
