@@ -50,7 +50,7 @@
               <div class="card-body text-center">
                 <i class="fa fa-map-marker fa-5x mb-3" aria-hidden="true"></i>
                 <h4 class="text-uppercase mb-5">สถานที่ตั้ง</h4>
-                <address>หน้าหอพัก Grand modern condo ตรงข้ามมหาวิทยาลัยกรุงเทพ ใต้สะพานลอยหอพักหญิง ม.5 ต.คลองหนึ่ง
+                <address>หน้าหอพัก Grand modern condo ตรงข้ามมหาวิทยาลัยกรุงเทพ หมู่.5 ต.คลองหนึ่ง
                   อ.คลองหลวง จ.ปทุมธานี 12120</address>
               </div>
             </div>
