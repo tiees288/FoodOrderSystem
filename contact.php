@@ -6,6 +6,14 @@
   }
   ?>
   <link rel="shortcut icon" href="favicon.ico" />
+  <style type="text/css">
+    iframe {
+      width: 100%;
+      height: 33%;
+      overflow: scroll;
+      /* border:1px solid; */
+    }
+  </style>
 </head>
 
 <body>
@@ -16,10 +24,16 @@
   <div class="container" style="padding-top: 90px;">
     <div class="col">
       <h1 class="page-header text-left">ติดต่อเรา</h1>
-      <div class="text-center">
-        <img src="images/foodorder.jpg" width="250" class="img-fluid img-thumbnail" alt="Responsive image">
-        <hr>
+      <div class="row">
+        <div class="col-md-offset-1 col-md-4 text-center">
+          <img src="images/foodorder.jpg" width="250" class="img-fluid img-thumbnail" alt="Responsive image">
+        </div>
+        <div class="col-md-7">
+          <h3><u>นโยบายของทางร้าน</u></h3>
+          <iframe frameBorder="0" src="policy.php"></iframe>
+        </div>
       </div>
+      <hr>
       <section id="contact">
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-3 my-5">
