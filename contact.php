@@ -25,7 +25,7 @@
     <div class="col">
       <h1 class="page-header text-left">ติดต่อเรา</h1>
       <div class="row">
-        <div class="col-md-offset-1 col-md-4 text-center">
+        <div class="col-md-offset1 col-md-4 text-center">
           <img src="images/foodorder.jpg" width="250" class="img-fluid img-thumbnail" alt="Responsive image">
         </div>
         <div class="col-md-7">
