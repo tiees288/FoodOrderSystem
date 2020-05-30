@@ -165,7 +165,7 @@
                     <input type="submit" <?= $editable ?> name="submit" id="submit" onclick="if(confirm('ยืนยันการปรับปรุงการจอง?')) return true; else return false;" class="btn btn-success" value="บันทึก" />
                     <button type="reset" class="btn btn-danger">คืนค่า</button>
                     <button type="submit" name="confirms" onclick="if(confirm('ต้องการยืนยันการจอง?')) return true; else return false;" class="btn btn-primary">ยืนยันการจอง</button>
-                    <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิการจอง?')) return true; else return false;" class="btn btn-warning">ยกเลิกการจอง</button></form>
+                    <button type="submit" name="cancel" onclick="if(confirm('ต้องการยกเลิกการจอง?')) return true; else return false;" class="btn btn-warning">ยกเลิกการจอง</button></form>
                     <button type="button" class="btn btn-info" onclick="window.history.back();">ย้อนกลับ</button>
 
                 </div>

@@ -13,7 +13,7 @@ include("../conf/function.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['confirms'])) { // กรณียืนยัน
         mysqli_query($link, "UPDATE reservations SET reserv_status = 1 WHERE reserv_id = '" . $_POST['reserv_id'] . "' ");
-        echo '<script>alert("ยืนยันกการจอง รหัสการจอง ' . str_pad($_POST['reserv_id'], 5, 0, STR_PAD_LEFT) . ' เรียบร้อย"); window.location.assign("staff_reserve_history.php")</script>';
+        echo '<script>alert("ยืนยันการจอง รหัสการจอง ' . str_pad($_POST['reserv_id'], 5, 0, STR_PAD_LEFT) . ' เรียบร้อย"); window.location.assign("staff_reserve_history.php")</script>';
     } elseif (isset($_POST['cancel'])) { //กรณียกเลิก
         mysqli_query($link, "UPDATE reservations SET reserv_status = 2 WHERE reserv_id = '" . $_POST['reserv_id'] . "' ");
         mysqli_query($link, "UPDATE reservelist SET reservlist_status = 2 WHERE reserv_id = '" . $_POST['reserv_id'] . "'");
