@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 food_status     = '" . $_POST['food_status'] . "'  WHERE foodid = '" . $_POST['foodid'] . "' ";
 
         if (mysqli_query($link, $sql_update) or die(mysqli_error($link))) {
-            echo "<script> alert('แก้ไขข้อมูล หัสรายการอาหาร: " . $_POST['foodid'] . " เรียบร้อยแล้ว'); window.location.assign('show_food.php')</script>";
+            echo "<script> alert('แก้ไขข้อมูล รหัสรายการอาหาร: " . $_POST['foodid'] . " เรียบร้อยแล้ว'); window.location.assign('show_food.php')</script>";
         }
     } else {
         $sql_update  = "UPDATE foods SET 
